@@ -1,16 +1,14 @@
-[
-{
-  "modid": "examplemod",
-  "name": "Example Mod",
-  "description": "Example placeholder mod.",
+[{
+  "modid": "gregification",
+  "name": "Gregification",
+  "description": "Adding compat for GregTech to all the mods",
   "version": "${version}",
   "mcversion": "${mcversion}",
-  "url": "",
-  "updateUrl": "",
-  "authorList": ["ExampleDude"],
-  "credits": "The Forge and FML guys, for making this example",
   "logoFile": "",
-  "screenshots": [],
-  "dependencies": []
-}
-]
+  "url": "https://minecraft.curseforge.com/projects/gregification",
+  "authorList": [
+    "dan"
+  ],
+  "credits": "TheLimePixel for GregicAdditions, GTCEBees, Greg's Construct, and GregBlock Utilities, iamtakingiteasy for GTCE2OC, Archengius for GTCE, Decal and the Gregicality team, Shadows of Fire for SoG, and of course, GregoriusT for starting all of this",
+  "dependencies": ["gregtech"]
+}]

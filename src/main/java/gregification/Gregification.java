@@ -1,6 +1,8 @@
 package gregification;
 
 import gregification.proxy.*;
+import gregification.util.GFLog;
+import gregification.util.GFValues;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.SidedProxy;
@@ -37,7 +39,7 @@ public class Gregification {
     public static ForestryCommonProxy ForestryProxy;
 
     // Ex Nihilo Proxy
-    @SidedProxy(modId = GFValues.MODID, serverSide = "gregification.proxy.ExNihiloCommonProxy", clientSide = "gregification.proxy.ExNihiloClientProxy")
+    @SidedProxy(modId = GFValues.MODID, serverSide = "gregification.proxy.ExNihiloCommonProxy", clientSide = "gregification.proxy.ExNihiloCommonProxy")
     public static ExNihiloCommonProxy ExNihiloProxy;
 
     // Open Computers Proxy
@@ -46,6 +48,8 @@ public class Gregification {
 
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {
+        GFLog.init(event.getModLog());
+        ExNihiloProxy.preInit();
     }
 
     @EventHandler
