@@ -46,7 +46,6 @@ import static gregtech.common.blocks.BlockMineral.MineralVariant.MARBLE;
 import static gregtech.common.blocks.BlockSteamCasing.SteamCasingType.BRONZE_HULL;
 import static gregtech.common.blocks.StoneBlock.ChiselingVariant.CRACKED;
 import static gregtech.common.blocks.StoneBlock.ChiselingVariant.NORMAL;
-import static gregtech.common.pipelike.cable.Insulation.CABLE_SINGLE;
 import static gregtech.loaders.recipe.CraftingComponent.*;
 
 public class ExNihiloRecipes {
@@ -79,16 +78,14 @@ public class ExNihiloRecipes {
 
     public static void registerRecipes() {
 
-        // Machines TODO Re-enable sieve recipe when move to GTCEu
-        MetaTileEntityLoader.registerMachineRecipe(SIEVES, "CPC", "FMF", "OSO", 'M', HULL, 'C', CIRCUIT, 'O', CABLE_SINGLE, 'F', CONVEYOR, 'S', ModBlocks.sieve, 'P', PISTON);
+        // Machines
+        MetaTileEntityLoader.registerMachineRecipe(SIEVES, "CPC", "FMF", "OSO", 'M', HULL, 'C', CIRCUIT, 'O', CABLE, 'F', CONVEYOR, 'S', new ItemStack(ModBlocks.sieve), 'P', PISTON);
         ModHandler.addShapedRecipe("steam_sieve", STEAM_SIEVE.getStackForm(), "BPB", "BMB", "BSB", 'B', new UnificationEntry(OrePrefix.pipeSmallFluid, Materials.Bronze), 'M', MetaBlocks.STEAM_CASING.getItemVariant(BRONZE_HULL), 'S', new ItemStack(ModBlocks.sieve), 'P', Blocks.PISTON);
 
         // Mirror Ex Nihilo Sifter recipes to Sifter RecipeMap
         for (SieveRecipe recipe : ExNihiloRegistryManager.SIEVE_REGISTRY.getRecipeList()) {
             for (ItemStack stack : recipe.getSievables()) {
-                SimpleRecipeBuilder builder = SIEVE_RECIPES.recipeBuilder().duration(100).EUt(4)
-                        .notConsumable(recipe.getMesh())
-                        .inputs(stack);
+                SimpleRecipeBuilder builder = SIEVE_RECIPES.recipeBuilder().notConsumable(recipe.getMesh()).inputs(stack);
 
                 for (Siftable siftable : ExNihiloRegistryManager.SIEVE_REGISTRY.getDrops(stack)) {
                     if (siftable.getMeshLevel() == recipe.getMesh().getMetadata())

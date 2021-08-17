@@ -56,7 +56,7 @@ public class MetaTileEntitySteamSieve extends SteamMetaTileEntity {
 
     @Override
     public ModularUI createUI(EntityPlayer player) {
-        ModularUI.Builder builder = ModularUI.builder(GuiTextures.BRONZE_BACKGROUND, 176, 216)
+        ModularUI.Builder builder = ModularUI.extendedBuilder()
                 .widget(new LabelWidget(6, 6, getMetaFullName()))
                 .widget(new ImageWidget(79, 42, 18, 18, getFullGuiTexture("not_enough_steam_%s"))
                         .setPredicate(() -> workableHandler.isHasNotEnoughEnergy()))

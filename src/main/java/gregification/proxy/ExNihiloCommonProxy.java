@@ -7,14 +7,9 @@ import gregification.exnihilo.metatileentities.ExNihiloMetaTileEntities;
 import gregification.util.GFLog;
 import gregification.util.GFValues;
 import gregtech.api.GTValues;
-import net.minecraft.item.crafting.IRecipe;
-import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod.EventHandler;
-import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.Optional;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
-@EventBusSubscriber(modid = GFValues.MODID)
 public class ExNihiloCommonProxy {
 
     @Optional.Method(modid = GFValues.MODID_EXNI)
@@ -30,8 +25,8 @@ public class ExNihiloCommonProxy {
     }
 
     @Optional.Method(modid = GFValues.MODID_EXNI)
-    @SubscribeEvent
-    public static void registerRecipes(RegistryEvent.Register<IRecipe> event) {
+    @EventHandler
+    public void init() {
         if (GFConfig.exNihilo.enableExNihilo && GTValues.isModLoaded(GFValues.MODID_EXNI)) {
             GFLog.exNihiloLogger.info("Registering Ex Nihilo Compat Recipes");
             ExNihiloRecipes.registerHandlers();

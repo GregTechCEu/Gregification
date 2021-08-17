@@ -99,7 +99,6 @@ repositories {
 }
 
 dependencies {
-    // "deobfCompile"("gregtechce:gregtech:$mcVersion:${config["gregtech.version"]}")
     "deobfCompile"("codechicken-lib-1-8:CodeChickenLib-$mcVersion:${config["ccl.version"]}:universal")
     "deobfCompile"("codechicken:ChickenASM:$shortVersion-${config["chickenasm.version"]}")
     "deobfCompile"("mezz.jei:jei_$mcVersion:${config["jei.version"]}")
@@ -140,6 +139,4 @@ processResources.apply {
     from(sourceSets["main"].resources.srcDirs) {
         exclude("mcmod.info")
     }
-    // access transformer
-    rename("(.+_at.cfg)", "META-INF/$1")
 }
