@@ -51,7 +51,9 @@ public class ExNihiloPebble extends Item implements IHasModel {
     }
 
     public static void register() {
-        INSTANCE = new ExNihiloPebble();
+        if (INSTANCE == null) {
+            INSTANCE = new ExNihiloPebble();
+        }
     }
 
     public static ItemStack getPebbleStack(GTPebbles pebbleType) {

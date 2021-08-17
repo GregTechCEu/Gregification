@@ -22,7 +22,6 @@ public class ExNihiloCommonProxy {
     public void preInit() {
         if (GFConfig.exNihilo.enableExNihilo && GTValues.isModLoaded(GFValues.MODID_EXNI)) {
             GFLog.exNihiloLogger.info("Registering Ex Nihilo Compat Items, Blocks, and Machines");
-            ExNihiloEnums.preInit();
             ExNihiloPebble.register();
             SieveDrops.readSieveDropsFromConfig();
             ExNihiloRegistryManager.registerSieveDefaultRecipeHandler(new SieveDrops());

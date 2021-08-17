@@ -24,7 +24,8 @@ import exnihilocreatio.util.ItemInfo;
 import gregification.config.GFConfig;
 import gregification.util.GFLog;
 import gregtech.api.unification.OreDictUnifier;
-import gregtech.api.unification.material.type.Material;
+import gregtech.api.unification.material.Material;
+import gregtech.api.unification.material.MaterialRegistry;
 import gregtech.api.unification.ore.OrePrefix;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IStringSerializable;
@@ -83,7 +84,7 @@ public class SieveDrops implements ISieveDefaultRegistryProvider {
                     type.getName());
             return null;
         }
-        Material material = Material.MATERIAL_REGISTRY.getObject(materialName);
+        Material material = MaterialRegistry.MATERIAL_REGISTRY.getObject(materialName);
         if (material == null) {
             GFLog.exNihiloLogger.error("Could not find material with name {} in {} category",
                     materialName, type.getName());
@@ -142,7 +143,7 @@ public class SieveDrops implements ISieveDefaultRegistryProvider {
         }
 
         public OrePrefix getPrefix() {
-            return OrePrefix.valueOf(prefix);
+            return OrePrefix.getPrefix(prefix);
         }
     }
 

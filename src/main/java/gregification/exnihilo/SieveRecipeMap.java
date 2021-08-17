@@ -40,34 +40,37 @@ public class SieveRecipeMap extends RecipeMap<SimpleRecipeBuilder> {
     private static final int INPUT_TOP = 26;
     private static final int INPUT_LEFT = 25;
 
-    public SieveRecipeMap(String unlocalizedName, int minInputs, int maxInputs, int minOutputs, int maxOutputs, int minFluidInputs,
-                          int maxFluidInputs, int minFluidOutputs, int maxFluidOutputs, SimpleRecipeBuilder defaultRecipe) {
-        super(unlocalizedName, minInputs, maxInputs, minOutputs, maxOutputs, minFluidInputs, maxFluidInputs, minFluidOutputs, maxFluidOutputs, defaultRecipe);
+    public SieveRecipeMap(String unlocalizedName,
+                          int minInputs, int maxInputs, int minOutputs, int maxOutputs,
+                          int minFluidInputs, int maxFluidInputs, int minFluidOutputs, int maxFluidOutputs,
+                          SimpleRecipeBuilder defaultRecipe, boolean isHidden) {
+        super(unlocalizedName, minInputs, maxInputs, minOutputs, maxOutputs, minFluidInputs, maxFluidInputs, minFluidOutputs, maxFluidOutputs, defaultRecipe, isHidden);
     }
 
     @Override
     @Nonnull
     public ModularUI.Builder createUITemplate(DoubleSupplier progressSupplier, IItemHandlerModifiable importItems,
-                                              IItemHandlerModifiable exportItems, FluidTankList importFluids, FluidTankList exportFluids) {
-        ModularUI.Builder builder = new ModularUI.Builder(GuiTextures.BACKGROUND, 176, 266)
-                .widget(new ProgressWidget(progressSupplier, PROGRESS_LEFT, PROGRESS_TOP, 20, 20, this.progressBarTexture, this.moveType));
-        this.addInventorySlotGroup(builder, importItems, importFluids, false);
-        this.addInventorySlotGroup(builder, exportItems, exportFluids, true);
+                                              IItemHandlerModifiable exportItems, FluidTankList importFluids,
+                                              FluidTankList exportFluids, int yOffset) {
+        ModularUI.Builder builder = ModularUI.defaultBuilder(yOffset);
+        builder.widget(new ProgressWidget(progressSupplier, PROGRESS_LEFT, PROGRESS_TOP, 20, 20, this.progressBarTexture, this.moveType));
+        this.addInventorySlotGroup(builder, importItems, importFluids, false, yOffset);
+        this.addInventorySlotGroup(builder, exportItems, exportFluids, true, yOffset);
         return builder;
     }
 
     @Override
-    protected void addInventorySlotGroup(ModularUI.Builder builder, IItemHandlerModifiable itemHandler, FluidTankList fluidHandler, boolean isOutputs) {
+    protected void addInventorySlotGroup(ModularUI.Builder builder, IItemHandlerModifiable itemHandler, FluidTankList fluidHandler, boolean isOutputs, int yOffset) {
         if (isOutputs) {
             for (int i = 0; i < 10; i++) {
                 for (int j = 0; j < 5; j++) {
                     int slotIndex = i * 5 + j;
-                    addSlot(builder, OUTPUT_LEFT + ITEM_SLOT_WITH_EDGE_DIMENSION * j, OUTPUT_TOP + ITEM_SLOT_WITH_EDGE_DIMENSION * i, slotIndex, itemHandler, fluidHandler, false, isOutputs);
+                    addSlot(builder, OUTPUT_LEFT + ITEM_SLOT_WITH_EDGE_DIMENSION * j, OUTPUT_TOP + ITEM_SLOT_WITH_EDGE_DIMENSION * i, slotIndex, itemHandler, fluidHandler, false, true);
                 }
             }
         } else {
-            addSlot(builder, INPUT_LEFT, INPUT_TOP, 0, itemHandler, fluidHandler, false, isOutputs);
-            addSlot(builder, MESH_LEFT, MESH_TOP, 1, itemHandler, fluidHandler, false, isOutputs);
+            addSlot(builder, INPUT_LEFT, INPUT_TOP, 0, itemHandler, fluidHandler, false, false);
+            addSlot(builder, MESH_LEFT, MESH_TOP, 1, itemHandler, fluidHandler, false, false);
         }
     }
 }

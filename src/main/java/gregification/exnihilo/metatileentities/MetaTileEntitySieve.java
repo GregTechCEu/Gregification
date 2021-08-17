@@ -39,7 +39,7 @@ public class MetaTileEntitySieve extends SimpleMachineMetaTileEntity {
 
     @Override
     public ModularUI createUI(EntityPlayer player) {
-        ModularUI.Builder builder = ModularUI.builder(GuiTextures.BACKGROUND, 176, 216)
+        ModularUI.Builder builder = ModularUI.extendedBuilder()
                 .widget(new LabelWidget(6, 6, getMetaFullName()))
                 .bindPlayerInventory(player.inventory, GuiTextures.SLOT, 8, 134)
                 .widget(new SlotWidget(this.importItems, 0, 35, 25).setBackgroundTexture(GuiTextures.SLOT))

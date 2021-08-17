@@ -25,14 +25,14 @@ import gregtech.api.recipes.ModHandler;
 import gregtech.api.recipes.Recipe;
 import gregtech.api.recipes.builders.SimpleRecipeBuilder;
 import gregtech.api.unification.OreDictUnifier;
+import gregtech.api.unification.material.Material;
 import gregtech.api.unification.material.Materials;
-import gregtech.api.unification.material.type.DustMaterial;
-import gregtech.api.unification.material.type.GemMaterial;
-import gregtech.api.unification.material.type.IngotMaterial;
-import gregtech.api.unification.material.type.Material;
+import gregtech.api.unification.material.properties.OreProperty;
+import gregtech.api.unification.material.properties.PropertyKey;
 import gregtech.api.unification.ore.OrePrefix;
 import gregtech.api.unification.stack.UnificationEntry;
 import gregtech.common.blocks.*;
+import gregtech.loaders.recipe.MetaTileEntityLoader;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 
@@ -41,55 +41,47 @@ import static gregification.exnihilo.metatileentities.ExNihiloMetaTileEntities.S
 import static gregification.exnihilo.metatileentities.ExNihiloMetaTileEntities.STEAM_SIEVE;
 import static gregtech.common.blocks.BlockGranite.GraniteVariant.BLACK_GRANITE;
 import static gregtech.common.blocks.BlockGranite.GraniteVariant.RED_GRANITE;
-import static gregtech.common.blocks.BlockMachineCasing.MachineCasingType.BRONZE_HULL;
 import static gregtech.common.blocks.BlockMineral.MineralVariant.BASALT;
 import static gregtech.common.blocks.BlockMineral.MineralVariant.MARBLE;
+import static gregtech.common.blocks.BlockSteamCasing.SteamCasingType.BRONZE_HULL;
 import static gregtech.common.blocks.StoneBlock.ChiselingVariant.CRACKED;
 import static gregtech.common.blocks.StoneBlock.ChiselingVariant.NORMAL;
 import static gregtech.common.pipelike.cable.Insulation.CABLE_SINGLE;
 import static gregtech.loaders.recipe.CraftingComponent.*;
-import static gregtech.loaders.recipe.MetaTileEntityLoader.registerMachineRecipe;
 
 public class ExNihiloRecipes {
 
-    // TODO Switch from valueOf with GTCEu
     public static void registerHandlers() {
-        OrePrefix.valueOf("oreChunk").addProcessingHandler(DustMaterial.class, ExNihiloRecipes::processChunk);
-        OrePrefix.valueOf("oreEnderChunk").addProcessingHandler(DustMaterial.class, ExNihiloRecipes::processChunk);
-        OrePrefix.valueOf("oreNetherChunk").addProcessingHandler(DustMaterial.class, ExNihiloRecipes::processChunk);
-        OrePrefix.valueOf("oreSandyChunk").addProcessingHandler(DustMaterial.class, ExNihiloRecipes::processChunk);
+        OrePrefix.getPrefix("oreChunk").addProcessingHandler(PropertyKey.ORE, ExNihiloRecipes::processChunk);
+        OrePrefix.getPrefix("oreEnderChunk").addProcessingHandler(PropertyKey.ORE, ExNihiloRecipes::processChunk);
+        OrePrefix.getPrefix("oreNetherChunk").addProcessingHandler(PropertyKey.ORE, ExNihiloRecipes::processChunk);
+        OrePrefix.getPrefix("oreSandyChunk").addProcessingHandler(PropertyKey.ORE, ExNihiloRecipes::processChunk);
     }
 
-    private static void processChunk(OrePrefix orePrefix, DustMaterial material) {
-        ItemStack ingotStack = null;
-        DustMaterial smeltingMaterial = material;
-        if (material.directSmelting != null) {
-            smeltingMaterial = material.directSmelting;
+    private static void processChunk(OrePrefix orePrefix, Material material, OreProperty oreProperty) {
+        Material smeltingMaterial = material;
+        ItemStack smeltStack = ItemStack.EMPTY;
+        if (oreProperty.getDirectSmeltResult() != null) {
+            smeltingMaterial = oreProperty.getDirectSmeltResult();
         }
-        if (smeltingMaterial instanceof IngotMaterial)
-            ingotStack = OreDictUnifier.get(OrePrefix.ingot, smeltingMaterial);
-        else if (smeltingMaterial instanceof GemMaterial)
-            ingotStack = OreDictUnifier.get(OrePrefix.gem, smeltingMaterial);
-
-        if (ingotStack != null && !ingotStack.isEmpty()) {
-            ingotStack.setCount(material.oreMultiplier);
-
-            if (!ingotStack.isEmpty() && isFurnaceMaterial(material)) {
-                ModHandler.addSmeltingRecipe(new UnificationEntry(orePrefix, material), ingotStack);
+        if (smeltingMaterial.hasProperty(PropertyKey.INGOT)) {
+            smeltStack = OreDictUnifier.get(OrePrefix.ingot, smeltingMaterial);
+        } else if (smeltingMaterial.hasProperty(PropertyKey.GEM)) {
+            smeltStack = OreDictUnifier.get(OrePrefix.gem, smeltingMaterial);
+        }
+        if (!smeltStack.isEmpty()) {
+            smeltStack.setCount(oreProperty.getOreMultiplier());
+            if (!material.hasProperty(PropertyKey.BLAST) || !(material.getProperty(PropertyKey.BLAST).getBlastTemperature() <= 0)) {
+                ModHandler.addSmeltingRecipe(new UnificationEntry(orePrefix, material), smeltStack);
             }
         }
-    }
-
-    private static boolean isFurnaceMaterial(Material material) {
-        return !(material instanceof IngotMaterial) ||
-                ((IngotMaterial) material).blastFurnaceTemperature <= 0;
     }
 
     public static void registerRecipes() {
 
         // Machines TODO Re-enable sieve recipe when move to GTCEu
-        // registerMachineRecipe(SIEVES, "CPC", "FMF", "OSO", 'M', HULL, 'C', CIRCUIT, 'O', CABLE_SINGLE, 'F', CONVEYOR, 'S', new ItemStack(ModBlocks.sieve), 'P', PISTON);
-        ModHandler.addShapedRecipe("steam_sieve", STEAM_SIEVE.getStackForm(), "BPB", "BMB", "BSB", 'B', new UnificationEntry(OrePrefix.pipeSmall, Materials.Bronze), 'M', MetaBlocks.MACHINE_CASING.getItemVariant(BRONZE_HULL), 'S', new ItemStack(ModBlocks.sieve), 'P', new ItemStack(Blocks.PISTON));
+        MetaTileEntityLoader.registerMachineRecipe(SIEVES, "CPC", "FMF", "OSO", 'M', HULL, 'C', CIRCUIT, 'O', CABLE_SINGLE, 'F', CONVEYOR, 'S', ModBlocks.sieve, 'P', PISTON);
+        ModHandler.addShapedRecipe("steam_sieve", STEAM_SIEVE.getStackForm(), "BPB", "BMB", "BSB", 'B', new UnificationEntry(OrePrefix.pipeSmallFluid, Materials.Bronze), 'M', MetaBlocks.STEAM_CASING.getItemVariant(BRONZE_HULL), 'S', new ItemStack(ModBlocks.sieve), 'P', Blocks.PISTON);
 
         // Mirror Ex Nihilo Sifter recipes to Sifter RecipeMap
         for (SieveRecipe recipe : ExNihiloRegistryManager.SIEVE_REGISTRY.getRecipeList()) {

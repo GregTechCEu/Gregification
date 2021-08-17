@@ -1,9 +1,6 @@
 package gregification.util;
 
-import gregtech.api.unification.material.type.Material;
 import net.minecraft.util.ResourceLocation;
-
-import java.util.function.Predicate;
 
 public class GFUtility {
 
@@ -11,7 +8,4 @@ public class GFUtility {
         return new ResourceLocation(GFValues.MODID, name);
     }
 
-    public static Predicate<Material> pred(Predicate<Material> in) {
-        return in;
-    }
 }

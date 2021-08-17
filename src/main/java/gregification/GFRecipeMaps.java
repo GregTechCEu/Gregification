@@ -14,7 +14,6 @@ import stanhebben.zenscript.annotations.ZenProperty;
 public class GFRecipeMaps {
 
     @ZenProperty
-    public static final RecipeMap<SimpleRecipeBuilder> SIEVE_RECIPES = new SieveRecipeMap("electric_sieve",
-            2, 2, 1, 54, 0, 0, 0, 0, new SimpleRecipeBuilder())
+    public static final RecipeMap<SimpleRecipeBuilder> SIEVE_RECIPES = new SieveRecipeMap("electric_sieve", 2, 2, 1, 54, 0, 0, 0, 0, new SimpleRecipeBuilder(), false)
             .setProgressBar(GuiTextures.PROGRESS_BAR_SIFT, ProgressWidget.MoveType.HORIZONTAL);
 }
