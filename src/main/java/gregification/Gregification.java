@@ -42,7 +42,7 @@ public class Gregification {
     public static ExNihiloCommonProxy ExNihiloProxy;
 
     // Open Computers Proxy
-    @SidedProxy(modId = GFValues.MODID, serverSide = "gregification.proxy.OCCommonProxy", clientSide = "gregification.proxy.OCClientProxy")
+    @SidedProxy(modId = GFValues.MODID, serverSide = "gregification.proxy.OCCommonProxy", clientSide = "gregification.proxy.OCCommonProxy")
     public static OCCommonProxy OCProxy;
 
     @EventHandler
@@ -54,6 +54,7 @@ public class Gregification {
     @EventHandler
     public void init(FMLInitializationEvent event) {
         ExNihiloProxy.init();
+        OCProxy.init();
     }
 
     @EventHandler

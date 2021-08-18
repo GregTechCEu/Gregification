@@ -111,13 +111,14 @@ dependencies {
     "deobfCompile"("slimeknights:TConstruct:$mcVersion-${config["ticon.version"]}")
     "deobfCompile"("com.github.mcjty:xnet:$shortVersion-${config["xnet.version"]}")
     "deobfCompile"("com.github.mcjty:mcjtylib:$shortVersion-${config["mcjtylib.version"]}")
-    "deobfCompile"("li.cil.oc:OpenComputers:MC$mcVersion-${config["oc.version"]}")
     "deobfCompile"("binnie:binnie-mods-$mcVersion:${config["binnie.version"]}")
     "deobfCompile"("exnihilocreatio:exnihilocreatio:$mcVersion-${config["exnihilo.version"]}") {
         isTransitive = false
     }
 
-    "compile"(files("gregtech-1.12.2-2.0.0.1191-alpha-dev.jar"))
+    "provided"("li.cil.oc:OpenComputers:MC$mcVersion-${config["oc.version"]}")
+
+    "compile"(files("gregtech-1.12.2-2.0.0.1188-alpha-dev.jar"))
     "compile"(files("libs/Cucumber-1.12.2-1.1.3.jar"))
     "compile"(files("libs/MysticalAgriculture-1.12.2-1.7.5.jar"))
     "compile"(files("libs/MysticalAgradditions-1.12.2-1.3.2.jar"))

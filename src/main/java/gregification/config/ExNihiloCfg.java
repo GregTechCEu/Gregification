@@ -6,17 +6,13 @@ import net.minecraftforge.common.config.Config;
 @Config(modid = GFValues.MODID)
 public class ExNihiloCfg {
 
-    @Config.Comment("Enable Ex Nihilo integration")
+    @Config.Comment("Enable Ex Nihilo integration. Default: true")
     @Config.RequiresMcRestart
     public boolean enableExNihilo = true;
 
-    @Config.Comment("Enable High-Tier Sieves (UHV-UXV)? Requires Gregicality to be installed")
+    @Config.Comment("Enable High-Tier Sieves (UHV-UXV)? Requires Gregicality to be installed. Default: true")
     @Config.RequiresMcRestart
     public boolean highTierSieve = true;
-
-    @Config.Comment("Should Ores automatically be added to Materials in Sieve Drop configs? May not have good defaults. Default: false")
-    @Config.RequiresMcRestart
-    public boolean shouldAutoApplyOre = false;
 
     @Config.Comment("Config category for sieve drops")
     @Config.RequiresMcRestart

@@ -8,5 +8,7 @@ public class GFValues {
 
     public static final String
             MODID_GCY = "gregicality",
-            MODID_EXNI = "exnihilocreatio";
+            MODID_EXNI = "exnihilocreatio",
+            MODID_OC = "opencomputers",
+            MODID_GTOC = "gtce2oc";
 }
