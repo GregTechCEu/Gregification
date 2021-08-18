@@ -53,6 +53,7 @@ configure<UserBaseExtension> {
     version = forgeVersion
     mappings = config["mcp.version"] as String
     runDir = "run"
+    isUseDepAts = true
     replace("@VERSION@", modVersion)
     replaceIn("GFValues.java")
 }
@@ -98,7 +99,6 @@ repositories {
 }
 
 dependencies {
-    "deobfCompile"("gregtechce:gregtech:$mcVersion:${config["gregtech.version"]}")
     "deobfCompile"("codechicken-lib-1-8:CodeChickenLib-$mcVersion:${config["ccl.version"]}:universal")
     "deobfCompile"("codechicken:ChickenASM:$shortVersion-${config["chickenasm.version"]}")
     "deobfCompile"("mezz.jei:jei_$mcVersion:${config["jei.version"]}")
@@ -117,6 +117,7 @@ dependencies {
         isTransitive = false
     }
 
+    "compile"(files("gregtech-1.12.2-2.0.0.1182-alpha-dev.jar"))
     "compile"(files("libs/Cucumber-1.12.2-1.1.3.jar"))
     "compile"(files("libs/MysticalAgriculture-1.12.2-1.7.5.jar"))
     "compile"(files("libs/MysticalAgradditions-1.12.2-1.3.2.jar"))
