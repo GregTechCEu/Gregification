@@ -17,11 +17,13 @@
  */
 package gregification.exnihilo;
 
+import com.google.common.collect.ImmutableList;
 import exnihilocreatio.ModBlocks;
 import exnihilocreatio.compatibility.jei.sieve.SieveRecipe;
 import exnihilocreatio.registries.manager.ExNihiloRegistryManager;
 import exnihilocreatio.registries.types.Siftable;
 import gregification.util.GFOrePrefix;
+import gregtech.api.recipes.MatchingMode;
 import gregtech.api.recipes.ModHandler;
 import gregtech.api.recipes.Recipe;
 import gregtech.api.recipes.builders.SimpleRecipeBuilder;
@@ -36,6 +38,10 @@ import gregtech.common.blocks.*;
 import gregtech.loaders.recipe.MetaTileEntityLoader;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
+import scala.actors.threadpool.Arrays;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static gregification.GFRecipeMaps.SIEVE_RECIPES;
 import static gregification.exnihilo.metatileentities.ExNihiloMetaTileEntities.SIEVES;
@@ -97,6 +103,9 @@ public class ExNihiloRecipes {
         // Mirror Ex Nihilo Sifter recipes to Sifter RecipeMap
         for (SieveRecipe recipe : ExNihiloRegistryManager.SIEVE_REGISTRY.getRecipeList()) {
             for (ItemStack stack : recipe.getSievables()) {
+                // todo do this check better
+                //noinspection unchecked
+                if (SIEVE_RECIPES.findRecipe(4, Arrays.asList(new ItemStack[]{stack, recipe.getMesh()}), new ArrayList<>(), 0, MatchingMode.DEFAULT) != null) continue;
                 SimpleRecipeBuilder builder = SIEVE_RECIPES.recipeBuilder().notConsumable(recipe.getMesh()).inputs(stack);
 
                 for (Siftable siftable : ExNihiloRegistryManager.SIEVE_REGISTRY.getDrops(stack)) {
