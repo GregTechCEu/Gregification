@@ -1,39 +1,24 @@
-/*
-    Copyright 2019, TheLimePixel, dan
-    GregBlock Utilities
-
-    This program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
-
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with this program.  If not, see <https://www.gnu.org/licenses/>.
- */
-package gregification.exnihilo.metatileentities;
+package gregification.common;
 
 import gregification.config.GFConfig;
-import gregification.util.GFValues;
+import gregification.exnihilo.metatileentities.MetaTileEntitySieve;
+import gregification.exnihilo.metatileentities.MetaTileEntitySteamSieve;
 import gregtech.api.GTValues;
 import gregtech.api.GregTechAPI;
 
-import static gregification.util.GFUtility.gregificationId;
+import static gregification.common.GFUtility.gregificationId;
 
-public class ExNihiloMetaTileEntities {
+public class GFMetaTileEntities {
 
     public static MetaTileEntitySieve[] SIEVES = new MetaTileEntitySieve[GTValues.V.length - 1];
 
     public static MetaTileEntitySteamSieve STEAM_SIEVE;
     // high pressure steam sieve?
 
-    public static void register() {
+    public static void registerExNihilo() {
 
         STEAM_SIEVE = GregTechAPI.registerMetaTileEntity(4000, new MetaTileEntitySteamSieve(gregificationId("sieve.steam"), false));
+        // 4001 reserved for HP Steam Sieve if desired
 
         SIEVES[0] = GregTechAPI.registerMetaTileEntity(4002, new MetaTileEntitySieve(gregificationId("sieve.lv"), 1));
         SIEVES[1] = GregTechAPI.registerMetaTileEntity(4003, new MetaTileEntitySieve(gregificationId("sieve.mv"), 2));

@@ -1,11 +1,11 @@
 package gregification.proxy;
 
 import exnihilocreatio.registries.manager.ExNihiloRegistryManager;
+import gregification.common.GFMetaTileEntities;
 import gregification.config.GFConfig;
 import gregification.exnihilo.*;
-import gregification.exnihilo.metatileentities.ExNihiloMetaTileEntities;
-import gregification.util.GFLog;
-import gregification.util.GFValues;
+import gregification.common.GFLog;
+import gregification.common.GFValues;
 import gregtech.api.GTValues;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraftforge.event.RegistryEvent;
@@ -23,7 +23,7 @@ public class ExNihiloCommonProxy {
             ExNihiloPebble.register();
             SieveDrops.readSieveDropsFromConfig();
             ExNihiloRegistryManager.registerSieveDefaultRecipeHandler(new SieveDrops());
-            ExNihiloMetaTileEntities.register();
+            GFMetaTileEntities.registerExNihilo();
         }
     }
 

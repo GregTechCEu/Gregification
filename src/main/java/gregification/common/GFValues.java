@@ -1,4 +1,4 @@
-package gregification.util;
+package gregification.common;
 
 public class GFValues {
 

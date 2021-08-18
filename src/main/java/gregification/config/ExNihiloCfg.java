@@ -1,6 +1,6 @@
 package gregification.config;
 
-import gregification.util.GFValues;
+import gregification.common.GFValues;
 import net.minecraftforge.common.config.Config;
 
 @Config(modid = GFValues.MODID)

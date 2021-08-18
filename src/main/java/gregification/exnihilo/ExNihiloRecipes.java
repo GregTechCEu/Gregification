@@ -17,12 +17,11 @@
  */
 package gregification.exnihilo;
 
-import com.google.common.collect.ImmutableList;
 import exnihilocreatio.ModBlocks;
 import exnihilocreatio.compatibility.jei.sieve.SieveRecipe;
 import exnihilocreatio.registries.manager.ExNihiloRegistryManager;
 import exnihilocreatio.registries.types.Siftable;
-import gregification.util.GFOrePrefix;
+import gregification.common.GFOrePrefix;
 import gregtech.api.recipes.MatchingMode;
 import gregtech.api.recipes.ModHandler;
 import gregtech.api.recipes.Recipe;
@@ -41,11 +40,10 @@ import net.minecraft.item.ItemStack;
 import scala.actors.threadpool.Arrays;
 
 import java.util.ArrayList;
-import java.util.List;
 
-import static gregification.GFRecipeMaps.SIEVE_RECIPES;
-import static gregification.exnihilo.metatileentities.ExNihiloMetaTileEntities.SIEVES;
-import static gregification.exnihilo.metatileentities.ExNihiloMetaTileEntities.STEAM_SIEVE;
+import static gregification.common.GFRecipeMaps.SIEVE_RECIPES;
+import static gregification.common.GFMetaTileEntities.SIEVES;
+import static gregification.common.GFMetaTileEntities.STEAM_SIEVE;
 import static gregtech.common.blocks.BlockGranite.GraniteVariant.BLACK_GRANITE;
 import static gregtech.common.blocks.BlockGranite.GraniteVariant.RED_GRANITE;
 import static gregtech.common.blocks.BlockMineral.MineralVariant.BASALT;

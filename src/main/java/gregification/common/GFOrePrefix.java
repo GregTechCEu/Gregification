@@ -1,4 +1,4 @@
-package gregification.util;
+package gregification.common;
 
 import gregification.config.GFConfig;
 import gregtech.api.GTValues;

@@ -17,7 +17,7 @@
  */
 package gregification.exnihilo.metatileentities;
 
-import gregification.GFRecipeMaps;
+import gregification.common.GFRecipeMaps;
 import gregtech.api.gui.GuiTextures;
 import gregtech.api.gui.ModularUI;
 import gregtech.api.gui.widgets.LabelWidget;

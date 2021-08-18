@@ -1,8 +1,8 @@
 package gregification;
 
 import gregification.proxy.*;
-import gregification.util.GFLog;
-import gregification.util.GFValues;
+import gregification.common.GFLog;
+import gregification.common.GFValues;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.SidedProxy;

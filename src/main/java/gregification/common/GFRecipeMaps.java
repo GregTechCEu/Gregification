@@ -1,4 +1,4 @@
-package gregification;
+package gregification.common;
 
 import crafttweaker.annotations.ZenRegister;
 import gregification.exnihilo.SieveRecipeMap;
