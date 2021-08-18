@@ -117,7 +117,7 @@ dependencies {
         isTransitive = false
     }
 
-    "compile"(files("gregtech-1.12.2-2.0.0.1182-alpha-dev.jar"))
+    "compile"(files("gregtech-1.12.2-2.0.0.1191-alpha-dev.jar"))
     "compile"(files("libs/Cucumber-1.12.2-1.1.3.jar"))
     "compile"(files("libs/MysticalAgriculture-1.12.2-1.7.5.jar"))
     "compile"(files("libs/MysticalAgradditions-1.12.2-1.3.2.jar"))

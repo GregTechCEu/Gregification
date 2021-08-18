@@ -18,7 +18,6 @@
 package gregification.exnihilo.metatileentities;
 
 import gregification.GFRecipeMaps;
-import gregtech.api.gui.GuiTextures;
 import gregtech.api.gui.ModularUI;
 import gregtech.api.gui.widgets.ImageWidget;
 import gregtech.api.gui.widgets.LabelWidget;

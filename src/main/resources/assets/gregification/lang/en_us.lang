@@ -1,0 +1,31 @@
+# Ex Nihilo
+item.gtPebble.basalt.name=Basalt Pebble
+item.gtPebble.black_granite.name=Black Granite Pebble
+item.gtPebble.marble.name=Marble Pebble
+item.gtPebble.red_granite.name=Red Granite Pebble
+
+item.material.oreprefix.oreChunk=%s Ore Chunk
+item.material.oreprefix.oreEnderChunk=Ender %s Ore Chunk
+item.material.oreprefix.oreNetherChunk=Nether %s Ore Chunk
+item.material.oreprefix.oreSandyChunk=Sandy %s Ore Chunk
+
+recipemap.electric_sieve.name=Electric Sieve
+
+gregification.machine.sieve.steam.name=Steam Sieve
+gregification.machine.sieve.steam.tooltip=Tired of Right-Clicking all day?
+
+gregtech.machine.sieve.tooltip=
+
+gregification.machine.sieve.lv.name=Basic Electric Sieve
+gregification.machine.sieve.mv.name=Advanced Electric Sieve
+gregification.machine.sieve.hv.name=Advanced Electric Sieve II
+gregification.machine.sieve.ev.name=Advanced Electric Sieve III
+gregification.machine.sieve.iv.name=Elite Electric Sieve
+gregification.machine.sieve.luv.name=Elite Electric Sieve II
+gregification.machine.sieve.zpm.name=Elite Electric Sieve III
+gregification.machine.sieve.uv.name=Elite Electric Sieve IV
+gregification.machine.sieve.uhv.name=High-Tech Electric Sieve
+gregification.machine.sieve.uev.name=High-Tech Electric Sieve II
+gregification.machine.sieve.uiv.name=High-Tech Electric Sieve III
+gregification.machine.sieve.umv.name=High-Tech Electric Sieve IV
+gregification.machine.sieve.uxv.name=Ultimate Electric Sieve

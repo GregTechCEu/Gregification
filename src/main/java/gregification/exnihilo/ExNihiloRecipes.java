@@ -21,6 +21,7 @@ import exnihilocreatio.ModBlocks;
 import exnihilocreatio.compatibility.jei.sieve.SieveRecipe;
 import exnihilocreatio.registries.manager.ExNihiloRegistryManager;
 import exnihilocreatio.registries.types.Siftable;
+import gregification.util.GFOrePrefix;
 import gregtech.api.recipes.ModHandler;
 import gregtech.api.recipes.Recipe;
 import gregtech.api.recipes.builders.SimpleRecipeBuilder;
@@ -51,10 +52,10 @@ import static gregtech.loaders.recipe.CraftingComponent.*;
 public class ExNihiloRecipes {
 
     public static void registerHandlers() {
-        OrePrefix.getPrefix("oreChunk").addProcessingHandler(PropertyKey.ORE, ExNihiloRecipes::processChunk);
-        OrePrefix.getPrefix("oreEnderChunk").addProcessingHandler(PropertyKey.ORE, ExNihiloRecipes::processChunk);
-        OrePrefix.getPrefix("oreNetherChunk").addProcessingHandler(PropertyKey.ORE, ExNihiloRecipes::processChunk);
-        OrePrefix.getPrefix("oreSandyChunk").addProcessingHandler(PropertyKey.ORE, ExNihiloRecipes::processChunk);
+        GFOrePrefix.oreChunk.addProcessingHandler(PropertyKey.ORE, ExNihiloRecipes::processChunk);
+        GFOrePrefix.oreEnderChunk.addProcessingHandler(PropertyKey.ORE, ExNihiloRecipes::processChunk);
+        GFOrePrefix.oreNetherChunk.addProcessingHandler(PropertyKey.ORE, ExNihiloRecipes::processChunk);
+        GFOrePrefix.oreSandyChunk.addProcessingHandler(PropertyKey.ORE, ExNihiloRecipes::processChunk);
     }
 
     private static void processChunk(OrePrefix orePrefix, Material material, OreProperty oreProperty) {
@@ -63,16 +64,14 @@ public class ExNihiloRecipes {
         if (oreProperty.getDirectSmeltResult() != null) {
             smeltingMaterial = oreProperty.getDirectSmeltResult();
         }
+
         if (smeltingMaterial.hasProperty(PropertyKey.INGOT)) {
             smeltStack = OreDictUnifier.get(OrePrefix.ingot, smeltingMaterial);
         } else if (smeltingMaterial.hasProperty(PropertyKey.GEM)) {
             smeltStack = OreDictUnifier.get(OrePrefix.gem, smeltingMaterial);
         }
-        if (!smeltStack.isEmpty()) {
-            smeltStack.setCount(oreProperty.getOreMultiplier());
-            if (!material.hasProperty(PropertyKey.BLAST) || !(material.getProperty(PropertyKey.BLAST).getBlastTemperature() <= 0)) {
-                ModHandler.addSmeltingRecipe(new UnificationEntry(orePrefix, material), smeltStack);
-            }
+        if (!smeltStack.isEmpty() && !material.hasProperty(PropertyKey.BLAST)) {
+            ModHandler.addSmeltingRecipe(new UnificationEntry(orePrefix, material), smeltStack);
         }
     }
 

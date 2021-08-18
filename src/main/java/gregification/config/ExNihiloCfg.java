@@ -10,7 +10,7 @@ public class ExNihiloCfg {
     @Config.RequiresMcRestart
     public boolean enableExNihilo = true;
 
-    @Config.Comment("") // todo
+    @Config.Comment("Enable High-Tier Sieves (UHV-UXV)? Requires Gregicality to be installed")
     @Config.RequiresMcRestart
     public boolean highTierSieve = true;
 

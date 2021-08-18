@@ -11,7 +11,7 @@ import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
 @Mod(modid = GFValues.MODID, name = GFValues.MOD_NAME, version = GFValues.VERSION,
-        dependencies = "required-after:gregtech@[1.15.0.721,);" +
+        dependencies = "required-after:gregtech@[2.0,);" +
                 "after:forestry;" +
                 "after:tconstruct;" +
                 "after:exnihilocreatio;" +
@@ -22,8 +22,7 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
                 "after:binniedesign;" +
                 "after:extratrees;" +
                 "after:botany;" +
-                "after:genetics"
-)
+                "after:genetics")
 public class Gregification {
 
     // Proxy for Gregification itself
@@ -54,7 +53,6 @@ public class Gregification {
 
     @EventHandler
     public void init(FMLInitializationEvent event) {
-        ExNihiloProxy.init();
     }
 
     @EventHandler
