@@ -53,6 +53,7 @@ public class Gregification {
 
     @EventHandler
     public void init(FMLInitializationEvent event) {
+        ExNihiloProxy.init();
     }
 
     @EventHandler

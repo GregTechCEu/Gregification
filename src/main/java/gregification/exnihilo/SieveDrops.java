@@ -23,10 +23,10 @@ import exnihilocreatio.registries.registries.SieveRegistry;
 import exnihilocreatio.util.ItemInfo;
 import gregification.config.GFConfig;
 import gregification.util.GFLog;
+import gregification.util.GFOrePrefix;
 import gregtech.api.unification.OreDictUnifier;
 import gregtech.api.unification.material.Material;
 import gregtech.api.unification.material.MaterialRegistry;
-import gregtech.api.unification.material.properties.OreProperty;
 import gregtech.api.unification.material.properties.PropertyKey;
 import gregtech.api.unification.ore.OrePrefix;
 import net.minecraft.item.ItemStack;
@@ -40,7 +40,7 @@ import java.util.Map;
 
 public class SieveDrops implements ISieveDefaultRegistryProvider {
 
-    private static final Map<SieveDropType, List<SieveDrop>> SIEVE_DROPS_MAP = new HashMap<>();
+    private static Map<SieveDropType, List<SieveDrop>> SIEVE_DROPS_MAP = new HashMap<>();
 
     public static void readSieveDropsFromConfig() {
         readSieveDropsFromConfig(GFConfig.exNihilo.drops.sandSieveDrops, SieveDropType.SAND);
@@ -54,7 +54,7 @@ public class SieveDrops implements ISieveDefaultRegistryProvider {
 
     private static void readSieveDropsFromConfig(String[] recipes, SieveDropType type) {
         if (recipes == null || recipes.length == 0) {
-            GFLog.exNihiloLogger.info("No configurations found for {} sieve category, skipping", type.getName());
+            GFLog.exNihiloLogger.info("No configurations found for {} sieve category, skipping...", type.getName());
             return;
         }
 
@@ -76,38 +76,34 @@ public class SieveDrops implements ISieveDefaultRegistryProvider {
             chance = Float.parseFloat(recipe[1 + offset]);
             tier = Integer.parseInt(recipe[2 + offset]);
         } catch(Exception e) {
-            GFLog.exNihiloLogger.error("Invalid sieve configuration found for {} in {} category, skipping",
+            GFLog.exNihiloLogger.error("Invalid sieve configuration found for {} in {} category, skipping...",
                     materialName == null ? "unknown material" : materialName, type.getName());
             return null;
         }
 
         if (materialName == null) {
-            GFLog.exNihiloLogger.error("Invalid sieve configuration found in {} category, material cannot be null",
+            GFLog.exNihiloLogger.error("Invalid sieve configuration found in {} category, material cannot be null. Skipping...",
                     type.getName());
             return null;
         }
         Material material = MaterialRegistry.MATERIAL_REGISTRY.getObject(materialName);
         if (material == null) {
-            GFLog.exNihiloLogger.error("Could not find material with name {} in {} category",
+            GFLog.exNihiloLogger.error("Could not find material with name {} in {} category, skipping...",
                     materialName, type.getName());
             return null;
         }
         if (!material.hasProperty(PropertyKey.ORE)) {
-            if (GFConfig.exNihilo.shouldAutoApplyOre) {
-                material.setProperty(PropertyKey.ORE, new OreProperty());
-            } else {
-                GFLog.exNihiloLogger.error("Material {} in {} category has no Ore associated! Enable \"shouldAutoApplyOre\" config to automatically apply one",
-                        materialName, type.getName());
-                return null;
-            }
+            GFLog.exNihiloLogger.error("Material {} in {} category has no Ore associated, skipping...",
+                    materialName, type.getName());
+            return null;
         }
         if (chance < 0.0f || chance > 1.0f) {
-            GFLog.exNihiloLogger.error("Chance value out of range for {} in {} category, must be between 0.0 and 1.0!",
+            GFLog.exNihiloLogger.error("Chance value out of range for {} in {} category, must be between 0.0 and 1.0! Skipping...",
                     materialName, type.getName());
             return null;
         }
         if (tier < 1 || tier > 4) {
-            GFLog.exNihiloLogger.error("Sifting tier out of range for {} in {} category, must be between 1 and 4 inclusive!",
+            GFLog.exNihiloLogger.error("Sifting tier out of range for {} in {} category, must be between 1 and 4 inclusive! Skipping...",
                     materialName, type.getName());
             return null;
         }
@@ -128,21 +124,23 @@ public class SieveDrops implements ISieveDefaultRegistryProvider {
                 }
             }
         }
+        SIEVE_DROPS_MAP = null; // can let this get GC'd now
     }
 
     // TODO Move away from valueOf for GTCEu
     private enum SieveDropType implements IStringSerializable {
-        SAND("sand", "oreSandyChunk"),
-        GRAVEL("gravel", "oreChunk"),
-        NETHERRACK("nether", "oreNetherChunk"),
-        END("end", "oreEnderChunk"),
-        GRANITE("crushedGranite", "oreChunk"),
-        DIORITE("crushedDiorite", "oreChunk"),
-        ANDESITE("crushedAndesite", "oreChunk");
+        SAND("sand", GFOrePrefix.oreSandyChunk),
+        GRAVEL("gravel", GFOrePrefix.oreChunk),
+        NETHERRACK("nether", GFOrePrefix.oreNetherChunk),
+        END("end", GFOrePrefix.oreEnderChunk),
+        GRANITE("crushedGranite", GFOrePrefix.oreChunk),
+        DIORITE("crushedDiorite", GFOrePrefix.oreChunk),
+        ANDESITE("crushedAndesite", GFOrePrefix.oreChunk);
 
-        private final String name, prefix;
+        private final String name;
+        private final OrePrefix prefix;
 
-        SieveDropType(String name, String prefix) {
+        SieveDropType(String name, OrePrefix prefix) {
             this.name = name;
             this.prefix = prefix;
         }
@@ -154,7 +152,7 @@ public class SieveDrops implements ISieveDefaultRegistryProvider {
         }
 
         public OrePrefix getPrefix() {
-            return OrePrefix.getPrefix(prefix);
+            return prefix;
         }
     }
 

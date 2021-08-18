@@ -11,6 +11,7 @@ import net.minecraft.item.crafting.IRecipe;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Optional;
+import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 @Mod.EventBusSubscriber(modid = GFValues.MODID)
@@ -33,7 +34,14 @@ public class ExNihiloCommonProxy {
         if (GFConfig.exNihilo.enableExNihilo && GTValues.isModLoaded(GFValues.MODID_EXNI)) {
             GFLog.exNihiloLogger.info("Registering Ex Nihilo Compat Recipes");
             ExNihiloRecipes.registerHandlers();
-            ExNihiloRecipes.registerRecipes();
+            ExNihiloRecipes.registerGTRecipes();
+        }
+    }
+
+    @Optional.Method(modid = GFValues.MODID_EXNI)
+    public void init() {
+        if (GFConfig.exNihilo.enableExNihilo && GTValues.isModLoaded(GFValues.MODID_EXNI)) {
+            ExNihiloRecipes.registerExNihiloRecipes();
         }
     }
 }
