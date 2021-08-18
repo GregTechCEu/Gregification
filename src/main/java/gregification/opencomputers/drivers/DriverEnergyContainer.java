@@ -1,3 +1,7 @@
+/*
+ * Adapted from gtce2oc https://www.curseforge.com/minecraft/mc-mods/gtce2oc
+ * Authors: iamtakingiteasy, KilaBash
+ */
 package gregification.opencomputers.drivers;
 
 import gregtech.api.capability.GregtechCapabilities;
