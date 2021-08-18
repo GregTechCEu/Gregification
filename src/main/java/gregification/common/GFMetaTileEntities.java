@@ -5,8 +5,7 @@ import gregification.exnihilo.metatileentities.MetaTileEntitySieve;
 import gregification.exnihilo.metatileentities.MetaTileEntitySteamSieve;
 import gregtech.api.GTValues;
 import gregtech.api.GregTechAPI;
-
-import static gregification.common.GFUtility.gregificationId;
+import net.minecraft.util.ResourceLocation;
 
 public class GFMetaTileEntities {
 
@@ -24,8 +23,8 @@ public class GFMetaTileEntities {
         SIEVES[1] = GregTechAPI.registerMetaTileEntity(4003, new MetaTileEntitySieve(gregificationId("sieve.mv"), 2));
         SIEVES[2] = GregTechAPI.registerMetaTileEntity(4004, new MetaTileEntitySieve(gregificationId("sieve.hv"), 3));
         SIEVES[3] = GregTechAPI.registerMetaTileEntity(4005, new MetaTileEntitySieve(gregificationId("sieve.ev"), 4));
+        SIEVES[4] = GregTechAPI.registerMetaTileEntity(4006, new MetaTileEntitySieve(gregificationId("sieve.iv"), 5));
         if (!GTValues.isModLoaded(GFValues.MODID_GCY) || (GTValues.isModLoaded(GFValues.MODID_GCY) && GFConfig.exNihilo.highTierSieve)) {
-            SIEVES[4] = GregTechAPI.registerMetaTileEntity(4006, new MetaTileEntitySieve(gregificationId("sieve.iv"), 5));
             SIEVES[5] = GregTechAPI.registerMetaTileEntity(4007, new MetaTileEntitySieve(gregificationId("sieve.luv"), 6));
             SIEVES[6] = GregTechAPI.registerMetaTileEntity(4008, new MetaTileEntitySieve(gregificationId("sieve.zpm"), 7));
             SIEVES[7] = GregTechAPI.registerMetaTileEntity(4009, new MetaTileEntitySieve(gregificationId("sieve.uv"), 8));
@@ -37,5 +36,9 @@ public class GFMetaTileEntities {
             SIEVES[11] = GregTechAPI.registerMetaTileEntity(4013, new MetaTileEntitySieve(gregificationId("sieve.umv"), 12));
             SIEVES[12] = GregTechAPI.registerMetaTileEntity(4014, new MetaTileEntitySieve(gregificationId("sieve.uxv"), 13));
         }
+    }
+
+    private static ResourceLocation gregificationId(String name) {
+        return new ResourceLocation(GFValues.MODID, name);
     }
 }
