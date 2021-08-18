@@ -26,6 +26,8 @@ import gregification.util.GFLog;
 import gregtech.api.unification.OreDictUnifier;
 import gregtech.api.unification.material.Material;
 import gregtech.api.unification.material.MaterialRegistry;
+import gregtech.api.unification.material.properties.OreProperty;
+import gregtech.api.unification.material.properties.PropertyKey;
 import gregtech.api.unification.ore.OrePrefix;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IStringSerializable;
@@ -89,6 +91,15 @@ public class SieveDrops implements ISieveDefaultRegistryProvider {
             GFLog.exNihiloLogger.error("Could not find material with name {} in {} category",
                     materialName, type.getName());
             return null;
+        }
+        if (!material.hasProperty(PropertyKey.ORE)) {
+            if (GFConfig.exNihilo.shouldAutoApplyOre) {
+                material.setProperty(PropertyKey.ORE, new OreProperty());
+            } else {
+                GFLog.exNihiloLogger.error("Material {} in {} category has no Ore associated! Enable \"shouldAutoApplyOre\" config to automatically apply one",
+                        materialName, type.getName());
+                return null;
+            }
         }
         if (chance < 0.0f || chance > 1.0f) {
             GFLog.exNihiloLogger.error("Chance value out of range for {} in {} category, must be between 0.0 and 1.0!",

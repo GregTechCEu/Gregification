@@ -14,6 +14,10 @@ public class ExNihiloCfg {
     @Config.RequiresMcRestart
     public boolean highTierSieve = true;
 
+    @Config.Comment("Should Ores automatically be added to Materials in Sieve Drop configs? May not have good defaults. Default: false")
+    @Config.RequiresMcRestart
+    public boolean shouldAutoApplyOre = false;
+
     @Config.Comment("Config category for sieve drops")
     @Config.RequiresMcRestart
     public SieveCategory drops = new SieveCategory();
@@ -70,7 +74,7 @@ public class ExNihiloCfg {
                 "lignite", "0.285", "1",
                 "coal", "0.095", "1",
                 "salt", "0.0952", "1",
-                "rockSalt", "0.0833", "1",
+                "rock_salt", "0.0833", "1",
                 "lepidolite", "0.0357", "1",
                 "spodumene", "0.0238", "1",
                 "tin", "0.24225", "1",
@@ -101,7 +105,7 @@ public class ExNihiloCfg {
         @Config.Comment("Granite Sieve drop list. Format is: { Material(string), Chance(double), Mesh Level(int) }. If empty, none will be generated")
         public String[] graniteSieveDrops = new String[] {
                 "apatite", "0.1014", "1",
-                "phosphor", "0.0676", "1",
+                "tricalcium_phosphate", "0.0676", "1",
                 "bauxite", "0.153", "1",
                 "aluminium", "0.0765", "1",
                 "ilmenite", "0.0255", "1",
@@ -130,7 +134,7 @@ public class ExNihiloCfg {
                 "lapis", "0.06825", "2",
                 "calcite", "0.02925", "2",
                 "topaz", "0.06", "2",
-                "blueTopaz", "0.04", "2",
+                "blue_topaz", "0.04", "2",
 
                 "chalcopyrite", "0.0969", "3",
                 "iron", "0.0969", "3",
@@ -138,7 +142,7 @@ public class ExNihiloCfg {
                 "copper", "0.0323", "3",
                 "brown_limonite", "0.0507", "3",
                 "yellow_limonite", "0.0507", "3",
-                "banded)iron", "0.0507", "3",
+                "banded_iron", "0.0507", "3",
                 "malachite", "0.0169", "3",
                 "bastnasite", "0.1014", "3",
                 "monazite", "0.0338", "3",
