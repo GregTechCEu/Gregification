@@ -1,0 +1,47 @@
+# Ex Nihilo
+item.gtPebble.basalt.name=Базальтовая галька
+item.gtPebble.black_granite.name=Галька черного гранита
+item.gtPebble.marble.name=Мраморная галька
+item.gtPebble.red_granite.name=Галька красного гранита
+
+item.material.oreprefix.oreChunk=%s кусок руды
+item.material.oreprefix.oreEnderChunk=%s кусок руды
+item.material.oreprefix.oreNetherChunk=%s кусок руды
+item.material.oreprefix.oreSandyChunk=Песчаный %s кусок руды
+
+recipemap.electric_sieve.name=Электрическое сито
+
+gregification.machine.sieve.steam.name=Паровой просеиватель
+gregification.machine.sieve.steam.tooltip=Tired of Right-Clicking all day?
+
+gregtech.machine.sieve.tooltip=
+
+gregification.machine.sieve.lv.name=Базовый электрический просеиватель
+gregification.machine.sieve.mv.name=Улучшенный электрический просеиватель
+gregification.machine.sieve.hv.name=Улучшенный электрический просеиватель II
+gregification.machine.sieve.ev.name=Улучшенный электрический просеиватель III
+gregification.machine.sieve.iv.name=Элитный электрический просеиватель
+gregification.machine.sieve.luv.name=Элитный электрический просеиватель II
+gregification.machine.sieve.zpm.name=Элитный электрический просеиватель III
+gregification.machine.sieve.uv.name=Элитный электрический просеиватель IV
+gregification.machine.sieve.uhv.name=Высокотехнологичная электрический просеиватель
+gregification.machine.sieve.uev.name=Высокотехнологичная электрический просеиватель II
+gregification.machine.sieve.uiv.name=Высокотехнологичная электрический просеиватель III
+gregification.machine.sieve.umv.name=Высокотехнологичная электрический просеиватель IV
+gregification.machine.sieve.uxv.name=Совершенная электрический просеиватель
+
+# Forestry
+metaitem.electrode.apatite.name=Апатитовый электрод
+metaitem.electrode.blaze.name=Ифритовый электрод
+metaitem.electrode.bronze.name=Бронзовый электрод
+metaitem.electrode.copper.name=Медный электрод
+metaitem.electrode.diamond.name=Алмазный электрод
+metaitem.electrode.emerald.name=Изумрудный электрод
+metaitem.electrode.ender.name=Эндер электрод
+metaitem.electrode.gold.name=Золотой электрод
+metaitem.electrode.iron.name=Железный электрод
+metaitem.electrode.lapis.name=Ляпис электрод
+metaitem.electrode.obsidian.name=Обсидиановый электрод
+metaitem.electrode.orchid.name=Орхидейный электрод
+metaitem.electrode.rubber.name=Прорезиненный электрод
+metaitem.electrode.tin.name=Оловянный электрод

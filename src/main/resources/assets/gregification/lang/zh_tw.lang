@@ -1,0 +1,47 @@
+# Ex Nihilo
+item.gtPebble.basalt.name=玄武巖卵石
+item.gtPebble.black_granite.name=黑花崗巖卵石
+item.gtPebble.marble.name=大理石卵石
+item.gtPebble.red_granite.name=紅花崗巖卵石
+
+item.material.oreprefix.oreChunk=%s礦物碎塊
+item.material.oreprefix.oreEnderChunk=%s末地礦物碎塊
+item.material.oreprefix.oreNetherChunk=%s下界礦物碎塊
+item.material.oreprefix.oreSandyChunk=%s沙子礦物碎塊
+
+recipemap.electric_sieve.name=電動篩
+
+gregification.machine.sieve.steam.name=蒸汽篩
+gregification.machine.sieve.steam.tooltip=Tired of Right-Clicking all day?
+
+gregtech.machine.sieve.tooltip=
+
+gregification.machine.sieve.lv.name=基礎電動篩
+gregification.machine.sieve.mv.name=進階電動篩
+gregification.machine.sieve.hv.name=進階電動篩 II
+gregification.machine.sieve.ev.name=進階電動篩 III
+gregification.machine.sieve.iv.name=精英電動篩
+gregification.machine.sieve.luv.name=精英電動篩 II
+gregification.machine.sieve.zpm.name=精英電動篩 III
+gregification.machine.sieve.uv.name=精英電動篩 IV
+gregification.machine.sieve.uhv.name=次世代電動篩
+gregification.machine.sieve.uev.name=次世代電動篩 II
+gregification.machine.sieve.uiv.name=次世代電動篩 III
+gregification.machine.sieve.umv.name=次世代電動篩 IV
+gregification.machine.sieve.uxv.name=終焉電動篩
+
+# Forestry
+metaitem.electrode.apatite.name=磷灰石電子管元件
+metaitem.electrode.blaze.name=烈焰電子管元件
+metaitem.electrode.bronze.name=青銅電子管元件
+metaitem.electrode.copper.name=銅電子管元件
+metaitem.electrode.diamond.name=鑽石電子管元件
+metaitem.electrode.emerald.name=綠寶石電子管元件
+metaitem.electrode.ender.name=末影電子管元件
+metaitem.electrode.gold.name=金電子管元件
+metaitem.electrode.iron.name=鐵電子管元件
+metaitem.electrode.lapis.name=青金石電子管元件
+metaitem.electrode.obsidian.name=黑曜石電子管元件
+metaitem.electrode.orchid.name=蘭花電子管元件
+metaitem.electrode.rubber.name=橡膠電子管元件
+metaitem.electrode.tin.name=錫電子管元件
