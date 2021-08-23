@@ -18,7 +18,16 @@ public class ForestryCommonProxy {
     public static void registerRecipes(RegistryEvent.Register<IRecipe> event) {
         if (GFConfig.forestry.enableForestry && Loader.isModLoaded(GFValues.MODID_FR)) {
             if (GFConfig.forestry.gtElectrodes) {
-                ElectrodeRecipes.init();
+                ElectrodeRecipes.initGTRecipes();
+            }
+        }
+    }
+
+    public void init() {
+        if (GFConfig.forestry.enableForestry && Loader.isModLoaded(GFValues.MODID_FR)) {
+            if (GFConfig.forestry.gtElectrodes) {
+                ElectrodeRecipes.removeForestryRecipes();
+                ElectrodeRecipes.addForestryMachineRecipes();
             }
         }
     }

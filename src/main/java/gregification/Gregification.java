@@ -57,6 +57,7 @@ public class Gregification {
     public void init(FMLInitializationEvent event) {
         ExNihiloProxy.init();
         OCProxy.init();
+        ForestryProxy.init();
     }
 
     @EventHandler

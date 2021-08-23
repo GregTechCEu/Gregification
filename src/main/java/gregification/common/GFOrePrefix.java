@@ -3,6 +3,8 @@ package gregification.common;
 import gregification.config.GFConfig;
 import gregtech.api.GTValues;
 import gregtech.api.unification.material.IMaterialHandler;
+import gregtech.api.unification.material.Materials;
+import gregtech.api.unification.material.info.MaterialFlags;
 import gregtech.api.unification.material.info.MaterialIconType;
 import gregtech.api.unification.ore.OrePrefix;
 import gregtech.common.items.MetaItems;
@@ -27,6 +29,8 @@ public class GFOrePrefix implements IMaterialHandler {
 
     @Override
     public void onMaterialsInit() {
+        materialFlagAdditions();
+
         if (GFConfig.exNihilo.enableExNihilo && GTValues.isModLoaded(GFValues.MODID_EXNI)) {
             initExNihilo();
         }
@@ -49,5 +53,11 @@ public class GFOrePrefix implements IMaterialHandler {
         oreSandyChunk.setAlternativeOreName(OrePrefix.oreSand.name());
 
         MetaItems.addOrePrefix(oreChunk, oreEnderChunk, oreNetherChunk, oreSandyChunk);
+    }
+
+    private static void materialFlagAdditions() {
+        Materials.Emerald.addFlag(MaterialFlags.GENERATE_BOLT_SCREW);
+        Materials.Apatite.addFlag(MaterialFlags.GENERATE_PLATE, MaterialFlags.GENERATE_BOLT_SCREW);
+        Materials.Lapis.addFlag(MaterialFlags.GENERATE_BOLT_SCREW);
     }
 }

@@ -17,26 +17,33 @@
  */
 package gregification.forestry.recipes;
 
+import forestry.api.recipes.RecipeManagers;
 import forestry.core.ModuleCore;
+import forestry.core.fluids.Fluids;
 import forestry.core.items.EnumElectronTube;
+import forestry.core.items.ItemElectronTube;
+import forestry.factory.MachineUIDs;
+import forestry.factory.ModuleFactory;
+import forestry.factory.recipes.FabricatorRecipeManager;
 import gregification.common.GFValues;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.common.Loader;
 
 import static gregification.common.GFMetaItem.*;
-import static gregtech.api.recipes.RecipeMaps.ASSEMBLER_RECIPES;
-import static gregtech.api.recipes.RecipeMaps.FORMING_PRESS_RECIPES;
+import static gregtech.api.recipes.RecipeMaps.*;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.ore.OrePrefix.*;
 
 public class ElectrodeRecipes {
 
-    public static void init() {
+    public static void initGTRecipes() {
 
-        ASSEMBLER_RECIPES.recipeBuilder().duration(150).EUt(16)
+        CIRCUIT_ASSEMBLER_RECIPES.recipeBuilder().duration(150).EUt(16)
                 .inputs(ELECTRODE_APATITE.getStackForm())
-                .input(plate, Glass)
+                .fluidInputs(Glass.getFluid(100))
                 .outputs(ModuleCore.getItems().tubes.get(EnumElectronTube.APATITE, 1))
                 .buildAndRegister();
 
@@ -54,9 +61,9 @@ public class ElectrodeRecipes {
                 .outputs(ELECTRODE_APATITE.getStackForm(2))
                 .buildAndRegister();
 
-        ASSEMBLER_RECIPES.recipeBuilder().duration(150).EUt(16)
+        CIRCUIT_ASSEMBLER_RECIPES.recipeBuilder().duration(150).EUt(16)
                 .input(ELECTRODE_BLAZE)
-                .input(plate, Glass)
+                .fluidInputs(Glass.getFluid(100))
                 .outputs(ModuleCore.getItems().tubes.get(EnumElectronTube.BLAZE, 1))
                 .buildAndRegister();
 
@@ -73,9 +80,9 @@ public class ElectrodeRecipes {
                 .output(ELECTRODE_BLAZE, 4)
                 .buildAndRegister();
 
-        ASSEMBLER_RECIPES.recipeBuilder().duration(150).EUt(16)
+        CIRCUIT_ASSEMBLER_RECIPES.recipeBuilder().duration(150).EUt(16)
                 .input(ELECTRODE_BRONZE)
-                .input(plate, Glass)
+                .fluidInputs(Glass.getFluid(100))
                 .outputs(ModuleCore.getItems().tubes.get(EnumElectronTube.BRONZE, 1))
                 .buildAndRegister();
 
@@ -91,9 +98,9 @@ public class ElectrodeRecipes {
                 .output(ELECTRODE_BRONZE, 2)
                 .buildAndRegister();
 
-        ASSEMBLER_RECIPES.recipeBuilder().duration(150).EUt(16)
+        CIRCUIT_ASSEMBLER_RECIPES.recipeBuilder().duration(150).EUt(16)
                 .input(ELECTRODE_COPPER)
-                .input(plate, Glass)
+                .fluidInputs(Glass.getFluid(100))
                 .outputs(ModuleCore.getItems().tubes.get(EnumElectronTube.COPPER, 1))
                 .buildAndRegister();
 
@@ -111,9 +118,9 @@ public class ElectrodeRecipes {
                 .output(ELECTRODE_COPPER, 2)
                 .buildAndRegister();
 
-        ASSEMBLER_RECIPES.recipeBuilder().duration(150).EUt(16)
+        CIRCUIT_ASSEMBLER_RECIPES.recipeBuilder().duration(150).EUt(16)
                 .input(ELECTRODE_DIAMOND)
-                .input(plate, Glass)
+                .fluidInputs(Glass.getFluid(100))
                 .outputs(ModuleCore.getItems().tubes.get(EnumElectronTube.DIAMOND, 1))
                 .buildAndRegister();
 
@@ -131,9 +138,9 @@ public class ElectrodeRecipes {
                 .output(ELECTRODE_DIAMOND, 2)
                 .buildAndRegister();
 
-        ASSEMBLER_RECIPES.recipeBuilder().duration(150).EUt(16)
+        CIRCUIT_ASSEMBLER_RECIPES.recipeBuilder().duration(150).EUt(16)
                 .input(ELECTRODE_EMERALD)
-                .input(plate, Glass)
+                .fluidInputs(Glass.getFluid(100))
                 .outputs(ModuleCore.getItems().tubes.get(EnumElectronTube.EMERALD, 1))
                 .buildAndRegister();
 
@@ -151,9 +158,9 @@ public class ElectrodeRecipes {
                 .output(ELECTRODE_EMERALD, 2)
                 .buildAndRegister();
 
-        ASSEMBLER_RECIPES.recipeBuilder().duration(150).EUt(16)
+        CIRCUIT_ASSEMBLER_RECIPES.recipeBuilder().duration(150).EUt(16)
                 .input(ELECTRODE_ENDER)
-                .input(plate, Glass)
+                .fluidInputs(Glass.getFluid(100))
                 .outputs(ModuleCore.getItems().tubes.get(EnumElectronTube.ENDER, 1))
                 .buildAndRegister();
 
@@ -170,9 +177,9 @@ public class ElectrodeRecipes {
                 .output(ELECTRODE_ENDER, 4)
                 .buildAndRegister();
 
-        ASSEMBLER_RECIPES.recipeBuilder().duration(150).EUt(16)
+        CIRCUIT_ASSEMBLER_RECIPES.recipeBuilder().duration(150).EUt(16)
                 .input(ELECTRODE_GOLD)
-                .input(plate, Glass)
+                .fluidInputs(Glass.getFluid(100))
                 .outputs(ModuleCore.getItems().tubes.get(EnumElectronTube.GOLD, 1))
                 .buildAndRegister();
 
@@ -191,9 +198,9 @@ public class ElectrodeRecipes {
                 .buildAndRegister();
 
         if (Loader.isModLoaded(GFValues.MODID_IC2) || Loader.isModLoaded(GFValues.MODID_BINNIE)) {
-            ASSEMBLER_RECIPES.recipeBuilder().duration(150).EUt(16)
+            CIRCUIT_ASSEMBLER_RECIPES.recipeBuilder().duration(150).EUt(16)
                     .input(ELECTRODE_IRON)
-                    .input(plate, Glass)
+                    .fluidInputs(Glass.getFluid(100))
                     .outputs(ModuleCore.getItems().tubes.get(EnumElectronTube.IRON, 1))
                     .buildAndRegister();
 
@@ -211,9 +218,9 @@ public class ElectrodeRecipes {
                     .buildAndRegister();
 
         }
-        ASSEMBLER_RECIPES.recipeBuilder().duration(150).EUt(16)
+        CIRCUIT_ASSEMBLER_RECIPES.recipeBuilder().duration(150).EUt(16)
                 .input(ELECTRODE_LAPIS)
-                .input(plate, Glass)
+                .fluidInputs(Glass.getFluid(100))
                 .outputs(ModuleCore.getItems().tubes.get(EnumElectronTube.LAPIS, 1))
                 .buildAndRegister();
 
@@ -231,9 +238,9 @@ public class ElectrodeRecipes {
                 .output(ELECTRODE_LAPIS, 2)
                 .buildAndRegister();
 
-        ASSEMBLER_RECIPES.recipeBuilder().duration(150).EUt(16)
+        CIRCUIT_ASSEMBLER_RECIPES.recipeBuilder().duration(150).EUt(16)
                 .input(ELECTRODE_OBSIDIAN)
-                .input(plate, Glass)
+                .fluidInputs(Glass.getFluid(100))
                 .outputs(ModuleCore.getItems().tubes.get(EnumElectronTube.OBSIDIAN, 1))
                 .buildAndRegister();
 
@@ -251,9 +258,9 @@ public class ElectrodeRecipes {
                 .buildAndRegister();
 
         if (Loader.isModLoaded(GFValues.MODID_XU2)) {
-            ASSEMBLER_RECIPES.recipeBuilder().duration(150).EUt(16)
+            CIRCUIT_ASSEMBLER_RECIPES.recipeBuilder().duration(150).EUt(16)
                     .input(ELECTRODE_ORCHID)
-                    .input(plate, Glass)
+                    .fluidInputs(Glass.getFluid(100))
                     .outputs(ModuleCore.getItems().tubes.get(EnumElectronTube.ORCHID, 1))
                     .buildAndRegister();
 
@@ -264,9 +271,9 @@ public class ElectrodeRecipes {
                     .buildAndRegister();
         }
         if (Loader.isModLoaded(GFValues.MODID_IC2) || Loader.isModLoaded(GFValues.MODID_TR)) {
-            ASSEMBLER_RECIPES.recipeBuilder().duration(150).EUt(16)
+            CIRCUIT_ASSEMBLER_RECIPES.recipeBuilder().duration(150).EUt(16)
                     .input(ELECTRODE_RUBBER)
-                    .input(plate, Glass)
+                    .fluidInputs(Glass.getFluid(100))
                     .outputs(ModuleCore.getItems().tubes.get(EnumElectronTube.RUBBER, 1))
                     .buildAndRegister();
 
@@ -284,9 +291,9 @@ public class ElectrodeRecipes {
                     .output(ELECTRODE_RUBBER, 2)
                     .buildAndRegister();
         }
-        ASSEMBLER_RECIPES.recipeBuilder().duration(150).EUt(16)
+        CIRCUIT_ASSEMBLER_RECIPES.recipeBuilder().duration(150).EUt(16)
                 .input(ELECTRODE_TIN)
-                .input(plate, Glass)
+                .fluidInputs(Glass.getFluid(100))
                 .outputs(ModuleCore.getItems().tubes.get(EnumElectronTube.TIN, 1))
                 .buildAndRegister();
 
@@ -303,5 +310,113 @@ public class ElectrodeRecipes {
                 .input(dust, Redstone)
                 .output(ELECTRODE_TIN, 2)
                 .buildAndRegister();
+    }
+
+    public static void removeForestryRecipes() {
+        if (ModuleFactory.machineEnabled(MachineUIDs.FABRICATOR)) {
+            ItemElectronTube electronTube = ModuleCore.getItems().tubes;
+            for (EnumElectronTube tube : EnumElectronTube.VALUES) {
+                removeFabricatorRecipe(electronTube.get(tube, 4));
+            }
+        }
+    }
+
+    public static void addForestryMachineRecipes() {
+        ItemElectronTube electronTube = ModuleCore.getItems().tubes;
+        FluidStack liquidGlass = Fluids.GLASS.getFluid(500);
+
+        if (liquidGlass != null) {
+            RecipeManagers.fabricatorManager.addRecipe(ItemStack.EMPTY, liquidGlass, electronTube.get(EnumElectronTube.COPPER, 2), new Object[]{
+                    "SXS",
+                    "#X#",
+                    "XXX",
+                    'S', "screwCopper",
+                    '#', "wireGtSingleRedAlloy",
+                    'X', "plateCopper"});
+            RecipeManagers.fabricatorManager.addRecipe(ItemStack.EMPTY, liquidGlass, electronTube.get(EnumElectronTube.TIN, 2), new Object[]{
+                    "SXS",
+                    "#X#",
+                    "XXX",
+                    'S', "screwTin",
+                    '#', "wireGtSingleRedAlloy",
+                    'X', "plateTin"});
+            RecipeManagers.fabricatorManager.addRecipe(ItemStack.EMPTY, liquidGlass, electronTube.get(EnumElectronTube.BRONZE, 2), new Object[]{
+                    "SXS",
+                    "#X#",
+                    "XXX",
+                    'S', "screwBronze",
+                    '#', "wireGtSingleRedAlloy",
+                    'X', "plateBronze"});
+            RecipeManagers.fabricatorManager.addRecipe(ItemStack.EMPTY, liquidGlass, electronTube.get(EnumElectronTube.IRON, 2), new Object[]{
+                    "SXS",
+                    "#X#",
+                    "XXX",
+                    'S', "screwIron",
+                    '#', "wireGtSingleRedAlloy",
+                    'X', "plateIron"});
+            RecipeManagers.fabricatorManager.addRecipe(ItemStack.EMPTY, liquidGlass, electronTube.get(EnumElectronTube.GOLD, 2), new Object[]{
+                    "SXS",
+                    "#X#",
+                    "XXX",
+                    'S', "screwGold",
+                    '#', "wireGtSingleRedAlloy",
+                    'X', "plateGold"});
+            RecipeManagers.fabricatorManager.addRecipe(ItemStack.EMPTY, liquidGlass, electronTube.get(EnumElectronTube.DIAMOND, 2), new Object[]{
+                    "SXS",
+                    "#X#",
+                    "XXX",
+                    'S', "screwDiamond",
+                    '#', "wireGtSingleRedAlloy",
+                    'X', "plateDiamond"});
+            RecipeManagers.fabricatorManager.addRecipe(ItemStack.EMPTY, liquidGlass, electronTube.get(EnumElectronTube.OBSIDIAN, 2), new Object[]{
+                    " X ",
+                    "#X#",
+                    "XXX",
+                    '#', "wireGtSingleRedAlloy",
+                    'X', "plateObsidian"});
+            RecipeManagers.fabricatorManager.addRecipe(ItemStack.EMPTY, liquidGlass, electronTube.get(EnumElectronTube.BLAZE, 2), new Object[]{
+                    " X ",
+                    "#X#",
+                    "XXX",
+                    '#', "wireGtSingleRedAlloy",
+                    'X', Items.BLAZE_POWDER});
+            RecipeManagers.fabricatorManager.addRecipe(ItemStack.EMPTY, liquidGlass, electronTube.get(EnumElectronTube.EMERALD, 2), new Object[]{
+                    "SXS",
+                    "#X#",
+                    "XXX",
+                    'S', "screwEmerald",
+                    '#', "wireGtSingleRedAlloy",
+                    'X', "plateEmerald"});
+            RecipeManagers.fabricatorManager.addRecipe(ItemStack.EMPTY, liquidGlass, electronTube.get(EnumElectronTube.APATITE, 2), new Object[]{
+                    "SXS",
+                    "#X#",
+                    "XXX",
+                    'S', "screwApatite",
+                    '#', "wireGtSingleRedAlloy",
+                    'X', "plateApatite"});
+            RecipeManagers.fabricatorManager.addRecipe(ItemStack.EMPTY, liquidGlass, electronTube.get(EnumElectronTube.LAPIS, 2), new Object[]{
+                    "SXS",
+                    "#X#",
+                    "XXX",
+                    'S', "screwLapis",
+                    '#', "wireGtSingleRedAlloy",
+                    'X', "plateLapis"});
+            RecipeManagers.fabricatorManager.addRecipe(ItemStack.EMPTY, liquidGlass, electronTube.get(EnumElectronTube.ENDER, 2), new Object[]{
+                    " X ",
+                    "#X#",
+                    "XXX",
+                    '#', "plateEnderEye",
+                    'X', new ItemStack(Blocks.END_STONE, 1, 0)});
+            RecipeManagers.fabricatorManager.addRecipe(ItemStack.EMPTY, liquidGlass, electronTube.get(EnumElectronTube.ORCHID, 2), new Object[]{
+                    " X ",
+                    "#X#",
+                    "XXX",
+                    '#', new ItemStack(Items.REPEATER, 1, 0),
+                    'X', new ItemStack(Blocks.REDSTONE_ORE, 1, 0)});
+        }
+    }
+
+    private static void removeFabricatorRecipe(ItemStack stack) {
+        FabricatorRecipeManager.getRecipes(stack).forEach(r -> RecipeManagers.fabricatorManager.removeRecipe(r));
     }
 }
