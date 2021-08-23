@@ -1,5 +1,6 @@
 package gregification;
 
+import gregification.common.GFMetaItem;
 import gregification.proxy.*;
 import gregification.common.GFLog;
 import gregification.common.GFValues;
@@ -48,6 +49,7 @@ public class Gregification {
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {
         GFLog.init(event.getModLog());
+        GFMetaItem.init();
         ExNihiloProxy.preInit();
     }
 

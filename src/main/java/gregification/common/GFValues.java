@@ -10,5 +10,10 @@ public class GFValues {
             MODID_GCY = "gregicality",
             MODID_EXNI = "exnihilocreatio",
             MODID_OC = "opencomputers",
-            MODID_GTOC = "gtce2oc";
+            MODID_GTOC = "gtce2oc",
+            MODID_FR = "forestry",
+            MODID_IC2 = "ic2",
+            MODID_BINNIE = "binniecore",
+            MODID_XU2 = "extrautils2",
+            MODID_TR = "techreborn";
 }

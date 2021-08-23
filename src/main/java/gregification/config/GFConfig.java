@@ -11,4 +11,7 @@ public class GFConfig {
 
     @Config.Comment("Config options for Open Computers features")
     public static OpenComputersCfg openComputers = new OpenComputersCfg();
+
+    @Config.Comment("Config options for Forestry features")
+    public static ForestryCfg forestry = new ForestryCfg();
 }
