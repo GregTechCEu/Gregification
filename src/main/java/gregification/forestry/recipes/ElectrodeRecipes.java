@@ -325,7 +325,7 @@ public class ElectrodeRecipes {
         ItemElectronTube electronTube = ModuleCore.getItems().tubes;
         FluidStack liquidGlass = Fluids.GLASS.getFluid(500);
 
-        if (liquidGlass != null) {
+        if (liquidGlass != null && ModuleFactory.machineEnabled(MachineUIDs.FABRICATOR)) {
             RecipeManagers.fabricatorManager.addRecipe(ItemStack.EMPTY, liquidGlass, electronTube.get(EnumElectronTube.COPPER, 2), new Object[]{
                     "SXS",
                     "#X#",
