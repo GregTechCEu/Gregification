@@ -22,6 +22,7 @@ public class ForestryCommonProxy {
         }
     }
 
+    @Optional.Method(modid = GFValues.MODID_FR)
     public void init() {
         if (GFConfig.forestry.enableForestry) {
             if (GFConfig.forestry.gtElectrodes) {

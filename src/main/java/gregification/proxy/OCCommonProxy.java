@@ -7,9 +7,11 @@ import gregification.common.GFLog;
 import gregification.common.GFValues;
 import gregtech.api.GTValues;
 import li.cil.oc.api.Driver;
+import net.minecraftforge.fml.common.Optional;
 
 public class OCCommonProxy {
 
+    @Optional.Method(modid = GFValues.MODID_OC)
     public void init() {
         if (GFConfig.openComputers.enableOpenComputers) {
             GFLog.ocLogger.info("Registering Open Computers Drivers...");

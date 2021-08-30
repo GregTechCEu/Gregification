@@ -15,6 +15,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 @Mod.EventBusSubscriber(modid = GFValues.MODID)
 public class ExNihiloCommonProxy {
 
+    @Optional.Method(modid = GFValues.MODID_EXNI)
     public void preInit() {
         if (GFConfig.exNihilo.enableExNihilo) {
             GFLog.exNihiloLogger.info("Registering Ex Nihilo Compat Items, Blocks, and Machines");
@@ -35,6 +36,7 @@ public class ExNihiloCommonProxy {
         }
     }
 
+    @Optional.Method(modid = GFValues.MODID_EXNI)
     public void init() {
         if (GFConfig.exNihilo.enableExNihilo) {
             ExNihiloRecipes.registerExNihiloRecipes();
