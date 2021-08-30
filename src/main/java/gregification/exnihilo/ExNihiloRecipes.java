@@ -37,9 +37,9 @@ import gregtech.common.blocks.*;
 import gregtech.loaders.recipe.MetaTileEntityLoader;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
-import scala.actors.threadpool.Arrays;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import static gregification.common.GFRecipeMaps.SIEVE_RECIPES;
 import static gregification.common.GFMetaTileEntities.SIEVES;
@@ -102,8 +102,7 @@ public class ExNihiloRecipes {
         for (SieveRecipe recipe : ExNihiloRegistryManager.SIEVE_REGISTRY.getRecipeList()) {
             for (ItemStack stack : recipe.getSievables()) {
                 // todo do this check better
-                //noinspection unchecked
-                if (SIEVE_RECIPES.findRecipe(4, Arrays.asList(new ItemStack[]{stack, recipe.getMesh()}), new ArrayList<>(), 0, MatchingMode.DEFAULT) != null) continue;
+                if (SIEVE_RECIPES.findRecipe(4, Arrays.asList(stack, recipe.getMesh()), new ArrayList<>(), 0, MatchingMode.DEFAULT) != null) continue;
                 SimpleRecipeBuilder builder = SIEVE_RECIPES.recipeBuilder().notConsumable(recipe.getMesh()).inputs(stack);
 
                 for (Siftable siftable : ExNihiloRegistryManager.SIEVE_REGISTRY.getDrops(stack)) {

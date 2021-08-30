@@ -11,7 +11,7 @@ import li.cil.oc.api.Driver;
 public class OCCommonProxy {
 
     public void init() {
-        if (GFConfig.openComputers.enableOpenComputers && GTValues.isModLoaded(GFValues.MODID_OC)) {
+        if (GFConfig.openComputers.enableOpenComputers) {
             GFLog.ocLogger.info("Registering Open Computers Drivers...");
 
             if (!GTValues.isModLoaded(GFValues.MODID_GTOC)) { // try to avoid colliding with GTCE2OC driver

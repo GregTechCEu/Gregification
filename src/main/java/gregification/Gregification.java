@@ -4,6 +4,7 @@ import gregification.common.GFMetaItem;
 import gregification.proxy.*;
 import gregification.common.GFLog;
 import gregification.common.GFValues;
+import gregtech.api.GTValues;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.SidedProxy;
@@ -50,14 +51,22 @@ public class Gregification {
     public void preInit(FMLPreInitializationEvent event) {
         GFLog.init(event.getModLog());
         GFMetaItem.init();
-        ExNihiloProxy.preInit();
+        if (GTValues.isModLoaded(GFValues.MODID_EXNI)) {
+            ExNihiloProxy.preInit();
+        }
     }
 
     @EventHandler
     public void init(FMLInitializationEvent event) {
-        ExNihiloProxy.init();
-        OCProxy.init();
-        ForestryProxy.init();
+        if (GTValues.isModLoaded(GFValues.MODID_EXNI)) {
+            ExNihiloProxy.init();
+        }
+        if (GTValues.isModLoaded(GFValues.MODID_OC)) {
+            OCProxy.init();
+        }
+        if (GTValues.isModLoaded(GFValues.MODID_FR)) {
+            ForestryProxy.init();
+        }
     }
 
     @EventHandler
