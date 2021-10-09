@@ -14,4 +14,8 @@ public class GFConfig {
 
     @Config.Comment("Config options for Forestry features")
     public static ForestryCfg forestry = new ForestryCfg();
+
+    @Config.Comment("Config options for Mystical Agriculture features")
+    public static MysticalAgricultureCfg mysticalAgriculture = new MysticalAgricultureCfg();
+
 }
