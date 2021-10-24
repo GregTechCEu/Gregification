@@ -2,19 +2,19 @@ package gregification.common;
 
 import gregification.config.GFConfig;
 import gregtech.api.GTValues;
-import gregtech.api.unification.material.IMaterialHandler;
+import gregtech.api.GregTechAPI;
 import gregtech.api.unification.material.Materials;
 import gregtech.api.unification.material.info.MaterialFlags;
 import gregtech.api.unification.material.info.MaterialIconType;
 import gregtech.api.unification.ore.OrePrefix;
 import gregtech.common.items.MetaItems;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import static gregtech.api.unification.ore.OrePrefix.Conditions.hasOreProperty;
 import static gregtech.api.unification.ore.OrePrefix.Flags.ENABLE_UNIFICATION;
 
 // This is just a convenient time to do this
-@IMaterialHandler.RegisterMaterialHandler
-public class GFOrePrefix implements IMaterialHandler {
+public class GFOrePrefix {
 
     // Ex Nihilo
     public static MaterialIconType oreChunkIcon;
@@ -27,8 +27,8 @@ public class GFOrePrefix implements IMaterialHandler {
     public static OrePrefix oreNetherChunk;
     public static OrePrefix oreSandyChunk;
 
-    @Override
-    public void onMaterialsInit() {
+    @SubscribeEvent
+    public void onMaterialRegisterEvent(GregTechAPI.MaterialEvent event) {
         materialFlagAdditions();
 
         if (GFConfig.exNihilo.enableExNihilo && GTValues.isModLoaded(GFValues.MODID_EXNI)) {
@@ -56,8 +56,8 @@ public class GFOrePrefix implements IMaterialHandler {
     }
 
     private static void materialFlagAdditions() {
-        Materials.Emerald.addFlag(MaterialFlags.GENERATE_BOLT_SCREW);
-        Materials.Apatite.addFlag(MaterialFlags.GENERATE_PLATE, MaterialFlags.GENERATE_BOLT_SCREW);
-        Materials.Lapis.addFlag(MaterialFlags.GENERATE_BOLT_SCREW);
+        Materials.Emerald.addFlags(MaterialFlags.GENERATE_BOLT_SCREW);
+        Materials.Apatite.addFlags(MaterialFlags.GENERATE_PLATE, MaterialFlags.GENERATE_BOLT_SCREW);
+        Materials.Lapis.addFlags(MaterialFlags.GENERATE_BOLT_SCREW);
     }
 }

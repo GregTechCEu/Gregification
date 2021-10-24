@@ -90,14 +90,37 @@ public class DriverSimpleMachine extends DriverSidedTileEntity {
             return new Object[] {};
         }
 
-        @Callback(doc = "function():boolean --  Returns is allowInputFromOutputSide enabled.")
+        @Callback(doc = "function():boolean --  Returns is allowInputFromOutputSide enabled for BOTH items and fluids.")
         public Object[] isAllowInputFromOutputSide(final Context context, final Arguments args) {
-            return new Object[] {tileEntity.isAllowInputFromOutputSide()};
+            return new Object[] {tileEntity.isAllowInputFromOutputSideItems() && tileEntity.isAllowInputFromOutputSideFluids()};
         }
 
-        @Callback(doc = "function(allowInputFromOutputSide:boolean):boolean -- Sets allowInputFromOutputSide enabled.")
+        @Callback(doc = "function():boolean --  Returns is allowInputFromOutputSide enabled for items.")
+        public Object[] isAllowInputFromOutputSideItems(final Context context, final Arguments args) {
+            return new Object[] {tileEntity.isAllowInputFromOutputSideItems() && tileEntity.isAllowInputFromOutputSideFluids()};
+        }
+
+        @Callback(doc = "function():boolean --  Returns is allowInputFromOutputSide enabled for fluids.")
+        public Object[] isAllowInputFromOutputSideFluids(final Context context, final Arguments args) {
+            return new Object[] {tileEntity.isAllowInputFromOutputSideItems() && tileEntity.isAllowInputFromOutputSideFluids()};
+        }
+
+        @Callback(doc = "function(allowInputFromOutputSide:boolean):boolean -- Sets allowInputFromOutputSide enabled for BOTH items and fluids.")
         public Object[] setAllowInputFromOutputSide(final Context context, final Arguments args) {
-            tileEntity.setAllowInputFromOutputSide(args.checkBoolean(0));
+            tileEntity.setAllowInputFromOutputSideItems(args.checkBoolean(0));
+            tileEntity.setAllowInputFromOutputSideFluids(args.checkBoolean(0));
+            return new Object[] {};
+        }
+
+        @Callback(doc = "function(allowInputFromOutputSide:boolean):boolean -- Sets allowInputFromOutputSide enabled for items.")
+        public Object[] setAllowInputFromOutputSideItems(final Context context, final Arguments args) {
+            tileEntity.setAllowInputFromOutputSideItems(args.checkBoolean(0));
+            return new Object[] {};
+        }
+
+        @Callback(doc = "function(allowInputFromOutputSide:boolean):boolean -- Sets allowInputFromOutputSide enabled for fluids.")
+        public Object[] setAllowInputFromOutputSideFluids(final Context context, final Arguments args) {
+            tileEntity.setAllowInputFromOutputSideFluids(args.checkBoolean(0));
             return new Object[] {};
         }
 
