@@ -34,7 +34,7 @@ import net.minecraft.util.ResourceLocation;
 public class MetaTileEntitySieve extends SimpleMachineMetaTileEntity {
 
     public MetaTileEntitySieve(ResourceLocation metaTileEntityId, int tier) {
-        super(metaTileEntityId, GFRecipeMaps.SIEVE_RECIPES, Textures.SIFTER_OVERLAY, tier);
+        super(metaTileEntityId, GFRecipeMaps.SIEVE_RECIPES, Textures.SIFTER_OVERLAY, tier, false);
     }
 
     @Override
