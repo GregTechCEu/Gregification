@@ -6,9 +6,7 @@
   "mcversion": "${mcversion}",
   "logoFile": "",
   "url": "https://minecraft.curseforge.com/projects/gregification",
-  "authorList": [
-    "dan"
-  ],
+  "authorList": ["dan"],
   "credits": "TheLimePixel for GregicAdditions, GTCEBees, Greg's Construct, and GregBlock Utilities, iamtakingiteasy for GTCE2OC, Archengius for GTCE, Decal and the Gregicality team, Shadows of Fire for SoG, and of course, GregoriusT for starting all of this",
-  "dependencies": ["gregtech"]
+  "dependencies": ["mixinbooter", "gregtech"]
 }]
