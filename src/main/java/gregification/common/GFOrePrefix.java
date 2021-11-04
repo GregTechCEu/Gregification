@@ -8,12 +8,14 @@ import gregtech.api.unification.material.info.MaterialFlags;
 import gregtech.api.unification.material.info.MaterialIconType;
 import gregtech.api.unification.ore.OrePrefix;
 import gregtech.common.items.MetaItems;
+import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import static gregtech.api.unification.ore.OrePrefix.Conditions.hasOreProperty;
 import static gregtech.api.unification.ore.OrePrefix.Flags.ENABLE_UNIFICATION;
 
 // This is just a convenient time to do this
+@Mod.EventBusSubscriber
 public class GFOrePrefix {
 
     // Ex Nihilo
@@ -28,7 +30,7 @@ public class GFOrePrefix {
     public static OrePrefix oreSandyChunk;
 
     @SubscribeEvent
-    public void onMaterialRegisterEvent(GregTechAPI.MaterialEvent event) {
+    public static void onMaterialRegisterEvent(GregTechAPI.MaterialEvent event) {
         materialFlagAdditions();
 
         if (GFConfig.exNihilo.enableExNihilo && GTValues.isModLoaded(GFValues.MODID_EXNI)) {

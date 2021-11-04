@@ -10,6 +10,14 @@ public class ExNihiloCfg {
     @Config.RequiresMcRestart
     public boolean enableExNihilo = true;
 
+    @Config.Comment("Makes Gregification overwrite the sifting table. Default: true")
+    @Config.RequiresMcRestart
+    public boolean GTOverwritedrops = true;
+
+    @Config.Comment("Should Gregification modify the Meshes recipes? Default: true")
+    @Config.RequiresMcRestart
+    public boolean ModifyMeshes = true;
+
     @Config.Comment("Enable High-Tier Sieves (UHV-UXV)? Requires Gregicality to be installed. Default: true")
     @Config.RequiresMcRestart
     public boolean highTierSieve = true;

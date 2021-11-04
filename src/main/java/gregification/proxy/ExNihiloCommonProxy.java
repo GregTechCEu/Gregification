@@ -21,6 +21,9 @@ public class ExNihiloCommonProxy {
             GFLog.exNihiloLogger.info("Registering Ex Nihilo Compat Items, Blocks, and Machines");
             ExNihiloPebble.register();
             SieveDrops.readSieveDropsFromConfig();
+            if (GFConfig.exNihilo.GTOverwritedrops) {
+                ExNihiloRegistryManager.registerSieveDefaultRecipeHandler(new CustomDrops());
+            }
             ExNihiloRegistryManager.registerSieveDefaultRecipeHandler(new SieveDrops());
             GFMetaTileEntities.registerExNihilo();
         }
@@ -40,6 +43,9 @@ public class ExNihiloCommonProxy {
     public void init() {
         if (GFConfig.exNihilo.enableExNihilo) {
             ExNihiloRecipes.registerExNihiloRecipes();
+            if (GFConfig.exNihilo.ModifyMeshes) {
+                MeshRecipes.init();
+            }
         }
     }
 }
