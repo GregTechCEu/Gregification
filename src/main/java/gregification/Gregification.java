@@ -13,16 +13,15 @@ import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
 @Mod(modid = GFValues.MODID, name = GFValues.MOD_NAME, version = GFValues.VERSION,
-        dependencies = "required-after:gregtech@[2.0,);" +
+        dependencies = "required-after:gregtech@[2.0,);" + "required-after:mixinbooter;" +
                 "after:gregicality@[1.0,);" +
                 "after:forestry;" +
                 "after:tconstruct;" +
                 "after:exnihilocreatio;" +
                 "after:mysticalagradditions;" +
                 "after:binniecore;" +
-                "after:extrabees;" +
-                "after:botany;" +
                 "after:binniedesign;" +
+                "after:extrabees;" +
                 "after:extratrees;" +
                 "after:botany;" +
                 "after:genetics")
