@@ -26,7 +26,6 @@ import net.minecraft.item.EnumRarity;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.Fluid;
-import org.jetbrains.annotations.NotNull;
 import org.spongepowered.asm.mixin.*;
 
 import javax.annotation.Nonnull;
@@ -70,7 +69,7 @@ public class FluidsTFCMixin {
     @Shadow public static FluidWrapper MILK_VINEGAR;
     @Shadow public static FluidWrapper LYE;
 
-    @Shadow @Nonnull protected static FluidWrapper registerFluid(@NotNull Fluid newFluid) { throw new AssertionError(); }
+    @Shadow @Nonnull protected static FluidWrapper registerFluid(@Nonnull Fluid newFluid) { throw new AssertionError(); }
 
     @Overwrite
     public static void registerFluids() {
