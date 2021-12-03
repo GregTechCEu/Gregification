@@ -113,6 +113,9 @@ dependencies {
     // OC
     deobfCompile "curse.maven:opencomputers-223008:2828357"
 
+    // TFC
+    deobfCompile "curse.maven:tfcraft-302973:3268988"
+
 }
 
 processResources {

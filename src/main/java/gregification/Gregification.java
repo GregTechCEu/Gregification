@@ -1,10 +1,12 @@
 package gregification;
 
 import gregification.common.GFMetaItem;
+import gregification.common.GFOrePrefix;
 import gregification.proxy.*;
 import gregification.common.GFLog;
 import gregification.common.GFValues;
 import gregtech.api.GTValues;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.SidedProxy;
@@ -46,6 +48,10 @@ public class Gregification {
     // Open Computers Proxy
     @SidedProxy(modId = GFValues.MODID, serverSide = "gregification.proxy.OCCommonProxy", clientSide = "gregification.proxy.OCCommonProxy")
     public static OCCommonProxy OCProxy;
+
+    public Gregification() {
+        MinecraftForge.EVENT_BUS.register(GFOrePrefix.class);
+    }
 
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {
