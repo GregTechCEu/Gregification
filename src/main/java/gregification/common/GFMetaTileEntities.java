@@ -4,7 +4,6 @@ import gregification.config.GFConfig;
 import gregification.exnihilo.metatileentities.MetaTileEntitySieve;
 import gregification.exnihilo.metatileentities.MetaTileEntitySteamSieve;
 import gregtech.api.GTValues;
-import gregtech.api.GregTechAPI;
 import gregtech.common.metatileentities.MetaTileEntities;
 import net.minecraft.util.ResourceLocation;
 
