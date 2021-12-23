@@ -43,9 +43,7 @@ public class ExNihiloCommonProxy {
     public void init() {
         if (GFConfig.exNihilo.enableExNihilo) {
             ExNihiloRecipes.registerExNihiloRecipes();
-            if (GFConfig.exNihilo.ModifyMeshes) {
-                MeshRecipes.init();
-            }
+            MeshRecipes.init();
         }
     }
 }
