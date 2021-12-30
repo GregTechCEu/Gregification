@@ -10,6 +10,14 @@ public class ExNihiloCfg {
     @Config.RequiresMcRestart
     public boolean enableExNihilo = true;
 
+    @Config.Comment("Makes Gregification overwrite the sifting table. Default: true")
+    @Config.RequiresMcRestart
+    public boolean GTOverwritedrops = true;
+
+    @Config.Comment("Should Gregification modify the Meshes recipes? Default: true")
+    @Config.RequiresMcRestart
+    public boolean ModifyMeshes = true;
+
     @Config.Comment("Enable High-Tier Sieves (UHV-UXV)? Requires Gregicality to be installed. Default: true")
     @Config.RequiresMcRestart
     public boolean highTierSieve = true;
@@ -116,6 +124,7 @@ public class ExNihiloCfg {
                 "tetrahedrite", "0.1836", "1",
                 "copper", "0.0612", "1",
                 "stibnite", "0.0612", "1",
+                "rutile", "0.0544", "1",
 
                 "redstone", "0.1938", "2",
                 "ruby", "0.0646", "2",
@@ -185,6 +194,7 @@ public class ExNihiloCfg {
                 "tennantite", "0.0663", "1",
                 "tin", "0.24225", "1",
                 "cassiterite", "0.08075", "1",
+                "rutile", "0.0544", "1",
 
                 "bornite", "0.0969", "2",
                 "chalcocite", "0.0969", "2",

@@ -8,12 +8,14 @@ import gregtech.api.unification.material.info.MaterialFlags;
 import gregtech.api.unification.material.info.MaterialIconType;
 import gregtech.api.unification.ore.OrePrefix;
 import gregtech.common.items.MetaItems;
+import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import static gregtech.api.unification.ore.OrePrefix.Conditions.hasOreProperty;
 import static gregtech.api.unification.ore.OrePrefix.Flags.ENABLE_UNIFICATION;
 
 // This is just a convenient time to do this
+@Mod.EventBusSubscriber
 public class GFOrePrefix {
 
     // Ex Nihilo
@@ -47,10 +49,10 @@ public class GFOrePrefix {
         oreNetherChunk = new OrePrefix("oreNetherChunk", -1, null, oreNetherChunkIcon, ENABLE_UNIFICATION, hasOreProperty);
         oreSandyChunk = new OrePrefix("oreSandyChunk", -1, null, oreSandyChunkIcon, ENABLE_UNIFICATION, hasOreProperty);
 
-        oreChunk.setAlternativeOreName(OrePrefix.oreGravel.name());
+        oreChunk.setAlternativeOreName(OrePrefix.ore.name());
         oreEnderChunk.setAlternativeOreName(OrePrefix.oreEndstone.name());
         oreNetherChunk.setAlternativeOreName(OrePrefix.oreNetherrack.name());
-        oreSandyChunk.setAlternativeOreName(OrePrefix.oreSand.name());
+        oreSandyChunk.setAlternativeOreName(OrePrefix.ore.name());
 
         MetaItems.addOrePrefix(oreChunk, oreEnderChunk, oreNetherChunk, oreSandyChunk);
     }

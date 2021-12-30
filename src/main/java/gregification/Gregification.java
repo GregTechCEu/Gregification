@@ -15,7 +15,7 @@ import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
 @Mod(modid = GFValues.MODID, name = GFValues.MOD_NAME, version = GFValues.VERSION,
-        dependencies = "required-after:gregtech@[2.0,);" + "required-after:mixinbooter;" +
+        dependencies = "required-after:gregtech@[2.0.0-alpha,);" + "required-after:mixinbooter;" +
                 "after:gregicality@[1.0,);" +
                 "after:forestry;" +
                 "after:tconstruct;" +
