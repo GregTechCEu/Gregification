@@ -19,13 +19,12 @@ package gregification.exnihilo;
 
 import gregtech.api.capability.impl.FluidTankList;
 import gregtech.api.gui.ModularUI;
-import gregtech.api.gui.widgets.ProgressWidget;
+import gregtech.api.gui.widgets.RecipeProgressWidget;
 import gregtech.api.recipes.RecipeMap;
 import gregtech.api.recipes.builders.SimpleRecipeBuilder;
 import net.minecraftforge.items.IItemHandlerModifiable;
 
 import javax.annotation.Nonnull;
-import java.util.function.DoubleSupplier;
 
 public class SieveRecipeMap extends RecipeMap<SimpleRecipeBuilder> {
 
@@ -48,22 +47,24 @@ public class SieveRecipeMap extends RecipeMap<SimpleRecipeBuilder> {
 
     @Override
     @Nonnull
-    public ModularUI.Builder createUITemplate(DoubleSupplier progressSupplier, IItemHandlerModifiable importItems,
-                                              IItemHandlerModifiable exportItems, FluidTankList importFluids,
-                                              FluidTankList exportFluids, int yOffset) {
+    public ModularUI.Builder createJeiUITemplate(IItemHandlerModifiable importItems, IItemHandlerModifiable exportItems, FluidTankList importFluids, FluidTankList exportFluids, int yOffset) {
         ModularUI.Builder builder = ModularUI.defaultBuilder(yOffset);
-        builder.widget(new ProgressWidget(progressSupplier, PROGRESS_LEFT, PROGRESS_TOP, 20, 20, this.progressBarTexture, this.moveType));
+        builder.widget(new RecipeProgressWidget(200, PROGRESS_LEFT, PROGRESS_TOP + yOffset, 20, 20, this.progressBarTexture, this.moveType, this));
         this.addInventorySlotGroup(builder, importItems, importFluids, false, yOffset);
         this.addInventorySlotGroup(builder, exportItems, exportFluids, true, yOffset);
+        if (this.specialTexture != null && this.specialTexturePosition != null) {
+            this.addSpecialTexture(builder);
+        }
         return builder;
     }
 
     @Override
     protected void addInventorySlotGroup(ModularUI.Builder builder, IItemHandlerModifiable itemHandler, FluidTankList fluidHandler, boolean isOutputs, int yOffset) {
         if (isOutputs) {
-            for (int i = 0; i < 10; i++) {
+            for (int i = 0;; i++) {
                 for (int j = 0; j < 5; j++) {
                     int slotIndex = i * 5 + j;
+                    if (slotIndex >= itemHandler.getSlots()) return;
                     addSlot(builder, OUTPUT_LEFT + ITEM_SLOT_WITH_EDGE_DIMENSION * j, OUTPUT_TOP + ITEM_SLOT_WITH_EDGE_DIMENSION * i, slotIndex, itemHandler, fluidHandler, false, true);
                 }
             }

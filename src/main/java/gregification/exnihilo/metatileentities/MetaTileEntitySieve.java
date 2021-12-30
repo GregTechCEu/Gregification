@@ -42,9 +42,9 @@ public class MetaTileEntitySieve extends SimpleMachineMetaTileEntity {
         ModularUI.Builder builder = ModularUI.extendedBuilder()
                 .widget(new LabelWidget(6, 6, getMetaFullName()))
                 .bindPlayerInventory(player.inventory, GuiTextures.SLOT, 8, 134)
-                .widget(new SlotWidget(this.importItems, 0, 35, 25).setBackgroundTexture(GuiTextures.SLOT))
-                .widget(new SlotWidget(this.importItems, 1, 53, 25).setBackgroundTexture(GuiTextures.SLOT))
-                .widget(new ProgressWidget(workable::getProgressPercent, 78, 24, 20, 18, GuiTextures.PROGRESS_BAR_SIFT, ProgressWidget.MoveType.VERTICAL_INVERTED));
+                .widget(new SlotWidget(this.importItems, 0, 15, 30).setBackgroundTexture(GuiTextures.SLOT))
+                .widget(new SlotWidget(this.importItems, 1, 33, 30).setBackgroundTexture(GuiTextures.SLOT))
+                .widget(new ProgressWidget(workable::getProgressPercent, 54, 29, 20, 18, GuiTextures.PROGRESS_BAR_SIFT, ProgressWidget.MoveType.VERTICAL_INVERTED));
 
         int leftButtonStartX = 7;
         if (exportItems.getSlots() > 0) {
@@ -54,8 +54,8 @@ public class MetaTileEntitySieve extends SimpleMachineMetaTileEntity {
         }
 
         for (int y = 0; y < 6; y++) {
-            for (int x = 0; x < 4; x++) {
-                builder.widget(new SlotWidget(this.exportItems, y * 4 + x, 98 + x * 18, 14 + y * 18, true, false).setBackgroundTexture(GuiTextures.SLOT));
+            for (int x = 0; x < 5; x++) {
+                builder.widget(new SlotWidget(this.exportItems, y * 4 + x, 78 + x * 18, 19 + y * 18, true, false).setBackgroundTexture(GuiTextures.SLOT));
             }
         }
 

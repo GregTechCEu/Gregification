@@ -49,20 +49,20 @@ public class MetaTileEntitySteamSieve extends SteamMetaTileEntity {
 
     @Override
     public IItemHandlerModifiable createExportItemHandler() {
-        return new ItemStackHandler(24);
+        return new ItemStackHandler(30);
     }
 
     @Override
     protected ModularUI createUI(EntityPlayer player) {
         ModularUI.Builder builder = ModularUI.builder(GuiTextures.BACKGROUND_STEAM.get(isHighPressure), 180, 220)
-                .slot(this.importItems, 0, 35, 25, GuiTextures.SLOT_STEAM.get(isHighPressure))
-                .slot(this.importItems, 1, 53, 25, GuiTextures.SLOT_STEAM.get(isHighPressure))
+                .slot(this.importItems, 0, 15, 30, GuiTextures.SLOT_STEAM.get(isHighPressure))
+                .slot(this.importItems, 1, 33, 30, GuiTextures.SLOT_STEAM.get(isHighPressure))
                 .bindPlayerInventory(player.inventory, GuiTextures.SLOT_STEAM.get(isHighPressure), 8, 134)
-                .progressBar(workableHandler::getProgressPercent, 78, 24, 20, 18, GuiTextures.PROGRESS_BAR_MACERATE, ProgressWidget.MoveType.HORIZONTAL);
+                .progressBar(workableHandler::getProgressPercent, 54, 29, 20, 18, GuiTextures.PROGRESS_BAR_MACERATE, ProgressWidget.MoveType.HORIZONTAL);
 
         for (int y = 0; y < 6; y++) {
-            for (int x = 0; x < 4; x++) {
-                builder.slot(this.exportItems, y * 4 + x, 98 + x * 18, 7 + y * 18, true, false, GuiTextures.SLOT_STEAM.get(isHighPressure));
+            for (int x = 0; x < 5; x++) {
+                builder.slot(this.exportItems, y * 4 + x, 78 + x * 18, 12 + y * 18, true, false, GuiTextures.SLOT_STEAM.get(isHighPressure));
             }
         }
 

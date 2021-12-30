@@ -48,7 +48,7 @@ public class GFOrePrefix {
         oreEnderChunk = new OrePrefix("oreEnderChunk", -1, null, oreEnderChunkIcon, ENABLE_UNIFICATION, hasOreProperty);
         oreNetherChunk = new OrePrefix("oreNetherChunk", -1, null, oreNetherChunkIcon, ENABLE_UNIFICATION, hasOreProperty);
         oreSandyChunk = new OrePrefix("oreSandyChunk", -1, null, oreSandyChunkIcon, ENABLE_UNIFICATION, hasOreProperty);
-
+        
         oreChunk.setAlternativeOreName(OrePrefix.ore.name());
         oreEnderChunk.setAlternativeOreName(OrePrefix.oreEndstone.name());
         oreNetherChunk.setAlternativeOreName(OrePrefix.oreNetherrack.name());
