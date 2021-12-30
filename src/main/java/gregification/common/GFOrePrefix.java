@@ -28,7 +28,7 @@ public class GFOrePrefix {
     public static OrePrefix oreSandyChunk;
 
     @SubscribeEvent
-    public void onMaterialRegisterEvent(GregTechAPI.MaterialEvent event) {
+    public static void onMaterialRegisterEvent(GregTechAPI.MaterialEvent event) {
         materialFlagAdditions();
 
         if (GFConfig.exNihilo.enableExNihilo && GTValues.isModLoaded(GFValues.MODID_EXNI)) {
