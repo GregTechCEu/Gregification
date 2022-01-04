@@ -81,5 +81,15 @@ public class DriverEnergyContainer extends DriverSidedTileEntity {
         public Object[] getInputAmperage(final Context context, final Arguments args) {
             return new Object[]{tileEntity.getInputAmperage()};
         }
+
+        @Callback(doc = "function():number -- Gets the energy input per second.")
+        public Object[] getInputPerSec(final Context context, final Arguments args) {
+            return new Object[]{tileEntity.getInputPerSec()};
+        }
+
+        @Callback(doc = "function():number -- Gets the energy output per second.")
+        public Object[] getOutputPerSec(final Context context, final Arguments args) {
+            return new Object[]{tileEntity.getOutputPerSec()};
+        }
     }
 }

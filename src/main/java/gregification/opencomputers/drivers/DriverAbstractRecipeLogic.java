@@ -76,11 +76,10 @@ public class DriverAbstractRecipeLogic extends DriverSidedTileEntity {
             super(holder, capability, "gtce_abstractRecipeLogic");
         }
 
-        @Callback(doc = "function():table --  Returns current recipe.")
+        @Callback(doc = "function():table -- Returns previous recipe.")
         public Object[] getCurrentRecipe(final Context context, final Arguments args) {
             //noinspection deprecation
-            Recipe previousRecipe = ReflectionHelper.getPrivateValue(AbstractRecipeLogic.class,
-                    tileEntity, "previousRecipe");
+            Recipe previousRecipe = tileEntity.getPreviousRecipe();
             if (previousRecipe != null && tileEntity.isActive()) {
                 HashMap<String, Object> recipe = new HashMap<>();
                 recipe.put("duration", previousRecipe.getDuration());

@@ -22,7 +22,7 @@ public class OCCommonProxy {
             } else GFLog.ocLogger.warn("GTCE2OC mod detected, problems may occur!");
 
             Driver.add(new DriverAbstractRecipeLogic());
-            Driver.add(new DriverMultiblockRecipeLogic());
+            Driver.add(new DriverRecipeMapMultiblockController());
             Driver.add(new DriverICoverable());
             Driver.add(new DriverSimpleMachine());
             Driver.add(new DriverFusionReactor());
