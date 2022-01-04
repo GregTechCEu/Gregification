@@ -19,7 +19,6 @@ package gregification.opencomputers.drivers;
 
 import gregtech.api.capability.GregtechTileCapabilities;
 import gregtech.api.capability.IMultipleTankHandler;
-import gregtech.api.capability.IWorkable;
 import gregtech.api.capability.impl.MultiblockRecipeLogic;
 import gregtech.api.metatileentity.MetaTileEntityHolder;
 import gregtech.api.metatileentity.multiblock.RecipeMapMultiblockController;
@@ -43,7 +42,7 @@ import java.util.List;
 import java.util.Map;
 
 @SuppressWarnings("unused")
-public class DriverMultiblockRecipeLogic extends DriverSidedTileEntity {
+public class DriverRecipeMapMultiblockController extends DriverSidedTileEntity {
 
     @Override
     public Class<?> getTileEntityClass() {
@@ -63,17 +62,16 @@ public class DriverMultiblockRecipeLogic extends DriverSidedTileEntity {
     public ManagedEnvironment createEnvironment(World world, BlockPos pos, EnumFacing side) {
         TileEntity tileEntity = world.getTileEntity(pos);
         if (tileEntity instanceof MetaTileEntityHolder) {
-            IWorkable capability = tileEntity.getCapability(GregtechTileCapabilities.CAPABILITY_WORKABLE, side);
-            if (capability instanceof MultiblockRecipeLogic)
+            if (((MetaTileEntityHolder) tileEntity).getMetaTileEntity() instanceof RecipeMapMultiblockController)
                 return new EnvironmentMultiblockRecipeLogic((MetaTileEntityHolder) tileEntity,
-                        (MultiblockRecipeLogic) capability);
+                        (RecipeMapMultiblockController) ((MetaTileEntityHolder) tileEntity).getMetaTileEntity());
         }
         return null;
     }
 
-    public final static class EnvironmentMultiblockRecipeLogic extends EnvironmentMetaTileEntity<MultiblockRecipeLogic> {
+    public final static class EnvironmentMultiblockRecipeLogic extends EnvironmentMetaTileEntity<RecipeMapMultiblockController> {
 
-        public EnvironmentMultiblockRecipeLogic(MetaTileEntityHolder holder, MultiblockRecipeLogic capability) {
+        public EnvironmentMultiblockRecipeLogic(MetaTileEntityHolder holder, RecipeMapMultiblockController capability) {
             super(holder, capability, "gtce_multiblockRecipeLogic");
         }
 
@@ -108,6 +106,16 @@ public class DriverMultiblockRecipeLogic extends DriverSidedTileEntity {
             return new Object[] {tileEntity.getEnergyContainer().getInputAmperage()};
         }
 
+        @Callback(doc = "function():number -- Gets the energy input per second.")
+        public Object[] getInputPerSec(final Context context, final Arguments args) {
+            return new Object[]{tileEntity.getEnergyContainer().getInputPerSec()};
+        }
+
+        @Callback(doc = "function():number -- Gets the energy output per second.")
+        public Object[] getOutputPerSec(final Context context, final Arguments args) {
+            return new Object[]{tileEntity.getEnergyContainer().getOutputPerSec()};
+        }
+
         @Nonnull
         private Object[] getInventory(IItemHandlerModifiable handler) {
             List<Map<String, Object>> result = new ArrayList<>();
@@ -124,14 +132,12 @@ public class DriverMultiblockRecipeLogic extends DriverSidedTileEntity {
 
         @Callback(doc = "function():table -- Gets the Input Inventory.")
         public Object[] getInputInventory(final Context context, final Arguments args) {
-            RecipeMapMultiblockController controller = (RecipeMapMultiblockController) tileEntity.getMetaTileEntity();
-            return getInventory(controller.getInputInventory());
+            return getInventory(tileEntity.getInputInventory());
         }
 
         @Callback(doc = "function():table -- Gets the Output Inventory.")
         public Object[] getOutputInventory(final Context context, final Arguments args) {
-            RecipeMapMultiblockController controller = (RecipeMapMultiblockController) tileEntity.getMetaTileEntity();
-            return getInventory(controller.getOutputInventory());
+            return getInventory(tileEntity.getOutputInventory());
         }
 
         @Nonnull
@@ -154,14 +160,12 @@ public class DriverMultiblockRecipeLogic extends DriverSidedTileEntity {
 
         @Callback(doc = "function():table -- Gets the Input Tank.")
         public Object[] getInputTank(final Context context, final Arguments args) {
-            RecipeMapMultiblockController controller = (RecipeMapMultiblockController) tileEntity.getMetaTileEntity();
-            return getTank(controller.getInputFluidInventory());
+            return getTank(tileEntity.getInputFluidInventory());
         }
 
         @Callback(doc = "function():table -- Gets the Output Tank.")
         public Object[] getOutputTank(final Context context, final Arguments args) {
-            RecipeMapMultiblockController controller = (RecipeMapMultiblockController) tileEntity.getMetaTileEntity();
-            return getTank(controller.getOutputFluidInventory());
+            return getTank(tileEntity.getOutputFluidInventory());
         }
     }
 }
