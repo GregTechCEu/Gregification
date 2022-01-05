@@ -2,6 +2,7 @@ package gregification.proxy;
 
 import exnihilocreatio.registries.manager.ExNihiloRegistryManager;
 import gregification.common.GFMetaTileEntities;
+import gregification.common.GFRecipeMaps;
 import gregification.config.GFConfig;
 import gregification.exnihilo.*;
 import gregification.common.GFLog;
@@ -21,6 +22,7 @@ public class ExNihiloCommonProxy {
             GFLog.exNihiloLogger.info("Registering Ex Nihilo Compat Items, Blocks, and Machines");
             ExNihiloPebble.register();
             SieveDrops.readSieveDropsFromConfig();
+            GFRecipeMaps.initExNihilo();
             if (GFConfig.exNihilo.GTOverwritedrops) {
                 ExNihiloRegistryManager.registerSieveDefaultRecipeHandler(new CustomDrops());
             }
