@@ -2,6 +2,7 @@ package gregification;
 
 import gregification.common.GFMetaItem;
 import gregification.common.GFOrePrefix;
+import gregification.galacticraft.GalacticraftInit;
 import gregification.proxy.*;
 import gregification.common.GFLog;
 import gregification.common.GFValues;
@@ -77,5 +78,8 @@ public class Gregification {
 
     @EventHandler
     public void postInit(FMLPostInitializationEvent event) {
+        if (GTValues.isModLoaded(GFValues.MODID_GC)) {
+            GalacticraftInit.initWorldGen();
+        }
     }
 }

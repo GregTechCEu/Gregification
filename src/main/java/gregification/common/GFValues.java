@@ -16,5 +16,6 @@ public class GFValues {
             MODID_BINNIE = "binniecore",
             MODID_XU2 = "extrautils2",
             MODID_TR = "techreborn",
-            MODID_MA = "mysticalagriculture";
+            MODID_MA = "mysticalagriculture",
+            MODID_GC = "galacticraftcore";
 }
