@@ -270,7 +270,7 @@ public class ElectrodeRecipes {
                     .output(ELECTRODE_ORCHID, 4)
                     .buildAndRegister();
         }
-        if (Loader.isModLoaded(GFValues.MODID_IC2) || Loader.isModLoaded(GFValues.MODID_TR)) {
+        if (Loader.isModLoaded(GFValues.MODID_IC2) || Loader.isModLoaded(GFValues.MODID_TR) || Loader.isModLoaded(GFValues.MODID_BINNIE)) {
             CIRCUIT_ASSEMBLER_RECIPES.recipeBuilder().duration(150).EUt(16)
                     .input(ELECTRODE_RUBBER)
                     .fluidInputs(Glass.getFluid(100))
