@@ -74,7 +74,7 @@ dependencies {
 
     // Hard-Deps
     deobfCompile "curse.maven:mixin-booter-419286:3321174"
-    compile files("gregtech-1.12.2-2.1.0-beta.jar")
+    compile files("gregtech-1.12.2-2.1.1-beta.jar")
 
     // Mystical Agriculture mods
     deobfCompile "curse.maven:cucumber-272335:2645867"
