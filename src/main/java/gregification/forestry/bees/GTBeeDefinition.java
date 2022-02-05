@@ -38,9 +38,12 @@ import forestry.core.genetics.alleles.AlleleHelper;
 import forestry.core.genetics.alleles.EnumAllele.*;
 import gregification.common.GFUtility;
 import gregification.common.GFValues;
+import gregification.config.GFConfig;
 import gregification.proxy.ForestryCommonProxy;
 import gregtech.api.GTValues;
 import gregtech.common.items.MetaItems;
+import magicbees.bees.EnumBeeSpecies;
+import magicbees.item.types.EnumCombType;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -61,7 +64,11 @@ public enum GTBeeDefinition implements IBeeDefinition {
     // Organic
     CLAY(GTBranchDefinition.ORGANIC, "Clay", true, 0xC8C8DA, 0x0000FF,
             beeSpecies -> {
-                beeSpecies.addProduct(getForestryComb(EnumHoneyComb.HONEY), 0.30f);
+                if (GTValues.isModLoaded(GFValues.MODID_EB)) {
+                    beeSpecies.addProduct(getExtraBeesComb(binnie.extrabees.items.types.EnumHoneyComb.CLAY), 0.30f);
+                } else {
+                    beeSpecies.addProduct(getForestryComb(EnumHoneyComb.HONEY), 0.30f);
+                }
                 beeSpecies.addProduct(new ItemStack(Items.CLAY_BALL), 0.15f);
                 beeSpecies.setHumidity(EnumHumidity.DAMP);
                 beeSpecies.setTemperature(EnumTemperature.NORMAL);
@@ -811,7 +818,155 @@ public enum GTBeeDefinition implements IBeeDefinition {
     // Enderium
 
     // Thaumic
-    // TODO TC6 Bees
+    THAUMIUM(GTBranchDefinition.THAUMIC, "Thaumium", true, 0x7A007A, 0x5C005C,
+            beeSpecies -> {
+                beeSpecies.addProduct(getForestryComb(EnumHoneyComb.STRINGY), 0.30f);
+                beeSpecies.addSpecialty(getGTComb(GTCombType.THAUMIUM), 0.20f);
+                beeSpecies.setHumidity(EnumHumidity.NORMAL);
+                beeSpecies.setTemperature(EnumTemperature.NORMAL);
+            },
+            template -> {
+                AlleleHelper.getInstance().set(template, SPEED, Speed.SLOWEST);
+                AlleleHelper.getInstance().set(template, LIFESPAN, Lifespan.LONGER);
+                AlleleHelper.getInstance().set(template, TEMPERATURE_TOLERANCE, Tolerance.BOTH_2);
+                AlleleHelper.getInstance().set(template, EFFECT, AlleleEffects.effectExploration);
+                AlleleHelper.getInstance().set(template, HUMIDITY_TOLERANCE, Tolerance.UP_1);
+                AlleleHelper.getInstance().set(template, FLOWER_PROVIDER, Flowers.JUNGLE);
+            },
+            dis -> {
+                IBeeMutationBuilder mutation = dis.registerMutation(EnumBeeSpecies.FIREY.getSpecies(), BeeDefinition.EDENIC, 10);
+                mutation.requireResource("blockThaumium");
+                //mutation.addMutationCondition(); todo magical forest
+            },
+            () -> GTBees.THAUMIC_BEES
+    ),
+    AMBER(GTBranchDefinition.THAUMIC, "Amber", true, 0xEE7700, 0x774B15,
+            beeSpecies -> {
+                beeSpecies.addProduct(getForestryComb(EnumHoneyComb.STRINGY), 0.30f);
+                beeSpecies.addSpecialty(getGTComb(GTCombType.AMBER), 0.20f);
+                beeSpecies.setHumidity(EnumHumidity.NORMAL);
+                beeSpecies.setTemperature(EnumTemperature.NORMAL);
+                beeSpecies.setHasEffect();
+            },
+            template -> {
+                AlleleHelper.getInstance().set(template, SPEED, Speed.SLOWER);
+                AlleleHelper.getInstance().set(template, TEMPERATURE_TOLERANCE, Tolerance.NONE);
+                AlleleHelper.getInstance().set(template, HUMIDITY_TOLERANCE, Tolerance.NONE);
+            },
+            dis -> {
+                IBeeMutationBuilder mutation = dis.registerMutation(THAUMIUM, STICKYRESIN, 10);
+                mutation.requireResource("blockAmber"); // todo oredict this in TC
+            },
+            () -> GTBees.THAUMIC_BEES
+    ),
+    QUICKSILVER(GTBranchDefinition.THAUMIC, "Quicksilver", true, 0x7A007A, 0x5C005C,
+            beeSpecies -> {
+                beeSpecies.addProduct(getForestryComb(EnumHoneyComb.STRINGY), 0.30f);
+                beeSpecies.addSpecialty(getGTComb(GTCombType.QUICKSILVER), 0.20f);
+                beeSpecies.setHumidity(EnumHumidity.NORMAL);
+                beeSpecies.setTemperature(EnumTemperature.NORMAL);
+                beeSpecies.setHasEffect();
+            },
+            template -> {
+                AlleleHelper.getInstance().set(template, TEMPERATURE_TOLERANCE, Tolerance.UP_1);
+                AlleleHelper.getInstance().set(template, HUMIDITY_TOLERANCE, Tolerance.UP_1);
+                AlleleHelper.getInstance().set(template, FLOWER_PROVIDER, Flowers.JUNGLE);
+                AlleleHelper.getInstance().set(template, EFFECT, AlleleEffects.effectMiasmic);
+            },
+            dis -> dis.registerMutation(THAUMIUM, SILVER, 10),
+            () -> GTBees.THAUMIC_BEES
+    ),
+    SALISMUNDUS(GTBranchDefinition.THAUMIC, "SalisMundus", true, 0xF7ADDE, 0x592582,
+            beeSpecies -> {
+                beeSpecies.addProduct(getForestryComb(EnumHoneyComb.STRINGY), 0.30f);
+                beeSpecies.addSpecialty(getGTComb(GTCombType.SALISMUNDUS), 0.20f);
+                beeSpecies.setHumidity(EnumHumidity.NORMAL);
+                beeSpecies.setTemperature(EnumTemperature.NORMAL);
+                beeSpecies.setHasEffect();
+            },
+            template -> {
+                AlleleHelper.getInstance().set(template, TEMPERATURE_TOLERANCE, Tolerance.UP_1);
+                AlleleHelper.getInstance().set(template, HUMIDITY_TOLERANCE, Tolerance.UP_1);
+                AlleleHelper.getInstance().set(template, FLOWER_PROVIDER, Flowers.JUNGLE);
+                AlleleHelper.getInstance().set(template, EFFECT, AlleleEffects.effectMiasmic);
+                AlleleHelper.getInstance().set(template, LIFESPAN, Lifespan.SHORT);
+                AlleleHelper.getInstance().set(template, SPEED, Speed.SLOWER);
+            },
+            dis -> {
+                IBeeMutationBuilder mutation = dis.registerMutation(THAUMIUM, THAUMIUM, 8);
+                // magical forest biome
+            },
+            () -> GTBees.THAUMIC_BEES
+    ),
+    TAINTED(GTBranchDefinition.THAUMIC, "Tainted", true, 0x904BB8, 0xE800FF,
+            beeSpecies -> {
+                beeSpecies.addProduct(getForestryComb(EnumHoneyComb.STRINGY), 0.30f);
+                beeSpecies.addSpecialty(getGTComb(GTCombType.TAINTED), 0.20f);
+                beeSpecies.setHumidity(EnumHumidity.NORMAL);
+                beeSpecies.setTemperature(EnumTemperature.NORMAL);
+                beeSpecies.setHasEffect();
+            },
+            template -> {
+                AlleleHelper.getInstance().set(template, NEVER_SLEEPS, true);
+                AlleleHelper.getInstance().set(template, CAVE_DWELLING, true);
+                AlleleHelper.getInstance().set(template, TOLERATES_RAIN, true);
+                AlleleHelper.getInstance().set(template, FERTILITY, Fertility.LOW);
+                AlleleHelper.getInstance().set(template, TEMPERATURE_TOLERANCE, Tolerance.BOTH_1);
+                AlleleHelper.getInstance().set(template, HUMIDITY_TOLERANCE, Tolerance.BOTH_1);
+                AlleleHelper.getInstance().set(template, LIFESPAN, Lifespan.SHORT);
+                if (GTValues.isModLoaded(GFValues.MODID_EB)) {
+                    AlleleHelper.getInstance().set(template, FLOWER_PROVIDER, ExtraBeesFlowers.ROCK);
+                }
+            },
+            dis -> {
+                IBeeMutationBuilder mutation = dis.registerMutation(THAUMIUM, THAUMIUM, 7);
+                // tainted biome
+            },
+            () -> GTBees.THAUMIC_BEES
+    ),
+    DIVIDED(GTBranchDefinition.THAUMIC, "Unstable", true, 0xF0F0F0, 0xDCDCDC,
+            beeSpecies -> {
+                beeSpecies.addProduct(GFUtility.getModItem(GFValues.MODID_EB, "honey_comb", 76), 0.20f);
+                beeSpecies.addSpecialty(getGTComb(GTCombType.DIVIDED), 0.125f);
+                beeSpecies.setHumidity(EnumHumidity.NORMAL);
+                beeSpecies.setTemperature(EnumTemperature.NORMAL);
+                beeSpecies.setHasEffect();
+            },
+            template -> {
+                AlleleHelper.getInstance().set(template, SPEED, Speed.SLOWER);
+                AlleleHelper.getInstance().set(template, LIFESPAN, Lifespan.SHORT);
+                AlleleHelper.getInstance().set(template, FLOWERING, Flowering.SLOW);
+                AlleleHelper.getInstance().set(template, NEVER_SLEEPS, true);
+            },
+            dis -> {
+                IBeeMutationBuilder mutation = dis.registerMutation(DIAMOND, IRON, 3);
+                mutation.requireResource("blockMagicalWood");
+            },
+            () -> GTValues.isModLoaded(GFValues.MODID_XU2) && GTValues.isModLoaded(GFValues.MODID_EB)
+    ),
+    SPARKLING(GTBranchDefinition.THAUMIC, "NetherStar", true, 0x7A007A, 0xFFFFFF,
+            beeSpecies -> {
+                beeSpecies.addProduct(GFUtility.getModItem(GFValues.MODID_MB, "resource", 5), 0.20f);
+                beeSpecies.addSpecialty(getGTComb(GTCombType.SPARKLING), 0.125f);
+                beeSpecies.setHumidity(EnumHumidity.NORMAL);
+                beeSpecies.setTemperature(EnumTemperature.NORMAL);
+            },
+            template -> {
+                AlleleHelper.getInstance().set(template, TEMPERATURE_TOLERANCE, Tolerance.DOWN_2);
+                AlleleHelper.getInstance().set(template, NEVER_SLEEPS, true);
+                AlleleHelper.getInstance().set(template, CAVE_DWELLING, true);
+                AlleleHelper.getInstance().set(template, FLOWER_PROVIDER, Flowers.NETHER);
+                AlleleHelper.getInstance().set(template, LIFESPAN, Lifespan.SHORT);
+                AlleleHelper.getInstance().set(template, EFFECT, AlleleEffects.effectAggressive);
+                AlleleHelper.getInstance().set(template, FLOWERING, Flowering.AVERAGE);
+            },
+            dis -> {
+                IBeeMutationBuilder mutation = dis.registerMutation(EnumBeeSpecies.WITHERING.getSpecies(), EnumBeeSpecies.DRACONIC.getSpecies(), 1);
+                mutation.requireResource("blockNetherStar");
+                // todo end biome
+            },
+            () -> GTValues.isModLoaded(GFValues.MODID_MB)
+    ),
 
     // Radioactive
     URANIUM(GTBranchDefinition.RADIOACTIVE, "Uranium", true, 0x19AF19, 0x169E16,
@@ -958,6 +1113,84 @@ public enum GTBeeDefinition implements IBeeDefinition {
     ),
 
     // Twilight
+    NAGA(GTBranchDefinition.TWILIGHT, "Naga", true, 0x0D5A0D, 0x28874B,
+            beeSpecies -> {
+                if (GTBees.THAUMIC_BEES) {
+                    beeSpecies.addProduct(getGTComb(GTCombType.SALISMUNDUS), 0.02f);
+                } else {
+                    beeSpecies.addProduct(getMagicBeesComb(EnumCombType.MUNDANE), 0.20f);
+                }
+                beeSpecies.addSpecialty(getGTComb(GTCombType.NAGA), 0.10f);
+                beeSpecies.setHumidity(EnumHumidity.DAMP);
+                beeSpecies.setTemperature(EnumTemperature.NORMAL);
+                beeSpecies.setHasEffect();
+            },
+            template -> {
+                AlleleHelper.getInstance().set(template, SPEED, Speed.FAST);
+                AlleleHelper.getInstance().set(template, LIFESPAN, Lifespan.SHORTEST);
+            },
+            dis -> {
+                IBeeMutationBuilder mutation = dis.registerMutation(EnumBeeSpecies.ELDRITCH.getSpecies(), BeeDefinition.IMPERIAL, 8);
+                mutation.restrictHumidity(EnumHumidity.DAMP);
+            },
+            () -> GTBees.TWILIGHT_BEES
+    ),
+    LICH(GTBranchDefinition.TWILIGHT, "Lich", true, 0xC5C5C5, 0x5C605E,
+            beeSpecies -> {
+                if (GTBees.THAUMIC_BEES) {
+                    beeSpecies.addProduct(getGTComb(GTCombType.SALISMUNDUS), 0.04f);
+                } else {
+                    beeSpecies.addProduct(getMagicBeesComb(EnumCombType.OTHERWORLDLY), 0.30f);
+                }
+                beeSpecies.addSpecialty(getGTComb(GTCombType.LICH), 0.10f);
+                beeSpecies.setHumidity(EnumHumidity.ARID);
+                beeSpecies.setTemperature(EnumTemperature.NORMAL);
+                beeSpecies.setHasEffect();
+            },
+            template -> {
+                AlleleHelper.getInstance().set(template, SPEED, Speed.FAST);
+                AlleleHelper.getInstance().set(template, LIFESPAN, Lifespan.SHORTEST);
+            },
+            dis -> {
+                IBeeMutationBuilder mutation = dis.registerMutation(EnumBeeSpecies.SUPERNATURAL.getSpecies(), NAGA, 7);
+                mutation.restrictHumidity(EnumHumidity.ARID);
+            },
+            () -> GTBees.TWILIGHT_BEES
+    ),
+    HYDRA(GTBranchDefinition.TWILIGHT, "Hydra", true, 0x872836, 0xB8132C,
+            beeSpecies -> {
+                if (GTBees.TWILIGHT_BEES) {
+                    beeSpecies.addProduct(getGTComb(GTCombType.SALISMUNDUS), 0.06f);
+                } else {
+                    beeSpecies.addProduct(getMagicBeesComb(EnumCombType.FIREY), 0.30f);
+                }
+                beeSpecies.addSpecialty(getGTComb(GTCombType.HYDRA), 0.10f);
+                beeSpecies.setHumidity(EnumHumidity.ARID);
+                beeSpecies.setTemperature(EnumTemperature.HELLISH);
+                beeSpecies.setHasEffect();
+            },
+            template -> {
+                AlleleHelper.getInstance().set(template, SPEED, Speed.FAST);
+                AlleleHelper.getInstance().set(template, LIFESPAN, Lifespan.SHORTEST);
+            },
+            dis -> {
+                IBeeMutationBuilder mutation = dis.registerMutation(LICH, EnumBeeSpecies.FIREY.getSpecies(), 6);
+                // todo custom biome?
+            },
+            () -> GTBees.TWILIGHT_BEES
+    ),
+    URGHAST(GTBranchDefinition.TWILIGHT, "UrGhast", true, 0xA7041C, 0x7C0618,
+            beeSpecies -> {
+
+            },
+            template -> {
+
+            },
+            dis -> {
+
+            },
+            () -> GTBees.TWILIGHT_BEES
+    ),
 
     // Space
 
@@ -1034,6 +1267,11 @@ public enum GTBeeDefinition implements IBeeDefinition {
         return GFUtility.getModItem(GFValues.MODID_EB, "honey_comb", type.ordinal());
     }
 
+    @Method(modid = GFValues.MODID_MB)
+    protected static ItemStack getMagicBeesComb(EnumCombType type) {
+        return GFUtility.getModItem(GFValues.MODID_MB, "beecomb", type.ordinal());
+    }
+
     protected static ItemStack getGTComb(GTCombType type) {
         return ForestryCommonProxy.combs.get(type, 1);
     }
@@ -1067,7 +1305,19 @@ public enum GTBeeDefinition implements IBeeDefinition {
     }
 
     protected final IBeeMutationBuilder registerMutation(IBeeDefinition parent1, IBeeDefinition parent2, int chance) {
-        return BeeManager.beeMutationFactory.createMutation(parent1.getGenome().getPrimary(), parent2.getGenome().getPrimary(), getTemplate(), chance);
+        return registerMutation(parent1.getGenome().getPrimary(), parent2.getGenome().getPrimary(), chance);
+    }
+
+    protected final IBeeMutationBuilder registerMutation(IAlleleBeeSpecies parent1, IBeeDefinition parent2, int chance) {
+        return registerMutation(parent1, parent2.getGenome().getPrimary(), chance);
+    }
+
+    protected final IBeeMutationBuilder registerMutation(IBeeDefinition parent1, IAlleleBeeSpecies parent2, int chance) {
+        return registerMutation(parent1.getGenome().getPrimary(), parent2, chance);
+    }
+
+    protected final IBeeMutationBuilder registerMutation(IAlleleBeeSpecies parent1, IAlleleBeeSpecies parent2, int chance) {
+        return BeeManager.beeMutationFactory.createMutation(parent1, parent2, getTemplate(), chance);
     }
 
     @Override

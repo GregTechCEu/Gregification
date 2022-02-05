@@ -11,7 +11,6 @@ public class GFUtility {
     }
 
     public static ItemStack getModItem(String modid, String name, int meta, int amount) {
-        // Hopefully this is never called if this is false..
         if (!GTValues.isModLoaded(modid)) {
             return ItemStack.EMPTY;
         }

@@ -17,6 +17,9 @@
  */
 package gregification.forestry.bees;
 
+import gregification.common.GFValues;
+import gregification.config.GFConfig;
+import gregtech.api.GTValues;
 import gregtech.api.unification.material.Material;
 import gregtech.api.unification.material.Materials;
 
@@ -100,14 +103,33 @@ public enum GTCombType {
     LUTETIUM("lutetium", true, Materials.Lutetium, 10,0x0059FF, 0x00AAFF),
     AMERICIUM("americium", true, Materials.Americium, 5,0x0C453A, 0x287869),
     NEUTRONIUM("neutronium", true, Materials.Neutronium, 2,0xFFF0F0, 0xFAFAFA),
-/*
-    //Twilight
-    NAGA("naga", true, null, 100,0x0D5A0D, 0x28874B),
-    LICH("lich", true, null, 90,0x5C605E, 0xC5C5C5),
-    HYDRA("hydra", true, null, 80,0x872836, 0xB8132C),
-    URGHAST("urghast", true, null, 70,0x7C0618, 0xA7041C),
-    SNOWQUEEN("snowqueen", true, null, 60,0x9C0018, 0xD02001),
 
+    //Twilight
+    NAGA("naga", GTBees.TWILIGHT_BEES, null, 100,0x0D5A0D, 0x28874B),
+    LICH("lich", GTBees.TWILIGHT_BEES, null, 90,0x5C605E, 0xC5C5C5),
+    HYDRA("hydra", GTBees.TWILIGHT_BEES, null, 80,0x872836, 0xB8132C),
+    URGHAST("urghast", GTBees.TWILIGHT_BEES, null, 70,0x7C0618, 0xA7041C),
+    SNOWQUEEN("snowqueen", GTBees.TWILIGHT_BEES, null, 60,0x9C0018, 0xD02001),
+
+    //Thaumcraft Line TODO Most of these probably no longer fit
+    THAUMIUM("thaumium", GTBees.THAUMIC_BEES, null, 100,0x7A007A, 0x5C005C),
+    AMBER("amber", GTBees.THAUMIC_BEES, null, 90,0x774B15, 0xEE7700),
+    QUICKSILVER("quicksilver", GTBees.THAUMIC_BEES, Materials.Mercury, 90,0xc7c7ea, 0xb5b3df),
+    SALISMUNDUS("salismundus", GTBees.THAUMIC_BEES, null, 75,0xF7ADDE, 0x592582),
+    TAINTED("tainted", GTBees.THAUMIC_BEES, null, 80,0x904BB8, 0xE800FF),
+
+    // Semi-stable nugget
+    DIVIDED("divided", GTBees.THAUMIC_BEES, null, 40,0xF0F0F0, 0xDCDCDC),
+
+    // Nether Star
+    SPARKLING("sparkling", GTBees.THAUMIC_BEES, Materials.NetherStar, 40,0x7A007A, 0xFFFFFF),
+
+    //THAUMIUMSHARD("thaumiumshard", GTBees.THAUMIC_BEES, null, 85,0x9966FF, 0xAD85FF),
+    //MITHRIL("mithril", GTBees.THAUMIC_BEES, null, 70,0xF0E68C, 0xFFFFD2),
+    //ASTRALSILVER("astralsilver", GTBees.THAUMIC_BEES, null, 70,0xAFEEEE, 0xE6E6FF),
+    //THAUMINITE("thauminite", GTBees.THAUMIC_BEES, null, 50,0x2E2D79, 0x7581E0),
+    //SHADOWMETAL("shadowmetal", GTBees.THAUMIC_BEES, null, 50,0x100322, 0x100342),
+/*
     //Space
     SPACE("space", true, null, 100,0x003366, 0xC0C0C0),
     METEORICIRON("meteoriciron",true, Materials.MeteoricIron, 100,0x321928, 0x643250),
@@ -158,8 +180,10 @@ public enum GTCombType {
  */
     ;
 
+
     public static final GTCombType[] VALUES = values();
 
+    // todo implement showInList, clean up other combs
     public boolean showInList;
     public Material material;
     public int chance;
