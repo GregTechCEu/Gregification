@@ -20,14 +20,14 @@ package gregification.forestry.bees;
 public enum GTDropType {
 
     OIL("oil", true, 0x19191B, 0x303032),
-    LAPIS("lapis coolant", true, 0x1727B1, 0x008CE3),
+    LAPIS("lapis", true, 0x1727B1, 0x008CE3),
     //OXYGEN("oxygen", true, 0x003366, 0x0066BB),
-    //MUTAGEN("small mutagen catalyst", true, 0xFFC100, 0x00FF11),
+    //MUTAGEN("mutagen", true, 0xFFC100, 0x00FF11),
     //COOLANT("coolant", true, 0x144F5A, 0x2494A2),
-    //HOT_COOLANT("hot coolant", true, 0xC11F1F, 0xEBB9B9),
-    //HYDRA("hydra blood", true, 0x872836, 0xB8132C),
-    //SNOW_QUEEN("snowqueen blood", true, 0xD02001, 0x9C0018),
-    //ENDERGOO("ender goo", true, 0xA005E7, 0x161616),
+    //HOT_COOLANT("hotcoolant", true, 0xC11F1F, 0xEBB9B9),
+    //HYDRA("hydrablood", true, 0x872836, 0xB8132C),
+    //SNOW_QUEEN("snowqueenblood", true, 0xD02001, 0x9C0018),
+    //ENDERGOO("endergoo", true, 0xA005E7, 0x161616),
     ;
 
     public static final GTDropType[] VALUES = values();

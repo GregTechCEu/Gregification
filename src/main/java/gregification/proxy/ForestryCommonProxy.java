@@ -8,8 +8,8 @@ import gregification.forestry.bees.*;
 import gregification.forestry.frames.GTFrameType;
 import gregification.forestry.frames.GTItemFrame;
 import gregification.forestry.recipes.CombRecipes;
+import gregification.forestry.recipes.DropRecipes;
 import gregification.forestry.recipes.ElectrodeRecipes;
-import gregification.forestry.recipes.ForestryOreDict;
 import gregtech.api.unification.OreDictUnifier;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -43,6 +43,7 @@ public class ForestryCommonProxy {
                     OreDictUnifier.registerOre(new ItemStack(ForestryCommonProxy.combs, 1, type.ordinal()), "beeComb");
                 }
                 CombRecipes.init();
+                DropRecipes.init();
             }
         }
     }

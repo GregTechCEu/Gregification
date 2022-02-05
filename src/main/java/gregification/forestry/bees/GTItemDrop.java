@@ -28,8 +28,10 @@ import forestry.api.lepidopterology.ButterflyManager;
 import forestry.core.items.IColoredItem;
 import gregification.common.GFValues;
 import gregtech.api.GTValues;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.NonNullList;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -59,6 +61,22 @@ public class GTItemDrop extends Item implements IColoredItem, IItemModelRegister
         manager.registerItemModel(item, 0);
         for (int i = 0; i < GTCombType.VALUES.length; i++) {
             manager.registerItemModel(item, i, GFValues.FORESTRY, "gt.honey_drop");
+        }
+    }
+
+    @Override
+    @Nonnull
+    public String getTranslationKey(@Nonnull ItemStack stack) {
+        GTDropType type = GTDropType.getDrop(stack.getItemDamage());
+        return super.getTranslationKey(stack) + "." + type.getName();
+    }
+
+    @Override
+    public void getSubItems(@Nonnull CreativeTabs tab, @Nonnull NonNullList<ItemStack> items) {
+        if (tab == Tabs.tabApiculture) {
+            for (int i = 0; i < GTDropType.VALUES.length; i++) {
+                items.add(new ItemStack(this, 1, i));
+            }
         }
     }
 
