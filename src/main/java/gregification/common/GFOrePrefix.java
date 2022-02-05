@@ -71,6 +71,12 @@ public class GFOrePrefix {
         Materials.Copper.addFlags(MaterialFlags.GENERATE_BOLT_SCREW);
         Materials.Rubber.addFlags(MaterialFlags.GENERATE_ROD);
 
+        // Forestry Frames
+        Materials.TreatedWood.addFlags(MaterialFlags.GENERATE_LONG_ROD);
+        Materials.Uranium235.addFlags(MaterialFlags.GENERATE_LONG_ROD);
+        Materials.Plutonium241.addFlags(MaterialFlags.GENERATE_LONG_ROD, MaterialFlags.GENERATE_FOIL);
+        Materials.BlueSteel.addFlags(MaterialFlags.GENERATE_LONG_ROD);
+
         // Blocks for Bee Breeding
         Materials.Arsenic.addFlags(MaterialFlags.FORCE_GENERATE_BLOCK);
         Materials.Lithium.addFlags(MaterialFlags.FORCE_GENERATE_BLOCK);

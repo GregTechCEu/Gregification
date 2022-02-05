@@ -10,6 +10,7 @@ import gregification.forestry.frames.GTItemFrame;
 import gregification.forestry.recipes.CombRecipes;
 import gregification.forestry.recipes.DropRecipes;
 import gregification.forestry.recipes.ElectrodeRecipes;
+import gregification.forestry.recipes.FrameRecipes;
 import gregtech.api.unification.OreDictUnifier;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -20,7 +21,9 @@ import net.minecraftforge.fml.common.Optional.Method;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static gregification.common.GFValues.FORESTRY;
 
@@ -29,7 +32,7 @@ public class ForestryCommonProxy {
 
     public static GTItemComb combs;
     public static GTItemDrop drops;
-    public static final List<GTItemFrame> frames = new ArrayList<>();
+    public static final Map<GTFrameType, GTItemFrame> frames = new HashMap<>();
 
     @Method(modid = FORESTRY)
     @SubscribeEvent
@@ -44,6 +47,9 @@ public class ForestryCommonProxy {
                 }
                 CombRecipes.init();
                 DropRecipes.init();
+            }
+            if (GFConfig.forestry.gtFrames) {
+                FrameRecipes.init();
             }
         }
     }
@@ -62,7 +68,7 @@ public class ForestryCommonProxy {
             if (GFConfig.forestry.gtFrames) {
                 if (ModuleHelper.isEnabled("apiculture")) {
                     for (GTFrameType type : GTFrameType.values()) {
-                        frames.add(new GTItemFrame(type));
+                        frames.put(type, new GTItemFrame(type));
                     }
                 } else {
                     GFLog.forestryLogger.error("GT Frames is enabled, but Forestry Apiculture module is disabled. Skipping GT Frames...");
@@ -96,7 +102,7 @@ public class ForestryCommonProxy {
                     event.getRegistry().register(drops);
                 }
                 if (GFConfig.forestry.gtFrames) {
-                    frames.forEach(f -> event.getRegistry().register(f));
+                    frames.values().forEach(f -> event.getRegistry().register(f));
                 }
             }
         }

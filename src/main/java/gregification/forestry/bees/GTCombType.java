@@ -93,7 +93,7 @@ public enum GTCombType {
 
     //Radioactive Line
     URANIUM("uranium", true, Materials.Uranium238, 50,0x19AF19, 0x169E16),
-    PLUTONIUM("plutonium", true, Materials.Plutonium241, 10,0x240000, 0x570000), // todo make sure this is right
+    PLUTONIUM("plutonium", true, Materials.Plutonium239, 10,0x240000, 0x570000),
     NAQUADAH("naquadah", true, Materials.Naquadah, 10,0x000000, 0x004400),
     NAQUADRIA("naquadria", true, Materials.Naquadria, 5,0x000000, 0x002400),
     THORIUM("thorium", true, Materials.Thorium, 75,0x001E00, 0x005000),

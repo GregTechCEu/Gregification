@@ -37,7 +37,7 @@ public class ForestryClientProxy extends ForestryCommonProxy {
                 drops.registerModel(drops, ForestryAPI.modelManager);
             }
             if (GFConfig.forestry.gtFrames) {
-                frames.forEach(f -> f.registerModel(f, ForestryAPI.modelManager));
+                frames.values().forEach(f -> f.registerModel(f, ForestryAPI.modelManager));
             }
         }
     }
