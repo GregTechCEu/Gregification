@@ -374,7 +374,7 @@ public class CombRecipes {
         RecipeBuilder<?> builder = RecipeMaps.CENTRIFUGE_RECIPES.recipeBuilder()
                 .inputs(combStack)
                 .duration(duration)
-                .EUt(volt.getCentrifugeTime());
+                .EUt(volt.getCentrifugeEnergy());
 
         int numGTOutputs = 0;
         for (int i = 0; i < item.length; i++) {
