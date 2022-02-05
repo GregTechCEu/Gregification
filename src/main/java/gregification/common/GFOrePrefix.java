@@ -36,6 +36,9 @@ public class GFOrePrefix {
         if (GFConfig.exNihilo.enableExNihilo && Loader.isModLoaded(GFValues.MODID_EXNI)) {
             initExNihilo();
         }
+        if (GFConfig.forestry.enableForestry && GTValues.isModLoaded(GFValues.FORESTRY)) {
+            initForestry();
+        }
     }
 
     private static void initExNihilo() {
@@ -48,7 +51,7 @@ public class GFOrePrefix {
         oreEnderChunk = new OrePrefix("oreEnderChunk", -1, null, oreEnderChunkIcon, ENABLE_UNIFICATION, hasOreProperty);
         oreNetherChunk = new OrePrefix("oreNetherChunk", -1, null, oreNetherChunkIcon, ENABLE_UNIFICATION, hasOreProperty);
         oreSandyChunk = new OrePrefix("oreSandyChunk", -1, null, oreSandyChunkIcon, ENABLE_UNIFICATION, hasOreProperty);
-        
+
         oreChunk.setAlternativeOreName(OrePrefix.ore.name());
         oreEnderChunk.setAlternativeOreName(OrePrefix.oreEndstone.name());
         oreNetherChunk.setAlternativeOreName(OrePrefix.oreNetherrack.name());
@@ -57,9 +60,19 @@ public class GFOrePrefix {
         MetaItems.addOrePrefix(oreChunk, oreEnderChunk, oreNetherChunk, oreSandyChunk);
     }
 
-    private static void materialFlagAdditions() {
+    private static void initForestry() {
+
+        // Electron Tubes
         Materials.Emerald.addFlags(MaterialFlags.GENERATE_BOLT_SCREW);
         Materials.Apatite.addFlags(MaterialFlags.GENERATE_PLATE, MaterialFlags.GENERATE_BOLT_SCREW);
         Materials.Lapis.addFlags(MaterialFlags.GENERATE_BOLT_SCREW);
+        Materials.Copper.addFlags(MaterialFlags.GENERATE_BOLT_SCREW);
+        Materials.Rubber.addFlags(MaterialFlags.GENERATE_ROD);
+
+        // Blocks for Bee Breeding
+        Materials.Arsenic.addFlags(MaterialFlags.FORCE_GENERATE_BLOCK);
+        Materials.Lithium.addFlags(MaterialFlags.FORCE_GENERATE_BLOCK);
+        Materials.Electrotine.addFlags(MaterialFlags.FORCE_GENERATE_BLOCK);
+        Materials.Lutetium.addFlags(MaterialFlags.FORCE_GENERATE_BLOCK);
     }
 }

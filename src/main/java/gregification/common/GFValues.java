@@ -11,10 +11,15 @@ public class GFValues {
             MODID_EXNI = "exnihilocreatio",
             MODID_OC = "opencomputers",
             MODID_GTOC = "gtce2oc",
-            MODID_FR = "forestry",
+            FORESTRY = "forestry",
+            MODID_EB = "extrabees",
+            MODID_MB = "magicbees",
             MODID_IC2 = "ic2",
             MODID_BINNIE = "binniecore",
             MODID_XU2 = "extrautils2",
             MODID_TR = "techreborn",
-            MODID_MA = "mysticalagriculture";
+            MODID_MA = "mysticalagriculture",
+            MODID_TCON = "tconstruct",
+            MODID_BOP = "biomesoplenty",
+            MODID_AE = "appliedenergistics2";
 }
