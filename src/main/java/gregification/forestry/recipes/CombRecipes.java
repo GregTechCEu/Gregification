@@ -409,7 +409,11 @@ public class CombRecipes {
             product.put(item[i], chance[i] / 10000.0f);
             // Add to GregTech Map
             if (numGTOutputs < RecipeMaps.CENTRIFUGE_RECIPES.getMaxOutputs()) {
-                builder.chancedOutput(item[i], chance[i], 0);
+                if (chance[i] >= 10000) {
+                    builder.outputs(item[i]);
+                } else {
+                    builder.chancedOutput(item[i], chance[i], 0);
+                }
                 numGTOutputs++;
             }
         }
