@@ -49,13 +49,14 @@ public class CombRecipes {
 
     // forgive me for the code i am about to write
     public static void init() {
-        // Organic TODO Biomass Comb
+        // Organic
         addProcessGT(GTCombType.COAL, new Material[]{Materials.Coal}, Voltage.LV);
         addProcessGT(GTCombType.COKE, new Material[]{Materials.Coke}, Voltage.LV);
         addCentrifugeToItemStack(GTCombType.STICKY, new ItemStack[]{MetaItems.STICKY_RESIN.getStackForm(), MetaItems.PLANT_BALL.getStackForm(), ModuleCore.getItems().beeswax.getItemStack()}, new int[]{50*100, 15*100, 50*100}, Voltage.ULV);
         addProcessGT(GTCombType.OIL, new Material[]{Materials.Oilsands}, Voltage.LV);
         addProcessGT(GTCombType.APATITE, new Material[]{Materials.Apatite, Materials.Phosphate}, Voltage.LV);
         addCentrifugeToMaterial(GTCombType.ASH, new Material[]{Materials.DarkAsh, Materials.Ash}, new int[]{50*100, 50*100}, new int[]{}, Voltage.ULV, ItemStack.EMPTY, 50*100);
+        addCentrifugeToItemStack(GTCombType.BIOMASS, new ItemStack[]{getStackForType(GTDropType.BIOMASS), getStackForType(GTDropType.ETHANOL), ModuleCore.getItems().beeswax.getItemStack()}, new int[]{70*100, 30*100, 50*100}, Voltage.ULV);
         if (GFConfig.forestry.nerfGTCombs) {
             addCentrifugeToItemStack(GTCombType.COAL, new ItemStack[]{OreDictUnifier.get(OrePrefix.gem, Materials.Coal), ModuleCore.getItems().beeswax.getItemStack()}, new int[]{5*100, 50*100}, Voltage.ULV);
             addCentrifugeToItemStack(GTCombType.COKE, new ItemStack[]{OreDictUnifier.get(OrePrefix.gem, Materials.Coke), ModuleCore.getItems().beeswax.getItemStack()}, new int[]{5*100, 50*100}, Voltage.ULV);
@@ -399,6 +400,10 @@ public class CombRecipes {
 
     private static ItemStack getStackForType(GTCombType type) {
         return new ItemStack(ForestryCommonProxy.combs, 1, type.ordinal());
+    }
+
+    private static ItemStack getStackForType(GTDropType type) {
+        return new ItemStack(ForestryCommonProxy.drops, 1, type.ordinal());
     }
 
     private enum Voltage {

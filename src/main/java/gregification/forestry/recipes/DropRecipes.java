@@ -22,8 +22,11 @@ import forestry.apiculture.ModuleApiculture;
 import forestry.apiculture.items.EnumPropolis;
 import forestry.factory.MachineUIDs;
 import forestry.factory.ModuleFactory;
+import gregification.common.GFUtility;
+import gregification.common.GFValues;
 import gregification.forestry.bees.GTDropType;
 import gregification.proxy.ForestryCommonProxy;
+import gregtech.api.GTValues;
 import gregtech.api.recipes.RecipeMaps;
 import gregtech.api.unification.material.Materials;
 import net.minecraft.item.ItemStack;
@@ -31,6 +34,8 @@ import net.minecraft.item.ItemStack;
 public class DropRecipes {
 
     public static void init() {
+
+        // Oil Drop
         ItemStack dropStack = getStackForType(GTDropType.OIL);
         RecipeMaps.EXTRACTOR_RECIPES.recipeBuilder()
                 .inputs(dropStack)
@@ -40,6 +45,34 @@ public class DropRecipes {
 
         if (ModuleFactory.machineEnabled(MachineUIDs.SQUEEZER)) {
             RecipeManagers.squeezerManager.addRecipe(40, dropStack, Materials.OilHeavy.getFluid(100), ModuleApiculture.getItems().propolis.get(EnumPropolis.NORMAL, 1), 30);
+        }
+
+        // Biomass Drop
+        dropStack = getStackForType(GTDropType.BIOMASS);
+        ItemStack propolisStack = ModuleApiculture.getItems().propolis.get(EnumPropolis.NORMAL, 1);
+        if (GTValues.isModLoaded(GFValues.MODID_EB)) {
+            propolisStack = GFUtility.getModItem(GFValues.MODID_EB, "propolis", 7);
+        }
+        RecipeMaps.EXTRACTOR_RECIPES.recipeBuilder()
+                .inputs(dropStack)
+                .chancedOutput(propolisStack, 3000, 0)
+                .fluidOutputs(Materials.Biomass.getFluid(100))
+                .duration(32).EUt(8).buildAndRegister();
+
+        if (ModuleFactory.machineEnabled(MachineUIDs.SQUEEZER)) {
+            RecipeManagers.squeezerManager.addRecipe(40, dropStack, Materials.Biomass.getFluid(100), propolisStack, 30);
+        }
+
+        // Ethanol Drop
+        dropStack = getStackForType(GTDropType.ETHANOL);
+        RecipeMaps.EXTRACTOR_RECIPES.recipeBuilder()
+                .inputs(dropStack)
+                .chancedOutput(propolisStack, 3000, 0)
+                .fluidOutputs(Materials.Ethanol.getFluid(100))
+                .duration(32).EUt(8).buildAndRegister();
+
+        if (ModuleFactory.machineEnabled(MachineUIDs.SQUEEZER)) {
+            RecipeManagers.squeezerManager.addRecipe(40, dropStack, Materials.Ethanol.getFluid(100), propolisStack, 30);
         }
 
         // TODO Other drops

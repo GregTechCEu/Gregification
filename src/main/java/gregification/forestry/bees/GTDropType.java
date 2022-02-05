@@ -21,6 +21,8 @@ public enum GTDropType {
 
     OIL("oil", true, 0x19191B, 0x303032),
     LAPIS("lapis", true, 0x1727B1, 0x008CE3),
+    BIOMASS("biomass", true, 0x21E118, 0x17AF0E),
+    ETHANOL("ethanol", true, 0xCE5504, 0x853703),
     //OXYGEN("oxygen", true, 0x003366, 0x0066BB),
     //MUTAGEN("mutagen", true, 0xFFC100, 0x00FF11),
     //COOLANT("coolant", true, 0x144F5A, 0x2494A2),
