@@ -24,7 +24,7 @@ public enum GTCombType {
 
     //Organic Line
     COAL("coal", true, Materials.Coal, 100,0x525252, 0x666666),
-    COKE("coke", true, Materials.Coke, 50, 0x000000, 0x000000), // todo colors
+    COKE("coke", true, Materials.Coke, 50, 0x4B4B4B, 0x7D7D7D),
     STICKY("stickyresin", true, null, 50,0x2E8F5B, 0xDCC289),
     OIL("oil", true, null, 100,0x333333, 0x4C4C4C),
     APATITE("apatite", true, Materials.Apatite, 100,0xc1c1f6, 0x676784),
@@ -80,7 +80,7 @@ public enum GTCombType {
     MANGANESE("manganese", true, Materials.Manganese, 30,0xD5D5D5, 0xAAAAAA),
     MAGNESIUM("magnesium", true, Materials.Magnesium, 75,0xF1D9D9, 0x8B8B8B),
     TITANIUM("titanium", true, Materials.Ilmenite, 100,0xCC99FF, 0xDBB8FF),
-    CHROME("chromium", true, Materials.Chrome, 50,0xEBA1EB, 0xF2C3F2),
+    CHROME("chrome", true, Materials.Chrome, 50,0xEBA1EB, 0xF2C3F2),
     TUNGSTEN("tungsten", true, Materials.Tungstate, 100,0x62626D, 0x161620),
     PLATINUM("platinum", true, Materials.Platinum, 40,0xE6E6E6, 0xFFFFCC),
     IRIDIUM("iridium", true, Materials.Iridium, 20,0xDADADA, 0xD1D1E0),

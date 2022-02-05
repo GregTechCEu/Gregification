@@ -101,6 +101,7 @@ dependencies {
     // Forestry and addons
     deobfCompile "curse.maven:forestry-59751:2918418"
     deobfCompile "curse.maven:binnies-mods-223525:2916129"
+    deobfCompile "curse.maven:magic-bees-65764:2566282"
 
     // TiCon
     deobfCompile "curse.maven:tinkers-construct-74072:2902483"

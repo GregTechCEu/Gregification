@@ -24,7 +24,7 @@ public class ForestryClientProxy extends ForestryCommonProxy {
     public void init() {
         super.init();
         if (GFConfig.forestry.enableForestry && GFConfig.forestry.gtBees) {
-            Minecraft.getMinecraft().getItemColors().registerItemColorHandler(CombItemColor.INSTANCE, combs);
+            Minecraft.getMinecraft().getItemColors().registerItemColorHandler(CombItemColor.INSTANCE, combs, drops);
         }
     }
 
@@ -34,6 +34,7 @@ public class ForestryClientProxy extends ForestryCommonProxy {
         if (GFConfig.forestry.enableForestry) {
             if (GFConfig.forestry.gtBees) {
                 combs.registerModel(combs, ForestryAPI.modelManager);
+                drops.registerModel(drops, ForestryAPI.modelManager);
             }
             if (GFConfig.forestry.gtFrames) {
                 frames.forEach(f -> f.registerModel(f, ForestryAPI.modelManager));

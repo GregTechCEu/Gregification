@@ -4,15 +4,15 @@ import forestry.modules.ModuleHelper;
 import gregification.common.GFLog;
 import gregification.common.GFValues;
 import gregification.config.GFConfig;
-import gregification.forestry.bees.GTAlleleBeeSpecies;
-import gregification.forestry.bees.GTBeeDefinition;
-import gregification.forestry.bees.GTItemComb;
+import gregification.forestry.bees.*;
 import gregification.forestry.frames.GTFrameType;
 import gregification.forestry.frames.GTItemFrame;
+import gregification.forestry.recipes.CombRecipes;
 import gregification.forestry.recipes.ElectrodeRecipes;
-import gregtech.api.GregTechAPI;
-import gregtech.api.unification.material.Materials;
+import gregification.forestry.recipes.ForestryOreDict;
+import gregtech.api.unification.OreDictUnifier;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -28,6 +28,7 @@ import static gregification.common.GFValues.FORESTRY;
 public class ForestryCommonProxy {
 
     public static GTItemComb combs;
+    public static GTItemDrop drops;
     public static final List<GTItemFrame> frames = new ArrayList<>();
 
     @Method(modid = FORESTRY)
@@ -36,6 +37,12 @@ public class ForestryCommonProxy {
         if (GFConfig.forestry.enableForestry) {
             if (GFConfig.forestry.gtElectrodes) {
                 ElectrodeRecipes.initGTRecipes();
+            }
+            if (GFConfig.forestry.gtBees) {
+                for (GTCombType type : GTCombType.VALUES) {
+                    OreDictUnifier.registerOre(new ItemStack(ForestryCommonProxy.combs, 1, type.ordinal()), "beeComb");
+                }
+                CombRecipes.init();
             }
         }
     }
@@ -46,6 +53,7 @@ public class ForestryCommonProxy {
             if (GFConfig.forestry.gtBees) {
                 if (ModuleHelper.isEnabled("apiculture")) {
                     combs = new GTItemComb();
+                    drops = new GTItemDrop();
                 } else {
                     GFLog.forestryLogger.error("GT Bees is enabled, but Forestry Apiculture module is disabled. Skipping GT Bees...");
                 }
@@ -84,6 +92,7 @@ public class ForestryCommonProxy {
             if (ModuleHelper.isEnabled("apiculture")) {
                 if (GFConfig.forestry.gtBees) {
                     event.getRegistry().register(combs);
+                    event.getRegistry().register(drops);
                 }
                 if (GFConfig.forestry.gtFrames) {
                     frames.forEach(f -> event.getRegistry().register(f));

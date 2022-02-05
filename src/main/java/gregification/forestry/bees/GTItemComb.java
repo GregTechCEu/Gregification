@@ -40,6 +40,7 @@ import java.util.List;
 public class GTItemComb extends Item implements IColoredItem, IItemModelRegister {
 
     public GTItemComb() {
+        super();
         setHasSubtypes(true);
         setCreativeTab(Tabs.tabApiculture);
         setRegistryName(GTValues.MODID, "gt.comb");

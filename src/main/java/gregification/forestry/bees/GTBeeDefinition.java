@@ -207,7 +207,7 @@ public enum GTBeeDefinition implements IBeeDefinition {
                 mutation.restrictTemperature(EnumTemperature.HELLISH);
             }
     ),
-    APATITE(GTBranchDefinition.ORGANIC, "Fertilizer", true, 0x7FCEF5, 0x654525,
+    APATITE(GTBranchDefinition.ORGANIC, "Apatite", true, 0x7FCEF5, 0x654525,
             beeSpecies -> {
                 if (GTValues.isModLoaded(GFValues.MODID_EB)) {
                     beeSpecies.addProduct(getExtraBeesComb(binnie.extrabees.items.types.EnumHoneyComb.SEED), 0.15f);
@@ -292,7 +292,7 @@ public enum GTBeeDefinition implements IBeeDefinition {
                 mutation.requireResource("blockCertusQuartz"); // todo check on AE2 oredict
             }
     ),
-    FLUIX(GTBranchDefinition.GEM, "FluixDust", true, 0xA375FF, 0xB591FF,
+    FLUIX(GTBranchDefinition.GEM, "Fluix", true, 0xA375FF, 0xB591FF,
             beeSpecies -> {
                 beeSpecies.addProduct(getGTComb(GTCombType.STONE), 0.30f);
                 beeSpecies.addSpecialty(getGTComb(GTCombType.FLUIX), 0.15f);
@@ -1010,10 +1010,9 @@ public enum GTBeeDefinition implements IBeeDefinition {
         String uid = "gregtech.bee.species" + species;
         String description = "for.description." + species;
         String name = "for.bees.species." + lowercaseName;
-        // todo localization
 
         this.branch = branch;
-        this.species = new GTAlleleBeeSpecies(GTValues.MODID, uid, name, "Gregification", description, dominant, branch.getBranch(), binomial, primary, secondary);
+        this.species = new GTAlleleBeeSpecies(GTValues.MODID, uid, name, "GregTech", description, dominant, branch.getBranch(), binomial, primary, secondary);
         this.generationCondition = generationCondition;
     }
 
@@ -1024,19 +1023,6 @@ public enum GTBeeDefinition implements IBeeDefinition {
         for (GTBeeDefinition bee : values()) {
             bee.registerMutations();
         }
-    }
-
-    protected static IAlleleBeeEffect getEffect(String modid, String name) {
-        return (IAlleleBeeEffect) AlleleManager.alleleRegistry.getAllele(modid + ".effect" + name);
-    }
-
-    protected static IAlleleFlowers getFlowers(String modid, String name) {
-        return (IAlleleFlowers) AlleleManager.alleleRegistry.getAllele(modid + ".flowers" + name);
-    }
-
-    protected static IAlleleBeeSpecies getSpecies(String modid, String name) {
-        // todo null check and default here
-        return (IAlleleBeeSpecies) AlleleManager.alleleRegistry.getAllele(modid + ".species" + name);
     }
 
     protected static ItemStack getForestryComb(EnumHoneyComb type) {
@@ -1104,9 +1090,5 @@ public enum GTBeeDefinition implements IBeeDefinition {
     @Override
     public final ItemStack getMemberStack(@Nonnull EnumBeeType beeType) {
         return BeeManager.beeRoot.getMemberStack(getIndividual(), beeType);
-    }
-
-    public final IBeeDefinition getRainResist() {
-        return new BeeVariation.RainResist(this);
     }
 }
