@@ -20,9 +20,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Optional.Method;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import static gregification.common.GFValues.FORESTRY;
@@ -45,7 +43,7 @@ public class ForestryCommonProxy {
                 for (GTCombType type : GTCombType.VALUES) {
                     OreDictUnifier.registerOre(new ItemStack(ForestryCommonProxy.combs, 1, type.ordinal()), "beeComb");
                 }
-                CombRecipes.init();
+                CombRecipes.initGTCombs();
                 DropRecipes.init();
             }
             if (GFConfig.forestry.gtFrames) {
@@ -84,10 +82,12 @@ public class ForestryCommonProxy {
                 ElectrodeRecipes.removeForestryRecipes();
                 ElectrodeRecipes.addForestryMachineRecipes();
             }
-            if (GFConfig.forestry.gtBees && ModuleHelper.isEnabled("apiculture")) {
-                // GTAlleleHelper.init();
-                GTAlleleBeeSpecies.setupGTAlleles();
-                GTBeeDefinition.initBees();
+            if (ModuleHelper.isEnabled("apiculture")) {
+                if (GFConfig.forestry.gtBees) {
+                    GTAlleleBeeSpecies.setupGTAlleles();
+                    GTBeeDefinition.initBees();
+                }
+                CombRecipes.initForestryCombs();
             }
         }
     }

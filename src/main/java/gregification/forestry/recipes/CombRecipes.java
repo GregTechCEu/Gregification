@@ -18,6 +18,7 @@
 package gregification.forestry.recipes;
 
 import com.google.common.collect.ImmutableMap;
+import forestry.api.recipes.ICentrifugeRecipe;
 import forestry.api.recipes.RecipeManagers;
 import forestry.core.ModuleCore;
 import forestry.factory.MachineUIDs;
@@ -44,11 +45,36 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 
 import java.util.Arrays;
+import java.util.Map;
+import java.util.Set;
 
 public class CombRecipes {
 
+    public static void initForestryCombs() {
+        if (!ModuleFactory.machineEnabled(MachineUIDs.CENTRIFUGE)) return;
+        for (ICentrifugeRecipe recipe : RecipeManagers.centrifugeManager.recipes()) {
+            ItemStack combStack = recipe.getInput();
+            if (combStack.getItem().getRegistryName().getNamespace().equals(GTValues.MODID)) continue;
+            Set<String> names = OreDictUnifier.getOreDictionaryNames(combStack);
+            if (names != null && !names.isEmpty() && names.contains("beeComb")) {
+                RecipeBuilder<?> builder = RecipeMaps.CENTRIFUGE_RECIPES.recipeBuilder()
+                        .inputs(combStack.copy())
+                        .duration(Voltage.ULV.getCentrifugeTime()).EUt(Voltage.ULV.getCentrifugeEnergy());
+
+                for (Map.Entry<ItemStack, Float> entry : recipe.getAllProducts().entrySet()) {
+                    if (entry.getValue() >= 1.0f) {
+                        builder.outputs(entry.getKey());
+                    } else {
+                        builder.chancedOutput(entry.getKey(), Math.max(1, Math.round(entry.getValue() * 10000)), 0);
+                    }
+                }
+                builder.buildAndRegister();
+            }
+        }
+    }
+
     // forgive me for the code i am about to write
-    public static void init() {
+    public static void initGTCombs() {
         // Organic
         addProcessGT(GTCombType.COAL, new Material[]{Materials.Coal}, Voltage.LV);
         addProcessGT(GTCombType.COKE, new Material[]{Materials.Coke}, Voltage.LV);
