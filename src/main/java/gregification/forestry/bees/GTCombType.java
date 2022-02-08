@@ -116,7 +116,7 @@ public enum GTCombType {
     TAINTED("tainted", GTBees.THAUMIC_BEES, 0x904BB8, 0xE800FF),
 
     // Semi-stable nugget
-    DIVIDED("divided", GTValues.isModLoaded(GFValues.MODID_XU2), 0xF0F0F0, 0xDCDCDC),
+    DIVIDED("divided", GTValues.isModLoaded(GFValues.MODID_XU2) && GTValues.isModLoaded(GFValues.MODID_EB), 0xF0F0F0, 0xDCDCDC),
 
     // Nether Star
     SPARKLING("sparkling", GTValues.isModLoaded(GFValues.MODID_MB), 0x7A007A, 0xFFFFFF),

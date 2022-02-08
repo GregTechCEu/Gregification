@@ -2,6 +2,7 @@ package gregification.proxy;
 
 import forestry.modules.ModuleHelper;
 import gregification.common.GFLog;
+import gregification.common.GFUtility;
 import gregification.common.GFValues;
 import gregification.config.GFConfig;
 import gregification.forestry.bees.*;
@@ -88,6 +89,9 @@ public class ForestryCommonProxy {
     public void postInit() {
         if (ModuleHelper.isEnabled("apiculture")) {
             CombRecipes.initForestryCombs();
+            if (GFConfig.forestry.gregifyForestry) {
+                ForestryOverrideRecipes.init();
+            }
         }
     }
 

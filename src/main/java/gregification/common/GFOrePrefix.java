@@ -3,7 +3,6 @@ package gregification.common;
 import gregification.config.GFConfig;
 import gregtech.api.GregTechAPI;
 import gregtech.api.unification.material.Materials;
-import gregtech.api.unification.material.info.MaterialFlags;
 import gregtech.api.unification.material.info.MaterialIconType;
 import gregtech.api.unification.material.properties.OreProperty;
 import gregtech.api.unification.material.properties.PropertyKey;
@@ -13,6 +12,7 @@ import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
+import static gregtech.api.unification.material.info.MaterialFlags.*;
 import static gregtech.api.unification.ore.OrePrefix.Conditions.hasOreProperty;
 import static gregtech.api.unification.ore.OrePrefix.Flags.ENABLE_UNIFICATION;
 
@@ -65,23 +65,23 @@ public class GFOrePrefix {
     private static void initForestry() {
 
         // Electron Tubes
-        Materials.Emerald.addFlags(MaterialFlags.GENERATE_BOLT_SCREW);
-        Materials.Apatite.addFlags(MaterialFlags.GENERATE_PLATE, MaterialFlags.GENERATE_BOLT_SCREW);
-        Materials.Lapis.addFlags(MaterialFlags.GENERATE_BOLT_SCREW);
-        Materials.Copper.addFlags(MaterialFlags.GENERATE_BOLT_SCREW);
-        Materials.Rubber.addFlags(MaterialFlags.GENERATE_ROD);
+        Materials.Emerald.addFlags(GENERATE_BOLT_SCREW);
+        Materials.Apatite.addFlags(GENERATE_PLATE, GENERATE_BOLT_SCREW);
+        Materials.Lapis.addFlags(GENERATE_BOLT_SCREW);
+        Materials.Copper.addFlags(GENERATE_BOLT_SCREW);
+        Materials.Rubber.addFlags(GENERATE_ROD);
 
         // Forestry Frames
-        Materials.TreatedWood.addFlags(MaterialFlags.GENERATE_LONG_ROD);
-        Materials.Uranium235.addFlags(MaterialFlags.GENERATE_LONG_ROD);
-        Materials.Plutonium241.addFlags(MaterialFlags.GENERATE_LONG_ROD, MaterialFlags.GENERATE_FOIL);
-        Materials.BlueSteel.addFlags(MaterialFlags.GENERATE_LONG_ROD);
+        Materials.TreatedWood.addFlags(GENERATE_LONG_ROD);
+        Materials.Uranium235.addFlags(GENERATE_LONG_ROD);
+        Materials.Plutonium241.addFlags(GENERATE_LONG_ROD, GENERATE_FOIL);
+        Materials.BlueSteel.addFlags(GENERATE_LONG_ROD);
 
         // Blocks for Bee Breeding
-        Materials.Arsenic.addFlags(MaterialFlags.FORCE_GENERATE_BLOCK);
-        Materials.Lithium.addFlags(MaterialFlags.FORCE_GENERATE_BLOCK);
-        Materials.Electrotine.addFlags(MaterialFlags.FORCE_GENERATE_BLOCK);
-        Materials.Lutetium.addFlags(MaterialFlags.FORCE_GENERATE_BLOCK);
+        Materials.Arsenic.addFlags(FORCE_GENERATE_BLOCK);
+        Materials.Lithium.addFlags(FORCE_GENERATE_BLOCK);
+        Materials.Electrotine.addFlags(FORCE_GENERATE_BLOCK);
+        Materials.Lutetium.addFlags(FORCE_GENERATE_BLOCK);
 
         // Ores for Comb Processing
         OreProperty property;
@@ -157,5 +157,11 @@ public class GFOrePrefix {
         Materials.Lutetium.setProperty(PropertyKey.ORE, new OreProperty());
         Materials.Americium.setProperty(PropertyKey.ORE, new OreProperty());
         Materials.NetherStar.setProperty(PropertyKey.ORE, new OreProperty());
+
+        if (GFConfig.forestry.gregifyForestry) {
+            Materials.Glass.addFlags(GENERATE_BOLT_SCREW);
+            Materials.Iron.addFlags(GENERATE_FOIL, GENERATE_FINE_WIRE);
+            Materials.Bronze.addFlags(GENERATE_FINE_WIRE);
+        }
     }
 }

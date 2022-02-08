@@ -71,6 +71,7 @@ dependencies {
     deobfCompile "curse.maven:tfcraft-302973:3268988"
     //deobfCompile "curse.maven:mcjtylib-233105:2745846"
     //deobfCompile "curse.maven:xnet-260912:2745852"
+    deobfCompile "curse.maven:gregtech-food-option-477021:3636751"
 
     // Addons and other mods for testing as needed
     //runtime "curse.maven:crafttweaker-239197:3411555"

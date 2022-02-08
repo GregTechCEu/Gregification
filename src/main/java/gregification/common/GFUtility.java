@@ -11,9 +11,13 @@ public class GFUtility {
     }
 
     public static ItemStack getModItem(String modid, String name, int meta, int amount) {
+        return getModItem(modid, name, meta, amount, null);
+    }
+
+    public static ItemStack getModItem(String modid, String name, int meta, int amount, String nbt) {
         if (!GTValues.isModLoaded(modid)) {
             return ItemStack.EMPTY;
         }
-        return GameRegistry.makeItemStack(modid+":"+name, meta, amount, null);
+        return GameRegistry.makeItemStack(modid+":"+name, meta, amount, nbt);
     }
 }

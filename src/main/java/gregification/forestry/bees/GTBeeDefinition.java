@@ -20,7 +20,6 @@ package gregification.forestry.bees;
 import forestry.api.apiculture.*;
 import forestry.api.core.EnumHumidity;
 import forestry.api.core.EnumTemperature;
-import forestry.api.genetics.AlleleManager;
 import forestry.api.genetics.IAllele;
 import forestry.api.genetics.IMutationBuilder;
 import forestry.apiculture.ModuleApiculture;
@@ -35,7 +34,11 @@ import forestry.core.genetics.alleles.EnumAllele.*;
 import gregification.common.GFUtility;
 import gregification.common.GFValues;
 import gregtech.api.GTValues;
+import gregtech.api.unification.OreDictUnifier;
+import gregtech.api.unification.material.Materials;
+import gregtech.api.unification.ore.OrePrefix;
 import gregtech.common.items.MetaItems;
+import gregtechfoodoption.item.GTFOMetaItem;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -99,10 +102,7 @@ public enum GTBeeDefinition implements IBeeDefinition {
                 AlleleHelper.getInstance().set(template, TEMPERATURE_TOLERANCE, Tolerance.BOTH_1);
                 AlleleHelper.getInstance().set(template, HUMIDITY_TOLERANCE, Tolerance.BOTH_1);
                 if (GTValues.isModLoaded(GFValues.MODID_EB)) {
-                    IAllele allele = AlleleManager.alleleRegistry.getAllele("extrabees.flower.water");
-                    if (allele != null) {
-                        AlleleHelper.getInstance().set(template, FLOWER_PROVIDER, allele);
-                    }
+                    AlleleHelper.getInstance().set(template, FLOWER_PROVIDER, GTBees.getFlowers(GFValues.MODID_EB, "water"));
                 }
             },
             dis -> {
@@ -182,10 +182,7 @@ public enum GTBeeDefinition implements IBeeDefinition {
                 AlleleHelper.getInstance().set(template, TEMPERATURE_TOLERANCE, Tolerance.NONE);
                 AlleleHelper.getInstance().set(template, HUMIDITY_TOLERANCE, Tolerance.NONE);
                 if (GTValues.isModLoaded(GFValues.MODID_EB)) {
-                    IAllele allele = AlleleManager.alleleRegistry.getAllele("extrabees.flower.water");
-                    if (allele != null) {
-                        AlleleHelper.getInstance().set(template, FLOWER_PROVIDER, allele);
-                    }
+                    AlleleHelper.getInstance().set(template, FLOWER_PROVIDER, GTBees.getFlowers(GFValues.MODID_EB, "water"));
                 }
             },
             dis -> dis.registerMutation(COAL, STICKYRESIN, 4)
@@ -230,10 +227,7 @@ public enum GTBeeDefinition implements IBeeDefinition {
                 AlleleHelper.getInstance().set(template, FLOWER_PROVIDER, Flowers.WHEAT);
                 AlleleHelper.getInstance().set(template, FLOWERING, Flowering.FASTER);
                 if (GTValues.isModLoaded(GFValues.MODID_EB)) {
-                    IAllele allele = AlleleManager.alleleRegistry.getAllele("extrabees.flower.rock");
-                    if (allele != null) {
-                        AlleleHelper.getInstance().set(template, FLOWER_PROVIDER, allele);
-                    }
+                    AlleleHelper.getInstance().set(template, FLOWER_PROVIDER, GTBees.getFlowers(GFValues.MODID_EB, "rock"));
                 }
             },
             dis -> {
@@ -258,6 +252,29 @@ public enum GTBeeDefinition implements IBeeDefinition {
                 IBeeMutationBuilder mutation = dis.registerMutation(BeeDefinition.INDUSTRIOUS, BeeDefinition.RURAL, 10);
                 mutation.restrictBiomeType(BiomeDictionary.Type.FOREST);
             }
+    ),
+    SANDWICH(GTBranchDefinition.GT_ORGANIC, "Sandwich", true, 0x32CD32, 0xDAA520,
+            beeSpecies -> {
+                beeSpecies.addProduct(getForestryComb(EnumHoneyComb.WHEATEN), 0.15f);
+                beeSpecies.addProduct(OreDictUnifier.get(OrePrefix.ingot, Materials.Meat), 0.05f);
+                beeSpecies.addProduct(GTFOMetaItem.CHEDDAR_SLICE.getStackForm(), 0.05f);
+                beeSpecies.addSpecialty(GTFOMetaItem.CUCUMBER_SLICE.getStackForm(), 0.05f);
+                beeSpecies.addSpecialty(GTFOMetaItem.ONION_SLICE.getStackForm(), 0.05f);
+                beeSpecies.addSpecialty(GTFOMetaItem.TOMATO_SLICE.getStackForm(), 0.05f);
+                beeSpecies.setHumidity(EnumHumidity.NORMAL);
+                beeSpecies.setTemperature(EnumTemperature.NORMAL);
+            },
+            template -> {
+                AlleleHelper.getInstance().set(template, SPEED, Speed.SLOW);
+                AlleleHelper.getInstance().set(template, HUMIDITY_TOLERANCE, Tolerance.BOTH_2);
+                AlleleHelper.getInstance().set(template, EFFECT, AlleleEffects.effectFertile);
+                AlleleHelper.getInstance().set(template, TERRITORY, Territory.LARGE);
+                AlleleHelper.getInstance().set(template, LIFESPAN, Lifespan.SHORTER);
+                AlleleHelper.getInstance().set(template, FLOWER_PROVIDER, Flowers.WHEAT);
+                AlleleHelper.getInstance().set(template, FLOWERING, Flowering.FASTER);
+            },
+            dis -> dis.registerMutation(BeeDefinition.AGRARIAN, BeeDefinition.CULTIVATED, 10),
+            () -> GTValues.isModLoaded(GFValues.MODID_GTFO)
     ),
 
     // Gems
@@ -298,7 +315,7 @@ public enum GTBeeDefinition implements IBeeDefinition {
             template -> AlleleHelper.getInstance().set(template, SPEED, Speed.SLOWER),
             dis -> {
                 IBeeMutationBuilder mutation = dis.registerMutation(BeeDefinition.HERMITIC, LAPIS, 10);
-                mutation.requireResource("blockCertusQuartz"); // todo check on AE2 oredict
+                mutation.requireResource("blockCertusQuartz");
             }
     ),
     FLUIX(GTBranchDefinition.GT_GEM, "Fluix", true, 0xA375FF, 0xB591FF,
@@ -311,7 +328,7 @@ public enum GTBeeDefinition implements IBeeDefinition {
             template -> AlleleHelper.getInstance().set(template, SPEED, Speed.SLOWER),
             dis -> {
                 IBeeMutationBuilder mutation = dis.registerMutation(REDSTONE, LAPIS, 7);
-                // todo AE2 Fluix Block requireResource()
+                mutation.requireResource("blockFluix");
             },
             () -> GTValues.isModLoaded(GFValues.MODID_AE)
     ),
@@ -857,7 +874,7 @@ public enum GTBeeDefinition implements IBeeDefinition {
             },
             dis -> {
                 IBeeMutationBuilder mutation = dis.registerMutation(THAUMIUM, STICKYRESIN, 10);
-                mutation.requireResource("blockAmber"); // todo oredict this in TC
+                mutation.requireResource("blockAmber");
             },
             () -> GTBees.THAUMIC_BEES
     ),
@@ -917,10 +934,7 @@ public enum GTBeeDefinition implements IBeeDefinition {
                 AlleleHelper.getInstance().set(template, HUMIDITY_TOLERANCE, Tolerance.BOTH_1);
                 AlleleHelper.getInstance().set(template, LIFESPAN, Lifespan.SHORT);
                 if (GTValues.isModLoaded(GFValues.MODID_EB)) {
-                    IAllele allele = AlleleManager.alleleRegistry.getAllele("extrabees.flower.rock");
-                    if (allele != null) {
-                        AlleleHelper.getInstance().set(template, FLOWER_PROVIDER, allele);
-                    }
+                    AlleleHelper.getInstance().set(template, FLOWER_PROVIDER, GTBees.getFlowers(GFValues.MODID_EB, "rock"));
                 }
             },
             dis -> {
@@ -1329,6 +1343,7 @@ public enum GTBeeDefinition implements IBeeDefinition {
             AlleleHelper.getInstance().set(template, SPECIES, species);
             setAlleles(template);
 
+            //noinspection ConstantConditions
             genome = BeeManager.beeRoot.templateAsGenome(template);
 
             BeeManager.beeRoot.registerTemplate(template);
@@ -1348,6 +1363,7 @@ public enum GTBeeDefinition implements IBeeDefinition {
     }
 
     protected final IBeeMutationBuilder registerMutation(IAlleleBeeSpecies parent1, IAlleleBeeSpecies parent2, int chance) {
+        //noinspection ConstantConditions
         return BeeManager.beeMutationFactory.createMutation(parent1, parent2, getTemplate(), chance);
     }
 
@@ -1370,6 +1386,7 @@ public enum GTBeeDefinition implements IBeeDefinition {
 
     @Override
     public final ItemStack getMemberStack(@Nonnull EnumBeeType beeType) {
+        //noinspection ConstantConditions
         return BeeManager.beeRoot.getMemberStack(getIndividual(), beeType);
     }
 }

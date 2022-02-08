@@ -24,6 +24,7 @@ public class ForestryCfg {
             "Additional mod compatibility:",
             "ExtraBees (HIGHLY recommended): Adds several late game bees like Americium, Lutetium, and Neutronium, as well as changing some other Bee recipes",
             "Applied Energistics 2: Adds Fluix Bee",
+            "GregTech Food Option: Adds Sandwich Bee",
             "Extra Utilities 2: Adds Divided Bee for making Stable/Unstable Nuggets (also requires ExtraBees)",
             "Default: true"
     })
@@ -65,4 +66,12 @@ public class ForestryCfg {
             "Default: true"
     })
     public boolean spaceBees = true;
+
+    @Config.Comment({
+            "Replace Forestry recipes with GT-style recipes",
+            "Currently changes:",
+            "",
+            "Default: true"
+    })
+    public boolean gregifyForestry = true;
 }
