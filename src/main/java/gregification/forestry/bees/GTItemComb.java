@@ -32,8 +32,8 @@ import net.minecraft.util.NonNullList;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import org.jetbrains.annotations.Nullable;
 
+import javax.annotation.Nullable;
 import java.util.List;
 
 @SuppressWarnings("ALL")
@@ -65,8 +65,9 @@ public class GTItemComb extends Item implements IColoredItem, IItemModelRegister
     @Override
     public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> items) {
         if (tab == Tabs.tabApiculture) {
-            for (int i = 0; i < GTCombType.VALUES.length; i++) {
-                items.add(new ItemStack(this, 1, i));
+            for (GTCombType type : GTCombType.VALUES) {
+                if (!type.showInList) continue;
+                items.add(new ItemStack(this, 1, type.ordinal()));
             }
         }
     }
@@ -74,7 +75,7 @@ public class GTItemComb extends Item implements IColoredItem, IItemModelRegister
     @Override
     public int getColorFromItemstack(ItemStack itemStack, int tintindex) {
         GTCombType type = GTCombType.get(itemStack.getItemDamage());
-        return type.getColors()[tintindex >= 1 ? 1 : 0];
+        return type.color[tintindex >= 1 ? 1 : 0];
     }
 
     @Override

@@ -23,37 +23,24 @@ public enum GTDropType {
     LAPIS("lapis", true, 0x1727B1, 0x008CE3),
     BIOMASS("biomass", true, 0x21E118, 0x17AF0E),
     ETHANOL("ethanol", true, 0xCE5504, 0x853703),
-    //OXYGEN("oxygen", true, 0x003366, 0x0066BB),
-    //MUTAGEN("mutagen", true, 0xFFC100, 0x00FF11),
-    //COOLANT("coolant", true, 0x144F5A, 0x2494A2),
-    //HOT_COOLANT("hotcoolant", true, 0xC11F1F, 0xEBB9B9),
-    //HYDRA("hydrablood", true, 0x872836, 0xB8132C),
-    //SNOW_QUEEN("snowqueenblood", true, 0xD02001, 0x9C0018),
-    //ENDERGOO("endergoo", true, 0xA005E7, 0x161616),
+
+    OXYGEN("oxygen", false, 0x003366, 0x0066BB),
+    MUTAGEN("mutagen", false, 0xFFC100, 0x00FF11),
+    COOLANT("coolant", false, 0x144F5A, 0x2494A2),
+    HOT_COOLANT("hotcoolant", false, 0xC11F1F, 0xEBB9B9),
+    ENDERGOO("endergoo", false, 0xA005E7, 0x161616),
     ;
 
     public static final GTDropType[] VALUES = values();
 
-    public boolean showInList;
-    private final String name;
-    private final int[] color;
+    public final boolean showInList;
+    public final String name;
+    public final int[] color;
 
     GTDropType(String name, boolean show, int primary, int secondary) {
         this.name = name;
         this.showInList = show;
         this.color = new int[]{primary, secondary};
-    }
-
-    public void setHidden() {
-        this.showInList = false;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public int[] getColors() {
-        return color;
     }
 
     public static GTDropType getDrop(int meta) {

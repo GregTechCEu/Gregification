@@ -156,5 +156,6 @@ public class GFOrePrefix {
         Materials.Naquadria.setProperty(PropertyKey.ORE, new OreProperty());
         Materials.Lutetium.setProperty(PropertyKey.ORE, new OreProperty());
         Materials.Americium.setProperty(PropertyKey.ORE, new OreProperty());
+        Materials.NetherStar.setProperty(PropertyKey.ORE, new OreProperty());
     }
 }

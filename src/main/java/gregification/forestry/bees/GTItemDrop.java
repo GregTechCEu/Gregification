@@ -68,14 +68,15 @@ public class GTItemDrop extends Item implements IColoredItem, IItemModelRegister
     @Nonnull
     public String getTranslationKey(@Nonnull ItemStack stack) {
         GTDropType type = GTDropType.getDrop(stack.getItemDamage());
-        return super.getTranslationKey(stack) + "." + type.getName();
+        return super.getTranslationKey(stack) + "." + type.name;
     }
 
     @Override
     public void getSubItems(@Nonnull CreativeTabs tab, @Nonnull NonNullList<ItemStack> items) {
         if (tab == Tabs.tabApiculture) {
-            for (int i = 0; i < GTDropType.VALUES.length; i++) {
-                items.add(new ItemStack(this, 1, i));
+            for (GTDropType type : GTDropType.VALUES) {
+                if (!type.showInList) continue;
+                items.add(new ItemStack(this, 1, type.ordinal()));
             }
         }
     }
@@ -83,7 +84,7 @@ public class GTItemDrop extends Item implements IColoredItem, IItemModelRegister
     @Override
     public int getColorFromItemstack(@Nonnull ItemStack itemStack, int i) {
         GTDropType type = GTDropType.getDrop(itemStack.getItemDamage());
-        return type.getColors()[i == 0 ? 0 : 1];
+        return type.color[i == 0 ? 0 : 1];
     }
 
     public ItemStack get(GTDropType type) {

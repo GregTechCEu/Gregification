@@ -23,5 +23,6 @@ public class GFValues {
             MODID_BOP = "biomesoplenty",
             MODID_AE = "appliedenergistics2",
             MODID_TF = "twilightforest",
-            MODID_THAUM = "thaumcraft";
+            MODID_THAUM = "thaumcraft",
+            GENDUSTRY = "gendustry";
 }

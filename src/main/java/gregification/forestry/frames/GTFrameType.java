@@ -19,7 +19,8 @@ package gregification.forestry.frames;
 
 import forestry.api.apiculture.IBeeGenome;
 import forestry.api.apiculture.IBeeModifier;
-import org.jetbrains.annotations.Nullable;
+
+import javax.annotation.Nullable;
 
 public enum GTFrameType implements IBeeModifier {
 

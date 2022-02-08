@@ -7,10 +7,7 @@ import gregification.config.GFConfig;
 import gregification.forestry.bees.*;
 import gregification.forestry.frames.GTFrameType;
 import gregification.forestry.frames.GTItemFrame;
-import gregification.forestry.recipes.CombRecipes;
-import gregification.forestry.recipes.DropRecipes;
-import gregification.forestry.recipes.ElectrodeRecipes;
-import gregification.forestry.recipes.FrameRecipes;
+import gregification.forestry.recipes.*;
 import gregtech.api.unification.OreDictUnifier;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -20,17 +17,10 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Optional.Method;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import static gregification.common.GFValues.FORESTRY;
 
 @Mod.EventBusSubscriber(modid = GFValues.MODID)
 public class ForestryCommonProxy {
-
-    public static GTItemComb combs;
-    public static GTItemDrop drops;
-    public static final Map<GTFrameType, GTItemFrame> frames = new HashMap<>();
 
     @Method(modid = FORESTRY)
     @SubscribeEvent
@@ -39,15 +29,18 @@ public class ForestryCommonProxy {
             if (GFConfig.forestry.gtElectrodes) {
                 ElectrodeRecipes.initGTRecipes();
             }
-            if (GFConfig.forestry.gtBees) {
-                for (GTCombType type : GTCombType.VALUES) {
-                    OreDictUnifier.registerOre(new ItemStack(ForestryCommonProxy.combs, 1, type.ordinal()), "beeComb");
+            if (ModuleHelper.isEnabled("apiculture")) {
+                if (GFConfig.forestry.gtBees) {
+                    for (GTCombType type : GTCombType.VALUES) {
+                        OreDictUnifier.registerOre(new ItemStack(GTBees.combs, 1, type.ordinal()), "beeComb");
+                    }
+                    CombRecipes.initGTCombs();
+                    DropRecipes.init();
+                    PropolisRecipes.init();
                 }
-                CombRecipes.initGTCombs();
-                DropRecipes.init();
-            }
-            if (GFConfig.forestry.gtFrames) {
-                FrameRecipes.init();
+                if (GFConfig.forestry.gtFrames) {
+                    FrameRecipes.init();
+                }
             }
         }
     }
@@ -57,8 +50,8 @@ public class ForestryCommonProxy {
         if (GFConfig.forestry.enableForestry) {
             if (GFConfig.forestry.gtBees) {
                 if (ModuleHelper.isEnabled("apiculture")) {
-                    combs = new GTItemComb();
-                    drops = new GTItemDrop();
+                    GTBees.combs = new GTItemComb();
+                    GTBees.drops = new GTItemDrop();
                 } else {
                     GFLog.forestryLogger.error("GT Bees is enabled, but Forestry Apiculture module is disabled. Skipping GT Bees...");
                 }
@@ -66,7 +59,7 @@ public class ForestryCommonProxy {
             if (GFConfig.forestry.gtFrames) {
                 if (ModuleHelper.isEnabled("apiculture")) {
                     for (GTFrameType type : GTFrameType.values()) {
-                        frames.put(type, new GTItemFrame(type));
+                        GTBees.frames.put(type, new GTItemFrame(type));
                     }
                 } else {
                     GFLog.forestryLogger.error("GT Frames is enabled, but Forestry Apiculture module is disabled. Skipping GT Frames...");
@@ -87,8 +80,14 @@ public class ForestryCommonProxy {
                     GTAlleleBeeSpecies.setupGTAlleles();
                     GTBeeDefinition.initBees();
                 }
-                CombRecipes.initForestryCombs();
             }
+        }
+    }
+
+    @Method(modid = FORESTRY)
+    public void postInit() {
+        if (ModuleHelper.isEnabled("apiculture")) {
+            CombRecipes.initForestryCombs();
         }
     }
 
@@ -98,11 +97,11 @@ public class ForestryCommonProxy {
         if (GFConfig.forestry.enableForestry) {
             if (ModuleHelper.isEnabled("apiculture")) {
                 if (GFConfig.forestry.gtBees) {
-                    event.getRegistry().register(combs);
-                    event.getRegistry().register(drops);
+                    event.getRegistry().register(GTBees.combs);
+                    event.getRegistry().register(GTBees.drops);
                 }
                 if (GFConfig.forestry.gtFrames) {
-                    frames.values().forEach(f -> event.getRegistry().register(f));
+                    GTBees.frames.values().forEach(f -> event.getRegistry().register(f));
                 }
             }
         }

@@ -24,8 +24,8 @@ import forestry.factory.MachineUIDs;
 import forestry.factory.ModuleFactory;
 import gregification.common.GFUtility;
 import gregification.common.GFValues;
+import gregification.forestry.bees.GTBees;
 import gregification.forestry.bees.GTDropType;
-import gregification.proxy.ForestryCommonProxy;
 import gregtech.api.GTValues;
 import gregtech.api.recipes.RecipeMaps;
 import gregtech.api.unification.material.Materials;
@@ -36,7 +36,7 @@ public class DropRecipes {
     public static void init() {
 
         // Oil Drop
-        ItemStack dropStack = getStackForType(GTDropType.OIL);
+        ItemStack dropStack = GTBees.getDropStack(GTDropType.OIL);
         RecipeMaps.EXTRACTOR_RECIPES.recipeBuilder()
                 .inputs(dropStack)
                 .chancedOutput(ModuleApiculture.getItems().propolis.get(EnumPropolis.NORMAL, 1), 3000, 0)
@@ -48,7 +48,7 @@ public class DropRecipes {
         }
 
         // Biomass Drop
-        dropStack = getStackForType(GTDropType.BIOMASS);
+        dropStack = GTBees.getDropStack(GTDropType.BIOMASS);
         ItemStack propolisStack = ModuleApiculture.getItems().propolis.get(EnumPropolis.NORMAL, 1);
         if (GTValues.isModLoaded(GFValues.MODID_EB)) {
             propolisStack = GFUtility.getModItem(GFValues.MODID_EB, "propolis", 7);
@@ -64,7 +64,7 @@ public class DropRecipes {
         }
 
         // Ethanol Drop
-        dropStack = getStackForType(GTDropType.ETHANOL);
+        dropStack = GTBees.getDropStack(GTDropType.ETHANOL);
         RecipeMaps.EXTRACTOR_RECIPES.recipeBuilder()
                 .inputs(dropStack)
                 .chancedOutput(propolisStack, 3000, 0)
@@ -76,9 +76,5 @@ public class DropRecipes {
         }
 
         // TODO Other drops
-    }
-
-    private static ItemStack getStackForType(GTDropType type) {
-        return ForestryCommonProxy.drops.get(type);
     }
 }

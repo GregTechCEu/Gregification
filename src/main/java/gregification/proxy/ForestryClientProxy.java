@@ -4,6 +4,7 @@ import forestry.api.core.ForestryAPI;
 import forestry.core.items.IColoredItem;
 import gregification.common.GFValues;
 import gregification.config.GFConfig;
+import gregification.forestry.bees.GTBees;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.item.ItemStack;
@@ -24,7 +25,7 @@ public class ForestryClientProxy extends ForestryCommonProxy {
     public void init() {
         super.init();
         if (GFConfig.forestry.enableForestry && GFConfig.forestry.gtBees) {
-            Minecraft.getMinecraft().getItemColors().registerItemColorHandler(CombItemColor.INSTANCE, combs, drops);
+            Minecraft.getMinecraft().getItemColors().registerItemColorHandler(CombItemColor.INSTANCE, GTBees.combs, GTBees.drops);
         }
     }
 
@@ -33,11 +34,11 @@ public class ForestryClientProxy extends ForestryCommonProxy {
     public static void registerModels(ModelRegistryEvent event) {
         if (GFConfig.forestry.enableForestry) {
             if (GFConfig.forestry.gtBees) {
-                combs.registerModel(combs, ForestryAPI.modelManager);
-                drops.registerModel(drops, ForestryAPI.modelManager);
+                GTBees.combs.registerModel(GTBees.combs, ForestryAPI.modelManager);
+                GTBees.drops.registerModel(GTBees.drops, ForestryAPI.modelManager);
             }
             if (GFConfig.forestry.gtFrames) {
-                frames.values().forEach(f -> f.registerModel(f, ForestryAPI.modelManager));
+                GTBees.frames.values().forEach(f -> f.registerModel(f, ForestryAPI.modelManager));
             }
         }
     }

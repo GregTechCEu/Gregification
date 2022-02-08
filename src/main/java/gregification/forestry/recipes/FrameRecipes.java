@@ -21,8 +21,8 @@ import forestry.api.recipes.RecipeManagers;
 import forestry.apiculture.ModuleApiculture;
 import forestry.factory.MachineUIDs;
 import forestry.factory.ModuleFactory;
+import gregification.forestry.bees.GTBees;
 import gregification.forestry.frames.GTFrameType;
-import gregification.proxy.ForestryCommonProxy;
 import gregtech.api.GTValues;
 import gregtech.api.recipes.RecipeMaps;
 import gregtech.api.unification.OreDictUnifier;
@@ -35,31 +35,31 @@ public class FrameRecipes {
 
     public static void init() {
         registerRecipe("stickLongElectrum", "stickElectrum", "foilElectrum",
-                Materials.Redstone.getFluid(576), getStackFromType(GTFrameType.ACCELERATED),
+                Materials.Redstone.getFluid(576), GTBees.getFrameStack(GTFrameType.ACCELERATED),
                 ModuleApiculture.getItems().frameImpregnated.getItemStack());
 
         registerRecipe("stickLongUranium235", "stickPlutonium241", "foilPlutonium241",
-                Materials.Redstone.getFluid(576), getStackFromType(GTFrameType.MUTAGENIC),
+                Materials.Redstone.getFluid(576), GTBees.getFrameStack(GTFrameType.MUTAGENIC),
                 ModuleApiculture.getItems().frameImpregnated.getItemStack());
 
         registerRecipe("stickLongBlueSteel", "stickBlueSteel", "gemNetherStar",
-                Materials.Redstone.getFluid(576), getStackFromType(GTFrameType.WORKING),
+                Materials.Redstone.getFluid(576), GTBees.getFrameStack(GTFrameType.WORKING),
                 ModuleApiculture.getItems().frameImpregnated.getItemStack());
 
         registerRecipe("stickLongWroughtIron", "stickWroughtIron", "foilWroughtIron",
-                Materials.Redstone.getFluid(576), getStackFromType(GTFrameType.DECAYING),
+                Materials.Redstone.getFluid(576), GTBees.getFrameStack(GTFrameType.DECAYING),
                 ModuleApiculture.getItems().frameImpregnated.getItemStack());
 
         registerRecipe("stickLongPotin", "stickPotin", "foilElectrum",
-                Materials.Redstone.getFluid(576), getStackFromType(GTFrameType.SLOWING),
+                Materials.Redstone.getFluid(576), GTBees.getFrameStack(GTFrameType.SLOWING),
                 ModuleApiculture.getItems().frameImpregnated.getItemStack());
 
         registerRecipe("stickLongOsmiridium", "stickOsmiridium", "foilOsmiridium",
-                Materials.Redstone.getFluid(576), getStackFromType(GTFrameType.STABILIZING),
+                Materials.Redstone.getFluid(576), GTBees.getFrameStack(GTFrameType.STABILIZING),
                 ModuleApiculture.getItems().frameImpregnated.getItemStack());
 
         registerRecipe("stickLongTreatedWood", "stickTreatedWood", "platePaper",
-                Materials.Redstone.getFluid(576), getStackFromType(GTFrameType.ARBORIST),
+                Materials.Redstone.getFluid(576), GTBees.getFrameStack(GTFrameType.ARBORIST),
                 ModuleApiculture.getItems().frameImpregnated.getItemStack());
     }
 
@@ -79,9 +79,5 @@ public class FrameRecipes {
                     'E', edgeItem,
                     '#', centerItem);
         }
-    }
-
-    private static ItemStack getStackFromType(GTFrameType type) {
-        return new ItemStack(ForestryCommonProxy.frames.get(type));
     }
 }

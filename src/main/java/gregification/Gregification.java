@@ -27,7 +27,8 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
                 "after:extratrees;" +
                 "after:magicbees;" +
                 "after:botany;" +
-                "after:genetics")
+                "after:genetics;" +
+                "after:gendustry")
 public class Gregification {
 
     // Proxy for Gregification itself
@@ -81,5 +82,8 @@ public class Gregification {
 
     @EventHandler
     public void postInit(FMLPostInitializationEvent event) {
+        if (GTValues.isModLoaded(GFValues.FORESTRY)) {
+            ForestryProxy.postInit();
+        }
     }
 }

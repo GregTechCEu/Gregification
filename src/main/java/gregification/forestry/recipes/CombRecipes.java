@@ -26,9 +26,9 @@ import forestry.factory.ModuleFactory;
 import gregification.common.GFUtility;
 import gregification.common.GFValues;
 import gregification.config.GFConfig;
+import gregification.forestry.bees.GTBees;
 import gregification.forestry.bees.GTCombType;
 import gregification.forestry.bees.GTDropType;
-import gregification.proxy.ForestryCommonProxy;
 import gregtech.api.GTValues;
 import gregtech.api.recipes.RecipeBuilder;
 import gregtech.api.recipes.RecipeMaps;
@@ -46,7 +46,6 @@ import net.minecraftforge.fluids.FluidStack;
 
 import java.util.Arrays;
 import java.util.Map;
-import java.util.Set;
 
 public class CombRecipes {
 
@@ -55,21 +54,18 @@ public class CombRecipes {
         for (ICentrifugeRecipe recipe : RecipeManagers.centrifugeManager.recipes()) {
             ItemStack combStack = recipe.getInput();
             if (combStack.getItem().getRegistryName().getNamespace().equals(GTValues.MODID)) continue;
-            Set<String> names = OreDictUnifier.getOreDictionaryNames(combStack);
-            if (names != null && !names.isEmpty() && names.contains("beeComb")) {
-                RecipeBuilder<?> builder = RecipeMaps.CENTRIFUGE_RECIPES.recipeBuilder()
-                        .inputs(combStack.copy())
-                        .duration(Voltage.ULV.getCentrifugeTime()).EUt(Voltage.ULV.getCentrifugeEnergy());
+            RecipeBuilder<?> builder = RecipeMaps.CENTRIFUGE_RECIPES.recipeBuilder()
+                    .inputs(combStack.copy())
+                    .duration(Voltage.ULV.getCentrifugeTime()).EUt(Voltage.ULV.getCentrifugeEnergy());
 
-                for (Map.Entry<ItemStack, Float> entry : recipe.getAllProducts().entrySet()) {
-                    if (entry.getValue() >= 1.0f) {
-                        builder.outputs(entry.getKey());
-                    } else {
-                        builder.chancedOutput(entry.getKey(), Math.max(1, Math.round(entry.getValue() * 10000)), 0);
-                    }
+            for (Map.Entry<ItemStack, Float> entry : recipe.getAllProducts().entrySet()) {
+                if (entry.getValue() >= 1.0f) {
+                    builder.outputs(entry.getKey());
+                } else {
+                    builder.chancedOutput(entry.getKey(), Math.max(1, Math.round(entry.getValue() * 10000)), 0);
                 }
-                builder.buildAndRegister();
             }
+            builder.buildAndRegister();
         }
     }
 
@@ -82,16 +78,16 @@ public class CombRecipes {
         addProcessGT(GTCombType.OIL, new Material[]{Materials.Oilsands}, Voltage.LV);
         addProcessGT(GTCombType.APATITE, new Material[]{Materials.Apatite, Materials.Phosphate}, Voltage.LV);
         addCentrifugeToMaterial(GTCombType.ASH, new Material[]{Materials.DarkAsh, Materials.Ash}, new int[]{50*100, 50*100}, new int[]{}, Voltage.ULV, ItemStack.EMPTY, 50*100);
-        addCentrifugeToItemStack(GTCombType.BIOMASS, new ItemStack[]{getStackForType(GTDropType.BIOMASS), getStackForType(GTDropType.ETHANOL), ModuleCore.getItems().beeswax.getItemStack()}, new int[]{70*100, 30*100, 50*100}, Voltage.ULV);
+        addCentrifugeToItemStack(GTCombType.BIOMASS, new ItemStack[]{GTBees.getDropStack(GTDropType.BIOMASS), GTBees.getDropStack(GTDropType.ETHANOL), ModuleCore.getItems().beeswax.getItemStack()}, new int[]{70*100, 30*100, 50*100}, Voltage.ULV);
         if (GFConfig.forestry.nerfGTCombs) {
             addCentrifugeToItemStack(GTCombType.COAL, new ItemStack[]{OreDictUnifier.get(OrePrefix.gem, Materials.Coal), ModuleCore.getItems().beeswax.getItemStack()}, new int[]{5*100, 50*100}, Voltage.ULV);
             addCentrifugeToItemStack(GTCombType.COKE, new ItemStack[]{OreDictUnifier.get(OrePrefix.gem, Materials.Coke), ModuleCore.getItems().beeswax.getItemStack()}, new int[]{5*100, 50*100}, Voltage.ULV);
             // TODO the recipe below gave 1 oilberry instead of oilsands dust. change to that if oilberry balance stays the same in the new crop system
-            addCentrifugeToItemStack(GTCombType.OIL, new ItemStack[]{OreDictUnifier.get(OrePrefix.dustTiny, Materials.Oilsands), ForestryCommonProxy.drops.get(GTDropType.OIL), ModuleCore.getItems().beeswax.getItemStack()}, new int[]{70*100, 100*100, 50*100}, Voltage.ULV);
+            addCentrifugeToItemStack(GTCombType.OIL, new ItemStack[]{OreDictUnifier.get(OrePrefix.dustTiny, Materials.Oilsands), GTBees.drops.get(GTDropType.OIL), ModuleCore.getItems().beeswax.getItemStack()}, new int[]{70*100, 100*100, 50*100}, Voltage.ULV);
         } else {
             addCentrifugeToItemStack(GTCombType.COAL, new ItemStack[]{OreDictUnifier.get(OrePrefix.gem, Materials.Coal), OreDictUnifier.get(OrePrefix.dustTiny, Materials.Coal), ModuleCore.getItems().beeswax.getItemStack()}, new int[]{5*100, 100*100, 50*100}, Voltage.ULV);
             addCentrifugeToItemStack(GTCombType.COKE, new ItemStack[]{OreDictUnifier.get(OrePrefix.gem, Materials.Coke), OreDictUnifier.get(OrePrefix.dustTiny, Materials.Coke), ModuleCore.getItems().beeswax.getItemStack()}, new int[]{5*100, 100*100, 50*100}, Voltage.ULV);
-            addCentrifugeToItemStack(GTCombType.OIL, new ItemStack[]{OreDictUnifier.get(OrePrefix.dustSmall, Materials.Oilsands), ForestryCommonProxy.drops.get(GTDropType.OIL), ModuleCore.getItems().beeswax.getItemStack()}, new int[]{70*100, 100*100, 50*100}, Voltage.ULV);
+            addCentrifugeToItemStack(GTCombType.OIL, new ItemStack[]{OreDictUnifier.get(OrePrefix.dustSmall, Materials.Oilsands), GTBees.drops.get(GTDropType.OIL), ModuleCore.getItems().beeswax.getItemStack()}, new int[]{70*100, 100*100, 50*100}, Voltage.ULV);
             addCentrifugeToMaterial(GTCombType.APATITE, new Material[]{Materials.Apatite, Materials.Phosphate}, new int[]{100*100, 80*100}, new int[]{}, Voltage.ULV, ItemStack.EMPTY, 30*100);
         }
 
@@ -273,6 +269,24 @@ public class CombRecipes {
         }
 
         // Twilight
+        if (GTBees.TWILIGHT_BEES) {
+            addCentrifugeToItemStack(GTCombType.NAGA, new ItemStack[]{GFUtility.getModItem(GFValues.MODID_TF, "naga_scale", 0), GFUtility.getModItem(GFValues.MODID_MB, "propolis", 4), ModuleCore.getItems().beeswax.getItemStack()}, new int[]{10*100, 5*100, 30*100}, Voltage.MV);
+            addCentrifugeToItemStack(GTCombType.LICH, new ItemStack[]{OreDictUnifier.get("ingotIronwood"), GFUtility.getModItem(GFValues.MODID_MB, "propolis", 5), ModuleCore.getItems().beeswax.getItemStack()}, new int[]{10*100, 5*100, 30*100}, Voltage.MV);
+            addCentrifugeToItemStack(GTCombType.HYDRA, new ItemStack[]{OreDictUnifier.get("ingotSteeleaf"), GFUtility.getModItem(GFValues.MODID_MB, "propolis", 1), ModuleCore.getItems().beeswax.getItemStack()}, new int[]{10*100, 5*100, 30*100}, Voltage.HV);
+            if (GTBees.THAUMIC_BEES) {
+                addCentrifugeToItemStack(GTCombType.URGHAST, new ItemStack[]{OreDictUnifier.get("carminite"), GFUtility.getModItem(GFValues.MODID_MB, "propolis", 2), ModuleCore.getItems().beeswax.getItemStack()}, new int[]{10*100, 5*100, 30*100}, Voltage.HV);
+                addCentrifugeToItemStack(GTCombType.SNOWQUEEN, new ItemStack[]{OreDictUnifier.get("ingotKnightmetal"), GFUtility.getModItem(GFValues.MODID_MB, "propolis", 3), ModuleCore.getItems().beeswax.getItemStack()}, new int[]{10*100, 5*100, 30*100}, Voltage.HV);
+            }
+        }
+
+        if (GTValues.isModLoaded(GFValues.MODID_MB)) {
+            addProcessGT(GTCombType.SPARKLING, new Material[]{Materials.NetherStar}, Voltage.EV);
+            addCentrifugeToItemStack(GTCombType.SPARKLING, new ItemStack[]{GFUtility.getModItem(GFValues.MODID_MB, "wax", 0), GFUtility.getModItem(GFValues.MODID_MB, "resource", 5), OreDictUnifier.get(OrePrefix.dustTiny, Materials.NetherStar)}, new int[]{50*100, 10*100, (GFConfig.forestry.nerfGTCombs ? 10:50)*100}, Voltage.EV);
+            if (GTValues.isModLoaded(GFValues.MODID_XU2)) {
+                addProcessGT(GTCombType.DIVIDED, new Material[]{Materials.Iron, Materials.Diamond}, Voltage.HV);
+                addCentrifugeToItemStack(GTCombType.DIVIDED, new ItemStack[]{GFUtility.getModItem(GFValues.MODID_MB, "wax", 0), GFUtility.getModItem(GFValues.MODID_XU2, "unstableingots", 1), OreDictUnifier.get(OrePrefix.dustTiny, Materials.Iron), OreDictUnifier.get(OrePrefix.dustTiny, Materials.Diamond)}, new int[]{50*100, 20*100, 50*100, 30*100}, Voltage.HV);
+            }
+        }
 
         // Space
 
@@ -288,7 +302,7 @@ public class CombRecipes {
         if (OreDictUnifier.get(OrePrefix.crushedPurified, outMaterial, 4).isEmpty() || OreDictUnifier.get(OrePrefix.crushed, inMaterial).isEmpty()) return;
 
         RecipeBuilder<?> builder = RecipeMaps.CHEMICAL_RECIPES.recipeBuilder()
-                .inputs(GTUtility.copyAmount(9, getStackForType(comb)))
+                .inputs(GTUtility.copyAmount(9, GTBees.getCombStack(comb)))
                 .input(OrePrefix.crushed, inMaterial)
                 .fluidInputs(volt.getFluid())
                 .output(OrePrefix.crushedPurified, outMaterial, 4)
@@ -318,7 +332,7 @@ public class CombRecipes {
         if (OreDictUnifier.get(OrePrefix.crushedPurified, material, 4).isEmpty()) return;
 
         RecipeBuilder<?> builder = RecipeMaps.AUTOCLAVE_RECIPES.recipeBuilder()
-                .inputs(GTUtility.copyAmount(9, getStackForType(comb)))
+                .inputs(GTUtility.copyAmount(9, GTBees.getCombStack(comb)))
                 .notConsumable(new IntCircuitIngredient(circuitNumber))
                 .fluidInputs(Materials.UUMatter.getFluid((int) Math.max(1, ((material.getMass() + volt.getUUAmount()) / 10))))
                 .output(OrePrefix.crushedPurified, material, 4)
@@ -392,7 +406,7 @@ public class CombRecipes {
     }
 
     private static void addCentrifugeToItemStack(GTCombType comb, ItemStack[] item, int[] chance, Voltage volt, int duration) {
-        ItemStack combStack = getStackForType(comb);
+        ItemStack combStack = GTBees.getCombStack(comb);
 
         // Start of the Forestry Map
         ImmutableMap.Builder<ItemStack, Float> product = new ImmutableMap.Builder<>();
@@ -426,14 +440,6 @@ public class CombRecipes {
         }
         // Finalize GregTech Map
         builder.buildAndRegister();
-    }
-
-    private static ItemStack getStackForType(GTCombType type) {
-        return new ItemStack(ForestryCommonProxy.combs, 1, type.ordinal());
-    }
-
-    private static ItemStack getStackForType(GTDropType type) {
-        return new ItemStack(ForestryCommonProxy.drops, 1, type.ordinal());
     }
 
     private enum Voltage {

@@ -110,6 +110,13 @@ for.bees.species.thorium=Thorium
 for.bees.species.lutetium=Lutetium
 for.bees.species.americium=Americium
 for.bees.species.neutronium=Neutronium
+for.bees.species.divided=Divided
+for.bees.species.sparkling=Sparkling
+for.bees.species.naga=Naga
+for.bees.species.lich=Lich
+for.bees.species.hydra=Hydra
+for.bees.species.urghast=Ur-Ghast
+for.bees.species.snowqueen=Snow Queen
 
 item.gt.comb.coal.name=Coal Comb
 item.gt.comb.coke.name=Coke Comb
@@ -176,6 +183,13 @@ item.gt.comb.thorium.name=Thorium Comb
 item.gt.comb.lutetium.name=Lutetium Comb
 item.gt.comb.americium.name=Americium Comb
 item.gt.comb.neutronium.name=Neutronium Comb
+item.gt.comb.divided.name=Divided Comb
+item.gt.comb.sparkling.name=Sparkling Comb
+item.gt.comb.naga.name=Naga Comb
+item.gt.comb.lich.name=Lich Comb
+item.gt.comb.hydra.name=Hydra Comb
+item.gt.comb.urghast.name=Ur-Ghast Comb
+item.gt.comb.snowqueen.name=Snow Queen Comb
 
 item.gt.honey_drop.oil.name=Oil Drop
 item.gt.honey_drop.lapis.name=Lapis Coolant Drop

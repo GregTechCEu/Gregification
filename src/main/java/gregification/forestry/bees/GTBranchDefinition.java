@@ -17,10 +17,9 @@
  */
 package gregification.forestry.bees;
 
-import binnie.extrabees.genetics.ExtraBeesFlowers;
-import binnie.extrabees.genetics.effect.ExtraBeesEffect;
 import forestry.api.apiculture.BeeManager;
 import forestry.api.apiculture.EnumBeeChromosome;
+import forestry.api.genetics.AlleleManager;
 import forestry.api.genetics.IAllele;
 import forestry.api.genetics.IClassification;
 import forestry.apiculture.genetics.alleles.AlleleEffects;
@@ -36,7 +35,7 @@ import static forestry.api.apiculture.EnumBeeChromosome.*;
 
 public enum GTBranchDefinition {
 
-    ORGANIC("Fuelis", alleles -> {
+    GT_ORGANIC("Fuelis", alleles -> {
         AlleleHelper.getInstance().set(alleles, TEMPERATURE_TOLERANCE, Tolerance.NONE);
         AlleleHelper.getInstance().set(alleles, HUMIDITY_TOLERANCE, Tolerance.BOTH_2);
         AlleleHelper.getInstance().set(alleles, NEVER_SLEEPS, false);
@@ -45,7 +44,7 @@ public enum GTBranchDefinition {
         AlleleHelper.getInstance().set(alleles, LIFESPAN, Lifespan.SHORTER);
         AlleleHelper.getInstance().set(alleles, SPEED, Speed.SLOWEST);
     }),
-    INDUSTRIAL("Industrialis", alleles -> {
+    GT_INDUSTRIAL("Industrialis", alleles -> {
         AlleleHelper.getInstance().set(alleles, TEMPERATURE_TOLERANCE, Tolerance.UP_1);
         AlleleHelper.getInstance().set(alleles, HUMIDITY_TOLERANCE, Tolerance.BOTH_1);
         AlleleHelper.getInstance().set(alleles, NEVER_SLEEPS, false);
@@ -54,7 +53,7 @@ public enum GTBranchDefinition {
         AlleleHelper.getInstance().set(alleles, LIFESPAN, Lifespan.SHORT);
         AlleleHelper.getInstance().set(alleles, SPEED, Speed.SLOW);
     }),
-    GTALLOY("Amalgamis", alleles -> {
+    GT_ALLOY("Amalgamis", alleles -> {
         AlleleHelper.getInstance().set(alleles, TEMPERATURE_TOLERANCE, Tolerance.NONE);
         AlleleHelper.getInstance().set(alleles, TOLERATES_RAIN, true);
         AlleleHelper.getInstance().set(alleles, NEVER_SLEEPS, false);
@@ -63,56 +62,55 @@ public enum GTBranchDefinition {
         AlleleHelper.getInstance().set(alleles, LIFESPAN, Lifespan.SHORTEST);
         AlleleHelper.getInstance().set(alleles, SPEED, Speed.FAST);
     }),
-    GEM("Ornamentis", alleles -> {
+    GT_GEM("Ornamentis", alleles -> {
         AlleleHelper.getInstance().set(alleles, TEMPERATURE_TOLERANCE, Tolerance.NONE);
         AlleleHelper.getInstance().set(alleles, NEVER_SLEEPS, false);
         AlleleHelper.getInstance().set(alleles, FLOWER_PROVIDER, Flowers.NETHER);
         AlleleHelper.getInstance().set(alleles, FLOWERING, Flowering.AVERAGE);
     }),
-    METAL("Metaliferis", alleles -> {
+    GT_METAL("Metaliferis", alleles -> {
         AlleleHelper.getInstance().set(alleles, TEMPERATURE_TOLERANCE, Tolerance.DOWN_2);
         AlleleHelper.getInstance().set(alleles, CAVE_DWELLING, true);
         AlleleHelper.getInstance().set(alleles, NEVER_SLEEPS, false);
         AlleleHelper.getInstance().set(alleles, FLOWER_PROVIDER, Flowers.JUNGLE);
         AlleleHelper.getInstance().set(alleles, FLOWERING, Flowering.SLOWER);
     }),
-    RAREMETAL("Mineralis", alleles -> {
+    GT_RAREMETAL("Mineralis", alleles -> {
         AlleleHelper.getInstance().set(alleles, TEMPERATURE_TOLERANCE, Tolerance.DOWN_1);
         AlleleHelper.getInstance().set(alleles, NEVER_SLEEPS, false);
         AlleleHelper.getInstance().set(alleles, FLOWER_PROVIDER, Flowers.CACTI);
         AlleleHelper.getInstance().set(alleles, FLOWERING, Flowering.FAST);
     }),
-    RADIOACTIVE("Criticalis", alleles -> {
+    GT_RADIOACTIVE("Criticalis", alleles -> {
         AlleleHelper.getInstance().set(alleles, TEMPERATURE_TOLERANCE, Tolerance.NONE);
         AlleleHelper.getInstance().set(alleles, NEVER_SLEEPS, false);
         AlleleHelper.getInstance().set(alleles, FLOWER_PROVIDER, Flowers.END);
         AlleleHelper.getInstance().set(alleles, FLOWERING, Flowering.AVERAGE);
         AlleleHelper.getInstance().set(alleles, SPEED, GTAlleleBeeSpecies.speedBlinding);
-        // TODO Figure out why this doesn't work
-        //if (GTValues.isModLoaded(GFValues.MODID_EB)) {
-        //    AlleleHelper.getInstance().set(alleles, SPEED, ExtraBeesEffect.RADIOACTIVE);
-        //}
+        if (GTValues.isModLoaded(GFValues.MODID_EB)) {
+            AlleleHelper.getInstance().set(alleles, EFFECT, GTBees.getEffect(GFValues.MODID_EB, "radioactive"));
+        }
     }),
-    // TODO For Twilight Forest compat, if desired (NYI)
-    TWILIGHT("Nemoris Obscuri", alleles -> {
+    // For Twilight Forest compat
+    GT_TWILIGHT("Nemoris Obscuri", alleles -> {
         AlleleHelper.getInstance().set(alleles, TEMPERATURE_TOLERANCE, Tolerance.BOTH_1);
         AlleleHelper.getInstance().set(alleles, HUMIDITY_TOLERANCE, Tolerance.BOTH_1);
         AlleleHelper.getInstance().set(alleles, NEVER_SLEEPS, false);
         AlleleHelper.getInstance().set(alleles, FLOWER_PROVIDER, Flowers.VANILLA);
         AlleleHelper.getInstance().set(alleles, FLOWERING, Flowering.FASTER);
     }),
-    // TODO For Thaumcraft compat, if desired (NYI)
-    THAUMIC("Arcanis", alleles -> {
+    // For Thaumcraft compat
+    GT_THAUMIC("Arcanis", alleles -> {
         AlleleHelper.getInstance().set(alleles, TEMPERATURE_TOLERANCE, Tolerance.BOTH_1);
         AlleleHelper.getInstance().set(alleles, HUMIDITY_TOLERANCE, Tolerance.BOTH_1);
         AlleleHelper.getInstance().set(alleles, FLOWERING, Flowering.FASTER);
         AlleleHelper.getInstance().set(alleles, LIFESPAN, Lifespan.LONGEST);
         if (GTValues.isModLoaded(GFValues.MODID_EB)) {
-            AlleleHelper.getInstance().set(alleles, FLOWER_PROVIDER, ExtraBeesFlowers.BOOK);
+            AlleleHelper.getInstance().set(alleles, FLOWER_PROVIDER, GTBees.getFlowers(GFValues.MODID_EB, "book"));
         }
     }),
-    // TODO For Advanced Rocketry/Galacticraft compat, if desired (NYI)
-    SPACE("Cosmicis", alleles -> {
+    // For Advanced Rocketry/Galacticraft compat
+    GT_SPACE("Cosmicis", alleles -> {
         AlleleHelper.getInstance().set(alleles, TEMPERATURE_TOLERANCE, Tolerance.DOWN_2);
         AlleleHelper.getInstance().set(alleles, TOLERATES_RAIN, true);
         AlleleHelper.getInstance().set(alleles, NEVER_SLEEPS, true);
@@ -121,10 +119,10 @@ public enum GTBranchDefinition {
         AlleleHelper.getInstance().set(alleles, SPEED, Speed.FAST);
         AlleleHelper.getInstance().set(alleles, TERRITORY, Territory.LARGEST);
         if (GTValues.isModLoaded(GFValues.MODID_EB)) {
-            AlleleHelper.getInstance().set(alleles, FLOWER_PROVIDER, ExtraBeesFlowers.ROCK);
+            AlleleHelper.getInstance().set(alleles, FLOWER_PROVIDER, GTBees.getFlowers(GFValues.MODID_EB, "rock"));
         }
     }),
-    PLANET("Planetaris", alleles -> {
+    GT_PLANET("Planetaris", alleles -> {
         AlleleHelper.getInstance().set(alleles, TEMPERATURE_TOLERANCE, Tolerance.BOTH_1);
         AlleleHelper.getInstance().set(alleles, TOLERATES_RAIN, true);
         AlleleHelper.getInstance().set(alleles, FLOWERING, Flowering.FASTEST);
@@ -132,7 +130,7 @@ public enum GTBranchDefinition {
         AlleleHelper.getInstance().set(alleles, SPEED, Speed.FASTEST);
         AlleleHelper.getInstance().set(alleles, TERRITORY, Territory.LARGER);
         if (GTValues.isModLoaded(GFValues.MODID_EB)) {
-            AlleleHelper.getInstance().set(alleles, FLOWER_PROVIDER, ExtraBeesFlowers.ROCK);
+            AlleleHelper.getInstance().set(alleles, FLOWER_PROVIDER, GTBees.getFlowers(GFValues.MODID_EB, "rock"));
         }
     }),
     ;
@@ -142,7 +140,9 @@ public enum GTBranchDefinition {
     private final Consumer<IAllele[]> branchProperties;
 
     GTBranchDefinition(String scientific, Consumer<IAllele[]> branchProperties) {
+        //noinspection ConstantConditions
         this.branch = BeeManager.beeFactory.createBranch(this.name().toLowerCase(), scientific);
+        AlleleManager.alleleRegistry.getClassification("family.apidae").addMemberGroup(this.branch);
         this.branchProperties = branchProperties;
     }
 
