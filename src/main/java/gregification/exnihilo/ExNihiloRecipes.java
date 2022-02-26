@@ -42,7 +42,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import static gregification.common.GFMetaTileEntities.SIEVES;
-import static gregification.common.GFMetaTileEntities.STEAM_SIEVE;
+import static gregification.common.GFMetaTileEntities.STEAM_SIEVE_BRONZE;
 import static gregification.common.GFRecipeMaps.SIEVE_RECIPES;
 import static gregtech.common.blocks.BlockSteamCasing.SteamCasingType.BRONZE_HULL;
 import static gregtech.loaders.recipe.CraftingComponent.CABLE;
@@ -80,7 +80,7 @@ public class ExNihiloRecipes {
     public static void registerGTRecipes() {
         // Machine Recipes
         MetaTileEntityLoader.registerMachineRecipe(SIEVES, "CPC", "FMF", "OSO", 'M', HULL, 'C', CIRCUIT, 'O', CABLE, 'F', CONVEYOR, 'S', new ItemStack(ModBlocks.sieve), 'P', PISTON);
-        ModHandler.addShapedRecipe("steam_sieve", STEAM_SIEVE.getStackForm(), "BPB", "BMB", "BSB", 'B', new UnificationEntry(OrePrefix.pipeSmallFluid, Materials.Bronze), 'M', MetaBlocks.STEAM_CASING.getItemVariant(BRONZE_HULL), 'S', new ItemStack(ModBlocks.sieve), 'P', Blocks.PISTON);
+        ModHandler.addShapedRecipe("steam_sieve", STEAM_SIEVE_BRONZE.getStackForm(), "BPB", "BMB", "BSB", 'B', new UnificationEntry(OrePrefix.pipeSmallFluid, Materials.Bronze), 'M', MetaBlocks.STEAM_CASING.getItemVariant(BRONZE_HULL), 'S', new ItemStack(ModBlocks.sieve), 'P', Blocks.PISTON);
     }
 
     // Has to be done in init phase because of ExNi registering outside of the Registry event
