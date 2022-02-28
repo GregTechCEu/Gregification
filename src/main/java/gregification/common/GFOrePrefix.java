@@ -1,13 +1,13 @@
 package gregification.common;
 
 import gregification.config.GFConfig;
-import gregtech.api.GTValues;
 import gregtech.api.GregTechAPI;
 import gregtech.api.unification.material.Materials;
 import gregtech.api.unification.material.info.MaterialFlags;
 import gregtech.api.unification.material.info.MaterialIconType;
 import gregtech.api.unification.ore.OrePrefix;
 import gregtech.common.items.MetaItems;
+import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
@@ -33,7 +33,7 @@ public class GFOrePrefix {
     public static void onMaterialRegisterEvent(GregTechAPI.MaterialEvent event) {
         materialFlagAdditions();
 
-        if (GFConfig.exNihilo.enableExNihilo && GTValues.isModLoaded(GFValues.MODID_EXNI)) {
+        if (GFConfig.exNihilo.enableExNihilo && Loader.isModLoaded(GFValues.MODID_EXNI)) {
             initExNihilo();
         }
     }
