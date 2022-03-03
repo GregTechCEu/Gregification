@@ -89,7 +89,12 @@ public class ExNihiloRecipes {
 
                 for (Siftable siftable : ExNihiloRegistryManager.SIEVE_REGISTRY.getDrops(stack)) {
                     if (siftable.getMeshLevel() == recipe.getMesh().getMetadata())
-                        builder.chancedOutput(siftable.getDrop().getItemStack(), (int) (siftable.getChance() * (float) Recipe.getMaxChancedValue()), 500);
+                        if((int) (siftable.getChance() * (float) Recipe.getMaxChancedValue()) >= Recipe.getMaxChancedValue()) {
+                            builder.outputs(siftable.getDrop().getItemStack());
+                        }
+                        else {
+                            builder.chancedOutput(siftable.getDrop().getItemStack(), (int) (siftable.getChance() * (float) Recipe.getMaxChancedValue()), 500);
+                        }
                 }
                 builder.buildAndRegister();
             }
