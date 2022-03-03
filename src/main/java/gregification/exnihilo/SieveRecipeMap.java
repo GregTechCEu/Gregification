@@ -18,6 +18,7 @@
 package gregification.exnihilo;
 
 import gregtech.api.capability.impl.FluidTankList;
+import gregtech.api.gui.GuiTextures;
 import gregtech.api.gui.ModularUI;
 import gregtech.api.gui.widgets.RecipeProgressWidget;
 import gregtech.api.recipes.RecipeMap;
@@ -27,16 +28,6 @@ import net.minecraftforge.items.IItemHandlerModifiable;
 import javax.annotation.Nonnull;
 
 public class SieveRecipeMap extends RecipeMap<SimpleRecipeBuilder> {
-
-    private static final int PROGRESS_LEFT = 51;
-    private static final int PROGRESS_TOP = 24;
-    private static final int ITEM_SLOT_WITH_EDGE_DIMENSION = 18;
-    private static final int OUTPUT_TOP = 2;
-    private static final int OUTPUT_LEFT = 79;
-    private static final int MESH_TOP = 26;
-    private static final int MESH_LEFT = 7;
-    private static final int INPUT_TOP = 26;
-    private static final int INPUT_LEFT = 25;
 
     public SieveRecipeMap(String unlocalizedName,
                           int minInputs, int maxInputs, int minOutputs, int maxOutputs,
@@ -48,29 +39,28 @@ public class SieveRecipeMap extends RecipeMap<SimpleRecipeBuilder> {
     @Override
     @Nonnull
     public ModularUI.Builder createJeiUITemplate(IItemHandlerModifiable importItems, IItemHandlerModifiable exportItems, FluidTankList importFluids, FluidTankList exportFluids, int yOffset) {
-        ModularUI.Builder builder = ModularUI.defaultBuilder(yOffset);
-        builder.widget(new RecipeProgressWidget(200, PROGRESS_LEFT, PROGRESS_TOP + yOffset, 20, 20, this.progressBarTexture, this.moveType, this));
+        ModularUI.Builder builder = new ModularUI.Builder(GuiTextures.BACKGROUND, 176, 192 + yOffset);
+        builder.widget(new RecipeProgressWidget(200, 25, 50 + yOffset, 20, 20, this.progressBarTexture, this.moveType, this));
         this.addInventorySlotGroup(builder, importItems, importFluids, false, yOffset);
         this.addInventorySlotGroup(builder, exportItems, exportFluids, true, yOffset);
         if (this.specialTexture != null && this.specialTexturePosition != null) {
             this.addSpecialTexture(builder);
         }
+
         return builder;
     }
 
     @Override
     protected void addInventorySlotGroup(ModularUI.Builder builder, IItemHandlerModifiable itemHandler, FluidTankList fluidHandler, boolean isOutputs, int yOffset) {
         if (isOutputs) {
-            for (int i = 0;; i++) {
-                for (int j = 0; j < 5; j++) {
-                    int slotIndex = i * 5 + j;
-                    if (slotIndex >= itemHandler.getSlots()) return;
-                    addSlot(builder, OUTPUT_LEFT + ITEM_SLOT_WITH_EDGE_DIMENSION * j, OUTPUT_TOP + ITEM_SLOT_WITH_EDGE_DIMENSION * i, slotIndex, itemHandler, fluidHandler, false, true);
+            for (int y = 0; y < 5; y++) {
+                for (int x = 0; x < 6; x++) {
+                    addSlot(builder, 61 + x * 18, y * 18, y * 6 + x, itemHandler, fluidHandler, false, true);
                 }
             }
         } else {
-            addSlot(builder, INPUT_LEFT, INPUT_TOP, 0, itemHandler, fluidHandler, false, false);
-            addSlot(builder, MESH_LEFT, MESH_TOP, 1, itemHandler, fluidHandler, false, false);
+            addSlot(builder, 17, 26, 0, itemHandler, fluidHandler, false, false);
+            addSlot(builder, 35, 26, 1, itemHandler, fluidHandler, false, false);
         }
     }
 }

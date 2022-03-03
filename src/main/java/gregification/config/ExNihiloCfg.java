@@ -286,6 +286,7 @@ public class ExNihiloCfg {
                 "ruby", "0.0288", "4",
                 "cinnabar", "0.0288", "4",
                 "chromite", "0.0072", "4",
+                "electrotine", "0.0072", "4",
                 "topaz", "0.0294", "4",
                 "blue_topaz", "0.0196", "4"
         };

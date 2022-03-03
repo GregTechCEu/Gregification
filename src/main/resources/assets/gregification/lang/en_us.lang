@@ -14,7 +14,10 @@ recipemap.electric_sieve.name=Electric Sieve
 gregification.machine.sieve.steam.name=Steam Sieve
 gregification.machine.sieve.steam.tooltip=Tired of Right-Clicking all day?
 
-gregtech.machine.sieve.tooltip=
+gregification.machine.steam_sieve_steel.name=High Pressure Steam Sieve
+gregification.machine.steam_sieve_steel.tooltip=Tired of Right-Clicking all day?
+
+gregtech.machine.sieve.tooltip=Tired of Right-Clicking all day?
 
 gregification.machine.sieve.lv.name=Basic Electric Sieve
 gregification.machine.sieve.mv.name=Advanced Electric Sieve
