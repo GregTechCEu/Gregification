@@ -17,8 +17,8 @@
  */
 package gregification.opencomputers.drivers;
 
-import gregtech.api.metatileentity.MetaTileEntityHolder;
 import gregtech.api.metatileentity.SimpleMachineMetaTileEntity;
+import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import li.cil.oc.api.machine.Arguments;
 import li.cil.oc.api.machine.Callback;
 import li.cil.oc.api.machine.Context;
@@ -40,8 +40,8 @@ public class DriverSimpleMachine extends DriverSidedTileEntity {
     @Override
     public boolean worksWith(World world, BlockPos pos, EnumFacing side) {
         TileEntity tileEntity = world.getTileEntity(pos);
-        if (tileEntity instanceof MetaTileEntityHolder) {
-            return ((MetaTileEntityHolder) tileEntity).getMetaTileEntity() instanceof SimpleMachineMetaTileEntity;
+        if (tileEntity instanceof IGregTechTileEntity) {
+            return ((IGregTechTileEntity) tileEntity).getMetaTileEntity() instanceof SimpleMachineMetaTileEntity;
         }
         return false;
     }
@@ -49,9 +49,9 @@ public class DriverSimpleMachine extends DriverSidedTileEntity {
     @Override
     public ManagedEnvironment createEnvironment(World world, BlockPos pos, EnumFacing side) {
         TileEntity tileEntity = world.getTileEntity(pos);
-        if (tileEntity instanceof MetaTileEntityHolder) {
-            return new EnvironmentSimpleMachine((MetaTileEntityHolder) tileEntity,
-                    (SimpleMachineMetaTileEntity) ((MetaTileEntityHolder) tileEntity).getMetaTileEntity()
+        if (tileEntity instanceof IGregTechTileEntity) {
+            return new EnvironmentSimpleMachine((IGregTechTileEntity) tileEntity,
+                    (SimpleMachineMetaTileEntity) ((IGregTechTileEntity) tileEntity).getMetaTileEntity()
             );
         }
         return null;
@@ -59,8 +59,8 @@ public class DriverSimpleMachine extends DriverSidedTileEntity {
 
     public final static class EnvironmentSimpleMachine extends EnvironmentMetaTileEntity<SimpleMachineMetaTileEntity> {
 
-        public EnvironmentSimpleMachine(MetaTileEntityHolder holder, SimpleMachineMetaTileEntity tileEntity) {
-            super(holder, tileEntity, "gtce_simpleMachineMetaTileEntity");
+        public EnvironmentSimpleMachine(IGregTechTileEntity holder, SimpleMachineMetaTileEntity tileEntity) {
+            super(holder, tileEntity, "gt_machine");
         }
 
         @Callback(doc = "function():number --  Returns the tier of machine.")

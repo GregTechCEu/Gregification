@@ -17,7 +17,7 @@
  */
 package gregification.opencomputers.drivers;
 
-import gregtech.api.metatileentity.MetaTileEntityHolder;
+import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import li.cil.oc.api.driver.NamedBlock;
 import li.cil.oc.integration.ManagedTileEntityEnvironment;
 
@@ -26,7 +26,7 @@ public abstract class EnvironmentMetaTileEntity<T> extends ManagedTileEntityEnvi
 
     private final String preferredName;
 
-    public EnvironmentMetaTileEntity(MetaTileEntityHolder holder, T capability, String name) {
+    public EnvironmentMetaTileEntity(IGregTechTileEntity holder, T capability, String name) {
         super(capability, name);
         preferredName = holder.getMetaTileEntity().metaTileEntityId.getPath();
     }

@@ -20,7 +20,7 @@ package gregification.opencomputers.drivers;
 import gregtech.api.capability.GregtechTileCapabilities;
 import gregtech.api.capability.IWorkable;
 import gregtech.api.capability.impl.AbstractRecipeLogic;
-import gregtech.api.metatileentity.MetaTileEntityHolder;
+import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.recipes.CountableIngredient;
 import gregtech.api.recipes.Recipe;
 import li.cil.oc.api.machine.Arguments;
@@ -34,7 +34,6 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fml.relauncher.ReflectionHelper;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -52,7 +51,7 @@ public class DriverAbstractRecipeLogic extends DriverSidedTileEntity {
     @Override
     public boolean worksWith(World world, BlockPos pos, EnumFacing side) {
         TileEntity tileEntity = world.getTileEntity(pos);
-        if (tileEntity instanceof MetaTileEntityHolder) {
+        if (tileEntity instanceof IGregTechTileEntity) {
             return tileEntity.hasCapability(GregtechTileCapabilities.CAPABILITY_WORKABLE, side);
         }
         return false;
@@ -61,10 +60,10 @@ public class DriverAbstractRecipeLogic extends DriverSidedTileEntity {
     @Override
     public ManagedEnvironment createEnvironment(World world, BlockPos pos, EnumFacing side) {
         TileEntity tileEntity = world.getTileEntity(pos);
-        if (tileEntity instanceof MetaTileEntityHolder) {
+        if (tileEntity instanceof IGregTechTileEntity) {
             IWorkable capability = tileEntity.getCapability(GregtechTileCapabilities.CAPABILITY_WORKABLE, side);
             if (capability instanceof AbstractRecipeLogic)
-                return new EnvironmentAbstractRecipeLogic((MetaTileEntityHolder) tileEntity,
+                return new EnvironmentAbstractRecipeLogic((IGregTechTileEntity) tileEntity,
                         (AbstractRecipeLogic) capability);
         }
         return null;
@@ -72,13 +71,12 @@ public class DriverAbstractRecipeLogic extends DriverSidedTileEntity {
 
     public final static class EnvironmentAbstractRecipeLogic extends EnvironmentMetaTileEntity<AbstractRecipeLogic> {
 
-        public EnvironmentAbstractRecipeLogic(MetaTileEntityHolder holder, AbstractRecipeLogic capability) {
-            super(holder, capability, "gtce_abstractRecipeLogic");
+        public EnvironmentAbstractRecipeLogic(IGregTechTileEntity holder, AbstractRecipeLogic capability) {
+            super(holder, capability, "gt_recipeLogic");
         }
 
         @Callback(doc = "function():table -- Returns previous recipe.")
         public Object[] getCurrentRecipe(final Context context, final Arguments args) {
-            //noinspection deprecation
             Recipe previousRecipe = tileEntity.getPreviousRecipe();
             if (previousRecipe != null && tileEntity.isActive()) {
                 HashMap<String, Object> recipe = new HashMap<>();
