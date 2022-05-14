@@ -9,11 +9,9 @@ import gregification.common.GFLog;
 import gregification.common.GFValues;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Optional;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
-@Mod.EventBusSubscriber(modid = GFValues.MODID)
 public class ExNihiloCommonProxy {
 
     @Optional.Method(modid = GFValues.MODID_EXNI)
@@ -23,9 +21,6 @@ public class ExNihiloCommonProxy {
             ExNihiloPebble.register();
             SieveDrops.readSieveDropsFromConfig();
             GFRecipeMaps.initExNihilo();
-            if (GFConfig.exNihilo.GTOverwritedrops) {
-                ExNihiloRegistryManager.registerSieveDefaultRecipeHandler(new CustomDrops());
-            }
             ExNihiloRegistryManager.registerSieveDefaultRecipeHandler(new SieveDrops());
             GFMetaTileEntities.registerExNihilo();
         }

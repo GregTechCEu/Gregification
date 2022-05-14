@@ -31,13 +31,9 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
                 "after:gendustry")
 public class Gregification {
 
-    // Proxy for Gregification itself
-    @SidedProxy(modId = GFValues.MODID, serverSide = "gregification.proxy.CommonProxy", clientSide = "gregification.proxy.ClientProxy")
-    public static CommonProxy GregificationProxy;
-
-    // Mystical Aggraditions Proxy
-    @SidedProxy(modId = GFValues.MODID, serverSide = "gregification.proxy.MysticalCommonProxy", clientSide = "gregification.proxy.MysticalClientProxy")
-    public static MysticalCommonProxy MysticalProxy;
+    // Proxy for Gregification itself, if needed
+    // @SidedProxy(modId = GFValues.MODID, serverSide = "gregification.proxy.CommonProxy", clientSide = "gregification.proxy.ClientProxy")
+    // public static CommonProxy GregificationProxy;
 
     // Forestry Proxy
     @SidedProxy(modId = GFValues.MODID, serverSide = "gregification.proxy.ForestryCommonProxy", clientSide = "gregification.proxy.ForestryClientProxy")
@@ -53,6 +49,9 @@ public class Gregification {
 
     public Gregification() {
         MinecraftForge.EVENT_BUS.register(GFOrePrefix.class);
+        MinecraftForge.EVENT_BUS.register(ExNihiloCommonProxy.class);
+        MinecraftForge.EVENT_BUS.register(ForestryCommonProxy.class);
+        MinecraftForge.EVENT_BUS.register(ForestryClientProxy.class);
     }
 
     @EventHandler
@@ -62,7 +61,7 @@ public class Gregification {
         if (Loader.isModLoaded(GFValues.MODID_EXNI)) {
             ExNihiloProxy.preInit();
         }
-        if (Loader.isModLoaded(GFValues.FORESTRY)) {
+        if (Loader.isModLoaded(GFValues.MODID_FR)) {
             ForestryProxy.preInit();
         }
     }
@@ -75,14 +74,14 @@ public class Gregification {
         if (Loader.isModLoaded(GFValues.MODID_OC)) {
             OCProxy.init();
         }
-        if (Loader.isModLoaded(GFValues.FORESTRY)) {
+        if (Loader.isModLoaded(GFValues.MODID_FR)) {
             ForestryProxy.init();
         }
     }
 
     @EventHandler
     public void postInit(FMLPostInitializationEvent event) {
-        if (Loader.isModLoaded(GFValues.FORESTRY)) {
+        if (Loader.isModLoaded(GFValues.MODID_FR)) {
             ForestryProxy.postInit();
         }
     }

@@ -76,6 +76,6 @@ public class GTItemFrame extends Item implements IHiveFrame, IItemModelRegister 
 
     @Override
     public void registerModel(@Nonnull Item item, @Nonnull IModelManager manager) {
-        manager.registerItemModel(item, 0, GFValues.FORESTRY, "gt.frame_" + type.getName().toLowerCase());
+        manager.registerItemModel(item, 0, GFValues.MODID_FR, "gt.frame_" + type.getName().toLowerCase());
     }
 }

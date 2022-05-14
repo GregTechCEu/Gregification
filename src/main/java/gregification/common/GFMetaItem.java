@@ -25,11 +25,6 @@ public class GFMetaItem extends StandardMetaItem {
     public static MetaItem<?>.MetaValueItem ELECTRODE_RUBBER;
     public static MetaItem<?>.MetaValueItem ELECTRODE_TIN;
 
-    public static MetaItem<?>.MetaValueItem HYPERIUM_ESSENCE;
-    public static MetaItem<?>.MetaValueItem HYPERIUM_SEED;
-    public static MetaItem<?>.MetaValueItem LUDICIUM_ESSENCE;
-    public static MetaItem<?>.MetaValueItem LUDICIUM_SEED;
-
     public static void init() {
         GFMetaItem item = new GFMetaItem();
         item.setRegistryName("gf_meta_item");
@@ -37,11 +32,8 @@ public class GFMetaItem extends StandardMetaItem {
 
     @Override
     public void registerSubItems() {
-        if (Loader.isModLoaded(GFValues.FORESTRY) && GFConfig.forestry.enableForestry && GFConfig.forestry.gtElectrodes) {
+        if (Loader.isModLoaded(GFValues.MODID_FR) && GFConfig.forestry.enableForestry && GFConfig.forestry.gtElectrodes) {
             registerForestryItems();
-        }
-        if (Loader.isModLoaded(GFValues.MODID_MA) && GFConfig.mysticalAgriculture.enableMysticalAgriculture) {
-            registerMysticalAgricultureItems();
         }
     }
 
@@ -72,13 +64,6 @@ public class GFMetaItem extends StandardMetaItem {
         if (Loader.isModLoaded(GFValues.MODID_IC2) || Loader.isModLoaded(GFValues.MODID_TR) || Loader.isModLoaded(GFValues.MODID_BINNIE)) {
             ELECTRODE_RUBBER = addItem(14, "electrode.rubber");
         }
-    }
-
-    private void registerMysticalAgricultureItems() {
-        HYPERIUM_ESSENCE = addItem(15, "hyperium_essence");
-        LUDICIUM_ESSENCE = addItem(16, "ludicium_essence");
-        HYPERIUM_SEED = addItem(17, "hyperium_crafting_seed");
-        LUDICIUM_SEED = addItem(18, "ludicium_crafting_seed");
     }
 
     // Override for a small optimization

@@ -27,13 +27,13 @@ public class OCCommonProxy {
             Driver.add(new DriverSimpleMachine());
             Driver.add(new DriverFusionReactor());
             Driver.add(new DriverWorldAccelerator());
+            //Driver.add(new DriverBatteryTower());
 
-            // TODO Waiting on Gregicality to be at least functional with CEu
-            //if (GFConfig.openComputers.enableGregicalityOC && GTValues.isModLoaded(GFValues.MODID_GCY)) {
+            // TODO Waiting on Gregicality Science
+            //if (GFConfig.openComputers.enableGregicalityOC && Loader.isModLoaded(GFValues.MODID_GCYS)) {
                 //Driver.add(new DriverNuclearReactor());
                 //Driver.add(new DriverVoidMiner());
                 //Driver.add(new DriverQubitMultiblockController());
-                //Driver.add(new DriverBatteryTower()); // todo this will move to CEu
             //}
         }
     }

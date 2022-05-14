@@ -6,23 +6,36 @@ import net.minecraftforge.common.config.Config;
 @Config(modid = GFValues.MODID)
 public class ExNihiloCfg {
 
-    @Config.Comment("Enable Ex Nihilo integration. Default: true")
+    @Config.Comment({
+            "Enable Ex Nihilo integration.",
+            "Default: true"
+    })
     @Config.RequiresMcRestart
     public boolean enableExNihilo = true;
 
-    @Config.Comment("Makes Gregification overwrite the sifting table. Default: true")
+    @Config.Comment({
+            "Override all Sifting Tables to drop excess outputs once GT drops have been added.",
+            "Default: true"
+    })
     @Config.RequiresMcRestart
-    public boolean GTOverwritedrops = true;
+    public boolean overrideAllSiftDrops = true;
 
-    @Config.Comment("Should Gregification modify the Meshes recipes? Default: true")
+    @Config.Comment({
+            "Replace Ex Nihilo Mesh recipes with GT-style recipes",
+            "Default: true"
+    })
     @Config.RequiresMcRestart
-    public boolean ModifyMeshes = true;
+    public boolean harderMeshes = true;
 
-    @Config.Comment("Enable High-Tier Sieves (UHV-UXV)? Requires Gregicality to be installed. Default: true")
+    @Config.Comment({
+            "Enable High-Tier Sieves (UHV-UXV)",
+            "Requires Gregicality to be installed.",
+            "Default: true"
+    })
     @Config.RequiresMcRestart
     public boolean highTierSieve = true;
 
-    @Config.Comment("Config category for sieve drops")
+    @Config.Comment({"Config category for sieve drops"})
     @Config.RequiresMcRestart
     public SieveCategory drops = new SieveCategory();
 

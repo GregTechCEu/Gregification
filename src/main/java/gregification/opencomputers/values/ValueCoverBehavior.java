@@ -20,7 +20,7 @@ package gregification.opencomputers.values;
 import gregtech.api.capability.GregtechTileCapabilities;
 import gregtech.api.cover.CoverBehavior;
 import gregtech.api.cover.ICoverable;
-import gregtech.api.metatileentity.MetaTileEntityHolder;
+import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import li.cil.oc.api.machine.Arguments;
 import li.cil.oc.api.machine.Callback;
 import li.cil.oc.api.machine.Context;
@@ -51,7 +51,7 @@ public class ValueCoverBehavior extends AbstractValue {
     }
 
     public ValueCoverBehavior(CoverBehavior coverBehavior, EnumFacing side){
-        this(coverBehavior, side, "CoverBehavior");
+        this(coverBehavior, side, "gt_coverBehavior");
     }
 
     public ValueCoverBehavior(){
@@ -60,7 +60,7 @@ public class ValueCoverBehavior extends AbstractValue {
     protected CoverBehavior getCoverBehavior(){
         World world = FMLCommonHandler.instance().getMinecraftServerInstance().getWorld(dim);
         TileEntity te = world.getTileEntity(pos);
-        if (te instanceof MetaTileEntityHolder){
+        if (te instanceof IGregTechTileEntity){
             ICoverable coverable = te.getCapability(GregtechTileCapabilities.CAPABILITY_COVERABLE, null);
             if (coverable != null){
                 return coverable.getCoverAtSide(side);

@@ -2,8 +2,6 @@ package gregification.proxy;
 
 import forestry.modules.ModuleHelper;
 import gregification.common.GFLog;
-import gregification.common.GFUtility;
-import gregification.common.GFValues;
 import gregification.config.GFConfig;
 import gregification.forestry.bees.*;
 import gregification.forestry.frames.GTFrameType;
@@ -14,16 +12,14 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Optional.Method;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
-import static gregification.common.GFValues.FORESTRY;
+import static gregification.common.GFValues.MODID_FR;
 
-@Mod.EventBusSubscriber(modid = GFValues.MODID)
 public class ForestryCommonProxy {
 
-    @Method(modid = FORESTRY)
+    @Method(modid = MODID_FR)
     @SubscribeEvent
     public static void registerRecipes(RegistryEvent.Register<IRecipe> event) {
         if (GFConfig.forestry.enableForestry) {
@@ -46,7 +42,7 @@ public class ForestryCommonProxy {
         }
     }
 
-    @Method(modid = FORESTRY)
+    @Method(modid = MODID_FR)
     public void preInit() {
         if (GFConfig.forestry.enableForestry) {
             if (GFConfig.forestry.gtBees) {
@@ -69,7 +65,7 @@ public class ForestryCommonProxy {
         }
     }
 
-    @Method(modid = FORESTRY)
+    @Method(modid = MODID_FR)
     public void init() {
         if (GFConfig.forestry.enableForestry) {
             if (GFConfig.forestry.gtElectrodes) {
@@ -85,7 +81,7 @@ public class ForestryCommonProxy {
         }
     }
 
-    @Method(modid = FORESTRY)
+    @Method(modid = MODID_FR)
     public void postInit() {
         if (ModuleHelper.isEnabled("apiculture")) {
             CombRecipes.initForestryCombs();
@@ -95,7 +91,7 @@ public class ForestryCommonProxy {
         }
     }
 
-    @Method(modid = FORESTRY)
+    @Method(modid = MODID_FR)
     @SubscribeEvent
     public static void registerItems(RegistryEvent.Register<Item> event) {
         if (GFConfig.forestry.enableForestry) {

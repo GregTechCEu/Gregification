@@ -33,7 +33,7 @@ import java.lang.reflect.Method;
 public class ValueCoverFluidFilter extends ValueCoverBehavior {
 
     public ValueCoverFluidFilter(CoverFluidFilter coverBehavior, EnumFacing side) {
-        super(coverBehavior, side, "CoverFluidFilter");
+        super(coverBehavior, side, "gt_coverFluidFilter");
     }
 
     public ValueCoverFluidFilter() {

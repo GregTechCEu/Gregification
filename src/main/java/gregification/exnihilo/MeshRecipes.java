@@ -13,10 +13,10 @@ import net.minecraft.item.ItemStack;
 
 import static gregtech.api.recipes.RecipeMaps.FORGE_HAMMER_RECIPES;
 
-
 public class MeshRecipes {
+
     public static void init() {
-        if (GFConfig.exNihilo.ModifyMeshes) {
+        if (GFConfig.exNihilo.harderMeshes) {
             ModHandler.removeRecipeByName("exnihilocreatio:item_mesh_2");
             ModHandler.addShapedRecipe("tin_alloy_mesh", new ItemStack(ModItems.mesh, 1, 2), "TST", "STS", "TST",
                     'T', new UnificationEntry(OrePrefix.stick, Materials.TinAlloy),

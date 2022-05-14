@@ -52,7 +52,7 @@ public class GTItemComb extends Item implements IColoredItem, IItemModelRegister
     public void registerModel(Item item, IModelManager manager) {
         manager.registerItemModel(item, 0);
         for (int i = 0; i < GTCombType.values().length; i++) {
-            manager.registerItemModel(item, i, GFValues.FORESTRY, "gt.comb");
+            manager.registerItemModel(item, i, GFValues.MODID_FR, "gt.comb");
         }
     }
 

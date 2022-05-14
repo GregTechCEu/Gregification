@@ -60,7 +60,7 @@ public class GTItemDrop extends Item implements IColoredItem, IItemModelRegister
     public void registerModel(@Nonnull Item item, @Nonnull IModelManager manager) {
         manager.registerItemModel(item, 0);
         for (int i = 0; i < GTCombType.VALUES.length; i++) {
-            manager.registerItemModel(item, i, GFValues.FORESTRY, "gt.honey_drop");
+            manager.registerItemModel(item, i, GFValues.MODID_FR, "gt.honey_drop");
         }
     }
 

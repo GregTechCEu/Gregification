@@ -24,7 +24,6 @@ import org.apache.commons.lang3.tuple.Pair;
 import java.util.HashMap;
 import java.util.Map;
 
-import static gregification.common.GFValues.FORESTRY;
 import static gregification.forestry.recipes.ForestryRecipeUtil.removeCarpenterRecipe;
 import static gregtech.api.GTValues.*;
 import static gregtech.api.recipes.RecipeMaps.*;
@@ -411,7 +410,7 @@ public class ForestryOverrideRecipes {
                 " A ", "IPI", " A ",
                 'A', "dustAsh",
                 'I', "brickPeat",
-                'P', GFUtility.getModItem(FORESTRY, "propolis", W));
+                'P', GFUtility.getModItem(GFValues.MODID_FR, "propolis", W));
 
         // Pulsating Mesh
         ModHandler.removeRecipeByName("forestry:pulsating_mesh");
@@ -505,7 +504,7 @@ public class ForestryOverrideRecipes {
         Pair<String, Integer> itemKey = Pair.of(name, meta);
         ItemStack stack = cachedStackMap.get(itemKey);
         if (stack == null) {
-            stack = GFUtility.getModItem(FORESTRY, name, meta, 1);
+            stack = GFUtility.getModItem(GFValues.MODID_FR, name, meta, 1);
             cachedStackMap.put(itemKey, stack);
         }
         if (stack == ItemStack.EMPTY) {

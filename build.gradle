@@ -12,7 +12,8 @@ buildscript {
 apply plugin: 'net.minecraftforge.gradle.forge'
 apply plugin: 'org.spongepowered.mixin'
 
-version = mc_version + "-" + gregification_version
+def gregification_version = "0.0.1"
+version = "1.12.2-" + gregification_version
 group = "gregification"
 archivesBaseName = "Gregification"
 
@@ -36,6 +37,10 @@ repositories {
         name "CurseForge"
         url "https://www.cursemaven.com"
     }
+    maven {
+        name "CraftTweaker"
+        url "https://maven.blamejared.com"
+    }
 }
 
 dependencies {
@@ -44,13 +49,11 @@ dependencies {
     deobfCompile "curse.maven:mixin-booter-419286:3321174"
     deobfCompile "curse.maven:gregtech-ce-unofficial-557242:3784798"
 
-    // Mystical Agriculture mods
-    deobfCompile "curse.maven:cucumber-272335:2645867"
-    compile files("MysticalAgriculture-1.12.2-1.7.5.jar")
-    compile files("MysticalAgradditions-1.12.2-1.3.2.jar")
-
     // CCLib
     deobfCompile "curse.maven:codechicken-lib-1-8-242818:2779848"
+
+    // CraftTweaker
+    deobfCompile "CraftTweaker2:CraftTweaker2-MC1120-Main:1.12-4.1.20.554"
 
     // Useful stuff
     deobfCompile "curse.maven:jei-238222:3040523"
@@ -59,9 +62,6 @@ dependencies {
 
     // Direct compat mods
     deobfCompile "curse.maven:ctm-267602:2915363"
-    //deobfCompile "curse.maven:cucumber-272335:2645867"
-    //deobfCompile "curse.maven:mystical-agriculture-246640:2704562"
-    //deobfCompile "curse.maven:mystical-agradditions-256247:2704832"
     deobfCompile "curse.maven:forestry-59751:2918418"
     //deobfCompile "curse.maven:tinkers-construct-74072:2902483"
     //deobfCompile "curse.maven:mantle-74924:2713386"
@@ -74,7 +74,6 @@ dependencies {
     deobfCompile "curse.maven:gregtech-food-option-477021:3787937"
 
     // Addons and other mods for testing as needed
-    //runtime "curse.maven:crafttweaker-239197:3411555"
     runtime "curse.maven:binnies-mods-223525:2916129"
     runtime "curse.maven:magic-bees-65764:2566282"
     runtime "curse.maven:gendustry-70492:2516215"

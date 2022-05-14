@@ -29,7 +29,7 @@ import net.minecraft.util.EnumFacing;
 public class ValueCoverRoboticArm extends ValueCoverConveyor {
 
     public ValueCoverRoboticArm(CoverRoboticArm coverBehavior, EnumFacing side) {
-        super(coverBehavior, side, "CoverRoboticArm");
+        super(coverBehavior, side, "gt_coverRoboticArm");
     }
 
     public ValueCoverRoboticArm() {

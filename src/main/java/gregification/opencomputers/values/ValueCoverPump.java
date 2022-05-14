@@ -32,7 +32,7 @@ import java.lang.reflect.Method;
 public class ValueCoverPump extends ValueCoverBehavior {
 
     public ValueCoverPump(CoverPump coverBehavior, EnumFacing side) {
-        super(coverBehavior, side, "CoverPump");
+        super(coverBehavior, side, "gt_coverPump");
     }
 
     public ValueCoverPump() {

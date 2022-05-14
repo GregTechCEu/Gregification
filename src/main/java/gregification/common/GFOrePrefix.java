@@ -9,15 +9,12 @@ import gregtech.api.unification.material.properties.PropertyKey;
 import gregtech.api.unification.ore.OrePrefix;
 import gregtech.common.items.MetaItems;
 import net.minecraftforge.fml.common.Loader;
-import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import static gregtech.api.unification.material.info.MaterialFlags.*;
 import static gregtech.api.unification.ore.OrePrefix.Conditions.hasOreProperty;
 import static gregtech.api.unification.ore.OrePrefix.Flags.ENABLE_UNIFICATION;
 
-// This is just a convenient time to do this
-@Mod.EventBusSubscriber
 public class GFOrePrefix {
 
     // Ex Nihilo
@@ -36,7 +33,7 @@ public class GFOrePrefix {
         if (GFConfig.exNihilo.enableExNihilo && Loader.isModLoaded(GFValues.MODID_EXNI)) {
             initExNihilo();
         }
-        if (GFConfig.forestry.enableForestry && Loader.isModLoaded(GFValues.FORESTRY)) {
+        if (GFConfig.forestry.enableForestry && Loader.isModLoaded(GFValues.MODID_FR)) {
             initForestry();
         }
     }

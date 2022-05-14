@@ -2,25 +2,22 @@ package gregification.proxy;
 
 import forestry.api.core.ForestryAPI;
 import forestry.core.items.IColoredItem;
-import gregification.common.GFValues;
 import gregification.config.GFConfig;
 import gregification.forestry.bees.GTBees;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.event.ModelRegistryEvent;
-import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Optional.*;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import static gregification.common.GFValues.FORESTRY;
+import static gregification.common.GFValues.MODID_FR;
 
-@Mod.EventBusSubscriber(modid = GFValues.MODID, value = Side.CLIENT)
 public class ForestryClientProxy extends ForestryCommonProxy {
 
-    @Method(modid = FORESTRY)
+    @Method(modid = MODID_FR)
     @Override
     public void init() {
         super.init();
@@ -29,7 +26,8 @@ public class ForestryClientProxy extends ForestryCommonProxy {
         }
     }
 
-    @Method(modid = FORESTRY)
+    @Method(modid = MODID_FR)
+    @SideOnly(Side.CLIENT)
     @SubscribeEvent
     public static void registerModels(ModelRegistryEvent event) {
         if (GFConfig.forestry.enableForestry) {
@@ -51,7 +49,7 @@ public class ForestryClientProxy extends ForestryCommonProxy {
         private CombItemColor() {
         }
 
-        @Method(modid = FORESTRY)
+        @Method(modid = MODID_FR)
         @Override
         public int colorMultiplier(ItemStack stack, int tintIndex) {
             if (stack.getItem() instanceof IColoredItem) {

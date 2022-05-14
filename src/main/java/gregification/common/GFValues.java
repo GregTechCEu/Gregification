@@ -7,11 +7,12 @@ public class GFValues {
     public static final String VERSION = "@VERSION@";
 
     public static final String
-            MODID_GCY = "gregicality",
+            MODID_GCYS = "gcys",
+            MODID_GCYM = "gcym",
             MODID_EXNI = "exnihilocreatio",
             MODID_OC = "opencomputers",
             MODID_GTOC = "gtce2oc",
-            FORESTRY = "forestry",
+            MODID_FR = "forestry",
             MODID_EB = "extrabees",
             MODID_MB = "magicbees",
             MODID_IC2 = "ic2",

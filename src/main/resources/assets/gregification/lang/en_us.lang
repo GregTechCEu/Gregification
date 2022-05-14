@@ -13,25 +13,35 @@ recipemap.electric_sieve.name=Electric Sieve
 
 gregification.machine.sieve.steam.name=Steam Sieve
 gregification.machine.sieve.steam.tooltip=Tired of Right-Clicking all day?
-
 gregification.machine.steam_sieve_steel.name=High Pressure Steam Sieve
 gregification.machine.steam_sieve_steel.tooltip=Tired of Right-Clicking all day?
 
-gregtech.machine.sieve.tooltip=Tired of Right-Clicking all day?
-
 gregification.machine.sieve.lv.name=Basic Electric Sieve
+gregification.machine.sieve.lv.tooltip=AFK Simulator
 gregification.machine.sieve.mv.name=Advanced Electric Sieve
+gregification.machine.sieve.mv.tooltip=AFK Simulator
 gregification.machine.sieve.hv.name=Advanced Electric Sieve II
+gregification.machine.sieve.hv.tooltip=AFK Simulator
 gregification.machine.sieve.ev.name=Advanced Electric Sieve III
+gregification.machine.sieve.ev.tooltip=AFK Simulator
 gregification.machine.sieve.iv.name=Elite Electric Sieve
+gregification.machine.sieve.iv.tooltip=Particle Vibration Chamber
 gregification.machine.sieve.luv.name=Elite Electric Sieve II
+gregification.machine.sieve.luv.tooltip=Particle Vibration Chamber
 gregification.machine.sieve.zpm.name=Elite Electric Sieve III
-gregification.machine.sieve.uv.name=Elite Electric Sieve IV
-gregification.machine.sieve.uhv.name=High-Tech Electric Sieve
-gregification.machine.sieve.uev.name=High-Tech Electric Sieve II
-gregification.machine.sieve.uiv.name=High-Tech Electric Sieve III
-gregification.machine.sieve.umv.name=High-Tech Electric Sieve IV
-gregification.machine.sieve.uxv.name=Ultimate Electric Sieve
+gregification.machine.sieve.zpm.tooltip=Particle Vibration Chamber
+gregification.machine.sieve.uv.name=Ultimate Electric Sieve
+gregification.machine.sieve.uv.tooltip=From nothing, something
+gregification.machine.sieve.uhv.name=Epic Electric Sieve
+gregification.machine.sieve.uhv.tooltip=From nothing, something
+gregification.machine.sieve.uev.name=Epic Electric Sieve II
+gregification.machine.sieve.uev.tooltip=From nothing, something
+gregification.machine.sieve.uiv.name=Epic Electric Sieve III
+gregification.machine.sieve.uiv.tooltip=From nothing, something
+gregification.machine.sieve.uxv.name=Epic Electric Sieve IV
+gregification.machine.sieve.uxv.tooltip=From nothing, something
+gregification.machine.sieve.opv.name=Legendary Electric Sieve
+gregification.machine.sieve.opv.tooltip=From nothing, something
 
 # Forestry
 metaitem.electrode.apatite.name=Apatine Electrode

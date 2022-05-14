@@ -36,7 +36,7 @@ public class ValueCoverConveyor extends ValueCoverBehavior {
     }
 
     public ValueCoverConveyor(CoverConveyor coverBehavior, EnumFacing side) {
-        this(coverBehavior, side, "CoverConveyor");
+        this(coverBehavior, side, "gt_coverConveyor");
     }
 
     public ValueCoverConveyor() {
