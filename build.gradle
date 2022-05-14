@@ -33,40 +33,8 @@ minecraft {
 
 repositories {
     maven {
-        name "ChickenBones' Mods"
-        url "http://maven.covers1624.net"
-    }
-    maven {
         name "CurseForge"
         url "https://www.cursemaven.com"
-    }
-    maven {
-        "JEI"
-        url "https://dvs1.progwml6.com/files/maven/"
-    }
-    maven {
-        "CraftTweaker"
-        url "https://maven.blamejared.com"
-    }
-    maven {
-        name "Forestry"
-        url "http://maven.ic2.player.to"
-    }
-    maven {
-        name "CTM"
-        url "https://maven.tterrag.com/"
-    }
-    maven {
-        name "OpenComputers"
-        url "https://maven.cil.li/"
-    }
-    maven {
-        name "McJty's Mods'"
-        url "http://maven.k-4u.nl"
-    }
-    maven {
-        name "Forgelin"
-        url "http://maven.shadowfacts.net/"
     }
 }
 
@@ -74,7 +42,7 @@ dependencies {
 
     // Hard-Deps
     deobfCompile "curse.maven:mixin-booter-419286:3321174"
-    compile files("gregtech-1.12.2-2.2.1-beta.jar")
+    deobfCompile "curse.maven:gregtech-ce-unofficial-557242:3784798"
 
     // Mystical Agriculture mods
     deobfCompile "curse.maven:cucumber-272335:2645867"
@@ -84,38 +52,41 @@ dependencies {
     // CCLib
     deobfCompile "curse.maven:codechicken-lib-1-8-242818:2779848"
 
-    // JEI
+    // Useful stuff
     deobfCompile "curse.maven:jei-238222:3040523"
+    deobfCompile "curse.maven:jeid-296289:2919737"
+    runtime "curse.maven:the-one-probe-245211:2667280"
 
-    // McJty's Mods
-    deobfCompile "curse.maven:mcjtylib-233105:2745846"
-    deobfCompile "curse.maven:the-one-probe-245211:2667280"
-    deobfCompile "curse.maven:xnet-260912:2745852"
-
-    // CT
-    compile files("CraftTweaker2-1.12-4.1.20.656.jar")
-
-    // Chisel
+    // Direct compat mods
     deobfCompile "curse.maven:ctm-267602:2915363"
-
-    // Forestry and addons
+    //deobfCompile "curse.maven:cucumber-272335:2645867"
+    //deobfCompile "curse.maven:mystical-agriculture-246640:2704562"
+    //deobfCompile "curse.maven:mystical-agradditions-256247:2704832"
     deobfCompile "curse.maven:forestry-59751:2918418"
-    deobfCompile "curse.maven:binnies-mods-223525:2916129"
-
-    // TiCon
-    deobfCompile "curse.maven:tinkers-construct-74072:2902483"
-    deobfCompile "curse.maven:mantle-74924:2713386"
-
-    // ExNihilo
+    //deobfCompile "curse.maven:tinkers-construct-74072:2902483"
+    //deobfCompile "curse.maven:mantle-74924:2713386"
     deobfCompile "curse.maven:shadowfacts-forgelin-248453:2785465"
     deobfCompile "curse.maven:ex-nihilo-creatio-274456:2817545"
-
-    // OC
     deobfCompile "curse.maven:opencomputers-223008:2828357"
-
-    // TFC
     deobfCompile "curse.maven:tfcraft-302973:3268988"
+    //deobfCompile "curse.maven:mcjtylib-233105:2745846"
+    //deobfCompile "curse.maven:xnet-260912:2745852"
+    deobfCompile "curse.maven:gregtech-food-option-477021:3787937"
 
+    // Addons and other mods for testing as needed
+    //runtime "curse.maven:crafttweaker-239197:3411555"
+    runtime "curse.maven:binnies-mods-223525:2916129"
+    runtime "curse.maven:magic-bees-65764:2566282"
+    runtime "curse.maven:gendustry-70492:2516215"
+    runtime "curse.maven:bdlib-70496:2518031"
+    //runtime "curse.maven:career-bees-281791:2534481"
+    //runtime "curse.maven:retrobees-300139:2934369"
+    //runtime "curse.maven:the-twilight-forest-227639:3051450"
+    runtime "curse.maven:thaumcraft-223628:2629023"
+    runtime "curse.maven:baubles-227083:2518667"
+    //runtime "curse.maven:ae2-extended-life-570458:3632074"
+    //runtime "curse.maven:biomes-o-plenty-220318:2715506"
+    //runtime "curse.maven:extra-utilities-225561:2678374"
 }
 
 processResources {

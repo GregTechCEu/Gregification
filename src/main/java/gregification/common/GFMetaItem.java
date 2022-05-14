@@ -37,7 +37,7 @@ public class GFMetaItem extends StandardMetaItem {
 
     @Override
     public void registerSubItems() {
-        if (Loader.isModLoaded(GFValues.MODID_FR) && GFConfig.forestry.enableForestry && GFConfig.forestry.gtElectrodes) {
+        if (Loader.isModLoaded(GFValues.FORESTRY) && GFConfig.forestry.enableForestry && GFConfig.forestry.gtElectrodes) {
             registerForestryItems();
         }
         if (Loader.isModLoaded(GFValues.MODID_MA) && GFConfig.mysticalAgriculture.enableMysticalAgriculture) {

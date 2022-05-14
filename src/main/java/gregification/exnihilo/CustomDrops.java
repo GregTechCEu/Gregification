@@ -7,11 +7,12 @@ import exnihilocreatio.registries.manager.ISieveDefaultRegistryProvider;
 import exnihilocreatio.registries.registries.SieveRegistry;
 import exnihilocreatio.util.ItemInfo;
 import net.minecraft.init.Items;
-import org.jetbrains.annotations.NotNull;
+
+import javax.annotation.Nonnull;
 
 public class CustomDrops implements ISieveDefaultRegistryProvider {
     @Override
-    public void registerRecipeDefaults(@NotNull SieveRegistry registry) {
+    public void registerRecipeDefaults(@Nonnull SieveRegistry registry) {
         registry.clearRegistry();
 
         registry.register("dirt", new ItemInfo(ModItems.pebbles), 1f, BlockSieve.MeshType.STRING.getID());

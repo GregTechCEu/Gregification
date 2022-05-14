@@ -25,8 +25,10 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
                 "after:binniedesign;" +
                 "after:extrabees;" +
                 "after:extratrees;" +
+                "after:magicbees;" +
                 "after:botany;" +
-                "after:genetics")
+                "after:genetics;" +
+                "after:gendustry")
 public class Gregification {
 
     // Proxy for Gregification itself
@@ -60,6 +62,9 @@ public class Gregification {
         if (Loader.isModLoaded(GFValues.MODID_EXNI)) {
             ExNihiloProxy.preInit();
         }
+        if (Loader.isModLoaded(GFValues.FORESTRY)) {
+            ForestryProxy.preInit();
+        }
     }
 
     @EventHandler
@@ -70,12 +75,15 @@ public class Gregification {
         if (Loader.isModLoaded(GFValues.MODID_OC)) {
             OCProxy.init();
         }
-        if (Loader.isModLoaded(GFValues.MODID_FR)) {
+        if (Loader.isModLoaded(GFValues.FORESTRY)) {
             ForestryProxy.init();
         }
     }
 
     @EventHandler
     public void postInit(FMLPostInitializationEvent event) {
+        if (Loader.isModLoaded(GFValues.FORESTRY)) {
+            ForestryProxy.postInit();
+        }
     }
 }

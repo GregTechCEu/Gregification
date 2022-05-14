@@ -1,46 +1,113 @@
 package gregification.proxy;
 
+import forestry.modules.ModuleHelper;
+import gregification.common.GFLog;
+import gregification.common.GFUtility;
 import gregification.common.GFValues;
 import gregification.config.GFConfig;
-import gregification.forestry.recipes.ElectrodeRecipes;
-import gregtech.api.GregTechAPI;
-import gregtech.api.unification.material.Materials;
+import gregification.forestry.bees.*;
+import gregification.forestry.frames.GTFrameType;
+import gregification.forestry.frames.GTItemFrame;
+import gregification.forestry.recipes.*;
+import gregtech.api.unification.OreDictUnifier;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.Optional;
+import net.minecraftforge.fml.common.Optional.Method;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
-import static gregtech.api.unification.material.info.MaterialFlags.*;
+import static gregification.common.GFValues.FORESTRY;
 
 @Mod.EventBusSubscriber(modid = GFValues.MODID)
 public class ForestryCommonProxy {
 
-    @Optional.Method(modid = GFValues.MODID_FR)
+    @Method(modid = FORESTRY)
     @SubscribeEvent
     public static void registerRecipes(RegistryEvent.Register<IRecipe> event) {
         if (GFConfig.forestry.enableForestry) {
             if (GFConfig.forestry.gtElectrodes) {
                 ElectrodeRecipes.initGTRecipes();
             }
+            if (ModuleHelper.isEnabled("apiculture")) {
+                if (GFConfig.forestry.gtBees) {
+                    for (GTCombType type : GTCombType.VALUES) {
+                        OreDictUnifier.registerOre(new ItemStack(GTBees.combs, 1, type.ordinal()), "beeComb");
+                    }
+                    CombRecipes.initGTCombs();
+                    DropRecipes.init();
+                    PropolisRecipes.init();
+                }
+                if (GFConfig.forestry.gtFrames) {
+                    FrameRecipes.init();
+                }
+            }
         }
     }
 
-    @Optional.Method(modid = GFValues.MODID_FR)
+    @Method(modid = FORESTRY)
+    public void preInit() {
+        if (GFConfig.forestry.enableForestry) {
+            if (GFConfig.forestry.gtBees) {
+                if (ModuleHelper.isEnabled("apiculture")) {
+                    GTBees.combs = new GTItemComb();
+                    GTBees.drops = new GTItemDrop();
+                } else {
+                    GFLog.forestryLogger.error("GT Bees is enabled, but Forestry Apiculture module is disabled. Skipping GT Bees...");
+                }
+            }
+            if (GFConfig.forestry.gtFrames) {
+                if (ModuleHelper.isEnabled("apiculture")) {
+                    for (GTFrameType type : GTFrameType.values()) {
+                        GTBees.frames.put(type, new GTItemFrame(type));
+                    }
+                } else {
+                    GFLog.forestryLogger.error("GT Frames is enabled, but Forestry Apiculture module is disabled. Skipping GT Frames...");
+                }
+            }
+        }
+    }
+
+    @Method(modid = FORESTRY)
     public void init() {
         if (GFConfig.forestry.enableForestry) {
             if (GFConfig.forestry.gtElectrodes) {
                 ElectrodeRecipes.removeForestryRecipes();
                 ElectrodeRecipes.addForestryMachineRecipes();
             }
+            if (ModuleHelper.isEnabled("apiculture")) {
+                if (GFConfig.forestry.gtBees) {
+                    GTAlleleBeeSpecies.setupGTAlleles();
+                    GTBeeDefinition.initBees();
+                }
+            }
         }
     }
 
-    @SubscribeEvent()
-    public static void onMaterialRegistration(GregTechAPI.MaterialEvent event) {
-        if(GFConfig.forestry.enableForestry && GFConfig.forestry.gtElectrodes) {
-            Materials.Copper.addFlags(GENERATE_BOLT_SCREW);
-            Materials.Rubber.addFlags(GENERATE_ROD);
+    @Method(modid = FORESTRY)
+    public void postInit() {
+        if (ModuleHelper.isEnabled("apiculture")) {
+            CombRecipes.initForestryCombs();
+            //if (GFConfig.forestry.gregifyForestry) {
+            //    ForestryOverrideRecipes.init();
+            //}
+        }
+    }
+
+    @Method(modid = FORESTRY)
+    @SubscribeEvent
+    public static void registerItems(RegistryEvent.Register<Item> event) {
+        if (GFConfig.forestry.enableForestry) {
+            if (ModuleHelper.isEnabled("apiculture")) {
+                if (GFConfig.forestry.gtBees) {
+                    event.getRegistry().register(GTBees.combs);
+                    event.getRegistry().register(GTBees.drops);
+                }
+                if (GFConfig.forestry.gtFrames) {
+                    GTBees.frames.values().forEach(f -> event.getRegistry().register(f));
+                }
+            }
         }
     }
 }

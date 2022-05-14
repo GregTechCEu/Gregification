@@ -9,5 +9,7 @@ Many features originally derive from:
 - [GregBlock Utilities](https://www.curseforge.com/minecraft/mc-mods/gregblock-utilities)
 - [GTCE2OC](https://www.curseforge.com/minecraft/mc-mods/gtce2oc)
 - [Gregicality](https://www.curseforge.com/minecraft/mc-mods/gregicality)
+- [Shadows of Greg](https://www.curseforge.com/minecraft/mc-mods/shadows-of-greg)
+- [GregTech++](https://www.curseforge.com/minecraft/mc-mods/gregtech-gt-gtplusplus)
 
 This mod aims to collect and unify all the compatibility mods and modules, and combine them all into one easy to use and configure experience
