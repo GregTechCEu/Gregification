@@ -80,6 +80,9 @@ public class DriverICoverable extends DriverSidedTileEntity {
                 return new Object[] {new ValueCoverFluidFilter((CoverFluidFilter) coverBehavior, side)};
             if (coverBehavior instanceof CoverItemFilter)
                 return new Object[] {new ValueCoverItemFilter((CoverItemFilter) coverBehavior, side)};
+            if (coverBehavior instanceof CoverEnderFluidLink) {
+                return new Object[] {new ValueCoverEnderFluidLink((CoverEnderFluidLink) coverBehavior, side)};
+            }
             if (coverBehavior != null)
                 return new Object[] {new ValueCoverBehavior(coverBehavior, side)};
             return new Object[] {null};

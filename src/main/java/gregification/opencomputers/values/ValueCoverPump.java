@@ -70,7 +70,7 @@ public class ValueCoverPump extends ValueCoverBehavior {
         return new Object[]{};
     }
 
-    @Callback(doc = "function(mode:number) --  Sets conveyor mode. (0:IMPORT, 1:EXPORT)")
+    @Callback(doc = "function(mode:number) --  Sets pump mode. (0:IMPORT, 1:EXPORT)")
     public Object[] setPumpMode(final Context context, final Arguments args) {
         CoverBehavior coverBehavior = getCoverBehavior();
         if (!(coverBehavior instanceof CoverPump)) return new Object[] {null, "Found no cover, this is an invalid object."};
@@ -80,7 +80,7 @@ public class ValueCoverPump extends ValueCoverBehavior {
         return new Object[]{};
     }
 
-    @Callback(doc = "function():number --  Gets conveyor mode. (0:IMPORT, 1:EXPORT)")
+    @Callback(doc = "function():number --  Gets pump mode. (0:IMPORT, 1:EXPORT)")
     public Object[] getPumpMode(final Context context, final Arguments args) {
         CoverBehavior coverBehavior = getCoverBehavior();
         if (!(coverBehavior instanceof CoverPump)) return new Object[] {null, "Found no cover, this is an invalid object."};
