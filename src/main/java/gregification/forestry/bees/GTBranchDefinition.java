@@ -26,7 +26,7 @@ import forestry.apiculture.genetics.alleles.AlleleEffects;
 import forestry.core.genetics.alleles.AlleleHelper;
 import forestry.core.genetics.alleles.EnumAllele.*;
 import gregification.common.GFValues;
-import gregtech.api.GTValues;
+import net.minecraftforge.fml.common.Loader;
 
 import java.util.Arrays;
 import java.util.function.Consumer;
@@ -87,7 +87,7 @@ public enum GTBranchDefinition {
         AlleleHelper.getInstance().set(alleles, FLOWER_PROVIDER, Flowers.END);
         AlleleHelper.getInstance().set(alleles, FLOWERING, Flowering.AVERAGE);
         AlleleHelper.getInstance().set(alleles, SPEED, GTAlleleBeeSpecies.speedBlinding);
-        if (GTValues.isModLoaded(GFValues.MODID_EB)) {
+        if (Loader.isModLoaded(GFValues.MODID_EB)) {
             AlleleHelper.getInstance().set(alleles, EFFECT, GTBees.getEffect(GFValues.MODID_EB, "radioactive"));
         }
     }),
@@ -105,7 +105,7 @@ public enum GTBranchDefinition {
         AlleleHelper.getInstance().set(alleles, HUMIDITY_TOLERANCE, Tolerance.BOTH_1);
         AlleleHelper.getInstance().set(alleles, FLOWERING, Flowering.FASTER);
         AlleleHelper.getInstance().set(alleles, LIFESPAN, Lifespan.LONGEST);
-        if (GTValues.isModLoaded(GFValues.MODID_EB)) {
+        if (Loader.isModLoaded(GFValues.MODID_EB)) {
             AlleleHelper.getInstance().set(alleles, FLOWER_PROVIDER, GTBees.getFlowers(GFValues.MODID_EB, "book"));
         }
     }),
@@ -118,7 +118,7 @@ public enum GTBranchDefinition {
         AlleleHelper.getInstance().set(alleles, LIFESPAN, Lifespan.LONGEST);
         AlleleHelper.getInstance().set(alleles, SPEED, Speed.FAST);
         AlleleHelper.getInstance().set(alleles, TERRITORY, Territory.LARGEST);
-        if (GTValues.isModLoaded(GFValues.MODID_EB)) {
+        if (Loader.isModLoaded(GFValues.MODID_EB)) {
             AlleleHelper.getInstance().set(alleles, FLOWER_PROVIDER, GTBees.getFlowers(GFValues.MODID_EB, "rock"));
         }
     }),
@@ -129,7 +129,7 @@ public enum GTBranchDefinition {
         AlleleHelper.getInstance().set(alleles, LIFESPAN, Lifespan.NORMAL);
         AlleleHelper.getInstance().set(alleles, SPEED, Speed.FASTEST);
         AlleleHelper.getInstance().set(alleles, TERRITORY, Territory.LARGER);
-        if (GTValues.isModLoaded(GFValues.MODID_EB)) {
+        if (Loader.isModLoaded(GFValues.MODID_EB)) {
             AlleleHelper.getInstance().set(alleles, FLOWER_PROVIDER, GTBees.getFlowers(GFValues.MODID_EB, "rock"));
         }
     }),

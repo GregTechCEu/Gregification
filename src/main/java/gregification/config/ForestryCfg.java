@@ -67,6 +67,7 @@ public class ForestryCfg {
     })
     public boolean spaceBees = true;
 
+    /**
     @Config.Comment({
             "Replace Forestry recipes with GT-style recipes",
             "Changes nearly every recipe in Forestry.",
@@ -82,4 +83,5 @@ public class ForestryCfg {
             "Default: false"
     })
     public boolean gregifyForestryAddons = true;
+    */
 }

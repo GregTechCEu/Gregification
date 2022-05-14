@@ -33,12 +33,10 @@ public class GFOrePrefix {
 
     @SubscribeEvent
     public static void onMaterialRegisterEvent(GregTechAPI.MaterialEvent event) {
-        materialFlagAdditions();
-
         if (GFConfig.exNihilo.enableExNihilo && Loader.isModLoaded(GFValues.MODID_EXNI)) {
             initExNihilo();
         }
-        if (GFConfig.forestry.enableForestry && GTValues.isModLoaded(GFValues.FORESTRY)) {
+        if (GFConfig.forestry.enableForestry && Loader.isModLoaded(GFValues.FORESTRY)) {
             initForestry();
         }
     }
@@ -158,10 +156,10 @@ public class GFOrePrefix {
         Materials.Americium.setProperty(PropertyKey.ORE, new OreProperty());
         Materials.NetherStar.setProperty(PropertyKey.ORE, new OreProperty());
 
-        if (GFConfig.forestry.gregifyForestry) {
-            Materials.Glass.addFlags(GENERATE_BOLT_SCREW);
-            Materials.Iron.addFlags(GENERATE_FOIL, GENERATE_FINE_WIRE);
-            Materials.Bronze.addFlags(GENERATE_FINE_WIRE);
-        }
+        //if (GFConfig.forestry.gregifyForestry) {
+        //    Materials.Glass.addFlags(GENERATE_BOLT_SCREW);
+        //    Materials.Iron.addFlags(GENERATE_FOIL, GENERATE_FINE_WIRE);
+        //    Materials.Bronze.addFlags(GENERATE_FINE_WIRE);
+        //}
     }
 }

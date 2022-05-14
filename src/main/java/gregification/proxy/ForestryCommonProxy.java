@@ -89,9 +89,9 @@ public class ForestryCommonProxy {
     public void postInit() {
         if (ModuleHelper.isEnabled("apiculture")) {
             CombRecipes.initForestryCombs();
-            if (GFConfig.forestry.gregifyForestry) {
-                ForestryOverrideRecipes.init();
-            }
+            //if (GFConfig.forestry.gregifyForestry) {
+            //    ForestryOverrideRecipes.init();
+            //}
         }
     }
 

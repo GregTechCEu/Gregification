@@ -15,10 +15,10 @@ import gregtech.common.ConfigHolder;
 import gregtechfoodoption.item.GTFOMetaItem;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.JsonToNBT;
 import net.minecraft.nbt.NBTException;
+import net.minecraftforge.fml.common.Loader;
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.HashMap;
@@ -74,7 +74,7 @@ public class ForestryOverrideRecipes {
         removeCarpenterRecipe(getForestryItem("chipsets", 1, 0, "{T:0s}"));
         CIRCUIT_ASSEMBLER_RECIPES.recipeBuilder()
                 .input(BASIC_CIRCUIT_BOARD)
-                .input(circuit, Tier.Primitive, 2)
+                .input(circuit, Tier.ULV, 2)
                 .input(foil, Iron, 2)
                 .input(screw, Iron, 4)
                 .input(wireFine, Iron)
@@ -92,7 +92,7 @@ public class ForestryOverrideRecipes {
         removeCarpenterRecipe(getForestryItem("chipsets", 1, 1, "{T:1s}"));
         CIRCUIT_ASSEMBLER_RECIPES.recipeBuilder()
                 .input(BASIC_CIRCUIT_BOARD)
-                .input(circuit, Tier.Basic, 2)
+                .input(circuit, Tier.LV, 2)
                 .input(foil, Bronze, 2)
                 .input(screw, Bronze, 4)
                 .input(wireFine, Bronze)
@@ -110,7 +110,7 @@ public class ForestryOverrideRecipes {
         removeCarpenterRecipe(getForestryItem("chipsets", 1, 2, "{T:2s}"));
         CIRCUIT_ASSEMBLER_RECIPES.recipeBuilder()
                 .input(GOOD_CIRCUIT_BOARD)
-                .input(circuit, Tier.Good, 2)
+                .input(circuit, Tier.MV, 2)
                 .input(foil, Steel, 2)
                 .input(screw, Steel, 4)
                 .input(wireFine, Steel)
@@ -128,7 +128,7 @@ public class ForestryOverrideRecipes {
         removeCarpenterRecipe(getForestryItem("chipsets", 1, 3, "{T:3s}"));
         CIRCUIT_ASSEMBLER_RECIPES.recipeBuilder()
                 .input(GOOD_CIRCUIT_BOARD)
-                .input(circuit, Tier.Advanced, 2)
+                .input(circuit, Tier.HV, 2)
                 .input(foil, Electrum, 2)
                 .input(screw, Electrum, 4)
                 .input(wireFine, Electrum)
@@ -149,7 +149,7 @@ public class ForestryOverrideRecipes {
                 'A', getForestryItem("portable_alyzer", 0),
                 'T', BRONZE_DRUM.getStackForm(),
                 'S', getForestryItem("sturdy_machine", 0),
-                'C', new UnificationEntry(circuit, Tier.Basic),
+                'C', new UnificationEntry(circuit, Tier.LV),
                 'M', ELECTRIC_MOTOR_LV.getStackForm());
 
         // Bottler
@@ -445,7 +445,7 @@ public class ForestryOverrideRecipes {
                     'F', "fenceWood");
         }
 
-        if (isModLoaded(GFValues.MODID_GTFO)) {
+        if (Loader.isModLoaded(GFValues.MODID_GTFO)) {
             // Honeyed Slice
             ModHandler.removeRecipeByName("forestry:honeyed_slice");
             RecipeManagers.carpenterManager.addRecipe(10, Fluids.FOR_HONEY.getFluid(800), ItemStack.EMPTY, getForestryItem("honeyed_slice", 0),

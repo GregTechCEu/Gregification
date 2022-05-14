@@ -43,6 +43,7 @@ import gregtech.api.util.GTUtility;
 import gregtech.common.items.MetaItems;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fml.common.Loader;
 
 import java.util.Arrays;
 import java.util.Map;
@@ -93,10 +94,10 @@ public class CombRecipes {
 
         // Industrial
         //addCentrifugeToItemStack(GTCombType.COOLANT, ...);
-        if (GTValues.isModLoaded(GFValues.MODID_EB)) {
+        if (Loader.isModLoaded(GFValues.MODID_EB)) {
             addCentrifugeToItemStack(GTCombType.ENERGY, new ItemStack[]{/*ForestryCommonProxy.drops.get(GTDropType.HOT_COOLANT),*/ MetaItems.ENERGIUM_DUST.getStackForm(), ModuleCore.getItems().refractoryWax.getItemStack()}, new int[]{/*20*100,*/ 20 * 100, 50 * 100}, Voltage.HV, 196);
             ItemStack wax = ModuleCore.getItems().beeswax.getItemStack();
-            if (GTValues.isModLoaded(GFValues.MODID_MB)) {
+            if (Loader.isModLoaded(GFValues.MODID_MB)) {
                 wax = GFUtility.getModItem(GFValues.MODID_MB, "wax", 2);
             }
             addCentrifugeToItemStack(GTCombType.LAPOTRON, new ItemStack[]{/*ForestryCommonProxy.drops.get(GTDropType.LAPIS),*/ OreDictUnifier.get(OrePrefix.dust, Materials.Lapotron), wax}, new int[]{/*20*100,*/ 15*100, 40*100}, Voltage.HV, 196);
@@ -122,7 +123,7 @@ public class CombRecipes {
         // Gem
         addProcessGT(GTCombType.STONE, new Material[]{Materials.Soapstone, Materials.Talc, Materials.Apatite, Materials.Phosphate, Materials.TricalciumPhosphate}, Voltage.LV);
         addProcessGT(GTCombType.CERTUS, new Material[]{Materials.CertusQuartz, Materials.Quartzite, Materials.Barite}, Voltage.LV);
-        if (GTValues.isModLoaded(GFValues.MODID_AE)) {
+        if (Loader.isModLoaded(GFValues.MODID_AE)) {
             addProcessGT(GTCombType.FLUIX, new Material[]{Materials.Redstone, Materials.CertusQuartz, Materials.NetherQuartz}, Voltage.LV);
         }
         addProcessGT(GTCombType.REDSTONE, new Material[]{Materials.Redstone, Materials.Cinnabar}, Voltage.LV);
@@ -140,13 +141,13 @@ public class CombRecipes {
         addProcessGT(GTCombType.GROSSULAR, new Material[]{Materials.Grossular, Materials.Aluminium, Materials.Silicon}, Voltage.LV);
         if (GFConfig.forestry.nerfGTCombs) {
             addCentrifugeToMaterial(GTCombType.STONE, new Material[]{Materials.Stone, Materials.GraniteBlack, Materials.GraniteRed, Materials.Basalt, Materials.Marble, Materials.Redrock}, new int[]{70*100, 50*100, 50*100, 50*100, 50*100, 50*100}, new int[]{9, 9, 9, 9, 9, 9}, Voltage.ULV, ItemStack.EMPTY, 50*100);
-            if (GTValues.isModLoaded(GFValues.MODID_AE)) {
+            if (Loader.isModLoaded(GFValues.MODID_AE)) {
                 addCentrifugeToItemStack(GTCombType.FLUIX, new ItemStack[]{OreDictUnifier.get("dustFluix"), ModuleCore.getItems().beeswax.getItemStack()}, new int[]{25*100, 30*100}, Voltage.ULV);
             }
         } else {
             addCentrifugeToMaterial(GTCombType.STONE, new Material[]{Materials.Soapstone, Materials.Talc, Materials.Apatite, Materials.Phosphate, Materials.TricalciumPhosphate}, new int[]{95*100, 90*100, 80*100, 75*100, 75*100}, new int[]{}, Voltage.ULV, ItemStack.EMPTY, 50*100);
             addCentrifugeToMaterial(GTCombType.CERTUS, new Material[] {Materials.CertusQuartz, Materials.Quartzite, Materials.Barite}, new int[] {100 * 100, 80 * 100, 75 * 100}, new int[] {}, Voltage.ULV, ItemStack.EMPTY, 50*100);
-            if (GTValues.isModLoaded(GFValues.MODID_AE)) {
+            if (Loader.isModLoaded(GFValues.MODID_AE)) {
                 addCentrifugeToItemStack(GTCombType.FLUIX, new ItemStack[]{OreDictUnifier.get("dustFluix"), OreDictUnifier.get(OrePrefix.dustTiny, Materials.Redstone), OreDictUnifier.get(OrePrefix.dustTiny, Materials.CertusQuartz), OreDictUnifier.get(OrePrefix.dustTiny, Materials.NetherQuartz), ModuleCore.getItems().beeswax.getItemStack()}, new int[]{25*100, 90*100, 90*100, 90*100, 30*100}, Voltage.ULV);
             }
             addCentrifugeToMaterial(GTCombType.REDSTONE, new Material[] {Materials.Redstone, Materials.Cinnabar }, new int[] {100 * 100, 80 * 100}, new int[] {}, Voltage.ULV, ItemStack.EMPTY, 30*100);
@@ -279,10 +280,10 @@ public class CombRecipes {
             }
         }
 
-        if (GTValues.isModLoaded(GFValues.MODID_MB)) {
+        if (Loader.isModLoaded(GFValues.MODID_MB)) {
             addProcessGT(GTCombType.SPARKLING, new Material[]{Materials.NetherStar}, Voltage.EV);
             addCentrifugeToItemStack(GTCombType.SPARKLING, new ItemStack[]{GFUtility.getModItem(GFValues.MODID_MB, "wax", 0), GFUtility.getModItem(GFValues.MODID_MB, "resource", 5), OreDictUnifier.get(OrePrefix.dustTiny, Materials.NetherStar)}, new int[]{50*100, 10*100, (GFConfig.forestry.nerfGTCombs ? 10:50)*100}, Voltage.EV);
-            if (GTValues.isModLoaded(GFValues.MODID_XU2)) {
+            if (Loader.isModLoaded(GFValues.MODID_XU2)) {
                 addProcessGT(GTCombType.DIVIDED, new Material[]{Materials.Iron, Materials.Diamond}, Voltage.HV);
                 addCentrifugeToItemStack(GTCombType.DIVIDED, new ItemStack[]{GFUtility.getModItem(GFValues.MODID_MB, "wax", 0), GFUtility.getModItem(GFValues.MODID_XU2, "unstableingots", 1), OreDictUnifier.get(OrePrefix.dustTiny, Materials.Iron), OreDictUnifier.get(OrePrefix.dustTiny, Materials.Diamond)}, new int[]{50*100, 20*100, 50*100, 30*100}, Voltage.HV);
             }

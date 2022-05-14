@@ -12,6 +12,7 @@ import gregification.forestry.frames.GTFrameType;
 import gregification.forestry.frames.GTItemFrame;
 import gregtech.api.GTValues;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.fml.common.Loader;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -19,8 +20,8 @@ import java.util.Map;
 public class GTBees {
 
     // Frequently used booleans for enabling some features
-    public static final boolean TWILIGHT_BEES = GFConfig.forestry.twilightBees && GTValues.isModLoaded(GFValues.MODID_TF) && GTValues.isModLoaded(GFValues.MODID_MB);
-    public static final boolean THAUMIC_BEES = GFConfig.forestry.thaumicBees && GTValues.isModLoaded(GFValues.MODID_THAUM) && GTValues.isModLoaded(GFValues.MODID_MB);
+    public static final boolean TWILIGHT_BEES = GFConfig.forestry.twilightBees && Loader.isModLoaded(GFValues.MODID_TF) && Loader.isModLoaded(GFValues.MODID_MB);
+    public static final boolean THAUMIC_BEES = GFConfig.forestry.thaumicBees && Loader.isModLoaded(GFValues.MODID_THAUM) && Loader.isModLoaded(GFValues.MODID_MB);
 
     // New Items
     public static GTItemComb combs;

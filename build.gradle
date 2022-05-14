@@ -42,7 +42,7 @@ dependencies {
 
     // Hard-Deps
     deobfCompile "curse.maven:mixin-booter-419286:3321174"
-    compile files("gregtech-1.12.2-2.2.1-beta.jar")
+    deobfCompile "curse.maven:gregtech-ce-unofficial-557242:3784798"
 
     // Mystical Agriculture mods
     deobfCompile "curse.maven:cucumber-272335:2645867"
@@ -71,7 +71,7 @@ dependencies {
     deobfCompile "curse.maven:tfcraft-302973:3268988"
     //deobfCompile "curse.maven:mcjtylib-233105:2745846"
     //deobfCompile "curse.maven:xnet-260912:2745852"
-    deobfCompile "curse.maven:gregtech-food-option-477021:3636751"
+    deobfCompile "curse.maven:gregtech-food-option-477021:3787937"
 
     // Addons and other mods for testing as needed
     //runtime "curse.maven:crafttweaker-239197:3411555"

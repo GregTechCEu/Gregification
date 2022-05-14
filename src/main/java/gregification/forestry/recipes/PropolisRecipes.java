@@ -2,9 +2,9 @@ package gregification.forestry.recipes;
 
 import gregification.common.GFUtility;
 import gregification.common.GFValues;
-import gregtech.api.GTValues;
 import gregtech.api.recipes.RecipeMaps;
 import gregtech.api.unification.material.Materials;
+import net.minecraftforge.fml.common.Loader;
 
 import static gregification.common.GFValues.*;
 
@@ -13,7 +13,7 @@ public class PropolisRecipes {
     public static void init() {
 
         // Extra Bees Propolis
-        if (GTValues.isModLoaded(GFValues.MODID_EB)) {
+        if (Loader.isModLoaded(GFValues.MODID_EB)) {
             RecipeMaps.EXTRACTOR_RECIPES.recipeBuilder()
                     .inputs(GFUtility.getModItem(MODID_EB, "propolis", 0))
                     .fluidOutputs(Materials.Water.getFluid(500))

@@ -26,10 +26,10 @@ import gregification.common.GFUtility;
 import gregification.common.GFValues;
 import gregification.forestry.bees.GTBees;
 import gregification.forestry.bees.GTDropType;
-import gregtech.api.GTValues;
 import gregtech.api.recipes.RecipeMaps;
 import gregtech.api.unification.material.Materials;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.fml.common.Loader;
 
 public class DropRecipes {
 
@@ -50,7 +50,7 @@ public class DropRecipes {
         // Biomass Drop
         dropStack = GTBees.getDropStack(GTDropType.BIOMASS);
         ItemStack propolisStack = ModuleApiculture.getItems().propolis.get(EnumPropolis.NORMAL, 1);
-        if (GTValues.isModLoaded(GFValues.MODID_EB)) {
+        if (Loader.isModLoaded(GFValues.MODID_EB)) {
             propolisStack = GFUtility.getModItem(GFValues.MODID_EB, "propolis", 7);
         }
         RecipeMaps.EXTRACTOR_RECIPES.recipeBuilder()

@@ -62,7 +62,7 @@ public class Gregification {
         if (Loader.isModLoaded(GFValues.MODID_EXNI)) {
             ExNihiloProxy.preInit();
         }
-        if (GTValues.isModLoaded(GFValues.FORESTRY)) {
+        if (Loader.isModLoaded(GFValues.FORESTRY)) {
             ForestryProxy.preInit();
         }
     }
@@ -75,14 +75,14 @@ public class Gregification {
         if (Loader.isModLoaded(GFValues.MODID_OC)) {
             OCProxy.init();
         }
-        if (GTValues.isModLoaded(GFValues.FORESTRY)) {
+        if (Loader.isModLoaded(GFValues.FORESTRY)) {
             ForestryProxy.init();
         }
     }
 
     @EventHandler
     public void postInit(FMLPostInitializationEvent event) {
-        if (GTValues.isModLoaded(GFValues.FORESTRY)) {
+        if (Loader.isModLoaded(GFValues.FORESTRY)) {
             ForestryProxy.postInit();
         }
     }

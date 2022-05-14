@@ -18,7 +18,7 @@
 package gregification.forestry.bees;
 
 import gregification.common.GFValues;
-import gregtech.api.GTValues;
+import net.minecraftforge.fml.common.Loader;
 
 public enum GTCombType {
 
@@ -116,10 +116,10 @@ public enum GTCombType {
     TAINTED("tainted", GTBees.THAUMIC_BEES, 0x904BB8, 0xE800FF),
 
     // Semi-stable nugget
-    DIVIDED("divided", GTValues.isModLoaded(GFValues.MODID_XU2) && GTValues.isModLoaded(GFValues.MODID_EB), 0xF0F0F0, 0xDCDCDC),
+    DIVIDED("divided", Loader.isModLoaded(GFValues.MODID_XU2) && Loader.isModLoaded(GFValues.MODID_EB), 0xF0F0F0, 0xDCDCDC),
 
     // Nether Star
-    SPARKLING("sparkling", GTValues.isModLoaded(GFValues.MODID_MB), 0x7A007A, 0xFFFFFF),
+    SPARKLING("sparkling", Loader.isModLoaded(GFValues.MODID_MB), 0x7A007A, 0xFFFFFF),
 
     //THAUMIUMSHARD("thaumiumshard", GTBees.THAUMIC_BEES, null, 85,0x9966FF, 0xAD85FF),
     //MITHRIL("mithril", GTBees.THAUMIC_BEES, null, 70,0xF0E68C, 0xFFFFD2),
