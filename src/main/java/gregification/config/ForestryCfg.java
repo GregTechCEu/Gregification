@@ -69,9 +69,17 @@ public class ForestryCfg {
 
     @Config.Comment({
             "Replace Forestry recipes with GT-style recipes",
-            "Currently changes:",
-            "",
-            "Default: true"
+            "Changes nearly every recipe in Forestry.",
+            "Some changes are only available with some GT harder recipe configs, primarily \"hardMiscRecipes\" and \"hardWoodRecipes\"",
+            "Default: false"
     })
     public boolean gregifyForestry = true;
+
+    @Config.Comment({
+            "Replace Forestry addon recipes with GT-style recipes",
+            "Currently supports:",
+            "",
+            "Default: false"
+    })
+    public boolean gregifyForestryAddons = true;
 }
