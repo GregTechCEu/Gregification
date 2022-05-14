@@ -27,6 +27,7 @@ public class OCCommonProxy {
             Driver.add(new DriverSimpleMachine());
             Driver.add(new DriverFusionReactor());
             Driver.add(new DriverWorldAccelerator());
+            Driver.add(new DriverConverter());
             //Driver.add(new DriverBatteryTower());
 
             // TODO Waiting on Gregicality Science
