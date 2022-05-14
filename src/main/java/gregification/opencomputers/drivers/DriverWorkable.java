@@ -6,7 +6,7 @@ package gregification.opencomputers.drivers;
 
 import gregtech.api.capability.GregtechTileCapabilities;
 import gregtech.api.capability.IWorkable;
-import gregtech.api.metatileentity.MetaTileEntityHolder;
+import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import li.cil.oc.api.machine.Arguments;
 import li.cil.oc.api.machine.Callback;
 import li.cil.oc.api.machine.Context;
@@ -28,7 +28,7 @@ public class DriverWorkable extends DriverSidedTileEntity {
     @Override
     public boolean worksWith(World world, BlockPos pos, EnumFacing side) {
         TileEntity tileEntity = world.getTileEntity(pos);
-        if (tileEntity instanceof MetaTileEntityHolder) {
+        if (tileEntity instanceof IGregTechTileEntity) {
             return tileEntity.hasCapability(GregtechTileCapabilities.CAPABILITY_WORKABLE, side);
         }
         return false;
@@ -37,8 +37,8 @@ public class DriverWorkable extends DriverSidedTileEntity {
     @Override
     public ManagedEnvironment createEnvironment(World world, BlockPos pos, EnumFacing side) {
         TileEntity tileEntity = world.getTileEntity(pos);
-        if (tileEntity instanceof MetaTileEntityHolder) {
-            return new EnvironmentIWorkable((MetaTileEntityHolder) tileEntity,
+        if (tileEntity instanceof IGregTechTileEntity) {
+            return new EnvironmentIWorkable((IGregTechTileEntity) tileEntity,
                     tileEntity.getCapability(GregtechTileCapabilities.CAPABILITY_WORKABLE, side)
             );
         }
@@ -47,8 +47,8 @@ public class DriverWorkable extends DriverSidedTileEntity {
 
     public final static class EnvironmentIWorkable extends EnvironmentMetaTileEntity<IWorkable> {
 
-        public EnvironmentIWorkable(MetaTileEntityHolder holder, IWorkable capability) {
-            super(holder, capability, "gtce_workable");
+        public EnvironmentIWorkable(IGregTechTileEntity holder, IWorkable capability) {
+            super(holder, capability, "gt_workable");
         }
 
         @Callback(doc = "function():number --  Returns the MaxProgress!")

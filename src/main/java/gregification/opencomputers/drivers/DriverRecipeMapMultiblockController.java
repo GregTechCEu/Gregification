@@ -20,7 +20,7 @@ package gregification.opencomputers.drivers;
 import gregtech.api.capability.GregtechTileCapabilities;
 import gregtech.api.capability.IMultipleTankHandler;
 import gregtech.api.capability.impl.MultiblockRecipeLogic;
-import gregtech.api.metatileentity.MetaTileEntityHolder;
+import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.RecipeMapMultiblockController;
 import li.cil.oc.api.machine.Arguments;
 import li.cil.oc.api.machine.Callback;
@@ -52,7 +52,7 @@ public class DriverRecipeMapMultiblockController extends DriverSidedTileEntity {
     @Override
     public boolean worksWith(World world, BlockPos pos, EnumFacing side) {
         TileEntity tileEntity = world.getTileEntity(pos);
-        if (tileEntity instanceof MetaTileEntityHolder) {
+        if (tileEntity instanceof IGregTechTileEntity) {
             return tileEntity.hasCapability(GregtechTileCapabilities.CAPABILITY_WORKABLE, side);
         }
         return false;
@@ -61,18 +61,18 @@ public class DriverRecipeMapMultiblockController extends DriverSidedTileEntity {
     @Override
     public ManagedEnvironment createEnvironment(World world, BlockPos pos, EnumFacing side) {
         TileEntity tileEntity = world.getTileEntity(pos);
-        if (tileEntity instanceof MetaTileEntityHolder) {
-            if (((MetaTileEntityHolder) tileEntity).getMetaTileEntity() instanceof RecipeMapMultiblockController)
-                return new EnvironmentMultiblockRecipeLogic((MetaTileEntityHolder) tileEntity,
-                        (RecipeMapMultiblockController) ((MetaTileEntityHolder) tileEntity).getMetaTileEntity());
+        if (tileEntity instanceof IGregTechTileEntity) {
+            if (((IGregTechTileEntity) tileEntity).getMetaTileEntity() instanceof RecipeMapMultiblockController)
+                return new EnvironmentMultiblockRecipeLogic((IGregTechTileEntity) tileEntity,
+                        (RecipeMapMultiblockController) ((IGregTechTileEntity) tileEntity).getMetaTileEntity());
         }
         return null;
     }
 
     public final static class EnvironmentMultiblockRecipeLogic extends EnvironmentMetaTileEntity<RecipeMapMultiblockController> {
 
-        public EnvironmentMultiblockRecipeLogic(MetaTileEntityHolder holder, RecipeMapMultiblockController capability) {
-            super(holder, capability, "gtce_multiblockRecipeLogic");
+        public EnvironmentMultiblockRecipeLogic(IGregTechTileEntity holder, RecipeMapMultiblockController capability) {
+            super(holder, capability, "gt_multiblockRecipeLogic");
         }
 
         @Callback(doc = "function():number --  Returns the amount of electricity contained in this Block, in EU units!")

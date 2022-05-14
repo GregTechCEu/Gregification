@@ -18,7 +18,7 @@
 package gregification.opencomputers.drivers.specific;
 
 import gregification.opencomputers.drivers.EnvironmentMetaTileEntity;
-import gregtech.api.metatileentity.MetaTileEntityHolder;
+import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.common.metatileentities.multi.electric.MetaTileEntityFusionReactor;
 import li.cil.oc.api.machine.Arguments;
 import li.cil.oc.api.machine.Callback;
@@ -41,8 +41,8 @@ public class DriverFusionReactor extends DriverSidedTileEntity {
     @Override
     public boolean worksWith(World world, BlockPos pos, EnumFacing side) {
         TileEntity tileEntity = world.getTileEntity(pos);
-        if (tileEntity instanceof MetaTileEntityHolder) {
-            return ((MetaTileEntityHolder) tileEntity).getMetaTileEntity() instanceof MetaTileEntityFusionReactor;
+        if (tileEntity instanceof IGregTechTileEntity) {
+            return ((IGregTechTileEntity) tileEntity).getMetaTileEntity() instanceof MetaTileEntityFusionReactor;
         }
         return false;
     }
@@ -50,9 +50,9 @@ public class DriverFusionReactor extends DriverSidedTileEntity {
     @Override
     public ManagedEnvironment createEnvironment(World world, BlockPos pos, EnumFacing side) {
         TileEntity tileEntity = world.getTileEntity(pos);
-        if (tileEntity instanceof MetaTileEntityHolder) {
-            return new EnvironmentFusionReactor((MetaTileEntityHolder) tileEntity,
-                    (MetaTileEntityFusionReactor) ((MetaTileEntityHolder) tileEntity).getMetaTileEntity()
+        if (tileEntity instanceof IGregTechTileEntity) {
+            return new EnvironmentFusionReactor((IGregTechTileEntity) tileEntity,
+                    (MetaTileEntityFusionReactor) ((IGregTechTileEntity) tileEntity).getMetaTileEntity()
             );
         }
         return null;
@@ -61,8 +61,8 @@ public class DriverFusionReactor extends DriverSidedTileEntity {
     public final static class EnvironmentFusionReactor extends
             EnvironmentMetaTileEntity<MetaTileEntityFusionReactor> {
 
-        public EnvironmentFusionReactor(MetaTileEntityHolder holder, MetaTileEntityFusionReactor tileEntity) {
-            super(holder, tileEntity, "gtce_tileEntityFusionReactor");
+        public EnvironmentFusionReactor(IGregTechTileEntity holder, MetaTileEntityFusionReactor tileEntity) {
+            super(holder, tileEntity, "gt_fusionReactor");
         }
 
         @Callback(doc = "function():number --  Returns the heat of machine.")

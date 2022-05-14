@@ -6,7 +6,7 @@ package gregification.opencomputers.drivers;
 
 import gregtech.api.capability.GregtechCapabilities;
 import gregtech.api.capability.IEnergyContainer;
-import gregtech.api.metatileentity.MetaTileEntityHolder;
+import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import li.cil.oc.api.machine.Arguments;
 import li.cil.oc.api.machine.Callback;
 import li.cil.oc.api.machine.Context;
@@ -28,7 +28,7 @@ public class DriverEnergyContainer extends DriverSidedTileEntity {
     @Override
     public boolean worksWith(World world, BlockPos pos, EnumFacing side) {
         TileEntity tileEntity = world.getTileEntity(pos);
-        if (tileEntity instanceof MetaTileEntityHolder) {
+        if (tileEntity instanceof IGregTechTileEntity) {
             return tileEntity.hasCapability(GregtechCapabilities.CAPABILITY_ENERGY_CONTAINER, side);
         }
         return false;
@@ -37,8 +37,8 @@ public class DriverEnergyContainer extends DriverSidedTileEntity {
     @Override
     public ManagedEnvironment createEnvironment(World world, BlockPos pos, EnumFacing side) {
         TileEntity tileEntity = world.getTileEntity(pos);
-        if (tileEntity instanceof MetaTileEntityHolder) {
-            return new EnvironmentIEnergyContainer((MetaTileEntityHolder) tileEntity,
+        if (tileEntity instanceof IGregTechTileEntity) {
+            return new EnvironmentIEnergyContainer((IGregTechTileEntity) tileEntity,
                     tileEntity.getCapability(GregtechCapabilities.CAPABILITY_ENERGY_CONTAINER, side)
             );
         }
@@ -47,8 +47,8 @@ public class DriverEnergyContainer extends DriverSidedTileEntity {
 
     public static final class EnvironmentIEnergyContainer extends EnvironmentMetaTileEntity<IEnergyContainer> {
 
-        public EnvironmentIEnergyContainer(MetaTileEntityHolder holder, IEnergyContainer capability) {
-            super(holder, capability, "gtce_energyContainer");
+        public EnvironmentIEnergyContainer(IGregTechTileEntity holder, IEnergyContainer capability) {
+            super(holder, capability, "gt_energyContainer");
         }
 
         @Callback(doc = "function():number --  Returns the amount of electricity contained in this Block, in EU units!")

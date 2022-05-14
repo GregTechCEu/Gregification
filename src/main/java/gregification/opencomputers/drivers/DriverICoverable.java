@@ -21,7 +21,7 @@ import gregification.opencomputers.values.*;
 import gregtech.api.capability.GregtechTileCapabilities;
 import gregtech.api.cover.CoverBehavior;
 import gregtech.api.cover.ICoverable;
-import gregtech.api.metatileentity.MetaTileEntityHolder;
+import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.common.covers.*;
 import li.cil.oc.api.machine.Arguments;
 import li.cil.oc.api.machine.Callback;
@@ -44,7 +44,7 @@ public class DriverICoverable extends DriverSidedTileEntity {
     @Override
     public boolean worksWith(World world, BlockPos pos, EnumFacing side) {
         TileEntity tileEntity = world.getTileEntity(pos);
-        if (tileEntity instanceof MetaTileEntityHolder) {
+        if (tileEntity instanceof IGregTechTileEntity) {
             return tileEntity.hasCapability(GregtechTileCapabilities.CAPABILITY_COVERABLE, side);
         }
         return false;
@@ -53,8 +53,8 @@ public class DriverICoverable extends DriverSidedTileEntity {
     @Override
     public ManagedEnvironment createEnvironment(World world, BlockPos pos, EnumFacing side) {
         TileEntity tileEntity = world.getTileEntity(pos);
-        if (tileEntity instanceof MetaTileEntityHolder) {
-            return new EnvironmentICoverable((MetaTileEntityHolder) tileEntity,
+        if (tileEntity instanceof IGregTechTileEntity) {
+            return new EnvironmentICoverable((IGregTechTileEntity) tileEntity,
                     tileEntity.getCapability(GregtechTileCapabilities.CAPABILITY_COVERABLE, null));
         }
         return null;
@@ -62,8 +62,8 @@ public class DriverICoverable extends DriverSidedTileEntity {
 
     public final static class EnvironmentICoverable extends EnvironmentMetaTileEntity<ICoverable> {
 
-        public EnvironmentICoverable(MetaTileEntityHolder holder, ICoverable capability) {
-            super(holder, capability, "gtce_workable");
+        public EnvironmentICoverable(IGregTechTileEntity holder, ICoverable capability) {
+            super(holder, capability, "gt_coverable");
         }
 
         @Callback(doc = "function(side:number):table --  Returns cover of side!")
