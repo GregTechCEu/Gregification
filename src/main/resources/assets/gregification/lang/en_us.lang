@@ -206,3 +206,9 @@ item.gt.honey_drop.oil.name=Oil Drop
 item.gt.honey_drop.lapis.name=Lapis Coolant Drop
 item.gt.honey_drop.biomass.name=Biomass Drop
 item.gt.honey_drop.ethanol.name=Ethanol Drop
+
+metaitem.tool.scoop.name=%s Scoop
+behaviour.scoop=Catches Butterflies on Left-Click
+
+material.for.honey=Honey
+material.juice=Fruit Juice

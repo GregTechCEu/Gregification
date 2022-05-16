@@ -14,8 +14,6 @@ recipemap.electric_sieve.name=电动筛
 gregification.machine.sieve.steam.name=蒸汽筛
 gregification.machine.sieve.steam.tooltip=Tired of Right-Clicking all day?
 
-gregtech.machine.sieve.tooltip=
-
 gregification.machine.sieve.lv.name=基础电动筛
 gregification.machine.sieve.mv.name=进阶电动筛
 gregification.machine.sieve.hv.name=进阶电动筛 II
@@ -27,8 +25,8 @@ gregification.machine.sieve.uv.name=精英电动筛 IV
 gregification.machine.sieve.uhv.name=次世代电动筛
 gregification.machine.sieve.uev.name=次世代电动筛 II
 gregification.machine.sieve.uiv.name=次世代电动筛 III
-gregification.machine.sieve.umv.name=次世代电动筛 IV
-gregification.machine.sieve.uxv.name=终焉电动筛
+gregification.machine.sieve.uxv.name=次世代电动筛 IV
+gregification.machine.sieve.opv.name=终焉电动筛
 
 # Forestry
 metaitem.electrode.apatite.name=磷灰石电子管元件
@@ -45,3 +43,9 @@ metaitem.electrode.obsidian.name=黑曜石电子管元件
 metaitem.electrode.orchid.name=兰花电子管元件
 metaitem.electrode.rubber.name=橡胶电子管元件
 metaitem.electrode.tin.name=锡电子管元件
+
+metaitem.tool.scoop.name=%s捕虫网
+behaviour.scoop=左键以捕捉蝴蝶
+
+material.for.honey=蜂蜜
+material.juice=Fruit Juice

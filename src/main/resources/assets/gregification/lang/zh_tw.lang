@@ -14,8 +14,6 @@ recipemap.electric_sieve.name=電動篩
 gregification.machine.sieve.steam.name=蒸汽篩
 gregification.machine.sieve.steam.tooltip=Tired of Right-Clicking all day?
 
-gregtech.machine.sieve.tooltip=
-
 gregification.machine.sieve.lv.name=基礎電動篩
 gregification.machine.sieve.mv.name=進階電動篩
 gregification.machine.sieve.hv.name=進階電動篩 II
@@ -27,8 +25,8 @@ gregification.machine.sieve.uv.name=精英電動篩 IV
 gregification.machine.sieve.uhv.name=次世代電動篩
 gregification.machine.sieve.uev.name=次世代電動篩 II
 gregification.machine.sieve.uiv.name=次世代電動篩 III
-gregification.machine.sieve.umv.name=次世代電動篩 IV
-gregification.machine.sieve.uxv.name=終焉電動篩
+gregification.machine.sieve.uxv.name=次世代電動篩 IV
+gregification.machine.sieve.opv.name=終焉電動篩
 
 # Forestry
 metaitem.electrode.apatite.name=磷灰石電子管元件

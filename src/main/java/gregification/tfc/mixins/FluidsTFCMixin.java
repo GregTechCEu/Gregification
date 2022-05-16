@@ -31,7 +31,7 @@ import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
 
 import javax.annotation.Nonnull;
-import java.awt.*;
+import java.awt.Color;
 import java.util.Arrays;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -39,71 +39,37 @@ import java.util.stream.Collectors;
 @Mixin(value = FluidsTFC.class, remap = false)
 public class FluidsTFCMixin {
 
-    @Shadow
-    @Final
-    private static ResourceLocation STILL;
-    @Shadow
-    @Final
-    private static ResourceLocation FLOW;
-    @Shadow
-    @Final
-    private static ResourceLocation LAVA_STILL;
-    @Shadow
-    @Final
-    private static ResourceLocation LAVA_FLOW;
-    @Shadow
-    @Final
-    private static Map<EnumDyeColor, FluidWrapper> DYE_FLUIDS;
+    @Shadow @Final private static ResourceLocation STILL;
+    @Shadow @Final private static ResourceLocation FLOW;
+    @Shadow @Final private static ResourceLocation LAVA_STILL;
+    @Shadow @Final private static ResourceLocation LAVA_FLOW;
+    @Shadow @Final private static Map<EnumDyeColor, FluidWrapper> DYE_FLUIDS;
 
-    @Shadow
-    private static ImmutableSet<FluidWrapper> allAlcoholsFluids;
-    @Shadow
-    private static ImmutableSet<FluidWrapper> allOtherFiniteFluids;
-    @Shadow
-    private static ImmutableMap<Metal, FluidWrapper> allMetalFluids;
+    @Shadow private static ImmutableSet<FluidWrapper> allAlcoholsFluids;
+    @Shadow private static ImmutableSet<FluidWrapper> allOtherFiniteFluids;
+    @Shadow private static ImmutableMap<Metal, FluidWrapper> allMetalFluids;
 
-    @Shadow
-    public static FluidWrapper FRESH_WATER;
-    @Shadow
-    public static FluidWrapper HOT_WATER;
-    @Shadow
-    public static FluidWrapper SALT_WATER;
-    @Shadow
-    public static FluidWrapper RUM;
-    @Shadow
-    public static FluidWrapper BEER;
-    @Shadow
-    public static FluidWrapper WHISKEY;
-    @Shadow
-    public static FluidWrapper RYE_WHISKEY;
-    @Shadow
-    public static FluidWrapper CORN_WHISKEY;
-    @Shadow
-    public static FluidWrapper SAKE;
-    @Shadow
-    public static FluidWrapper VODKA;
-    @Shadow
-    public static FluidWrapper CIDER;
-    @Shadow
-    public static FluidWrapper VINEGAR;
-    @Shadow
-    public static FluidWrapper BRINE;
-    @Shadow
-    public static FluidWrapper MILK;
-    @Shadow
-    public static FluidWrapper OLIVE_OIL;
-    @Shadow
-    public static FluidWrapper OLIVE_OIL_WATER;
-    @Shadow
-    public static FluidWrapper TANNIN;
-    @Shadow
-    public static FluidWrapper LIMEWATER;
-    @Shadow
-    public static FluidWrapper CURDLED_MILK;
-    @Shadow
-    public static FluidWrapper MILK_VINEGAR;
-    @Shadow
-    public static FluidWrapper LYE;
+    @Shadow public static FluidWrapper FRESH_WATER;
+    @Shadow public static FluidWrapper HOT_WATER;
+    @Shadow public static FluidWrapper SALT_WATER;
+    @Shadow public static FluidWrapper RUM;
+    @Shadow public static FluidWrapper BEER;
+    @Shadow public static FluidWrapper WHISKEY;
+    @Shadow public static FluidWrapper RYE_WHISKEY;
+    @Shadow public static FluidWrapper CORN_WHISKEY;
+    @Shadow public static FluidWrapper SAKE;
+    @Shadow public static FluidWrapper VODKA;
+    @Shadow public static FluidWrapper CIDER;
+    @Shadow public static FluidWrapper VINEGAR;
+    @Shadow public static FluidWrapper BRINE;
+    @Shadow public static FluidWrapper MILK;
+    @Shadow public static FluidWrapper OLIVE_OIL;
+    @Shadow public static FluidWrapper OLIVE_OIL_WATER;
+    @Shadow public static FluidWrapper TANNIN;
+    @Shadow public static FluidWrapper LIMEWATER;
+    @Shadow public static FluidWrapper CURDLED_MILK;
+    @Shadow public static FluidWrapper MILK_VINEGAR;
+    @Shadow public static FluidWrapper LYE;
 
     @Shadow
     @Nonnull
@@ -194,5 +160,4 @@ public class FluidsTFCMixin {
                     })));
         }
     }
-
 }

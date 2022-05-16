@@ -14,8 +14,6 @@ recipemap.electric_sieve.name=Электрическое сито
 gregification.machine.sieve.steam.name=Паровой просеиватель
 gregification.machine.sieve.steam.tooltip=Tired of Right-Clicking all day?
 
-gregtech.machine.sieve.tooltip=
-
 gregification.machine.sieve.lv.name=Базовый электрический просеиватель
 gregification.machine.sieve.mv.name=Улучшенный электрический просеиватель
 gregification.machine.sieve.hv.name=Улучшенный электрический просеиватель II
@@ -27,8 +25,8 @@ gregification.machine.sieve.uv.name=Элитный электрический п
 gregification.machine.sieve.uhv.name=Высокотехнологичная электрический просеиватель
 gregification.machine.sieve.uev.name=Высокотехнологичная электрический просеиватель II
 gregification.machine.sieve.uiv.name=Высокотехнологичная электрический просеиватель III
-gregification.machine.sieve.umv.name=Высокотехнологичная электрический просеиватель IV
-gregification.machine.sieve.uxv.name=Совершенная электрический просеиватель
+gregification.machine.sieve.uxv.name=Высокотехнологичная электрический просеиватель IV
+gregification.machine.sieve.opv.name=Совершенная электрический просеиватель
 
 # Forestry
 metaitem.electrode.apatite.name=Апатитовый электрод
@@ -45,3 +43,9 @@ metaitem.electrode.obsidian.name=Обсидиановый электрод
 metaitem.electrode.orchid.name=Орхидейный электрод
 metaitem.electrode.rubber.name=Прорезиненный электрод
 metaitem.electrode.tin.name=Оловянный электрод
+
+metaitem.tool.scoop.name=%s совок
+behaviour.scoop=Ловит бабочек на левый клик
+
+material.for.honey=Мед
+material.juice=Fruit Juice

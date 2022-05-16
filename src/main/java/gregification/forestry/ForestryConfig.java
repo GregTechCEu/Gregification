@@ -11,6 +11,12 @@ public class ForestryConfig {
     public boolean gtElectrodes = true;
 
     @Config.Comment({
+            "Enable the GT Scoop",
+            "Default: true"
+    })
+    public boolean gtScoop = true;
+
+    @Config.Comment({
             "Enable GT Bees",
             "Requirements: Forestry Apiculture module",
             "Additional mod compatibility:",
@@ -25,7 +31,7 @@ public class ForestryConfig {
     @Config.Comment({
             "Whether or not to nerf GT Comb processing recipes.",
             "Requirements: Forestry Apiculture modile, gtBees config enabled",
-            "Primarily affects whether the Centrifuge (GT or Forestry) can process GT gtCombs",
+            "Primarily affects whether the Centrifuge (GT or Forestry) can process GT combs",
             "Default: false"
     })
     public boolean nerfGTCombs = false;

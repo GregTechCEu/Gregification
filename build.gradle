@@ -72,6 +72,7 @@ dependencies {
     //deobfCompile "curse.maven:mcjtylib-233105:2745846"
     //deobfCompile "curse.maven:xnet-260912:2745852"
     deobfCompile "curse.maven:gregtech-food-option-477021:3787937"
+    deobfCompile "curse.maven:ae2-extended-life-570458:3632074"
 
     // Addons and other mods for testing as needed
     runtime "curse.maven:binnies-mods-223525:2916129"
@@ -83,7 +84,6 @@ dependencies {
     //runtime "curse.maven:the-twilight-forest-227639:3051450"
     runtime "curse.maven:thaumcraft-223628:2629023"
     runtime "curse.maven:baubles-227083:2518667"
-    //runtime "curse.maven:ae2-extended-life-570458:3632074"
     //runtime "curse.maven:biomes-o-plenty-220318:2715506"
     //runtime "curse.maven:extra-utilities-225561:2678374"
 }

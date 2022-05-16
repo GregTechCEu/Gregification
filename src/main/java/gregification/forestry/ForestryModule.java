@@ -8,9 +8,14 @@ import gregification.forestry.bees.*;
 import gregification.forestry.frames.GTFrameType;
 import gregification.forestry.frames.GTItemFrame;
 import gregification.forestry.recipes.*;
+import gregification.forestry.tools.ToolScoop;
 import gregtech.api.GregTechAPI;
+import gregtech.api.fluids.MetaFluids;
+import gregtech.api.fluids.fluidType.FluidTypes;
 import gregtech.api.items.metaitem.MetaItem;
+import gregtech.api.items.toolitem.ToolMetaItem;
 import gregtech.api.unification.OreDictUnifier;
+import gregtech.api.unification.material.Material;
 import gregtech.api.unification.material.Materials;
 import gregtech.api.unification.material.properties.OreProperty;
 import gregtech.api.unification.material.properties.PropertyKey;
@@ -59,6 +64,13 @@ public class ForestryModule implements IModule {
     public static MetaItem<?>.MetaValueItem ELECTRODE_RUBBER;
     public static MetaItem<?>.MetaValueItem ELECTRODE_TIN;
 
+    public static ToolMetaItem<?>.MetaToolValueItem SCOOP;
+
+    // Materials
+
+    public static Material Honey;
+    public static Material Juice;
+
     @Override
     public void preInit(FMLPreInitializationEvent event) {
         // Initialize GT Comb and Drop items
@@ -81,6 +93,9 @@ public class ForestryModule implements IModule {
                 logger.error("GT Frames is enabled, but Forestry Apiculture module is disabled. Skipping GT Frames...");
             }
         }
+
+        // Fluid texture for Honey
+        MetaFluids.setMaterialFluidTexture(Honey, FluidTypes.LIQUID);
     }
 
     @Override
@@ -154,10 +169,22 @@ public class ForestryModule implements IModule {
                 ELECTRODE_RUBBER = BaseModule.baseMetaItem.addItem(14, "electrode.rubber");
             }
         }
+
+        // Register GT Scoop
+        if (BaseConfig.forestry.gtScoop) {
+            logger.info("Registering GT Scoop");
+            SCOOP = (ToolMetaItem<?>.MetaToolValueItem) BaseModule.baseMetaTool.addItem(1, "tool.scoop")
+                    .setToolStats(new ToolScoop())
+                    .setFullRepairCost(3)
+                    .addOreDict("craftingToolScoop");
+        }
     }
 
     @Override
     public void registerRecipes(RegistryEvent.Register<IRecipe> event) {
+        // GT Scoop recipes
+        MiscRecipes.registerHandlers();
+
         // GT Electrode recipes
         if (BaseConfig.forestry.gtElectrodes) {
             logger.info("Registering GT Electrode recipes");
@@ -166,15 +193,14 @@ public class ForestryModule implements IModule {
 
         if (ForestryUtils.apicultureEnabled()) {
 
-            // GT Comb, Drop, and Propolis recipes
+            // GT Comb, Drop, and Propolis recipes, and Comb OreDict
             if (BaseConfig.forestry.gtBees) {
                 logger.info("Registering GT Bee, Comb, Drop and Propolis recipes");
                 for (GTCombType type : GTCombType.VALUES) {
                     OreDictUnifier.registerOre(ForestryUtils.getCombStack(type), "beeComb");
                 }
                 CombRecipes.initGTCombs();
-                DropRecipes.init();
-                PropolisRecipes.init();
+                MiscRecipes.init();
             }
 
             // GT Frame recipes
@@ -188,6 +214,11 @@ public class ForestryModule implements IModule {
     @Override
     public void registerMaterials(GregTechAPI.MaterialEvent event) {
         logger.info("Registering Material additions");
+
+        // Honey and Juice compatibility fluids
+
+        Honey = new Material.Builder(20000, "for.honey").fluid().build();
+        Juice = new Material.Builder(20001, "juice").fluid().build();
 
         // Electron Tubes
         Materials.Emerald.addFlags(GENERATE_BOLT_SCREW);

@@ -93,23 +93,17 @@ public class Gregification {
 
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {
-        getModules().forEach((k, v) -> {
-            if (v) k.preInit(event);
-        });
+        getModules().forEach((k, v) -> { if (v) k.preInit(event); });
     }
 
     @EventHandler
     public void init(FMLInitializationEvent event) {
-        getModules().forEach((k, v) -> {
-            if (v) k.init(event);
-        });
+        getModules().forEach((k, v) -> { if (v) k.init(event); });
     }
 
     @EventHandler
     public void postInit(FMLPostInitializationEvent event) {
-        getModules().forEach((k, v) -> {
-            if (v) k.postInit(event);
-        });
+        getModules().forEach((k, v) -> { if (v) k.postInit(event); });
     }
 
 
@@ -117,36 +111,26 @@ public class Gregification {
 
     @SubscribeEvent
     public void registerItems(RegistryEvent.Register<Item> event) {
-        getModules().forEach((k, v) -> {
-            if (v) k.registerItems(event);
-        });
+        getModules().forEach((k, v) -> { if (v) k.registerItems(event); });
     }
 
     @SubscribeEvent
     public void registerBlocks(RegistryEvent.Register<Block> event) {
-        getModules().forEach((k, v) -> {
-            if (v) k.registerBlocks(event);
-        });
+        getModules().forEach((k, v) -> { if (v) k.registerBlocks(event); });
     }
 
     @SubscribeEvent
     public void registerRecipes(RegistryEvent.Register<IRecipe> event) {
-        getModules().forEach((k, v) -> {
-            if (v) k.registerRecipes(event);
-        });
+        getModules().forEach((k, v) -> { if (v) k.registerRecipes(event); });
     }
 
     @SubscribeEvent
     public void registerModels(ModelRegistryEvent event) {
-        getModules().forEach((k, v) -> {
-            if (v) k.registerModels(event);
-        });
+        getModules().forEach((k, v) -> { if (v) k.registerModels(event); });
     }
 
     @SubscribeEvent
     public void registerMaterials(GregTechAPI.MaterialEvent event) {
-        getModules().forEach((k, v) -> {
-            if (v) k.registerMaterials(event);
-        });
+        getModules().forEach((k, v) -> { if (v) k.registerMaterials(event); });
     }
 }

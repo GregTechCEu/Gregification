@@ -24,6 +24,7 @@ public class ForestryUtils {
     public static ItemStack getCombStack(GTCombType type, int amount) {
         if (!apicultureEnabled()) {
             ForestryModule.logger.error("Tried to get GT Comb stack, but Apiculture module is not enabled!");
+            return ItemStack.EMPTY;
         }
         return new ItemStack(ForestryModule.gtCombs, amount, type.ordinal());
     }
@@ -35,6 +36,7 @@ public class ForestryUtils {
     public static ItemStack getDropStack(GTDropType type, int amount) {
         if (!apicultureEnabled()) {
             ForestryModule.logger.error("Tried to get GT Drop stack, but Apiculture module is not enabled!");
+            return ItemStack.EMPTY;
         }
         return new ItemStack(ForestryModule.gtDrops, amount, type.ordinal());
     }
@@ -42,6 +44,7 @@ public class ForestryUtils {
     public static ItemStack getFrameStack(GTFrameType type) {
         if (!apicultureEnabled()) {
             ForestryModule.logger.error("Tried to get GT Frame stack, but Apiculture module is not enabled!");
+            return ItemStack.EMPTY;
         }
         return new ItemStack(ForestryModule.gtFrames.get(type), 1);
     }

@@ -5,7 +5,7 @@ import net.minecraftforge.common.config.Config;
 public class ExNihiloConfig {
 
     @Config.Comment({
-            "Override all Sifting Tables to drop excess outputs once GT gtDrops have been added.",
+            "Override all Sifting Tables to drop excess outputs once GT drops have been added.",
             "Default: true"
     })
     @Config.RequiresMcRestart
@@ -26,7 +26,7 @@ public class ExNihiloConfig {
     @Config.RequiresMcRestart
     public boolean highTierSieve = true;
 
-    @Config.Comment({"Config category for sieve gtDrops"})
+    @Config.Comment({"Config category for sieve drops"})
     @Config.RequiresMcRestart
     public SieveCategory drops = new SieveCategory();
 
