@@ -46,6 +46,3 @@ metaitem.electrode.tin.name=Оловянный электрод
 
 metaitem.tool.scoop.name=%s совок
 behaviour.scoop=Ловит бабочек на левый клик
-
-material.for.honey=Мед
-material.juice=Fruit Juice

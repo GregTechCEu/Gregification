@@ -66,11 +66,6 @@ public class ForestryModule implements IModule {
 
     public static ToolMetaItem<?>.MetaToolValueItem SCOOP;
 
-    // Materials
-
-    public static Material Honey;
-    public static Material Juice;
-
     @Override
     public void preInit(FMLPreInitializationEvent event) {
         // Initialize GT Comb and Drop items
@@ -93,9 +88,6 @@ public class ForestryModule implements IModule {
                 logger.error("GT Frames is enabled, but Forestry Apiculture module is disabled. Skipping GT Frames...");
             }
         }
-
-        // Fluid texture for Honey
-        MetaFluids.setMaterialFluidTexture(Honey, FluidTypes.LIQUID);
     }
 
     @Override
@@ -214,11 +206,6 @@ public class ForestryModule implements IModule {
     @Override
     public void registerMaterials(GregTechAPI.MaterialEvent event) {
         logger.info("Registering Material additions");
-
-        // Honey and Juice compatibility fluids
-
-        Honey = new Material.Builder(20000, "for.honey").fluid().build();
-        Juice = new Material.Builder(20001, "juice").fluid().build();
 
         // Electron Tubes
         Materials.Emerald.addFlags(GENERATE_BOLT_SCREW);

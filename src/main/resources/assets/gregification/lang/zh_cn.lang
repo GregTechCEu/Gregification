@@ -46,6 +46,3 @@ metaitem.electrode.tin.name=锡电子管元件
 
 metaitem.tool.scoop.name=%s捕虫网
 behaviour.scoop=左键以捕捉蝴蝶
-
-material.for.honey=蜂蜜
-material.juice=Fruit Juice
