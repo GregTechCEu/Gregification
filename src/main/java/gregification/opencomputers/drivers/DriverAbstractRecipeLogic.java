@@ -146,9 +146,9 @@ public class DriverAbstractRecipeLogic extends DriverSidedTileEntity {
                 if (!fluidOutput.isEmpty()) {
                     recipe.put("fluidOutputs", fluidOutput);
                 }
-                return new Object[] {recipe};
+                return new Object[]{recipe};
             }
-            return new Object[] {null};
+            return new Object[]{null};
         }
     }
 }

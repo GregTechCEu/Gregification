@@ -47,7 +47,7 @@ public class DriverConverter extends DriverSidedTileEntity {
 
         @Callback(doc = "function():number --  Gets the Converter Mode. (0:FE->EU, 1:EU->FE)")
         public Object[] getConverterMode(final Context context, final Arguments args) {
-            return new Object[] {tileEntity.isFeToEu() ? 0 : 1};
+            return new Object[]{tileEntity.isFeToEu() ? 0 : 1};
         }
 
         @Callback(doc = "function(mode:number) --  Sets the Converter Mode. (0:FE->EU, 1:EU->FE)")

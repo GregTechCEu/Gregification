@@ -38,7 +38,8 @@ public class ValueCoverRoboticArm extends ValueCoverConveyor {
     @Callback(doc = "function(mode:number) --  Sets transfer mode. (0:TRANSFER_ANY, 1:TRANSFER_EXACT, 2:KEEP_EXACT)")
     public Object[] setTransferMode(final Context context, final Arguments args) {
         CoverBehavior coverBehavior = getCoverBehavior();
-        if (!(coverBehavior instanceof CoverRoboticArm)) return new Object[] {null, "Found no cover, this is an invalid object."};
+        if (!(coverBehavior instanceof CoverRoboticArm))
+            return new Object[]{null, "Found no cover, this is an invalid object."};
         int mode = args.checkInteger(0);
         if (mode < 0 || mode > 2) throw new IllegalArgumentException("Expect a number between 0 and 2.");
         ((CoverRoboticArm) coverBehavior).setTransferMode(TransferMode.values()[mode]);
@@ -48,7 +49,8 @@ public class ValueCoverRoboticArm extends ValueCoverConveyor {
     @Callback(doc = "function():number --  Gets transfer mode. (0:TRANSFER_ANY, 1:TRANSFER_EXACT, 2:KEEP_EXACT)")
     public Object[] getTransferMode(final Context context, final Arguments args) {
         CoverBehavior coverBehavior = getCoverBehavior();
-        if (!(coverBehavior instanceof CoverRoboticArm)) return new Object[] {null, "Found no cover, this is an invalid object."};
+        if (!(coverBehavior instanceof CoverRoboticArm))
+            return new Object[]{null, "Found no cover, this is an invalid object."};
         return new Object[]{((CoverRoboticArm) coverBehavior).getTransferMode().ordinal()};
     }
 }

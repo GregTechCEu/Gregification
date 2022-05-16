@@ -17,7 +17,7 @@
  */
 package gregification.exnihilo.metatileentities;
 
-import gregification.common.GFRecipeMaps;
+import gregification.exnihilo.ExNihiloModule;
 import gregtech.api.gui.GuiTextures;
 import gregtech.api.gui.ModularUI;
 import gregtech.api.gui.widgets.CycleButtonWidget;
@@ -36,7 +36,7 @@ import javax.annotation.Nonnull;
 public class MetaTileEntitySieve extends SimpleMachineMetaTileEntity {
 
     public MetaTileEntitySieve(ResourceLocation metaTileEntityId, int tier) {
-        super(metaTileEntityId, GFRecipeMaps.SIEVE_RECIPES, Textures.SIFTER_OVERLAY, tier, false);
+        super(metaTileEntityId, ExNihiloModule.SIEVE_RECIPES, Textures.SIFTER_OVERLAY, tier, false);
     }
 
     @Override

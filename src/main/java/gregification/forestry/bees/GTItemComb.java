@@ -22,8 +22,7 @@ import forestry.api.core.IModelManager;
 import forestry.api.core.Tabs;
 import forestry.core.items.IColoredItem;
 import forestry.core.utils.ItemTooltipUtil;
-import gregification.common.GFValues;
-import gregtech.api.GTValues;
+import gregification.base.ModIDs;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
@@ -43,7 +42,7 @@ public class GTItemComb extends Item implements IColoredItem, IItemModelRegister
         super();
         setHasSubtypes(true);
         setCreativeTab(Tabs.tabApiculture);
-        setRegistryName(GTValues.MODID, "gt.comb");
+        setRegistryName(ModIDs.MODID_GT, "gt.comb");
         setTranslationKey("gt.comb");
     }
 
@@ -52,7 +51,7 @@ public class GTItemComb extends Item implements IColoredItem, IItemModelRegister
     public void registerModel(Item item, IModelManager manager) {
         manager.registerItemModel(item, 0);
         for (int i = 0; i < GTCombType.values().length; i++) {
-            manager.registerItemModel(item, i, GFValues.MODID_FR, "gt.comb");
+            manager.registerItemModel(item, i, ModIDs.MODID_FR, "gt.comb");
         }
     }
 

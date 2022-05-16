@@ -42,7 +42,8 @@ public class ValueCoverFluidFilter extends ValueCoverBehavior {
     @Callback(doc = "function(mode:number) --  Sets filter mode. (0:FILTER_FILL, 1:FILTER_DRAIN, 2:FILTER_BOTH)")
     public Object[] setFilterMode(final Context context, final Arguments args) {
         CoverBehavior coverBehavior = getCoverBehavior();
-        if (!(coverBehavior instanceof CoverFluidFilter)) return new Object[] {null, "Found no cover, this is an invalid object."};
+        if (!(coverBehavior instanceof CoverFluidFilter))
+            return new Object[]{null, "Found no cover, this is an invalid object."};
         int mode = args.checkInteger(0);
         if (mode < 0 || mode > 2) throw new IllegalArgumentException("Expect a number between 0 and 2.");
         Method setFilterMode = ReflectionHelper.findMethod(CoverFluidFilter.class, "setFilterMode", null, FluidFilterMode.class);
@@ -57,7 +58,8 @@ public class ValueCoverFluidFilter extends ValueCoverBehavior {
     @Callback(doc = "function():number --  Gets filter mode. (0:FILTER_FILL, 1:FILTER_DRAIN, 2:FILTER_BOTH)")
     public Object[] getFilterMode(final Context context, final Arguments args) {
         CoverBehavior coverBehavior = getCoverBehavior();
-        if (!(coverBehavior instanceof CoverFluidFilter)) return new Object[] {null, "Found no cover, this is an invalid object."};
+        if (!(coverBehavior instanceof CoverFluidFilter))
+            return new Object[]{null, "Found no cover, this is an invalid object."};
         return new Object[]{((CoverFluidFilter) coverBehavior).getFilterMode().ordinal()};
     }
 }

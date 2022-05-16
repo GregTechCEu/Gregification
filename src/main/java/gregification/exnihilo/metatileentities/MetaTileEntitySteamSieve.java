@@ -17,8 +17,7 @@
  */
 package gregification.exnihilo.metatileentities;
 
-import gregification.common.GFRecipeMaps;
-import gregification.common.GFTextures;
+import gregification.exnihilo.ExNihiloModule;
 import gregtech.api.capability.impl.NotifiableItemStackHandler;
 import gregtech.api.gui.GuiTextures;
 import gregtech.api.gui.ModularUI;
@@ -34,11 +33,10 @@ import net.minecraftforge.items.IItemHandlerModifiable;
 
 import javax.annotation.Nonnull;
 
-
 public class MetaTileEntitySteamSieve extends SteamMetaTileEntity {
 
     public MetaTileEntitySteamSieve(ResourceLocation metaTileEntityId, boolean isHighPressure) {
-        super(metaTileEntityId, GFRecipeMaps.SIEVE_RECIPES, Textures.SIFTER_OVERLAY, isHighPressure);
+        super(metaTileEntityId, ExNihiloModule.SIEVE_RECIPES, Textures.SIFTER_OVERLAY, isHighPressure);
     }
 
     @Override
@@ -63,7 +61,7 @@ public class MetaTileEntitySteamSieve extends SteamMetaTileEntity {
                 .slot(this.importItems, 0, 17, 43, GuiTextures.SLOT_STEAM.get(isHighPressure))
                 .slot(this.importItems, 1, 35, 43, GuiTextures.SLOT_STEAM.get(isHighPressure))
                 .progressBar(workableHandler::getProgressPercent, 25, 68, 20, 20,
-                        GFTextures.PROGRESS_BAR_SIFTER_STEAM.get(isHighPressure), ProgressWidget.MoveType.VERTICAL_INVERTED, workableHandler.getRecipeMap())
+                        ExNihiloModule.PROGRESS_BAR_SIFTER_STEAM.get(isHighPressure), ProgressWidget.MoveType.VERTICAL_INVERTED, workableHandler.getRecipeMap())
                 .widget((new ImageWidget(79, 77, 18, 18, GuiTextures.INDICATOR_NO_STEAM.get(this.isHighPressure)))
                         .setPredicate(() -> this.workableHandler.isHasNotEnoughEnergy()))
                 .bindPlayerInventory(player.inventory, GuiTextures.SLOT_STEAM.get(this.isHighPressure), 7, 109);

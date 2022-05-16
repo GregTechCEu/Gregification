@@ -22,9 +22,9 @@ import forestry.apiculture.ModuleApiculture;
 import forestry.apiculture.items.EnumPropolis;
 import forestry.factory.MachineUIDs;
 import forestry.factory.ModuleFactory;
-import gregification.common.GFUtility;
-import gregification.common.GFValues;
-import gregification.forestry.bees.GTBees;
+import gregification.base.BaseUtility;
+import gregification.base.ModIDs;
+import gregification.forestry.ForestryUtils;
 import gregification.forestry.bees.GTDropType;
 import gregtech.api.recipes.RecipeMaps;
 import gregtech.api.unification.material.Materials;
@@ -36,7 +36,7 @@ public class DropRecipes {
     public static void init() {
 
         // Oil Drop
-        ItemStack dropStack = GTBees.getDropStack(GTDropType.OIL);
+        ItemStack dropStack = ForestryUtils.getDropStack(GTDropType.OIL);
         RecipeMaps.EXTRACTOR_RECIPES.recipeBuilder()
                 .inputs(dropStack)
                 .chancedOutput(ModuleApiculture.getItems().propolis.get(EnumPropolis.NORMAL, 1), 3000, 0)
@@ -48,10 +48,10 @@ public class DropRecipes {
         }
 
         // Biomass Drop
-        dropStack = GTBees.getDropStack(GTDropType.BIOMASS);
+        dropStack = ForestryUtils.getDropStack(GTDropType.BIOMASS);
         ItemStack propolisStack = ModuleApiculture.getItems().propolis.get(EnumPropolis.NORMAL, 1);
-        if (Loader.isModLoaded(GFValues.MODID_EB)) {
-            propolisStack = GFUtility.getModItem(GFValues.MODID_EB, "propolis", 7);
+        if (Loader.isModLoaded(ModIDs.MODID_EB)) {
+            propolisStack = BaseUtility.getModItem(ModIDs.MODID_EB, "propolis", 7);
         }
         RecipeMaps.EXTRACTOR_RECIPES.recipeBuilder()
                 .inputs(dropStack)
@@ -64,7 +64,7 @@ public class DropRecipes {
         }
 
         // Ethanol Drop
-        dropStack = GTBees.getDropStack(GTDropType.ETHANOL);
+        dropStack = ForestryUtils.getDropStack(GTDropType.ETHANOL);
         RecipeMaps.EXTRACTOR_RECIPES.recipeBuilder()
                 .inputs(dropStack)
                 .chancedOutput(propolisStack, 3000, 0)
@@ -75,6 +75,6 @@ public class DropRecipes {
             RecipeManagers.squeezerManager.addRecipe(40, dropStack, Materials.Ethanol.getFluid(100), propolisStack, 30);
         }
 
-        // TODO Other drops
+        // TODO Other gtDrops
     }
 }

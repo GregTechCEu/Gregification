@@ -1,8 +1,8 @@
-package gregification.exnihilo;
+package gregification.exnihilo.recipes;
 
 import exnihilocreatio.ModBlocks;
 import exnihilocreatio.ModItems;
-import gregification.config.GFConfig;
+import gregification.base.BaseConfig;
 import gregtech.api.recipes.ModHandler;
 import gregtech.api.unification.material.Materials;
 import gregtech.api.unification.ore.OrePrefix;
@@ -16,7 +16,7 @@ import static gregtech.api.recipes.RecipeMaps.FORGE_HAMMER_RECIPES;
 public class MeshRecipes {
 
     public static void init() {
-        if (GFConfig.exNihilo.harderMeshes) {
+        if (BaseConfig.exNihilo.harderMeshes) {
             ModHandler.removeRecipeByName("exnihilocreatio:item_mesh_2");
             ModHandler.addShapedRecipe("tin_alloy_mesh", new ItemStack(ModItems.mesh, 1, 2), "TST", "STS", "TST",
                     'T', new UnificationEntry(OrePrefix.stick, Materials.TinAlloy),

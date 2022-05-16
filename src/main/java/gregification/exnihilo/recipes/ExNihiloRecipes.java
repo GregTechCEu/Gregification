@@ -15,13 +15,13 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-package gregification.exnihilo;
+package gregification.exnihilo.recipes;
 
 import exnihilocreatio.ModBlocks;
 import exnihilocreatio.compatibility.jei.sieve.SieveRecipe;
 import exnihilocreatio.registries.manager.ExNihiloRegistryManager;
 import exnihilocreatio.registries.types.Siftable;
-import gregification.common.GFOrePrefix;
+import gregification.exnihilo.ExNihiloModule;
 import gregtech.api.recipes.ModHandler;
 import gregtech.api.recipes.Recipe;
 import gregtech.api.recipes.builders.SimpleRecipeBuilder;
@@ -40,18 +40,17 @@ import net.minecraft.item.ItemStack;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import static gregification.common.GFMetaTileEntities.*;
-import static gregification.common.GFRecipeMaps.SIEVE_RECIPES;
+import static gregification.exnihilo.ExNihiloModule.*;
 import static gregtech.common.blocks.BlockSteamCasing.SteamCasingType.BRONZE_HULL;
 import static gregtech.loaders.recipe.CraftingComponent.*;
 
 public class ExNihiloRecipes {
 
     public static void registerHandlers() {
-        GFOrePrefix.oreChunk.addProcessingHandler(PropertyKey.ORE, ExNihiloRecipes::processChunk);
-        GFOrePrefix.oreEnderChunk.addProcessingHandler(PropertyKey.ORE, ExNihiloRecipes::processChunk);
-        GFOrePrefix.oreNetherChunk.addProcessingHandler(PropertyKey.ORE, ExNihiloRecipes::processChunk);
-        GFOrePrefix.oreSandyChunk.addProcessingHandler(PropertyKey.ORE, ExNihiloRecipes::processChunk);
+        ExNihiloModule.oreChunk.addProcessingHandler(PropertyKey.ORE, ExNihiloRecipes::processChunk);
+        ExNihiloModule.oreEnderChunk.addProcessingHandler(PropertyKey.ORE, ExNihiloRecipes::processChunk);
+        ExNihiloModule.oreNetherChunk.addProcessingHandler(PropertyKey.ORE, ExNihiloRecipes::processChunk);
+        ExNihiloModule.oreSandyChunk.addProcessingHandler(PropertyKey.ORE, ExNihiloRecipes::processChunk);
     }
 
     private static void processChunk(OrePrefix orePrefix, Material material, OreProperty oreProperty) {
@@ -83,15 +82,15 @@ public class ExNihiloRecipes {
         // Mirror Ex Nihilo Sifter recipes to Sifter RecipeMap
         for (SieveRecipe recipe : ExNihiloRegistryManager.SIEVE_REGISTRY.getRecipeList()) {
             for (ItemStack stack : recipe.getSievables()) {
-                if (SIEVE_RECIPES.findRecipe(4, Arrays.asList(stack, recipe.getMesh()), new ArrayList<>(), 0) != null) continue;
+                if (SIEVE_RECIPES.findRecipe(4, Arrays.asList(stack, recipe.getMesh()), new ArrayList<>(), 0) != null)
+                    continue;
                 SimpleRecipeBuilder builder = SIEVE_RECIPES.recipeBuilder().notConsumable(recipe.getMesh()).inputs(stack);
 
                 for (Siftable siftable : ExNihiloRegistryManager.SIEVE_REGISTRY.getDrops(stack)) {
                     if (siftable.getMeshLevel() == recipe.getMesh().getMetadata())
-                        if((int) (siftable.getChance() * (float) Recipe.getMaxChancedValue()) >= Recipe.getMaxChancedValue()) {
+                        if ((int) (siftable.getChance() * (float) Recipe.getMaxChancedValue()) >= Recipe.getMaxChancedValue()) {
                             builder.outputs(siftable.getDrop().getItemStack());
-                        }
-                        else {
+                        } else {
                             builder.chancedOutput(siftable.getDrop().getItemStack(), (int) (siftable.getChance() * (float) Recipe.getMaxChancedValue()), 500);
                         }
                 }

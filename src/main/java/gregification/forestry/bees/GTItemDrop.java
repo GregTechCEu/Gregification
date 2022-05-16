@@ -26,7 +26,7 @@ import forestry.api.genetics.AlleleManager;
 import forestry.api.genetics.ISpeciesRoot;
 import forestry.api.lepidopterology.ButterflyManager;
 import forestry.core.items.IColoredItem;
-import gregification.common.GFValues;
+import gregification.base.ModIDs;
 import gregtech.api.GTValues;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
@@ -43,7 +43,7 @@ public class GTItemDrop extends Item implements IColoredItem, IItemModelRegister
         setHasSubtypes(true);
         setCreativeTab(Tabs.tabApiculture);
         setTranslationKey("gt.honey_drop");
-        setRegistryName(GTValues.MODID, "gt.honey_drop");
+        setRegistryName(ModIDs.MODID_GT, "gt.honey_drop");
         setResearchSuitability(BeeManager.beeRoot);
         setResearchSuitability(TreeManager.treeRoot);
         setResearchSuitability(ButterflyManager.butterflyRoot);
@@ -60,7 +60,7 @@ public class GTItemDrop extends Item implements IColoredItem, IItemModelRegister
     public void registerModel(@Nonnull Item item, @Nonnull IModelManager manager) {
         manager.registerItemModel(item, 0);
         for (int i = 0; i < GTCombType.VALUES.length; i++) {
-            manager.registerItemModel(item, i, GFValues.MODID_FR, "gt.honey_drop");
+            manager.registerItemModel(item, i, ModIDs.MODID_FR, "gt.honey_drop");
         }
     }
 

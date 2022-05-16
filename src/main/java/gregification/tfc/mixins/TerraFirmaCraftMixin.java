@@ -11,7 +11,8 @@ import org.spongepowered.asm.mixin.Unique;
 @Mixin(TerraFirmaCraft.class)
 public class TerraFirmaCraftMixin implements ITFCFluidRegistrationStatus {
 
-    @Unique private boolean isEarly = true;
+    @Unique
+    private boolean isEarly = true;
 
     @Mod.EventHandler
     public void construct(FMLConstructionEvent event) {

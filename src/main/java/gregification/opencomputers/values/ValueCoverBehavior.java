@@ -43,26 +43,26 @@ public class ValueCoverBehavior extends AbstractValue {
     private int dim;
     private String coverName;
 
-    protected ValueCoverBehavior(CoverBehavior coverBehavior, EnumFacing side, String coverName){
+    protected ValueCoverBehavior(CoverBehavior coverBehavior, EnumFacing side, String coverName) {
         pos = coverBehavior.coverHolder.getPos();
         dim = coverBehavior.coverHolder.getWorld().provider.getDimension();
         this.side = side;
         this.coverName = coverName;
     }
 
-    public ValueCoverBehavior(CoverBehavior coverBehavior, EnumFacing side){
+    public ValueCoverBehavior(CoverBehavior coverBehavior, EnumFacing side) {
         this(coverBehavior, side, "gt_coverBehavior");
     }
 
-    public ValueCoverBehavior(){
+    public ValueCoverBehavior() {
     }
 
-    protected CoverBehavior getCoverBehavior(){
+    protected CoverBehavior getCoverBehavior() {
         World world = FMLCommonHandler.instance().getMinecraftServerInstance().getWorld(dim);
         TileEntity te = world.getTileEntity(pos);
-        if (te instanceof IGregTechTileEntity){
+        if (te instanceof IGregTechTileEntity) {
             ICoverable coverable = te.getCapability(GregtechTileCapabilities.CAPABILITY_COVERABLE, null);
-            if (coverable != null){
+            if (coverable != null) {
                 return coverable.getCoverAtSide(side);
             }
         }
@@ -71,36 +71,36 @@ public class ValueCoverBehavior extends AbstractValue {
 
     @Callback(doc = "function():number --  Returns the side of the cover.")
     public Object[] getSide(final Context context, final Arguments args) {
-        return new Object[] {side.ordinal()};
+        return new Object[]{side.ordinal()};
     }
 
     @Callback(doc = "function():string --  Returns the type name of the cover.")
     public Object[] getTypeName(final Context context, final Arguments args) {
-        return new Object[] {coverName};
+        return new Object[]{coverName};
     }
 
     @Callback(doc = "function(signal:number) --  Sets redstone signal output.")
     public Object[] setRedstoneSignalOutput(final Context context, final Arguments args) {
         CoverBehavior coverBehavior = getCoverBehavior();
-        if (coverBehavior == null) return new Object[] {null, "Found no cover, this is an invalid object."};
+        if (coverBehavior == null) return new Object[]{null, "Found no cover, this is an invalid object."};
         int signal = args.checkInteger(0);
         if (signal > 15 || signal < 0) throw new IllegalArgumentException("Expect a number between 0 and 15.");
         coverBehavior.setRedstoneSignalOutput(signal);
-        return new Object[] {};
+        return new Object[]{};
     }
 
     @Callback(doc = "function():number --  Gets redstone signal output.")
     public final Object[] getRedstoneSignalOutput(final Context context, final Arguments args) {
         CoverBehavior coverBehavior = getCoverBehavior();
-        if (coverBehavior == null) return new Object[] {null, "Found no cover, this is an invalid object."};
-        return new Object[] {coverBehavior.getRedstoneSignalOutput()};
+        if (coverBehavior == null) return new Object[]{null, "Found no cover, this is an invalid object."};
+        return new Object[]{coverBehavior.getRedstoneSignalOutput()};
     }
 
     @Callback(doc = "function():number --  Gets redstone signal input.")
     public final Object[] getRedstoneSignalInput(final Context context, final Arguments args) {
         CoverBehavior coverBehavior = getCoverBehavior();
-        if (coverBehavior == null) return new Object[] {null, "Found no cover, this is an invalid object."};
-        return new Object[] {coverBehavior.getRedstoneSignalInput()};
+        if (coverBehavior == null) return new Object[]{null, "Found no cover, this is an invalid object."};
+        return new Object[]{coverBehavior.getRedstoneSignalInput()};
     }
 
     @Override

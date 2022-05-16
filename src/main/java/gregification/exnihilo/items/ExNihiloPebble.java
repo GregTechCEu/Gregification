@@ -15,12 +15,13 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-package gregification.exnihilo;
+package gregification.exnihilo.items;
 
 import exnihilocreatio.ExNihiloCreatio;
 import exnihilocreatio.entities.ProjectileStone;
 import exnihilocreatio.util.Data;
 import exnihilocreatio.util.IHasModel;
+import gregification.exnihilo.ExNihiloModule;
 import net.minecraft.client.renderer.block.model.ModelBakery;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
@@ -40,24 +41,12 @@ import javax.annotation.Nullable;
 
 public class ExNihiloPebble extends Item implements IHasModel {
 
-    private static ExNihiloPebble INSTANCE;
-
-    private ExNihiloPebble() {
+    public ExNihiloPebble() {
         setTranslationKey("gtPebble");
         setRegistryName("gtPebble");
         setCreativeTab(ExNihiloCreatio.tabExNihilo);
         setHasSubtypes(true);
         Data.ITEMS.add(this);
-    }
-
-    public static void register() {
-        if (INSTANCE == null) {
-            INSTANCE = new ExNihiloPebble();
-        }
-    }
-
-    public static ItemStack getPebbleStack(GTPebbles pebbleType) {
-        return new ItemStack(INSTANCE, 1, pebbleType.ordinal());
     }
 
     @Override
@@ -71,7 +60,7 @@ public class ExNihiloPebble extends Item implements IHasModel {
     public void getSubItems(@Nullable CreativeTabs tab, @Nonnull NonNullList<ItemStack> list) {
         if (tab != null && isInCreativeTab(tab)) {
             for (GTPebbles pebble : GTPebbles.VALUES) {
-                list.add(getPebbleStack(pebble));
+                list.add(new ItemStack(ExNihiloModule.gtPebble, 1, pebble.ordinal()));
             }
         }
     }

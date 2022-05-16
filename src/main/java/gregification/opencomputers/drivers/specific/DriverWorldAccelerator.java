@@ -67,18 +67,18 @@ public class DriverWorldAccelerator extends DriverSidedTileEntity {
 
         @Callback(doc = "function():boolean --  Returns the mode of machine.")
         public Object[] isTileMode(final Context context, final Arguments args) {
-            return new Object[] {tileEntity.isTEMode()};
+            return new Object[]{tileEntity.isTEMode()};
         }
 
         @Callback(doc = "function(isTile:boolean) --  Sets the mode of machine.")
         public Object[] setTileMode(final Context context, final Arguments args) {
             tileEntity.setTEMode(args.checkBoolean(0));
-            return new Object[] {};
+            return new Object[]{};
         }
 
         @Callback(doc = "function():boolean --  Returns is working enabled.")
         public Object[] isWorkingEnabled(final Context context, final Arguments args) {
-            return new Object[] {tileEntity.isWorkingEnabled()};
+            return new Object[]{tileEntity.isWorkingEnabled()};
         }
 
         @Callback(doc = "function(workingEnabled:boolean):boolean -- "
@@ -86,7 +86,7 @@ public class DriverWorldAccelerator extends DriverSidedTileEntity {
         public Object[] setWorkingEnabled(final Context context, final Arguments args) {
             boolean lsatState = tileEntity.isWorkingEnabled();
             tileEntity.setWorkingEnabled(args.checkBoolean(0));
-            return new Object[] {lsatState};
+            return new Object[]{lsatState};
         }
 
     }

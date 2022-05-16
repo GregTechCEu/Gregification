@@ -24,8 +24,7 @@ import forestry.api.apiculture.IHiveFrame;
 import forestry.api.core.IItemModelRegister;
 import forestry.api.core.IModelManager;
 import forestry.api.core.Tabs;
-import gregification.common.GFValues;
-import gregtech.api.GTValues;
+import gregification.base.ModIDs;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -47,7 +46,7 @@ public class GTItemFrame extends Item implements IHiveFrame, IItemModelRegister 
         this.setMaxDamage(this.type.maxDamage);
         this.setMaxStackSize(1);
         this.setCreativeTab(Tabs.tabApiculture);
-        this.setRegistryName(GTValues.MODID, "gt.frame_" + type.getName());
+        this.setRegistryName(ModIDs.MODID_GT, "gt.frame_" + type.getName());
         this.setTranslationKey("gt.frame_" + type.getName().toLowerCase());
     }
 
@@ -76,6 +75,6 @@ public class GTItemFrame extends Item implements IHiveFrame, IItemModelRegister 
 
     @Override
     public void registerModel(@Nonnull Item item, @Nonnull IModelManager manager) {
-        manager.registerItemModel(item, 0, GFValues.MODID_FR, "gt.frame_" + type.getName().toLowerCase());
+        manager.registerItemModel(item, 0, ModIDs.MODID_FR, "gt.frame_" + type.getName().toLowerCase());
     }
 }

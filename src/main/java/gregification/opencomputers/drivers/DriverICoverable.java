@@ -71,21 +71,21 @@ public class DriverICoverable extends DriverSidedTileEntity {
             EnumFacing side = EnumFacing.values()[args.checkInteger(0)];
             CoverBehavior coverBehavior = tileEntity.getCoverAtSide(side);
             if (coverBehavior instanceof CoverRoboticArm)
-                return new Object[] {new ValueCoverRoboticArm((CoverRoboticArm) coverBehavior, side)};
+                return new Object[]{new ValueCoverRoboticArm((CoverRoboticArm) coverBehavior, side)};
             if (coverBehavior instanceof CoverConveyor)
-                return new Object[] {new ValueCoverConveyor((CoverConveyor) coverBehavior, side)};
+                return new Object[]{new ValueCoverConveyor((CoverConveyor) coverBehavior, side)};
             if (coverBehavior instanceof CoverPump)
-                return new Object[] {new ValueCoverPump((CoverPump) coverBehavior, side)};
+                return new Object[]{new ValueCoverPump((CoverPump) coverBehavior, side)};
             if (coverBehavior instanceof CoverFluidFilter)
-                return new Object[] {new ValueCoverFluidFilter((CoverFluidFilter) coverBehavior, side)};
+                return new Object[]{new ValueCoverFluidFilter((CoverFluidFilter) coverBehavior, side)};
             if (coverBehavior instanceof CoverItemFilter)
-                return new Object[] {new ValueCoverItemFilter((CoverItemFilter) coverBehavior, side)};
+                return new Object[]{new ValueCoverItemFilter((CoverItemFilter) coverBehavior, side)};
             if (coverBehavior instanceof CoverEnderFluidLink) {
-                return new Object[] {new ValueCoverEnderFluidLink((CoverEnderFluidLink) coverBehavior, side)};
+                return new Object[]{new ValueCoverEnderFluidLink((CoverEnderFluidLink) coverBehavior, side)};
             }
             if (coverBehavior != null)
-                return new Object[] {new ValueCoverBehavior(coverBehavior, side)};
-            return new Object[] {null};
+                return new Object[]{new ValueCoverBehavior(coverBehavior, side)};
+            return new Object[]{null};
         }
     }
 }

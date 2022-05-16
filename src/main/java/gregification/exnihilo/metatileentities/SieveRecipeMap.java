@@ -15,7 +15,7 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-package gregification.exnihilo;
+package gregification.exnihilo.metatileentities;
 
 import gregtech.api.capability.impl.FluidTankList;
 import gregtech.api.gui.GuiTextures;

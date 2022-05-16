@@ -67,7 +67,7 @@ public class DriverFusionReactor extends DriverSidedTileEntity {
 
         @Callback(doc = "function():number --  Returns the heat of machine.")
         public Object[] getHeat(final Context context, final Arguments args) {
-            return new Object[] {tileEntity.getHeat()};
+            return new Object[]{tileEntity.getHeat()};
         }
     }
 }

@@ -1,42 +1,31 @@
-package gregification.forestry.bees;
+package gregification.forestry;
 
 import forestry.api.apiculture.IAlleleBeeEffect;
 import forestry.api.apiculture.IAlleleBeeSpecies;
 import forestry.api.genetics.AlleleManager;
 import forestry.api.genetics.IAlleleFlowers;
+import forestry.api.recipes.RecipeManagers;
+import forestry.factory.MachineUIDs;
+import forestry.factory.ModuleFactory;
+import forestry.factory.recipes.CarpenterRecipeManager;
 import forestry.modules.ModuleHelper;
-import gregification.common.GFLog;
-import gregification.common.GFValues;
-import gregification.config.GFConfig;
+import gregification.base.ModIDs;
+import gregification.forestry.bees.GTCombType;
+import gregification.forestry.bees.GTDropType;
 import gregification.forestry.frames.GTFrameType;
-import gregification.forestry.frames.GTItemFrame;
-import gregtech.api.GTValues;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.fml.common.Loader;
 
-import java.util.HashMap;
-import java.util.Map;
-
-public class GTBees {
-
-    // Frequently used booleans for enabling some features
-    public static final boolean TWILIGHT_BEES = GFConfig.forestry.twilightBees && Loader.isModLoaded(GFValues.MODID_TF) && Loader.isModLoaded(GFValues.MODID_MB);
-    public static final boolean THAUMIC_BEES = GFConfig.forestry.thaumicBees && Loader.isModLoaded(GFValues.MODID_THAUM) && Loader.isModLoaded(GFValues.MODID_MB);
-
-    // New Items
-    public static GTItemComb combs;
-    public static GTItemDrop drops;
-    public static Map<GTFrameType, GTItemFrame> frames = new HashMap<>();
+public class ForestryUtils {
 
     public static ItemStack getCombStack(GTCombType type) {
         return getCombStack(type, 1);
     }
 
     public static ItemStack getCombStack(GTCombType type, int amount) {
-        if (!ModuleHelper.isEnabled("apiculture")) {
-            GFLog.forestryLogger.error("Tried to get GT Comb stack, but Apiculture module is not enabled!");
+        if (!apicultureEnabled()) {
+            ForestryModule.logger.error("Tried to get GT Comb stack, but Apiculture module is not enabled!");
         }
-        return new ItemStack(combs, amount, type.ordinal());
+        return new ItemStack(ForestryModule.gtCombs, amount, type.ordinal());
     }
 
     public static ItemStack getDropStack(GTDropType type) {
@@ -44,29 +33,29 @@ public class GTBees {
     }
 
     public static ItemStack getDropStack(GTDropType type, int amount) {
-        if (!ModuleHelper.isEnabled("apiculture")) {
-            GFLog.forestryLogger.error("Tried to get GT Drop stack, but Apiculture module is not enabled!");
+        if (!apicultureEnabled()) {
+            ForestryModule.logger.error("Tried to get GT Drop stack, but Apiculture module is not enabled!");
         }
-        return new ItemStack(drops, amount, type.ordinal());
+        return new ItemStack(ForestryModule.gtDrops, amount, type.ordinal());
     }
 
     public static ItemStack getFrameStack(GTFrameType type) {
-        if (!ModuleHelper.isEnabled("apiculture")) {
-            GFLog.forestryLogger.error("Tried to get GT Frame stack, but Apiculture module is not enabled!");
+        if (!apicultureEnabled()) {
+            ForestryModule.logger.error("Tried to get GT Frame stack, but Apiculture module is not enabled!");
         }
-        return new ItemStack(frames.get(type), 1);
+        return new ItemStack(ForestryModule.gtFrames.get(type), 1);
     }
 
     public static IAlleleBeeEffect getEffect(String modid, String name) {
         String s;
         switch (modid) {
-            case GFValues.MODID_EB:
+            case ModIDs.MODID_EB:
                 s = "extrabees.effect." + name;
                 break;
-            case GFValues.MODID_MB:
+            case ModIDs.MODID_MB:
                 s = "magicbees.effect" + name;
                 break;
-            case GTValues.MODID:
+            case ModIDs.MODID_GT:
                 s = "gregtech.effect." + name;
                 break;
             default:
@@ -79,13 +68,13 @@ public class GTBees {
     public static IAlleleFlowers getFlowers(String modid, String name) {
         String s;
         switch (modid) {
-            case GFValues.MODID_EB:
+            case ModIDs.MODID_EB:
                 s = "extrabees.flower." + name;
                 break;
-            case GFValues.MODID_MB:
+            case ModIDs.MODID_MB:
                 s = "magicbees.flower" + name;
                 break;
-            case GTValues.MODID:
+            case ModIDs.MODID_GT:
                 s = "gregtech.flower." + name;
                 break;
             default:
@@ -98,13 +87,13 @@ public class GTBees {
     public static IAlleleBeeSpecies getSpecies(String modid, String name) {
         String s;
         switch (modid) {
-            case GFValues.MODID_EB:
+            case ModIDs.MODID_EB:
                 s = "extrabees.species." + name;
                 break;
-            case GFValues.MODID_MB:
+            case ModIDs.MODID_MB:
                 s = "magicbees.species" + name;
                 break;
-            case GTValues.MODID:
+            case ModIDs.MODID_GT:
                 s = "gregtech.species." + name;
                 break;
             default:
@@ -112,5 +101,15 @@ public class GTBees {
                 break;
         }
         return (IAlleleBeeSpecies) AlleleManager.alleleRegistry.getAllele(s);
+    }
+
+    public static void removeCarpenterRecipe(ItemStack output) {
+        if (ModuleFactory.machineEnabled(MachineUIDs.CARPENTER)) {
+            CarpenterRecipeManager.getRecipes(output).forEach(r -> RecipeManagers.carpenterManager.removeRecipe(r));
+        }
+    }
+
+    public static boolean apicultureEnabled() {
+        return ModuleHelper.isEnabled("apiculture");
     }
 }

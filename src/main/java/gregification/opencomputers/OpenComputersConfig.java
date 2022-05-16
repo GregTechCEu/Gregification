@@ -1,17 +1,8 @@
-package gregification.config;
+package gregification.opencomputers;
 
-import gregification.common.GFValues;
 import net.minecraftforge.common.config.Config;
 
-@Config(modid = GFValues.MODID)
-public class OpenComputersCfg {
-
-    @Config.Comment({
-            "Enable Open Computers integration.",
-            "Default: true"
-    })
-    @Config.RequiresMcRestart
-    public boolean enableOpenComputers = true;
+public class OpenComputersConfig {
 
     @Config.Comment({
             "Enable Gregicality Science Open Computers integration.",

@@ -1,16 +1,8 @@
-package gregification.config;
+package gregification.forestry;
 
-import gregification.common.GFValues;
 import net.minecraftforge.common.config.Config;
 
-@Config(modid = GFValues.MODID)
-public class ForestryCfg {
-
-    @Config.Comment({
-            "Enable Forestry Integration. Overrides all other options in this category.",
-            "Default: true"
-    })
-    public boolean enableForestry = true;
+public class ForestryConfig {
 
     @Config.Comment({
             "Enable GT Electrodes. Also overrides Forestry recipes.",
@@ -33,7 +25,7 @@ public class ForestryCfg {
     @Config.Comment({
             "Whether or not to nerf GT Comb processing recipes.",
             "Requirements: Forestry Apiculture modile, gtBees config enabled",
-            "Primarily affects whether the Centrifuge (GT or Forestry) can process GT combs",
+            "Primarily affects whether the Centrifuge (GT or Forestry) can process GT gtCombs",
             "Default: false"
     })
     public boolean nerfGTCombs = false;
@@ -68,20 +60,20 @@ public class ForestryCfg {
     public boolean spaceBees = true;
 
     /**
-    @Config.Comment({
-            "Replace Forestry recipes with GT-style recipes",
-            "Changes nearly every recipe in Forestry.",
-            "Some changes are only available with some GT harder recipe configs, primarily \"hardMiscRecipes\" and \"hardWoodRecipes\"",
-            "Default: false"
-    })
-    public boolean gregifyForestry = true;
+     @Config.Comment({
+     "Replace Forestry recipes with GT-style recipes",
+     "Changes nearly every recipe in Forestry.",
+     "Some changes are only available with some GT harder recipe configs, primarily \"hardMiscRecipes\" and \"hardWoodRecipes\"",
+     "Default: false"
+     })
+     public boolean gregifyForestry = true;
 
-    @Config.Comment({
-            "Replace Forestry addon recipes with GT-style recipes",
-            "Currently supports:",
-            "",
-            "Default: false"
-    })
-    public boolean gregifyForestryAddons = true;
-    */
+     @Config.Comment({
+     "Replace Forestry addon recipes with GT-style recipes",
+     "Currently supports:",
+     "",
+     "Default: false"
+     })
+     public boolean gregifyForestryAddons = true;
+     */
 }

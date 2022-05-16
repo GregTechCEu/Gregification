@@ -1,31 +1,29 @@
 package gregification.forestry.recipes;
 
-import gregification.common.GFUtility;
-import gregification.common.GFValues;
+import gregification.base.BaseUtility;
+import gregification.base.ModIDs;
 import gregtech.api.recipes.RecipeMaps;
 import gregtech.api.unification.material.Materials;
 import net.minecraftforge.fml.common.Loader;
-
-import static gregification.common.GFValues.*;
 
 public class PropolisRecipes {
 
     public static void init() {
 
         // Extra Bees Propolis
-        if (Loader.isModLoaded(GFValues.MODID_EB)) {
+        if (Loader.isModLoaded(ModIDs.MODID_EB)) {
             RecipeMaps.EXTRACTOR_RECIPES.recipeBuilder()
-                    .inputs(GFUtility.getModItem(MODID_EB, "propolis", 0))
+                    .inputs(BaseUtility.getModItem(ModIDs.MODID_EB, "propolis", 0))
                     .fluidOutputs(Materials.Water.getFluid(500))
                     .duration(32).EUt(7).buildAndRegister();
 
             RecipeMaps.EXTRACTOR_RECIPES.recipeBuilder()
-                    .inputs(GFUtility.getModItem(MODID_EB, "propolis", 1))
+                    .inputs(BaseUtility.getModItem(ModIDs.MODID_EB, "propolis", 1))
                     .fluidOutputs(Materials.Oil.getFluid(500))
                     .duration(32).EUt(7).buildAndRegister();
 
             RecipeMaps.EXTRACTOR_RECIPES.recipeBuilder()
-                    .inputs(GFUtility.getModItem(MODID_EB, "propolis", 7))
+                    .inputs(BaseUtility.getModItem(ModIDs.MODID_EB, "propolis", 7))
                     .fluidOutputs(Materials.Creosote.getFluid(500))
                     .duration(32).EUt(7).buildAndRegister();
         }

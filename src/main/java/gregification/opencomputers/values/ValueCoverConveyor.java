@@ -45,25 +45,29 @@ public class ValueCoverConveyor extends ValueCoverBehavior {
     @Callback(doc = "function():number --  Returns tier.")
     public Object[] getTier(final Context context, final Arguments args) {
         CoverBehavior coverBehavior = getCoverBehavior();
-        if (!(coverBehavior instanceof CoverConveyor)) return new Object[] {null, "Found no cover, this is an invalid object."};
+        if (!(coverBehavior instanceof CoverConveyor))
+            return new Object[]{null, "Found no cover, this is an invalid object."};
         return new Object[]{((CoverConveyor) coverBehavior).tier};
     }
 
     @Callback(doc = "function():number --  Returns transfer rate.")
     public Object[] getTransferRate(final Context context, final Arguments args) {
         CoverBehavior coverBehavior = getCoverBehavior();
-        if (!(coverBehavior instanceof CoverConveyor)) return new Object[] {null, "Found no cover, this is an invalid object."};
-        int transferRate = ReflectionHelper.getPrivateValue(CoverConveyor.class, (CoverConveyor)coverBehavior, "transferRate");
+        if (!(coverBehavior instanceof CoverConveyor))
+            return new Object[]{null, "Found no cover, this is an invalid object."};
+        int transferRate = ReflectionHelper.getPrivateValue(CoverConveyor.class, (CoverConveyor) coverBehavior, "transferRate");
         return new Object[]{transferRate};
     }
 
     @Callback(doc = "function(number) --  Sets transfer rate.")
     public Object[] setTransferRate(final Context context, final Arguments args) {
         CoverBehavior coverBehavior = getCoverBehavior();
-        if (!(coverBehavior instanceof CoverConveyor)) return new Object[] {null, "Found no cover, this is an invalid object."};
+        if (!(coverBehavior instanceof CoverConveyor))
+            return new Object[]{null, "Found no cover, this is an invalid object."};
         int transferRate = args.checkInteger(0);
         int maxRate = ((CoverConveyor) coverBehavior).maxItemTransferRate;
-        if (transferRate < 0 || transferRate > maxRate) throw new IllegalArgumentException(String.format("Expect a number between 0 and %d.", maxRate));
+        if (transferRate < 0 || transferRate > maxRate)
+            throw new IllegalArgumentException(String.format("Expect a number between 0 and %d.", maxRate));
         Method setTransferRate = ReflectionHelper.findMethod(CoverConveyor.class, "setTransferRate", null, int.class);
         try {
             setTransferRate.invoke(coverBehavior, transferRate);
@@ -76,7 +80,8 @@ public class ValueCoverConveyor extends ValueCoverBehavior {
     @Callback(doc = "function(mode:number) --  Sets conveyor mode. (0:IMPORT, 1:EXPORT)")
     public Object[] setConveyorMode(final Context context, final Arguments args) {
         CoverBehavior coverBehavior = getCoverBehavior();
-        if (!(coverBehavior instanceof CoverConveyor)) return new Object[] {null, "Found no cover, this is an invalid object."};
+        if (!(coverBehavior instanceof CoverConveyor))
+            return new Object[]{null, "Found no cover, this is an invalid object."};
         int mode = args.checkInteger(0);
         if (mode < 0 || mode > 1) throw new IllegalArgumentException("Expect a number between 0 and 1.");
         Method setFilterMode = ReflectionHelper
@@ -92,7 +97,8 @@ public class ValueCoverConveyor extends ValueCoverBehavior {
     @Callback(doc = "function():number --  Gets conveyor mode. (0:IMPORT, 1:EXPORT)")
     public Object[] getConveyorMode(final Context context, final Arguments args) {
         CoverBehavior coverBehavior = getCoverBehavior();
-        if (!(coverBehavior instanceof CoverConveyor)) return new Object[] {null, "Found no cover, this is an invalid object."};
+        if (!(coverBehavior instanceof CoverConveyor))
+            return new Object[]{null, "Found no cover, this is an invalid object."};
         return new Object[]{((CoverConveyor) coverBehavior).getConveyorMode().ordinal()};
     }
 }

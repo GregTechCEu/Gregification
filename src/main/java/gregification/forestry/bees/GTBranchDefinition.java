@@ -25,7 +25,8 @@ import forestry.api.genetics.IClassification;
 import forestry.apiculture.genetics.alleles.AlleleEffects;
 import forestry.core.genetics.alleles.AlleleHelper;
 import forestry.core.genetics.alleles.EnumAllele.*;
-import gregification.common.GFValues;
+import gregification.base.ModIDs;
+import gregification.forestry.ForestryUtils;
 import net.minecraftforge.fml.common.Loader;
 
 import java.util.Arrays;
@@ -87,8 +88,8 @@ public enum GTBranchDefinition {
         AlleleHelper.getInstance().set(alleles, FLOWER_PROVIDER, Flowers.END);
         AlleleHelper.getInstance().set(alleles, FLOWERING, Flowering.AVERAGE);
         AlleleHelper.getInstance().set(alleles, SPEED, GTAlleleBeeSpecies.speedBlinding);
-        if (Loader.isModLoaded(GFValues.MODID_EB)) {
-            AlleleHelper.getInstance().set(alleles, EFFECT, GTBees.getEffect(GFValues.MODID_EB, "radioactive"));
+        if (Loader.isModLoaded(ModIDs.MODID_EB)) {
+            AlleleHelper.getInstance().set(alleles, EFFECT, ForestryUtils.getEffect(ModIDs.MODID_EB, "radioactive"));
         }
     }),
     // For Twilight Forest compat
@@ -105,8 +106,8 @@ public enum GTBranchDefinition {
         AlleleHelper.getInstance().set(alleles, HUMIDITY_TOLERANCE, Tolerance.BOTH_1);
         AlleleHelper.getInstance().set(alleles, FLOWERING, Flowering.FASTER);
         AlleleHelper.getInstance().set(alleles, LIFESPAN, Lifespan.LONGEST);
-        if (Loader.isModLoaded(GFValues.MODID_EB)) {
-            AlleleHelper.getInstance().set(alleles, FLOWER_PROVIDER, GTBees.getFlowers(GFValues.MODID_EB, "book"));
+        if (Loader.isModLoaded(ModIDs.MODID_EB)) {
+            AlleleHelper.getInstance().set(alleles, FLOWER_PROVIDER, ForestryUtils.getFlowers(ModIDs.MODID_EB, "book"));
         }
     }),
     // For Advanced Rocketry/Galacticraft compat
@@ -118,8 +119,8 @@ public enum GTBranchDefinition {
         AlleleHelper.getInstance().set(alleles, LIFESPAN, Lifespan.LONGEST);
         AlleleHelper.getInstance().set(alleles, SPEED, Speed.FAST);
         AlleleHelper.getInstance().set(alleles, TERRITORY, Territory.LARGEST);
-        if (Loader.isModLoaded(GFValues.MODID_EB)) {
-            AlleleHelper.getInstance().set(alleles, FLOWER_PROVIDER, GTBees.getFlowers(GFValues.MODID_EB, "rock"));
+        if (Loader.isModLoaded(ModIDs.MODID_EB)) {
+            AlleleHelper.getInstance().set(alleles, FLOWER_PROVIDER, ForestryUtils.getFlowers(ModIDs.MODID_EB, "rock"));
         }
     }),
     GT_PLANET("Planetaris", alleles -> {
@@ -129,8 +130,8 @@ public enum GTBranchDefinition {
         AlleleHelper.getInstance().set(alleles, LIFESPAN, Lifespan.NORMAL);
         AlleleHelper.getInstance().set(alleles, SPEED, Speed.FASTEST);
         AlleleHelper.getInstance().set(alleles, TERRITORY, Territory.LARGER);
-        if (Loader.isModLoaded(GFValues.MODID_EB)) {
-            AlleleHelper.getInstance().set(alleles, FLOWER_PROVIDER, GTBees.getFlowers(GFValues.MODID_EB, "rock"));
+        if (Loader.isModLoaded(ModIDs.MODID_EB)) {
+            AlleleHelper.getInstance().set(alleles, FLOWER_PROVIDER, ForestryUtils.getFlowers(ModIDs.MODID_EB, "rock"));
         }
     }),
     ;

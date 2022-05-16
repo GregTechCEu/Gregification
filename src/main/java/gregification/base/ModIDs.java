@@ -1,12 +1,9 @@
-package gregification.common;
+package gregification.base;
 
-public class GFValues {
-
-    public static final String MODID = "gregification";
-    public static final String MOD_NAME = "Gregification";
-    public static final String VERSION = "@VERSION@";
+public class ModIDs {
 
     public static final String
+            MODID_GT = "gregtech",
             MODID_GCYS = "gcys",
             MODID_GCYM = "gcym",
             MODID_EXNI = "exnihilocreatio",

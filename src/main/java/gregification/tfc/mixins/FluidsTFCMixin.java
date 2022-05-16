@@ -2,7 +2,6 @@ package gregification.tfc.mixins;
 
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
-
 import gregification.tfc.ITFCFluidRegistrationStatus;
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.Constants;
@@ -26,7 +25,10 @@ import net.minecraft.item.EnumRarity;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.Fluid;
-import org.spongepowered.asm.mixin.*;
+import org.spongepowered.asm.mixin.Final;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Overwrite;
+import org.spongepowered.asm.mixin.Shadow;
 
 import javax.annotation.Nonnull;
 import java.awt.*;
@@ -37,56 +39,95 @@ import java.util.stream.Collectors;
 @Mixin(value = FluidsTFC.class, remap = false)
 public class FluidsTFCMixin {
 
-    @Shadow @Final private static ResourceLocation STILL;
-    @Shadow @Final private static ResourceLocation FLOW;
-    @Shadow @Final private static ResourceLocation LAVA_STILL;
-    @Shadow @Final private static ResourceLocation LAVA_FLOW;
-    @Shadow @Final private static Map<EnumDyeColor, FluidWrapper> DYE_FLUIDS;
+    @Shadow
+    @Final
+    private static ResourceLocation STILL;
+    @Shadow
+    @Final
+    private static ResourceLocation FLOW;
+    @Shadow
+    @Final
+    private static ResourceLocation LAVA_STILL;
+    @Shadow
+    @Final
+    private static ResourceLocation LAVA_FLOW;
+    @Shadow
+    @Final
+    private static Map<EnumDyeColor, FluidWrapper> DYE_FLUIDS;
 
-    @Shadow private static ImmutableSet<FluidWrapper> allAlcoholsFluids;
-    @Shadow private static ImmutableSet<FluidWrapper> allOtherFiniteFluids;
-    @Shadow private static ImmutableMap<Metal, FluidWrapper> allMetalFluids;
+    @Shadow
+    private static ImmutableSet<FluidWrapper> allAlcoholsFluids;
+    @Shadow
+    private static ImmutableSet<FluidWrapper> allOtherFiniteFluids;
+    @Shadow
+    private static ImmutableMap<Metal, FluidWrapper> allMetalFluids;
 
-    @Shadow public static FluidWrapper FRESH_WATER;
-    @Shadow public static FluidWrapper HOT_WATER;
-    @Shadow public static FluidWrapper SALT_WATER;
-    @Shadow public static FluidWrapper RUM;
-    @Shadow public static FluidWrapper BEER;
-    @Shadow public static FluidWrapper WHISKEY;
-    @Shadow public static FluidWrapper RYE_WHISKEY;
-    @Shadow public static FluidWrapper CORN_WHISKEY;
-    @Shadow public static FluidWrapper SAKE;
-    @Shadow public static FluidWrapper VODKA;
-    @Shadow public static FluidWrapper CIDER;
-    @Shadow public static FluidWrapper VINEGAR;
-    @Shadow public static FluidWrapper BRINE;
-    @Shadow public static FluidWrapper MILK;
-    @Shadow public static FluidWrapper OLIVE_OIL;
-    @Shadow public static FluidWrapper OLIVE_OIL_WATER;
-    @Shadow public static FluidWrapper TANNIN;
-    @Shadow public static FluidWrapper LIMEWATER;
-    @Shadow public static FluidWrapper CURDLED_MILK;
-    @Shadow public static FluidWrapper MILK_VINEGAR;
-    @Shadow public static FluidWrapper LYE;
+    @Shadow
+    public static FluidWrapper FRESH_WATER;
+    @Shadow
+    public static FluidWrapper HOT_WATER;
+    @Shadow
+    public static FluidWrapper SALT_WATER;
+    @Shadow
+    public static FluidWrapper RUM;
+    @Shadow
+    public static FluidWrapper BEER;
+    @Shadow
+    public static FluidWrapper WHISKEY;
+    @Shadow
+    public static FluidWrapper RYE_WHISKEY;
+    @Shadow
+    public static FluidWrapper CORN_WHISKEY;
+    @Shadow
+    public static FluidWrapper SAKE;
+    @Shadow
+    public static FluidWrapper VODKA;
+    @Shadow
+    public static FluidWrapper CIDER;
+    @Shadow
+    public static FluidWrapper VINEGAR;
+    @Shadow
+    public static FluidWrapper BRINE;
+    @Shadow
+    public static FluidWrapper MILK;
+    @Shadow
+    public static FluidWrapper OLIVE_OIL;
+    @Shadow
+    public static FluidWrapper OLIVE_OIL_WATER;
+    @Shadow
+    public static FluidWrapper TANNIN;
+    @Shadow
+    public static FluidWrapper LIMEWATER;
+    @Shadow
+    public static FluidWrapper CURDLED_MILK;
+    @Shadow
+    public static FluidWrapper MILK_VINEGAR;
+    @Shadow
+    public static FluidWrapper LYE;
 
-    @Shadow @Nonnull protected static FluidWrapper registerFluid(@Nonnull Fluid newFluid) { throw new AssertionError(); }
+    @Shadow
+    @Nonnull
+    protected static FluidWrapper registerFluid(@Nonnull Fluid newFluid) {
+        throw new AssertionError();
+    }
 
+    /**
+     * @reason Fix GT overwriting TFC water types in world generation
+     * @author Rongmario
+     */
     @Overwrite
     public static void registerFluids() {
         if (((ITFCFluidRegistrationStatus) (Object) TerraFirmaCraft.getInstance()).isEarly()) {
             FRESH_WATER = registerFluid(new Fluid("fresh_water", STILL, FLOW, 0xFF296ACD)).with(DrinkableProperty.DRINKABLE, player -> {
-                if (player.getFoodStats() instanceof FoodStatsTFC)
-                {
+                if (player.getFoodStats() instanceof FoodStatsTFC) {
                     ((FoodStatsTFC) player.getFoodStats()).addThirst(40);
                 }
             });
             HOT_WATER = registerFluid(new Fluid("hot_water", STILL, FLOW, 0xFF345FDA).setTemperature(350));
             SALT_WATER = registerFluid(new Fluid("salt_water", STILL, FLOW, 0xFF1F5099)).with(DrinkableProperty.DRINKABLE, player -> {
-                if (player.getFoodStats() instanceof FoodStatsTFC)
-                {
+                if (player.getFoodStats() instanceof FoodStatsTFC) {
                     ((FoodStatsTFC) player.getFoodStats()).addThirst(-10);
-                    if (Constants.RNG.nextDouble() < ConfigTFC.General.PLAYER.chanceThirstOnSaltyDrink)
-                    {
+                    if (Constants.RNG.nextDouble() < ConfigTFC.General.PLAYER.chanceThirstOnSaltyDrink) {
                         player.addPotionEffect(new PotionEffect(PotionEffectsTFC.THIRST, 600, 0));
                     }
                 }
@@ -119,8 +160,7 @@ public class FluidsTFCMixin {
                             VINEGAR = registerFluid(new Fluid("vinegar", STILL, FLOW, 0xFFC7C2AA)),
                             BRINE = registerFluid(new Fluid("brine", STILL, FLOW, 0xFFDCD3C9)),
                             MILK = registerFluid(new Fluid("milk", STILL, FLOW, 0xFFFFFFFF)).with(DrinkableProperty.DRINKABLE, player -> {
-                                if (player.getFoodStats() instanceof IFoodStatsTFC)
-                                {
+                                if (player.getFoodStats() instanceof IFoodStatsTFC) {
                                     IFoodStatsTFC foodStats = (IFoodStatsTFC) player.getFoodStats();
                                     foodStats.addThirst(10);
                                     foodStats.getNutrition().addBuff(FoodData.MILK);

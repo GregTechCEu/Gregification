@@ -77,33 +77,33 @@ public class DriverRecipeMapMultiblockController extends DriverSidedTileEntity {
 
         @Callback(doc = "function():number --  Returns the amount of electricity contained in this Block, in EU units!")
         public Object[] getEnergyStored(final Context context, final Arguments args) {
-            return new Object[] {tileEntity.getEnergyContainer().getEnergyStored()};
+            return new Object[]{tileEntity.getEnergyContainer().getEnergyStored()};
         }
 
         @Callback(doc = "function():number --  "
                 + "Returns the amount of electricity containable in this Block, in EU units!")
         public Object[] getEnergyCapacity(final Context context, final Arguments args) {
-            return new Object[] {tileEntity.getEnergyContainer().getEnergyCapacity()};
+            return new Object[]{tileEntity.getEnergyContainer().getEnergyCapacity()};
         }
 
         @Callback(doc = "function():number --  Gets the Output in EU/p.")
         public Object[] getOutputVoltage(final Context context, final Arguments args) {
-            return new Object[] {tileEntity.getEnergyContainer().getOutputVoltage()};
+            return new Object[]{tileEntity.getEnergyContainer().getOutputVoltage()};
         }
 
         @Callback(doc = "function():number -- Gets the amount of Energy Packets per tick.")
         public Object[] getOutputAmperage(final Context context, final Arguments args) {
-            return new Object[] {tileEntity.getEnergyContainer().getOutputAmperage()};
+            return new Object[]{tileEntity.getEnergyContainer().getOutputAmperage()};
         }
 
         @Callback(doc = "function():number -- Gets the maximum Input in EU/p.")
         public Object[] getInputVoltage(final Context context, final Arguments args) {
-            return new Object[] {tileEntity.getEnergyContainer().getInputVoltage()};
+            return new Object[]{tileEntity.getEnergyContainer().getInputVoltage()};
         }
 
         @Callback(doc = "function():number -- Gets the amount of Energy Packets per tick.")
         public Object[] getInputAmperage(final Context context, final Arguments args) {
-            return new Object[] {tileEntity.getEnergyContainer().getInputAmperage()};
+            return new Object[]{tileEntity.getEnergyContainer().getInputAmperage()};
         }
 
         @Callback(doc = "function():number -- Gets the energy input per second.")
@@ -127,7 +127,7 @@ public class DriverRecipeMapMultiblockController extends DriverSidedTileEntity {
                 map.put("name", itemStack.getDisplayName());
                 result.add(map);
             }
-            return new Object[] {result};
+            return new Object[]{result};
         }
 
         @Callback(doc = "function():table -- Gets the Input Inventory.")
@@ -143,10 +143,10 @@ public class DriverRecipeMapMultiblockController extends DriverSidedTileEntity {
         @Nonnull
         private Object[] getTank(IMultipleTankHandler handler) {
             List<Map<String, Object>> result = new ArrayList<>();
-            handler.getFluidTanks().forEach(tank->{
+            handler.getFluidTanks().forEach(tank -> {
                 Map<String, Object> map = new HashMap<>();
                 FluidStack fluid = tank.getFluid();
-                if (fluid == null){
+                if (fluid == null) {
                     map.put("amount", 0);
                     map.put("name", null);
                 } else {
@@ -155,7 +155,7 @@ public class DriverRecipeMapMultiblockController extends DriverSidedTileEntity {
                 }
                 result.add(map);
             });
-            return new Object[] {result};
+            return new Object[]{result};
         }
 
         @Callback(doc = "function():table -- Gets the Input Tank.")

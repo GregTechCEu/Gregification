@@ -17,7 +17,8 @@
  */
 package gregification.forestry.bees;
 
-import gregification.common.GFValues;
+import gregification.base.ModIDs;
+import gregification.forestry.ForestryModule;
 import net.minecraftforge.fml.common.Loader;
 
 public enum GTCombType {
@@ -102,24 +103,24 @@ public enum GTCombType {
     NEUTRONIUM("neutronium", true, 0xFFF0F0, 0xFAFAFA),
 
     //Twilight
-    NAGA("naga", GTBees.TWILIGHT_BEES, 0x0D5A0D, 0x28874B),
-    LICH("lich", GTBees.TWILIGHT_BEES, 0x5C605E, 0xC5C5C5),
-    HYDRA("hydra", GTBees.TWILIGHT_BEES, 0x872836, 0xB8132C),
-    URGHAST("urghast", GTBees.TWILIGHT_BEES && GTBees.THAUMIC_BEES, 0x7C0618, 0xA7041C),
-    SNOWQUEEN("snowqueen", GTBees.TWILIGHT_BEES && GTBees.THAUMIC_BEES, 0x9C0018, 0xD02001),
+    NAGA("naga", ForestryModule.TWILIGHT_BEES, 0x0D5A0D, 0x28874B),
+    LICH("lich", ForestryModule.TWILIGHT_BEES, 0x5C605E, 0xC5C5C5),
+    HYDRA("hydra", ForestryModule.TWILIGHT_BEES, 0x872836, 0xB8132C),
+    URGHAST("urghast", ForestryModule.TWILIGHT_BEES && ForestryModule.THAUMIC_BEES, 0x7C0618, 0xA7041C),
+    SNOWQUEEN("snowqueen", ForestryModule.TWILIGHT_BEES && ForestryModule.THAUMIC_BEES, 0x9C0018, 0xD02001),
 
     //Thaumcraft Line TODO Most of these probably no longer fit
-    THAUMIUM("thaumium", GTBees.THAUMIC_BEES, 0x7A007A, 0x5C005C),
-    AMBER("amber", GTBees.THAUMIC_BEES, 0x774B15, 0xEE7700),
-    QUICKSILVER("quicksilver", GTBees.THAUMIC_BEES, 0xc7c7ea, 0xb5b3df),
-    SALISMUNDUS("salismundus", GTBees.THAUMIC_BEES, 0xF7ADDE, 0x592582),
-    TAINTED("tainted", GTBees.THAUMIC_BEES, 0x904BB8, 0xE800FF),
+    THAUMIUM("thaumium", ForestryModule.THAUMIC_BEES, 0x7A007A, 0x5C005C),
+    AMBER("amber", ForestryModule.THAUMIC_BEES, 0x774B15, 0xEE7700),
+    QUICKSILVER("quicksilver", ForestryModule.THAUMIC_BEES, 0xc7c7ea, 0xb5b3df),
+    SALISMUNDUS("salismundus", ForestryModule.THAUMIC_BEES, 0xF7ADDE, 0x592582),
+    TAINTED("tainted", ForestryModule.THAUMIC_BEES, 0x904BB8, 0xE800FF),
 
     // Semi-stable nugget
-    DIVIDED("divided", Loader.isModLoaded(GFValues.MODID_XU2) && Loader.isModLoaded(GFValues.MODID_EB), 0xF0F0F0, 0xDCDCDC),
+    DIVIDED("divided", Loader.isModLoaded(ModIDs.MODID_XU2) && Loader.isModLoaded(ModIDs.MODID_EB), 0xF0F0F0, 0xDCDCDC),
 
     // Nether Star
-    SPARKLING("sparkling", Loader.isModLoaded(GFValues.MODID_MB), 0x7A007A, 0xFFFFFF),
+    SPARKLING("sparkling", Loader.isModLoaded(ModIDs.MODID_MB), 0x7A007A, 0xFFFFFF),
 
     //THAUMIUMSHARD("thaumiumshard", GTBees.THAUMIC_BEES, null, 85,0x9966FF, 0xAD85FF),
     //MITHRIL("mithril", GTBees.THAUMIC_BEES, null, 70,0xF0E68C, 0xFFFFD2),
@@ -174,8 +175,7 @@ public enum GTCombType {
     RUNEI("rune1", true, null, 10,0x0104D9, 0xE31010),
     RUNEII("rune2", true, null, 10,0xE31010, 0x0104D9),
     FIREESSENSE("fireessence", true, null, 30,0xFFA157, 0xD41238),
- */
-    ;
+ */;
 
     public static final GTCombType[] VALUES = values();
 

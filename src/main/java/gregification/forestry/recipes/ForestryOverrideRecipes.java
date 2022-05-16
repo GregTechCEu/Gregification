@@ -4,9 +4,10 @@ import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableMap;
 import forestry.api.recipes.RecipeManagers;
 import forestry.core.fluids.Fluids;
-import gregification.common.GFLog;
-import gregification.common.GFUtility;
-import gregification.common.GFValues;
+import gregification.base.BaseUtility;
+import gregification.base.ModIDs;
+import gregification.forestry.ForestryModule;
+import gregification.forestry.ForestryUtils;
 import gregtech.api.recipes.ModHandler;
 import gregtech.api.recipes.ingredients.IntCircuitIngredient;
 import gregtech.api.unification.material.MarkerMaterials.Tier;
@@ -24,7 +25,6 @@ import org.apache.commons.lang3.tuple.Pair;
 import java.util.HashMap;
 import java.util.Map;
 
-import static gregification.forestry.recipes.ForestryRecipeUtil.removeCarpenterRecipe;
 import static gregtech.api.GTValues.*;
 import static gregtech.api.recipes.RecipeMaps.*;
 import static gregtech.api.unification.material.Materials.*;
@@ -52,7 +52,7 @@ public class ForestryOverrideRecipes {
                 .duration(400).EUt(VA[LV]).buildAndRegister();
 
         // Hardened Casing
-        removeCarpenterRecipe(getForestryItem("hardened_machine", 0));
+        ForestryUtils.removeCarpenterRecipe(getForestryItem("hardened_machine", 0));
         ASSEMBLER_RECIPES.recipeBuilder()
                 .inputs(getForestryItem("sturdy_machine", 0))
                 .input(plate, Diamond, 4)
@@ -70,7 +70,7 @@ public class ForestryOverrideRecipes {
         // TODO Flexible Casing?
 
         // Basic Circuit Chipset
-        removeCarpenterRecipe(getForestryItem("chipsets", 1, 0, "{T:0s}"));
+        ForestryUtils.removeCarpenterRecipe(getForestryItem("chipsets", 1, 0, "{T:0s}"));
         CIRCUIT_ASSEMBLER_RECIPES.recipeBuilder()
                 .input(BASIC_CIRCUIT_BOARD)
                 .input(circuit, Tier.ULV, 2)
@@ -88,7 +88,7 @@ public class ForestryOverrideRecipes {
                 'C', "circuitPrimitive");
 
         // Enhanced Circuit Chipset
-        removeCarpenterRecipe(getForestryItem("chipsets", 1, 1, "{T:1s}"));
+        ForestryUtils.removeCarpenterRecipe(getForestryItem("chipsets", 1, 1, "{T:1s}"));
         CIRCUIT_ASSEMBLER_RECIPES.recipeBuilder()
                 .input(BASIC_CIRCUIT_BOARD)
                 .input(circuit, Tier.LV, 2)
@@ -106,7 +106,7 @@ public class ForestryOverrideRecipes {
                 'C', "circuitBasic");
 
         // Refined Circuit Chipset
-        removeCarpenterRecipe(getForestryItem("chipsets", 1, 2, "{T:2s}"));
+        ForestryUtils.removeCarpenterRecipe(getForestryItem("chipsets", 1, 2, "{T:2s}"));
         CIRCUIT_ASSEMBLER_RECIPES.recipeBuilder()
                 .input(GOOD_CIRCUIT_BOARD)
                 .input(circuit, Tier.MV, 2)
@@ -124,7 +124,7 @@ public class ForestryOverrideRecipes {
                 'C', "circuitGood");
 
         // Intricate Circuit Chipset
-        removeCarpenterRecipe(getForestryItem("chipsets", 1, 3, "{T:3s}"));
+        ForestryUtils.removeCarpenterRecipe(getForestryItem("chipsets", 1, 3, "{T:3s}"));
         CIRCUIT_ASSEMBLER_RECIPES.recipeBuilder()
                 .input(GOOD_CIRCUIT_BOARD)
                 .input(circuit, Tier.HV, 2)
@@ -249,7 +249,7 @@ public class ForestryOverrideRecipes {
                 'E', EMITTER_LV.getStackForm());
 
         // Analyzer
-        removeCarpenterRecipe(getForestryItem("portable_alyzer", 0));
+        ForestryUtils.removeCarpenterRecipe(getForestryItem("portable_alyzer", 0));
         RecipeManagers.carpenterManager.addRecipe(20, Redstone.getFluid(576), COVER_SCREEN.getStackForm(), getForestryItem("portable_alyzer", 0),
                 "SPS", "PCP", "SPS",
                 'S', "screwDiamond",
@@ -387,7 +387,7 @@ public class ForestryOverrideRecipes {
                     'B', new UnificationEntry(bolt, Glass));
 
             // Scented Paneling
-            removeCarpenterRecipe(getForestryItem("crafting_material", 6));
+            ForestryUtils.removeCarpenterRecipe(getForestryItem("crafting_material", 6));
             RecipeManagers.carpenterManager.addRecipe(10, Fluids.FOR_HONEY.getFluid(500), ItemStack.EMPTY, getForestryItem("crafting_material", 6),
                     "WJW", "SSS", "APA",
                     'W', "wireFineElectrum",
@@ -410,7 +410,7 @@ public class ForestryOverrideRecipes {
                 " A ", "IPI", " A ",
                 'A', "dustAsh",
                 'I', "brickPeat",
-                'P', GFUtility.getModItem(GFValues.MODID_FR, "propolis", W));
+                'P', BaseUtility.getModItem(ModIDs.MODID_FR, "propolis", W));
 
         // Pulsating Mesh
         ModHandler.removeRecipeByName("forestry:pulsating_mesh");
@@ -420,7 +420,7 @@ public class ForestryOverrideRecipes {
         ASSEMBLER_RECIPES.recipeBuilder().inputs(getForestryItem("crafting_material", 9, 2)).fluidInputs(Water.getFluid(500)).circuitMeta(9).outputs(getForestryItem("crafting_material", 3)).duration(64).EUt(7).buildAndRegister();
 
         // Soldering Iron
-        removeCarpenterRecipe(getForestryItem("soldering_iron", 0));
+        ForestryUtils.removeCarpenterRecipe(getForestryItem("soldering_iron", 0));
         RecipeManagers.carpenterManager.addRecipe(20, Redstone.getFluid(576), ItemStack.EMPTY, getForestryItem("soldering_iron", 0),
                 "  R", " RB", "O  ",
                 'R', "stickSteel",
@@ -431,11 +431,11 @@ public class ForestryOverrideRecipes {
         ASSEMBLER_RECIPES.recipeBuilder().input("logWood", 1).fluidInputs(SeedOil.getFluid(50)).circuitMeta(2).outputs(getForestryItem("oak_stick", 0)).duration(16).EUt(7).buildAndRegister();
 
         // Wood Pulp TODO Always remove?
-        removeCarpenterRecipe(getForestryItem("wood_pulp", 0));
+        ForestryUtils.removeCarpenterRecipe(getForestryItem("wood_pulp", 0));
 
         if (ConfigHolder.recipes.hardWoodRecipes) {
             // Escritoire
-            removeCarpenterRecipe(getForestryItem("escritoire", 0));
+            ForestryUtils.removeCarpenterRecipe(getForestryItem("escritoire", 0));
             RecipeManagers.carpenterManager.addRecipe(20, SeedOil.getFluid(500), ItemStack.EMPTY, getForestryItem("escritoire", 0),
                     "PSS", "HHH", "F F",
                     'P', "plankWood",
@@ -444,7 +444,7 @@ public class ForestryOverrideRecipes {
                     'F', "fenceWood");
         }
 
-        if (Loader.isModLoaded(GFValues.MODID_GTFO)) {
+        if (Loader.isModLoaded(ModIDs.MODID_GTFO)) {
             // Honeyed Slice
             ModHandler.removeRecipeByName("forestry:honeyed_slice");
             RecipeManagers.carpenterManager.addRecipe(10, Fluids.FOR_HONEY.getFluid(800), ItemStack.EMPTY, getForestryItem("honeyed_slice", 0),
@@ -504,11 +504,11 @@ public class ForestryOverrideRecipes {
         Pair<String, Integer> itemKey = Pair.of(name, meta);
         ItemStack stack = cachedStackMap.get(itemKey);
         if (stack == null) {
-            stack = GFUtility.getModItem(GFValues.MODID_FR, name, meta, 1);
+            stack = BaseUtility.getModItem(ModIDs.MODID_FR, name, meta, 1);
             cachedStackMap.put(itemKey, stack);
         }
         if (stack == ItemStack.EMPTY) {
-            GFLog.forestryLogger.error("Could not find Forestry item with name {} and meta {}", name, meta);
+            ForestryModule.logger.error("Could not find Forestry item with name {} and meta {}", name, meta);
             return stack;
         }
         stack = stack.copy();
@@ -516,7 +516,7 @@ public class ForestryOverrideRecipes {
             try {
                 stack.setTagCompound(JsonToNBT.getTagFromJson(nbt));
             } catch (NBTException e) {
-                GFLog.forestryLogger.error("Invalid NBT string passed for item with name {} and meta {}. NBT string: {}", name, meta, nbt);
+                ForestryModule.logger.error("Invalid NBT string passed for item with name {} and meta {}. NBT string: {}", name, meta, nbt);
             }
         }
         stack.setCount(amount);

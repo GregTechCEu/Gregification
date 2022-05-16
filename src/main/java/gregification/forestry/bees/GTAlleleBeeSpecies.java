@@ -24,7 +24,7 @@ import forestry.api.genetics.IAlleleFloat;
 import forestry.api.genetics.IClassification;
 import forestry.apiculture.genetics.alleles.AlleleBeeSpecies;
 import forestry.core.genetics.alleles.AlleleFloat;
-import gregification.common.GFValues;
+import gregification.Gregification;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 
@@ -75,7 +75,7 @@ public class GTAlleleBeeSpecies extends AlleleBeeSpecies {
     public static void setupGTAlleles() {
         IAlleleFloat allele = (IAlleleFloat) AlleleManager.alleleRegistry.getAllele("magicbees.speedBlinding");
         if (allele == null) {
-            allele = new AlleleFloat(GFValues.MODID, "gregtech.speedBlinding", "gregtech.speedBlinding", 2f, false);
+            allele = new AlleleFloat(Gregification.MODID, "gregtech.speedBlinding", "gregtech.speedBlinding", 2f, false);
             AlleleManager.alleleRegistry.registerAllele(allele, EnumBeeChromosome.SPEED);
         }
         speedBlinding = allele;

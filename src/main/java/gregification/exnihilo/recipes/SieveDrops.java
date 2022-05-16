@@ -15,7 +15,7 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-package gregification.exnihilo;
+package gregification.exnihilo.recipes;
 
 import exnihilocreatio.ModBlocks;
 import exnihilocreatio.ModItems;
@@ -24,9 +24,8 @@ import exnihilocreatio.items.seeds.ItemSeedBase;
 import exnihilocreatio.registries.manager.ISieveDefaultRegistryProvider;
 import exnihilocreatio.registries.registries.SieveRegistry;
 import exnihilocreatio.util.ItemInfo;
-import gregification.config.GFConfig;
-import gregification.common.GFLog;
-import gregification.common.GFOrePrefix;
+import gregification.base.BaseConfig;
+import gregification.exnihilo.ExNihiloModule;
 import gregtech.api.GregTechAPI;
 import gregtech.api.unification.OreDictUnifier;
 import gregtech.api.unification.material.Material;
@@ -47,18 +46,18 @@ public class SieveDrops implements ISieveDefaultRegistryProvider {
     private static Map<SieveDropType, List<SieveDrop>> SIEVE_DROPS_MAP = new HashMap<>();
 
     public static void readSieveDropsFromConfig() {
-        readSieveDropsFromConfig(GFConfig.exNihilo.drops.sandSieveDrops, SieveDropType.SAND);
-        readSieveDropsFromConfig(GFConfig.exNihilo.drops.gravelSieveDrops, SieveDropType.GRAVEL);
-        readSieveDropsFromConfig(GFConfig.exNihilo.drops.graniteSieveDrops, SieveDropType.GRANITE);
-        readSieveDropsFromConfig(GFConfig.exNihilo.drops.dioriteSieveDrops, SieveDropType.DIORITE);
-        readSieveDropsFromConfig(GFConfig.exNihilo.drops.andesiteSieveDrops, SieveDropType.ANDESITE);
-        readSieveDropsFromConfig(GFConfig.exNihilo.drops.netherrackSieveDrops, SieveDropType.NETHERRACK);
-        readSieveDropsFromConfig(GFConfig.exNihilo.drops.endstoneSieveDrops, SieveDropType.END);
+        readSieveDropsFromConfig(BaseConfig.exNihilo.drops.sandSieveDrops, SieveDropType.SAND);
+        readSieveDropsFromConfig(BaseConfig.exNihilo.drops.gravelSieveDrops, SieveDropType.GRAVEL);
+        readSieveDropsFromConfig(BaseConfig.exNihilo.drops.graniteSieveDrops, SieveDropType.GRANITE);
+        readSieveDropsFromConfig(BaseConfig.exNihilo.drops.dioriteSieveDrops, SieveDropType.DIORITE);
+        readSieveDropsFromConfig(BaseConfig.exNihilo.drops.andesiteSieveDrops, SieveDropType.ANDESITE);
+        readSieveDropsFromConfig(BaseConfig.exNihilo.drops.netherrackSieveDrops, SieveDropType.NETHERRACK);
+        readSieveDropsFromConfig(BaseConfig.exNihilo.drops.endstoneSieveDrops, SieveDropType.END);
     }
 
     private static void readSieveDropsFromConfig(String[] recipes, SieveDropType type) {
         if (recipes == null || recipes.length == 0) {
-            GFLog.exNihiloLogger.info("No configurations found for {} sieve category, skipping...", type.getName());
+            ExNihiloModule.logger.info("No configurations found for {} sieve category, skipping...", type.getName());
             return;
         }
 
@@ -79,35 +78,35 @@ public class SieveDrops implements ISieveDefaultRegistryProvider {
             materialName = recipe[offset];
             chance = Float.parseFloat(recipe[1 + offset]);
             tier = Integer.parseInt(recipe[2 + offset]);
-        } catch(Exception e) {
-            GFLog.exNihiloLogger.error("Invalid sieve configuration found for {} in {} category, skipping...",
+        } catch (Exception e) {
+            ExNihiloModule.logger.error("Invalid sieve configuration found for {} in {} category, skipping...",
                     materialName == null ? "unknown material" : materialName, type.getName());
             return null;
         }
 
         if (materialName == null) {
-            GFLog.exNihiloLogger.error("Invalid sieve configuration found in {} category, material cannot be null. Skipping...",
+            ExNihiloModule.logger.error("Invalid sieve configuration found in {} category, material cannot be null. Skipping...",
                     type.getName());
             return null;
         }
         Material material = GregTechAPI.MaterialRegistry.get(materialName);
         if (material == null) {
-            GFLog.exNihiloLogger.error("Could not find material with name {} in {} category, skipping...",
+            ExNihiloModule.logger.error("Could not find material with name {} in {} category, skipping...",
                     materialName, type.getName());
             return null;
         }
         if (!material.hasProperty(PropertyKey.ORE)) {
-            GFLog.exNihiloLogger.error("Material {} in {} category has no Ore associated, skipping...",
+            ExNihiloModule.logger.error("Material {} in {} category has no Ore associated, skipping...",
                     materialName, type.getName());
             return null;
         }
         if (chance < 0.0f || chance > 1.0f) {
-            GFLog.exNihiloLogger.error("Chance value out of range for {} in {} category, must be between 0.0 and 1.0! Skipping...",
+            ExNihiloModule.logger.error("Chance value out of range for {} in {} category, must be between 0.0 and 1.0! Skipping...",
                     materialName, type.getName());
             return null;
         }
         if (tier < 1 || tier > 4) {
-            GFLog.exNihiloLogger.error("Sifting tier out of range for {} in {} category, must be between 1 and 4 inclusive! Skipping...",
+            ExNihiloModule.logger.error("Sifting tier out of range for {} in {} category, must be between 1 and 4 inclusive! Skipping...",
                     materialName, type.getName());
             return null;
         }
@@ -117,7 +116,7 @@ public class SieveDrops implements ISieveDefaultRegistryProvider {
     // TODO Clean this up
     @Override
     public void registerRecipeDefaults(@Nonnull SieveRegistry registry) {
-        if (GFConfig.exNihilo.overrideAllSiftDrops) {
+        if (BaseConfig.exNihilo.overrideAllSiftDrops) {
             registry.clearRegistry();
 
             registry.register("dirt", new ItemInfo(ModItems.pebbles), 1f, BlockSieve.MeshType.STRING.getID());
@@ -137,7 +136,7 @@ public class SieveDrops implements ISieveDefaultRegistryProvider {
             registry.register("dirt", new ItemInfo(Items.PUMPKIN_SEEDS), 0.35f, BlockSieve.MeshType.STRING.getID());
             registry.register("dirt", new ItemInfo(ModItems.resources, 3), 0.05f, BlockSieve.MeshType.STRING.getID());
             registry.register("dirt", new ItemInfo(ModItems.resources, 4), 0.05f, BlockSieve.MeshType.STRING.getID());
-            for (ItemSeedBase seed : ModItems.itemSeeds)  {
+            for (ItemSeedBase seed : ModItems.itemSeeds) {
                 registry.register("dirt", new ItemInfo(seed), 0.05f, BlockSieve.MeshType.STRING.getID());
             }
             registry.register("dust", new ItemInfo(Items.DYE, 15), 0.1f, BlockSieve.MeshType.STRING.getID());
@@ -161,13 +160,13 @@ public class SieveDrops implements ISieveDefaultRegistryProvider {
 
     // TODO Move away from valueOf for GTCEu
     private enum SieveDropType implements IStringSerializable {
-        SAND("sand", GFOrePrefix.oreSandyChunk),
-        GRAVEL("gravel", GFOrePrefix.oreChunk),
-        NETHERRACK("nether", GFOrePrefix.oreNetherChunk),
-        END("end", GFOrePrefix.oreEnderChunk),
-        GRANITE("crushedGranite", GFOrePrefix.oreChunk),
-        DIORITE("crushedDiorite", GFOrePrefix.oreChunk),
-        ANDESITE("crushedAndesite", GFOrePrefix.oreChunk);
+        SAND("sand", ExNihiloModule.oreSandyChunk),
+        GRAVEL("gravel", ExNihiloModule.oreChunk),
+        NETHERRACK("nether", ExNihiloModule.oreNetherChunk),
+        END("end", ExNihiloModule.oreEnderChunk),
+        GRANITE("crushedGranite", ExNihiloModule.oreChunk),
+        DIORITE("crushedDiorite", ExNihiloModule.oreChunk),
+        ANDESITE("crushedAndesite", ExNihiloModule.oreChunk);
 
         private final String name;
         private final OrePrefix prefix;

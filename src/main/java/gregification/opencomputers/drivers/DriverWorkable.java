@@ -53,22 +53,22 @@ public class DriverWorkable extends DriverSidedTileEntity {
 
         @Callback(doc = "function():number --  Returns the MaxProgress!")
         public Object[] getMaxProgress(final Context context, final Arguments args) {
-            return new Object[] {tileEntity.getMaxProgress()};
+            return new Object[]{tileEntity.getMaxProgress()};
         }
 
         @Callback(doc = "function():number --  Returns the Progress!")
         public Object[] getProgress(final Context context, final Arguments args) {
-            return new Object[] {tileEntity.getProgress()};
+            return new Object[]{tileEntity.getProgress()};
         }
 
         @Callback(doc = "function():boolean --  Returns is active or not.")
         public Object[] isActive(final Context context, final Arguments args) {
-            return new Object[] {tileEntity.isActive()};
+            return new Object[]{tileEntity.isActive()};
         }
 
         @Callback(doc = "function():boolean --  Returns is working enabled.")
         public Object[] isWorkingEnabled(final Context context, final Arguments args) {
-            return new Object[] {tileEntity.isWorkingEnabled()};
+            return new Object[]{tileEntity.isWorkingEnabled()};
         }
 
         @Callback(doc = "function(workingEnabled:boolean):boolean -- "
@@ -76,7 +76,7 @@ public class DriverWorkable extends DriverSidedTileEntity {
         public Object[] setWorkingEnabled(final Context context, final Arguments args) {
             boolean lsatState = tileEntity.isWorkingEnabled();
             tileEntity.setWorkingEnabled(args.checkBoolean(0));
-            return new Object[] {lsatState};
+            return new Object[]{lsatState};
         }
 
     }

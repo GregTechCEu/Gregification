@@ -1,20 +1,11 @@
-package gregification.config;
+package gregification.exnihilo;
 
-import gregification.common.GFValues;
 import net.minecraftforge.common.config.Config;
 
-@Config(modid = GFValues.MODID)
-public class ExNihiloCfg {
+public class ExNihiloConfig {
 
     @Config.Comment({
-            "Enable Ex Nihilo integration.",
-            "Default: true"
-    })
-    @Config.RequiresMcRestart
-    public boolean enableExNihilo = true;
-
-    @Config.Comment({
-            "Override all Sifting Tables to drop excess outputs once GT drops have been added.",
+            "Override all Sifting Tables to drop excess outputs once GT gtDrops have been added.",
             "Default: true"
     })
     @Config.RequiresMcRestart
@@ -35,14 +26,14 @@ public class ExNihiloCfg {
     @Config.RequiresMcRestart
     public boolean highTierSieve = true;
 
-    @Config.Comment({"Config category for sieve drops"})
+    @Config.Comment({"Config category for sieve gtDrops"})
     @Config.RequiresMcRestart
     public SieveCategory drops = new SieveCategory();
 
     public static class SieveCategory {
 
         @Config.Comment("Sand Sieve drop list. Format is: { Material(string), Chance(double), Mesh Level(int) }. If empty, none will be generated")
-        public String[] sandSieveDrops = new String[] {
+        public String[] sandSieveDrops = new String[]{
                 "copper", "0.0612", "2",
                 "redstone", "0.1938", "2",
                 "cinnabar", "0.0646", "2",
@@ -78,7 +69,7 @@ public class ExNihiloCfg {
         };
 
         @Config.Comment("Gravel Sieve drop list. Format is: { Material(string), Chance(double), Mesh Level(int) }. If empty, none will be generated")
-        public String[] gravelSieveDrops = new String[] {
+        public String[] gravelSieveDrops = new String[]{
                 "coal", "0.192", "1",
                 "trona", "0.0507", "1",
                 "coal", "0.095", "1",
@@ -110,7 +101,7 @@ public class ExNihiloCfg {
         };
 
         @Config.Comment("Granite Sieve drop list. Format is: { Material(string), Chance(double), Mesh Level(int) }. If empty, none will be generated")
-        public String[] graniteSieveDrops = new String[] {
+        public String[] graniteSieveDrops = new String[]{
                 "apatite", "0.1014", "1",
                 "tricalcium_phosphate", "0.0676", "1",
                 "bauxite", "0.153", "1",
@@ -178,7 +169,7 @@ public class ExNihiloCfg {
         };
 
         @Config.Comment("Diorite Sieve drop list. Format is: { Material(string), Chance(double), Mesh Level(int) }. If empty, none will be generated")
-        public String[] dioriteSieveDrops = new String[] {
+        public String[] dioriteSieveDrops = new String[]{
                 "bauxite", "0.153", "1",
                 "aluminium", "0.0765", "1",
                 "ilmenite", "0.0255", "1",
@@ -222,7 +213,7 @@ public class ExNihiloCfg {
         };
 
         @Config.Comment("Andesite Sieve drop list. Format is: { Material(string), Chance(double), Mesh Level(int) }. If empty, none will be generated")
-        public String[] andesiteSieveDrops = new String[] {
+        public String[] andesiteSieveDrops = new String[]{
                 "redstone", "0.1938", "2",
                 "ruby", "0.0646", "2",
                 "cinnabar", "0.0646", "2",
@@ -270,7 +261,7 @@ public class ExNihiloCfg {
         };
 
         @Config.Comment("Netherrack Sieve drop list. Format is: { Material(string), Chance(double), Mesh Level(int) }. If empty, none will be generated")
-        public String[] netherrackSieveDrops = new String[] {
+        public String[] netherrackSieveDrops = new String[]{
                 "chalcopyrite", "0.0432", "2",
                 "iron", "0.0432", "2",
                 "pyrite", "0.0432", "2",
@@ -305,7 +296,7 @@ public class ExNihiloCfg {
         };
 
         @Config.Comment("Endstone Sieve drop list. Format is: { Material(string), Chance(double), Mesh Level(int) }. If empty, none will be generated")
-        public String[] endstoneSieveDrops = new String[] {
+        public String[] endstoneSieveDrops = new String[]{
                 "beryllium", "0.0405", "2",
                 "emerald", "0.0243", "2",
                 "thorium", "0.0162", "2",
