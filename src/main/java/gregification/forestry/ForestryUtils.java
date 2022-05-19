@@ -106,12 +106,6 @@ public class ForestryUtils {
         return (IAlleleBeeSpecies) AlleleManager.alleleRegistry.getAllele(s);
     }
 
-    public static void removeCarpenterRecipe(ItemStack output) {
-        if (ModuleFactory.machineEnabled(MachineUIDs.CARPENTER)) {
-            CarpenterRecipeManager.getRecipes(output).forEach(r -> RecipeManagers.carpenterManager.removeRecipe(r));
-        }
-    }
-
     public static boolean apicultureEnabled() {
         return ModuleHelper.isEnabled("apiculture");
     }

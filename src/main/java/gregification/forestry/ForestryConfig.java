@@ -58,28 +58,10 @@ public class ForestryConfig {
     })
     public boolean thaumicBees = true;
 
-    @Config.Comment({
-            "Enable GT Advanced Rocketry/Galacticraft Bees",
-            "Requirements: Forestry Apiculture module, Advanced Rocketry OR Galacticraft, gtBees config option",
-            "Default: true"
-    })
-    public boolean spaceBees = true;
-
-    /**
-     @Config.Comment({
-     "Replace Forestry recipes with GT-style recipes",
-     "Changes nearly every recipe in Forestry.",
-     "Some changes are only available with some GT harder recipe configs, primarily \"hardMiscRecipes\" and \"hardWoodRecipes\"",
-     "Default: false"
-     })
-     public boolean gregifyForestry = true;
-
-     @Config.Comment({
-     "Replace Forestry addon recipes with GT-style recipes",
-     "Currently supports:",
-     "",
-     "Default: false"
-     })
-     public boolean gregifyForestryAddons = true;
-     */
+    //@Config.Comment({
+    //        "Enable GT Advanced Rocketry/Galacticraft Bees",
+    //        "Requirements: Forestry Apiculture module, Advanced Rocketry OR Galacticraft, gtBees config option",
+    //        "Default: true"
+    //})
+    //public boolean spaceBees = true;
 }

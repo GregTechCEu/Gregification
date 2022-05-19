@@ -10,12 +10,9 @@ import gregification.forestry.frames.GTItemFrame;
 import gregification.forestry.recipes.*;
 import gregification.forestry.tools.ToolScoop;
 import gregtech.api.GregTechAPI;
-import gregtech.api.fluids.MetaFluids;
-import gregtech.api.fluids.fluidType.FluidTypes;
 import gregtech.api.items.metaitem.MetaItem;
 import gregtech.api.items.toolitem.ToolMetaItem;
 import gregtech.api.unification.OreDictUnifier;
-import gregtech.api.unification.material.Material;
 import gregtech.api.unification.material.Materials;
 import gregtech.api.unification.material.properties.OreProperty;
 import gregtech.api.unification.material.properties.PropertyKey;
@@ -115,9 +112,6 @@ public class ForestryModule implements IModule {
         if (ForestryUtils.apicultureEnabled()) {
             logger.info("Registering Forestry Comb recipe overrides");
             CombRecipes.initForestryCombs();
-            //if (GFConfig.forestry.gregifyForestry) {
-            //    ForestryOverrideRecipes.init();
-            //}
         }
     }
 
@@ -300,11 +294,5 @@ public class ForestryModule implements IModule {
         Materials.Lutetium.setProperty(PropertyKey.ORE, new OreProperty());
         Materials.Americium.setProperty(PropertyKey.ORE, new OreProperty());
         Materials.NetherStar.setProperty(PropertyKey.ORE, new OreProperty());
-
-        //if (GFConfig.forestry.gregifyForestry) {
-        //    Materials.Glass.addFlags(GENERATE_BOLT_SCREW);
-        //    Materials.Iron.addFlags(GENERATE_FOIL, GENERATE_FINE_WIRE);
-        //    Materials.Bronze.addFlags(GENERATE_FINE_WIRE);
-        //}
     }
 }
