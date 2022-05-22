@@ -3,7 +3,8 @@ package gregification.exnihilo;
 import exnihilocreatio.registries.manager.ExNihiloRegistryManager;
 import gregification.base.BaseConfig;
 import gregification.base.BaseUtility;
-import gregification.base.IModule;
+import gregification.base.ModIDs;
+import gregification.base.Module;
 import gregification.exnihilo.items.ExNihiloPebble;
 import gregification.exnihilo.metatileentities.MetaTileEntitySieve;
 import gregification.exnihilo.metatileentities.MetaTileEntitySteamSieve;
@@ -25,6 +26,7 @@ import gregtech.common.metatileentities.MetaTileEntities;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import org.apache.logging.log4j.LogManager;
@@ -35,7 +37,7 @@ import static gregtech.api.unification.ore.OrePrefix.Flags.ENABLE_UNIFICATION;
 import static gregtech.common.metatileentities.MetaTileEntities.getHighTier;
 import static gregtech.common.metatileentities.MetaTileEntities.getMidTier;
 
-public class ExNihiloModule implements IModule {
+public class ExNihiloModule extends Module {
 
     public static final Logger logger = LogManager.getLogger("Gregification: Ex Nihilo");
 
@@ -73,6 +75,10 @@ public class ExNihiloModule implements IModule {
 
     public static final SteamTexture PROGRESS_BAR_SIFTER_STEAM = SteamTexture.fullImage("textures/gui/progress_bar/progress_bar_sift_%s.png");
 
+    @Override
+    public boolean isModuleActive() {
+        return BaseConfig.enableExNihiloModule && Loader.isModLoaded(ModIDs.MODID_EXNI);
+    }
 
     @Override
     public void preInit(FMLPreInitializationEvent event) {

@@ -2,8 +2,8 @@ package gregification.forestry;
 
 import gregification.base.BaseConfig;
 import gregification.base.BaseModule;
-import gregification.base.IModule;
 import gregification.base.ModIDs;
+import gregification.base.Module;
 import gregification.forestry.bees.*;
 import gregification.forestry.frames.GTFrameType;
 import gregification.forestry.frames.GTItemFrame;
@@ -31,7 +31,7 @@ import java.util.Map;
 
 import static gregtech.api.unification.material.info.MaterialFlags.*;
 
-public class ForestryModule implements IModule {
+public class ForestryModule extends Module {
 
     public static final Logger logger = LogManager.getLogger("Gregification: Forestry");
 
@@ -62,6 +62,11 @@ public class ForestryModule implements IModule {
     public static MetaItem<?>.MetaValueItem ELECTRODE_TIN;
 
     public static ToolMetaItem<?>.MetaToolValueItem SCOOP;
+
+    @Override
+    public boolean isModuleActive() {
+        return BaseConfig.enableForestryModule && Loader.isModLoaded(ModIDs.MODID_FR);
+    }
 
     @Override
     public void preInit(FMLPreInitializationEvent event) {

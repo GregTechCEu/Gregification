@@ -7,7 +7,7 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-public class BaseModule implements IModule {
+public class BaseModule extends Module {
 
     public static final Logger logger = LogManager.getLogger("Gregification");
 
@@ -20,6 +20,11 @@ public class BaseModule implements IModule {
     // Current ID Ranges:
     // - Forestry Module: 0-9
     public static MetaTool baseMetaTool;
+
+    @Override
+    public boolean isModuleActive() {
+        return true;
+    }
 
     @Override
     public void preInit(FMLPreInitializationEvent event) {

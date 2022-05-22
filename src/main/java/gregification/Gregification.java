@@ -1,8 +1,6 @@
 package gregification;
 
-import gregification.base.BaseConfig;
-import gregification.base.IModule;
-import gregification.base.ModIDs;
+import gregification.base.Module;
 import gregtech.api.GregTechAPI;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
@@ -10,7 +8,6 @@ import net.minecraft.item.crafting.IRecipe;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.SidedProxy;
@@ -20,8 +17,8 @@ import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 
 import static gregification.Gregification.*;
 
@@ -49,39 +46,48 @@ public class Gregification {
     // Modules
 
     @SidedProxy(modId = MODID, serverSide = "gregification.base.BaseModule", clientSide = "gregification.base.BaseModule")
-    private static IModule BASE;
+    private static Module BASE;
 
     @SidedProxy(modId = MODID, serverSide = "gregification.forestry.ForestryModule", clientSide = "gregification.forestry.ForestryClientModule")
-    private static IModule FORESTRY;
+    private static Module FORESTRY;
 
     @SidedProxy(modId = MODID, serverSide = "gregification.exnihilo.ExNihiloModule", clientSide = "gregification.exnihilo.ExNihiloModule")
-    private static IModule EXNIHILO;
+    private static Module EXNIHILO;
 
     @SidedProxy(modId = MODID, serverSide = "gregification.opencomputers.OpenComputersModule", clientSide = "gregification.opencomputers.OpenComputersModule")
-    private static IModule OPENCOMPUTERS;
+    private static Module OPENCOMPUTERS;
 
-    // Module Map
-    private static final Map<IModule, Boolean> MODULE_MAP = new HashMap<>();
+
+    /*----------------------------------------------------------------
+    | To add a new Module, register it above with the @SidedProxy    |
+    | annotation and list the class that implements Module.class     |
+    | under its serverSide. If you need a clientSide as well, have   |
+    | that class extend your serverSide class. No further            |
+    | registration beyond that is needed.                            |
+    ----------------------------------------------------------------*/
+
+
+    //////////////////////////////////////////////
+    // !!   Below here does not need to be   !! //
+    // !!    modified to add a new module    !! //
+    //////////////////////////////////////////////
+
+
+    // Module List
+    // Contains only active modules
+    private static final List<Module> MODULE_LIST = new ArrayList<>();
 
 
     // Module acquisition
 
-    private Map<IModule, Boolean> getModules() {
-        if (MODULE_MAP.isEmpty()) {
-            MODULE_MAP.put(BASE, true);
-            MODULE_MAP.put(FORESTRY, BaseConfig.enableForestryModule && Loader.isModLoaded(ModIDs.MODID_FR));
-            MODULE_MAP.put(EXNIHILO, BaseConfig.enableExNihiloModule && Loader.isModLoaded(ModIDs.MODID_EXNI));
-            MODULE_MAP.put(OPENCOMPUTERS, BaseConfig.enableOpenComputersModule && Loader.isModLoaded(ModIDs.MODID_OC));
-            // Add your new module here
+    private List<Module> getModules() {
+        if (MODULE_LIST.isEmpty()) {
+            Module.getModules().forEach(module -> {
+                if (module.isModuleActive()) MODULE_LIST.add(module);
+            });
         }
-        return MODULE_MAP;
+        return MODULE_LIST;
     }
-
-
-    /////////////////////////////////////////////////
-    // Below here only needs to be modified if you //
-    // add a new event to the IModule interface.   //
-    /////////////////////////////////////////////////
 
 
     // Event Handlers
@@ -89,21 +95,27 @@ public class Gregification {
     @EventHandler
     public void onConstruction(FMLConstructionEvent event) {
         MinecraftForge.EVENT_BUS.register(this);
+        getModules().forEach(m -> {
+            List<Class<?>> listeners = m.getEventBusListeners();
+            if (listeners != null) {
+                listeners.forEach(MinecraftForge.EVENT_BUS::register);
+            }
+        });
     }
 
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {
-        getModules().forEach((k, v) -> { if (v) k.preInit(event); });
+        getModules().forEach(m -> m.preInit(event));
     }
 
     @EventHandler
     public void init(FMLInitializationEvent event) {
-        getModules().forEach((k, v) -> { if (v) k.init(event); });
+        getModules().forEach(m -> m.init(event));
     }
 
     @EventHandler
     public void postInit(FMLPostInitializationEvent event) {
-        getModules().forEach((k, v) -> { if (v) k.postInit(event); });
+        getModules().forEach(m -> m.postInit(event));
     }
 
 
@@ -111,26 +123,26 @@ public class Gregification {
 
     @SubscribeEvent
     public void registerItems(RegistryEvent.Register<Item> event) {
-        getModules().forEach((k, v) -> { if (v) k.registerItems(event); });
+        getModules().forEach(m -> m.registerItems(event));
     }
 
     @SubscribeEvent
     public void registerBlocks(RegistryEvent.Register<Block> event) {
-        getModules().forEach((k, v) -> { if (v) k.registerBlocks(event); });
+        getModules().forEach(m -> m.registerBlocks(event));
     }
 
     @SubscribeEvent
     public void registerRecipes(RegistryEvent.Register<IRecipe> event) {
-        getModules().forEach((k, v) -> { if (v) k.registerRecipes(event); });
+        getModules().forEach(m -> m.registerRecipes(event));
     }
 
     @SubscribeEvent
     public void registerModels(ModelRegistryEvent event) {
-        getModules().forEach((k, v) -> { if (v) k.registerModels(event); });
+        getModules().forEach(m -> m.registerModels(event));
     }
 
     @SubscribeEvent
     public void registerMaterials(GregTechAPI.MaterialEvent event) {
-        getModules().forEach((k, v) -> { if (v) k.registerMaterials(event); });
+        getModules().forEach(m -> m.registerMaterials(event));
     }
 }

@@ -1,8 +1,8 @@
 package gregification.opencomputers;
 
 import gregification.base.BaseConfig;
-import gregification.base.IModule;
 import gregification.base.ModIDs;
+import gregification.base.Module;
 import gregification.opencomputers.drivers.*;
 import gregification.opencomputers.drivers.specific.DriverConverter;
 import gregification.opencomputers.drivers.specific.DriverFusionReactor;
@@ -13,10 +13,14 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-@SuppressWarnings("unused")
-public class OpenComputersModule implements IModule {
+public class OpenComputersModule extends Module {
 
     public static final Logger logger = LogManager.getLogger("Gregification: Open Computers");
+
+    @Override
+    public boolean isModuleActive() {
+        return BaseConfig.enableOpenComputersModule && Loader.isModLoaded(ModIDs.MODID_OC);
+    }
 
     @Override
     public void init(FMLInitializationEvent event) {

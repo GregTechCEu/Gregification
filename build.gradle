@@ -29,7 +29,7 @@ minecraft {
     useDepAts = true
     makeObfSourceJar = false
     replace("@VERSION@", gregification_version)
-    replaceIn("GFValues.java")
+    replaceIn("Gregification.java")
 }
 
 repositories {
@@ -46,44 +46,44 @@ repositories {
 dependencies {
 
     // Hard-Deps
-    deobfCompile "curse.maven:mixin-booter-419286:3321174"
     deobfCompile "curse.maven:gregtech-ce-unofficial-557242:3784798"
-
-    // CCLib
     deobfCompile "curse.maven:codechicken-lib-1-8-242818:2779848"
-
-    // CraftTweaker
-    deobfCompile "CraftTweaker2:CraftTweaker2-MC1120-Main:1.12-4.1.20.554"
+    deobfCompile "curse.maven:mixin-booter-419286:3321174"
 
     // Useful stuff
+    deobfCompile "CraftTweaker2:CraftTweaker2-MC1120-Main:1.12-4.1.20.554"
     deobfCompile "curse.maven:jei-238222:3040523"
     deobfCompile "curse.maven:jeid-296289:2919737"
     runtime "curse.maven:the-one-probe-245211:2667280"
 
     // Direct compat mods
+    // Must be present in-dev as their code is referenced in this mod
     deobfCompile "curse.maven:ctm-267602:2915363"
     deobfCompile "curse.maven:forestry-59751:2918418"
-    //deobfCompile "curse.maven:tinkers-construct-74072:2902483"
-    //deobfCompile "curse.maven:mantle-74924:2713386"
+    deobfCompile "curse.maven:tinkers-construct-74072:2902483"
+    deobfCompile "curse.maven:mantle-74924:2713386"
     deobfCompile "curse.maven:shadowfacts-forgelin-248453:2785465"
     deobfCompile "curse.maven:ex-nihilo-creatio-274456:2817545"
     deobfCompile "curse.maven:opencomputers-223008:2828357"
     deobfCompile "curse.maven:tfcraft-302973:3268988"
-    //deobfCompile "curse.maven:mcjtylib-233105:2745846"
-    //deobfCompile "curse.maven:xnet-260912:2745852"
     deobfCompile "curse.maven:gregtech-food-option-477021:3787937"
     deobfCompile "curse.maven:ae2-extended-life-570458:3632074"
 
-    // Addons and other mods for testing as needed
-    runtime "curse.maven:binnies-mods-223525:2916129"
-    runtime "curse.maven:magic-bees-65764:2566282"
-    runtime "curse.maven:gendustry-70492:2516215"
-    runtime "curse.maven:bdlib-70496:2518031"
+    // May get some form of compatibility in the future
+    //deobfCompile "curse.maven:mcjtylib-233105:2745846"
+    //deobfCompile "curse.maven:xnet-260912:2745852"
+
+    // Addons and other mods
+    // Enable for testing as needed
+    //runtime "curse.maven:binnies-mods-223525:2916129"
+    //runtime "curse.maven:magic-bees-65764:2566282"
+    //runtime "curse.maven:gendustry-70492:2516215"
+    //runtime "curse.maven:bdlib-70496:2518031"
     //runtime "curse.maven:career-bees-281791:2534481"
     //runtime "curse.maven:retrobees-300139:2934369"
     //runtime "curse.maven:the-twilight-forest-227639:3051450"
-    runtime "curse.maven:thaumcraft-223628:2629023"
-    runtime "curse.maven:baubles-227083:2518667"
+    //runtime "curse.maven:thaumcraft-223628:2629023"
+    //runtime "curse.maven:baubles-227083:2518667"
     //runtime "curse.maven:biomes-o-plenty-220318:2715506"
     //runtime "curse.maven:extra-utilities-225561:2678374"
 }
