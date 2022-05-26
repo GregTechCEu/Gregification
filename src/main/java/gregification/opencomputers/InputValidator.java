@@ -26,6 +26,14 @@ public class InputValidator {
         return value;
     }
 
+    public static <T extends Enum<?>> T getEnumArrayIndex(Arguments args, int argsIndex, T[] array) {
+        int value = args.checkInteger(argsIndex);
+        if (value < 0 || value >= array.length) {
+            throw new IllegalArgumentException("Passed value must be within 0 and " + (array.length - 1));
+        }
+        return array[value];
+    }
+
     /**
      * Validate that the String at a given index is a valid hex-color code.
      *

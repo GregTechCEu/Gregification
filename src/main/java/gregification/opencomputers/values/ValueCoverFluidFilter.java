@@ -33,30 +33,30 @@ public class ValueCoverFluidFilter extends ValueCoverBehavior {
     }
 
     @Override
-    protected CoverBehavior getCoverBehavior() {
+    protected CoverFluidFilter getCoverBehavior() {
         CoverBehavior cover = super.getCoverBehavior();
-        return cover instanceof CoverFluidFilter ? cover : null;
+        return cover instanceof CoverFluidFilter ? (CoverFluidFilter) cover : null;
     }
 
     @Callback(doc = "function(mode:number) --  Sets filter mode. (0:FILTER_FILL, 1:FILTER_DRAIN, 2:FILTER_BOTH)")
     public Object[] setFilterMode(final Context context, final Arguments args) {
-        CoverBehavior cover = getCoverBehavior();
+        CoverFluidFilter cover = getCoverBehavior();
         if (cover == null) {
             return NULL_COVER;
         }
 
-        int mode = InputValidator.getInteger(args, 0, 0, 2);
-        ((CoverFluidFilter) cover).setFilterMode(FluidFilterMode.values()[mode]);
+        FluidFilterMode mode = InputValidator.getEnumArrayIndex(args, 0, FluidFilterMode.values());
+        cover.setFilterMode(mode);
         return new Object[]{};
     }
 
     @Callback(doc = "function():number --  Gets filter mode. (0:FILTER_FILL, 1:FILTER_DRAIN, 2:FILTER_BOTH)")
     public Object[] getFilterMode(final Context context, final Arguments args) {
-        CoverBehavior cover = getCoverBehavior();
+        CoverFluidFilter cover = getCoverBehavior();
         if (cover == null) {
             return NULL_COVER;
         }
 
-        return new Object[]{((CoverFluidFilter) cover).getFilterMode().ordinal()};
+        return new Object[]{cover.getFilterMode().ordinal()};
     }
 }

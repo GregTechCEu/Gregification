@@ -33,30 +33,30 @@ public class ValueCoverRoboticArm extends ValueCoverConveyor {
     }
 
     @Override
-    protected CoverBehavior getCoverBehavior() {
+    protected CoverRoboticArm getCoverBehavior() {
         CoverBehavior cover = super.getCoverBehavior();
-        return cover instanceof CoverRoboticArm ? cover : null;
+        return cover instanceof CoverRoboticArm ? (CoverRoboticArm) cover : null;
     }
 
     @Callback(doc = "function(mode:number) --  Sets transfer mode. (0:TRANSFER_ANY, 1:TRANSFER_EXACT, 2:KEEP_EXACT)")
     public Object[] setTransferMode(final Context context, final Arguments args) {
-        CoverBehavior cover = getCoverBehavior();
+        CoverRoboticArm cover = getCoverBehavior();
         if (cover == null) {
             return NULL_COVER;
         }
 
-        int mode = InputValidator.getInteger(args, 0, 0, 2);
-        ((CoverRoboticArm) cover).setTransferMode(TransferMode.values()[mode]);
+        TransferMode mode = InputValidator.getEnumArrayIndex(args, 0, TransferMode.values());
+        cover.setTransferMode(mode);
         return new Object[]{};
     }
 
     @Callback(doc = "function():number --  Gets transfer mode. (0:TRANSFER_ANY, 1:TRANSFER_EXACT, 2:KEEP_EXACT)")
     public Object[] getTransferMode(final Context context, final Arguments args) {
-        CoverBehavior cover = getCoverBehavior();
+        CoverRoboticArm cover = getCoverBehavior();
         if (cover == null) {
             return NULL_COVER;
         }
 
-        return new Object[]{((CoverRoboticArm) cover).getTransferMode().ordinal()};
+        return new Object[]{cover.getTransferMode().ordinal()};
     }
 }
