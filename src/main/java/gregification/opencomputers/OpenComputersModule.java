@@ -1,12 +1,11 @@
 package gregification.opencomputers;
 
 import gregification.base.BaseConfig;
+import gregification.base.BaseUtility;
 import gregification.base.ModIDs;
 import gregification.base.Module;
 import gregification.opencomputers.drivers.*;
-import gregification.opencomputers.drivers.specific.DriverConverter;
-import gregification.opencomputers.drivers.specific.DriverFusionReactor;
-import gregification.opencomputers.drivers.specific.DriverWorldAccelerator;
+import gregification.opencomputers.drivers.specific.*;
 import li.cil.oc.api.Driver;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -24,16 +23,13 @@ public class OpenComputersModule extends Module {
 
     @Override
     public void init(FMLInitializationEvent event) {
+        // Incompatible with this module (probably doesn't work with GTCEu anyway...)
+        BaseUtility.throwIncompatibilityIfLoaded("gtce2oc",
+                "All functionality from this mod has been implemented in Gregification.");
+
         logger.info("Registering Open Computers Drivers...");
-
-        // TODO Remove this catch if GTCE2OC is found to no longer launch with GTCEu
-        if (!Loader.isModLoaded(ModIDs.MODID_GTOC)) { // try to avoid colliding with GTCE2OC driver
-            Driver.add(new DriverEnergyContainer());
-            Driver.add(new DriverWorkable());
-        } else {
-            logger.warn("GTCE2OC mod detected, problems may occur!");
-        }
-
+        Driver.add(new DriverEnergyContainer());
+        Driver.add(new DriverWorkable());
         Driver.add(new DriverAbstractRecipeLogic());
         Driver.add(new DriverRecipeMapMultiblockController());
         Driver.add(new DriverICoverable());

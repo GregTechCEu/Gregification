@@ -17,6 +17,7 @@
  */
 package gregification.opencomputers.drivers;
 
+import gregification.opencomputers.InputValidator;
 import gregification.opencomputers.values.*;
 import gregtech.api.capability.GregtechTileCapabilities;
 import gregtech.api.cover.CoverBehavior;
@@ -33,7 +34,6 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-@SuppressWarnings("unused")
 public class DriverICoverable extends DriverSidedTileEntity {
 
     @Override
@@ -68,7 +68,8 @@ public class DriverICoverable extends DriverSidedTileEntity {
 
         @Callback(doc = "function(side:number):table --  Returns cover of side!")
         public Object[] getCover(final Context context, final Arguments args) {
-            EnumFacing side = EnumFacing.values()[args.checkInteger(0)];
+            int index = InputValidator.getInteger(args, 0, 0, 5);
+            EnumFacing side = EnumFacing.VALUES[index];
             CoverBehavior coverBehavior = tileEntity.getCoverAtSide(side);
             if (coverBehavior instanceof CoverRoboticArm)
                 return new Object[]{new ValueCoverRoboticArm((CoverRoboticArm) coverBehavior, side)};

@@ -46,16 +46,16 @@ public class Gregification {
     // Modules
 
     @SidedProxy(modId = MODID, serverSide = "gregification.base.BaseModule", clientSide = "gregification.base.BaseModule")
-    private static Module BASE;
+    private static Module _BASE;
 
     @SidedProxy(modId = MODID, serverSide = "gregification.forestry.ForestryModule", clientSide = "gregification.forestry.ForestryClientModule")
-    private static Module FORESTRY;
+    private static Module _FORESTRY;
 
     @SidedProxy(modId = MODID, serverSide = "gregification.exnihilo.ExNihiloModule", clientSide = "gregification.exnihilo.ExNihiloModule")
-    private static Module EXNIHILO;
+    private static Module _EXNIHILO;
 
     @SidedProxy(modId = MODID, serverSide = "gregification.opencomputers.OpenComputersModule", clientSide = "gregification.opencomputers.OpenComputersModule")
-    private static Module OPENCOMPUTERS;
+    private static Module _OPENCOMPUTERS;
 
 
     /*----------------------------------------------------------------

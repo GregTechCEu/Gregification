@@ -21,7 +21,6 @@ import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import li.cil.oc.api.driver.NamedBlock;
 import li.cil.oc.integration.ManagedTileEntityEnvironment;
 
-@SuppressWarnings("unused")
 public abstract class EnvironmentMetaTileEntity<T> extends ManagedTileEntityEnvironment<T> implements NamedBlock {
 
     private final String preferredName;

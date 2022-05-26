@@ -8,7 +8,6 @@ public class ModIDs {
             MODID_GCYM = "gcym",
             MODID_EXNI = "exnihilocreatio",
             MODID_OC = "opencomputers",
-            MODID_GTOC = "gtce2oc",
             MODID_FR = "forestry",
             MODID_EB = "extrabees",
             MODID_MB = "magicbees",

@@ -17,6 +17,7 @@
  */
 package gregification.opencomputers.values;
 
+import gregification.opencomputers.InputValidator;
 import gregtech.api.capability.GregtechTileCapabilities;
 import gregtech.api.cover.CoverBehavior;
 import gregtech.api.cover.ICoverable;
@@ -35,13 +36,14 @@ import net.minecraftforge.fml.common.FMLCommonHandler;
 
 import java.util.Objects;
 
-@SuppressWarnings("unused")
 public class ValueCoverBehavior extends AbstractValue {
 
     private BlockPos pos;
     private EnumFacing side;
     private int dim;
     private String coverName;
+
+    public final Object[] NULL_COVER = new Object[]{null, "Found no cover, this is an invalid object."};
 
     protected ValueCoverBehavior(CoverBehavior coverBehavior, EnumFacing side, String coverName) {
         pos = coverBehavior.coverHolder.getPos();
@@ -52,9 +54,6 @@ public class ValueCoverBehavior extends AbstractValue {
 
     public ValueCoverBehavior(CoverBehavior coverBehavior, EnumFacing side) {
         this(coverBehavior, side, "gt_coverBehavior");
-    }
-
-    public ValueCoverBehavior() {
     }
 
     protected CoverBehavior getCoverBehavior() {
@@ -81,26 +80,34 @@ public class ValueCoverBehavior extends AbstractValue {
 
     @Callback(doc = "function(signal:number) --  Sets redstone signal output.")
     public Object[] setRedstoneSignalOutput(final Context context, final Arguments args) {
-        CoverBehavior coverBehavior = getCoverBehavior();
-        if (coverBehavior == null) return new Object[]{null, "Found no cover, this is an invalid object."};
-        int signal = args.checkInteger(0);
-        if (signal > 15 || signal < 0) throw new IllegalArgumentException("Expect a number between 0 and 15.");
-        coverBehavior.setRedstoneSignalOutput(signal);
+        CoverBehavior cover = getCoverBehavior();
+        if (cover == null) {
+            return NULL_COVER;
+        }
+
+        int signal = InputValidator.getInteger(args, 0, 0, 15);
+        cover.setRedstoneSignalOutput(signal);
         return new Object[]{};
     }
 
     @Callback(doc = "function():number --  Gets redstone signal output.")
     public final Object[] getRedstoneSignalOutput(final Context context, final Arguments args) {
-        CoverBehavior coverBehavior = getCoverBehavior();
-        if (coverBehavior == null) return new Object[]{null, "Found no cover, this is an invalid object."};
-        return new Object[]{coverBehavior.getRedstoneSignalOutput()};
+        CoverBehavior cover = getCoverBehavior();
+        if (cover == null) {
+            return NULL_COVER;
+        }
+
+        return new Object[]{cover.getRedstoneSignalOutput()};
     }
 
     @Callback(doc = "function():number --  Gets redstone signal input.")
     public final Object[] getRedstoneSignalInput(final Context context, final Arguments args) {
-        CoverBehavior coverBehavior = getCoverBehavior();
-        if (coverBehavior == null) return new Object[]{null, "Found no cover, this is an invalid object."};
-        return new Object[]{coverBehavior.getRedstoneSignalInput()};
+        CoverBehavior cover = getCoverBehavior();
+        if (cover == null) {
+            return NULL_COVER;
+        }
+
+        return new Object[]{cover.getRedstoneSignalInput()};
     }
 
     @Override

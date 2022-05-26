@@ -1,5 +1,6 @@
 package gregification.opencomputers.drivers.specific;
 
+import gregification.opencomputers.InputValidator;
 import gregification.opencomputers.drivers.EnvironmentMetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.common.metatileentities.converter.MetaTileEntityConverter;
@@ -52,7 +53,8 @@ public class DriverConverter extends DriverSidedTileEntity {
 
         @Callback(doc = "function(mode:number) --  Sets the Converter Mode. (0:FE->EU, 1:EU->FE)")
         public Object[] setConverterMode(final Context context, final Arguments args) {
-            tileEntity.setFeToEu(args.checkInteger(0) == 0);
+            boolean mode = InputValidator.getInteger(args, 0, 0, 1) == 0;
+            tileEntity.setFeToEu(mode);
             return new Object[]{};
         }
     }

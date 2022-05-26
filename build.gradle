@@ -46,7 +46,7 @@ repositories {
 dependencies {
 
     // Hard-Deps
-    deobfCompile "curse.maven:gregtech-ce-unofficial-557242:3784798"
+    deobfCompile "curse.maven:gregtech-ce-unofficial-557242:3805253"
     deobfCompile "curse.maven:codechicken-lib-1-8-242818:2779848"
     deobfCompile "curse.maven:mixin-booter-419286:3321174"
 
@@ -66,8 +66,8 @@ dependencies {
     deobfCompile "curse.maven:ex-nihilo-creatio-274456:2817545"
     deobfCompile "curse.maven:opencomputers-223008:2828357"
     deobfCompile "curse.maven:tfcraft-302973:3268988"
-    deobfCompile "curse.maven:gregtech-food-option-477021:3787937"
     deobfCompile "curse.maven:ae2-extended-life-570458:3632074"
+    deobfProvided "curse.maven:gregtech-food-option-477021:3787937"
 
     // May get some form of compatibility in the future
     //deobfCompile "curse.maven:mcjtylib-233105:2745846"

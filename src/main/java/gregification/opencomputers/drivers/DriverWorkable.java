@@ -17,7 +17,6 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-@SuppressWarnings("unused")
 public class DriverWorkable extends DriverSidedTileEntity {
 
     @Override
@@ -78,6 +77,5 @@ public class DriverWorkable extends DriverSidedTileEntity {
             tileEntity.setWorkingEnabled(args.checkBoolean(0));
             return new Object[]{lsatState};
         }
-
     }
 }
