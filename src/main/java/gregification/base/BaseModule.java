@@ -4,12 +4,9 @@ import gregtech.api.items.metaitem.MetaItem;
 import gregtech.api.items.metaitem.StandardMetaItem;
 import gregtech.common.items.MetaTool;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
-public class BaseModule extends Module {
-
-    public static final Logger logger = LogManager.getLogger("Gregification");
+@Module.Root(name = "Gregification: Base")
+public class BaseModule implements Module {
 
     // Base MetaItem
     // Current ID Ranges:

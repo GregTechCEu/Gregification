@@ -1,5 +1,6 @@
 package gregification.forestry;
 
+import forestry.api.core.ForestryAPI;
 import gregification.base.BaseConfig;
 import gregification.base.BaseModule;
 import gregification.base.ModIDs;
@@ -16,14 +17,17 @@ import gregtech.api.unification.OreDictUnifier;
 import gregtech.api.unification.material.Materials;
 import gregtech.api.unification.material.properties.OreProperty;
 import gregtech.api.unification.material.properties.PropertyKey;
+import net.minecraft.client.Minecraft;
 import net.minecraft.item.Item;
 import net.minecraft.item.crafting.IRecipe;
+import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import org.apache.logging.log4j.LogManager;
+import net.minecraftforge.fml.relauncher.Side;
 import org.apache.logging.log4j.Logger;
 
 import java.util.HashMap;
@@ -31,9 +35,11 @@ import java.util.Map;
 
 import static gregtech.api.unification.material.info.MaterialFlags.*;
 
-public class ForestryModule extends Module {
+@Module.Root(name = "Gregification: Forestry")
+public class ForestryModule implements Module {
 
-    public static final Logger logger = LogManager.getLogger("Gregification: Forestry");
+    @Module.Log
+    public static Logger logger;
 
     // Frequently used booleans for enabling some features
 
@@ -107,6 +113,14 @@ public class ForestryModule extends Module {
                 logger.info("Registering GT Bee alleles, species and mutations");
                 GTAlleleBeeSpecies.setupGTAlleles();
                 GTBeeDefinition.initBees();
+            }
+        }
+
+        if (FMLCommonHandler.instance().getSide() == Side.CLIENT) {
+            if (ForestryUtils.apicultureEnabled()) {
+                if (BaseConfig.forestry.gtBees) {
+                    Minecraft.getMinecraft().getItemColors().registerItemColorHandler(CombItemColor.INSTANCE, ForestryModule.gtCombs, ForestryModule.gtDrops);
+                }
             }
         }
     }
@@ -198,6 +212,19 @@ public class ForestryModule extends Module {
             if (BaseConfig.forestry.gtFrames) {
                 logger.info("Registering GT Frame recipes");
                 FrameRecipes.init();
+            }
+        }
+    }
+
+    @Override
+    public void registerModels(ModelRegistryEvent event) {
+        if (ForestryUtils.apicultureEnabled()) {
+            if (BaseConfig.forestry.gtBees) {
+                ForestryModule.gtCombs.registerModel(ForestryModule.gtCombs, ForestryAPI.modelManager);
+                ForestryModule.gtDrops.registerModel(ForestryModule.gtDrops, ForestryAPI.modelManager);
+            }
+            if (BaseConfig.forestry.gtFrames) {
+                ForestryModule.gtFrames.values().forEach(f -> f.registerModel(f, ForestryAPI.modelManager));
             }
         }
     }

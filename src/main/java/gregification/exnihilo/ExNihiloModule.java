@@ -29,7 +29,6 @@ import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import static gregtech.api.unification.ore.OrePrefix.Conditions.hasOreProperty;
@@ -37,9 +36,11 @@ import static gregtech.api.unification.ore.OrePrefix.Flags.ENABLE_UNIFICATION;
 import static gregtech.common.metatileentities.MetaTileEntities.getHighTier;
 import static gregtech.common.metatileentities.MetaTileEntities.getMidTier;
 
-public class ExNihiloModule extends Module {
+@Module.Root(name = "Gregification: Ex Nihilo")
+public class ExNihiloModule implements Module {
 
-    public static final Logger logger = LogManager.getLogger("Gregification: Ex Nihilo");
+    @Module.Log
+    public static Logger logger;
 
     // Icon Types
 

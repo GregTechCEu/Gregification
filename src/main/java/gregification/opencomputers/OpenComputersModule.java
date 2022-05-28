@@ -9,12 +9,13 @@ import gregification.opencomputers.drivers.specific.*;
 import li.cil.oc.api.Driver;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
-import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-public class OpenComputersModule extends Module {
+@Module.Root(name = "Gregification: Open Computers")
+public class OpenComputersModule implements Module {
 
-    public static final Logger logger = LogManager.getLogger("Gregification: Open Computers");
+    @Module.Log
+    public static Logger logger;
 
     @Override
     public boolean isModuleActive() {

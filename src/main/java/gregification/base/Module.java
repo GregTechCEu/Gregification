@@ -10,61 +10,70 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
-import java.util.ArrayList;
+import java.lang.annotation.*;
 import java.util.List;
 
-public abstract class Module {
-
-    private static final List<Module> MODULES = new ArrayList<>();
-
-    public Module() {
-        MODULES.add(this);
-    }
-
-    public static List<Module> getModules() {
-        return MODULES;
-    }
+public interface Module {
 
     /**
      * Should return true if the required mod is loaded, and if
      * the required config settings are enabled.
      */
-    public abstract boolean isModuleActive();
+    boolean isModuleActive();
 
     /**
      * Override this and return a List of Classes that should be registered to the Event Bus.
      */
-    public List<Class<?>> getEventBusListeners() {
+    default List<Class<?>> getEventBusListeners() {
         return null;
     }
 
 
     // Event stages
 
-    public void preInit(FMLPreInitializationEvent event) {
+    default void preInit(FMLPreInitializationEvent event) {
     }
 
-    public void init(FMLInitializationEvent event) {
+    default void init(FMLInitializationEvent event) {
     }
 
-    public void postInit(FMLPostInitializationEvent event) {
+    default void postInit(FMLPostInitializationEvent event) {
     }
 
 
     // Common events
 
-    public void registerItems(RegistryEvent.Register<Item> event) {
+    default void registerItems(RegistryEvent.Register<Item> event) {
     }
 
-    public void registerBlocks(RegistryEvent.Register<Block> event) {
+    default void registerBlocks(RegistryEvent.Register<Block> event) {
     }
 
-    public void registerRecipes(RegistryEvent.Register<IRecipe> event) {
+    default void registerRecipes(RegistryEvent.Register<IRecipe> event) {
     }
 
-    public void registerModels(ModelRegistryEvent event) {
+    default void registerModels(ModelRegistryEvent event) {
     }
 
-    public void registerMaterials(GregTechAPI.MaterialEvent event) {
+    default void registerMaterials(GregTechAPI.MaterialEvent event) {
+    }
+
+    /**
+     * Annotate your module class with this to automatically create and initialize your Module.
+     */
+    @Retention(RetentionPolicy.RUNTIME)
+    @Target(ElementType.TYPE)
+    @interface Root {
+        String name();
+    }
+
+    /**
+     * Annotate a static field of type {@link org.apache.logging.log4j.Logger} to automatically populate the Logger.
+     *
+     * MUST be on a class annotated with {@link Root}, and will automatically use {@link Root#name()} as the Logger name.
+     */
+    @Retention(RetentionPolicy.RUNTIME)
+    @Target(ElementType.FIELD)
+    @interface Log {
     }
 }
