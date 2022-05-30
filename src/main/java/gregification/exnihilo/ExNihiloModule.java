@@ -138,7 +138,7 @@ public class ExNihiloModule implements Module {
             SIEVES[7] = MetaTileEntities.registerMetaTileEntity(4009, new MetaTileEntitySieve(BaseUtility.gregificationId("sieve.uv"), 8));
         }
         // TODO this config should ideally use the HIGH_TIER map instead of direct checking it, if the cfg is kept
-        if (getHighTier("sieve") && BaseConfig.exNihilo.highTierSieve) {
+        if (getHighTier("sieve") && ExNihiloConfig.highTierSieve) {
             SIEVES[8] = MetaTileEntities.registerMetaTileEntity(4010, new MetaTileEntitySieve(BaseUtility.gregificationId("sieve.uhv"), 9));
             SIEVES[9] = MetaTileEntities.registerMetaTileEntity(4011, new MetaTileEntitySieve(BaseUtility.gregificationId("sieve.uev"), 10));
             SIEVES[10] = MetaTileEntities.registerMetaTileEntity(4012, new MetaTileEntitySieve(BaseUtility.gregificationId("sieve.uiv"), 11));

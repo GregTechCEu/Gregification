@@ -1,38 +1,42 @@
 package gregification.exnihilo;
 
+import gregification.Gregification;
 import net.minecraftforge.common.config.Config;
+import net.minecraftforge.common.config.Config.*;
 
+@LangKey("gregification.config.ex_nihilo")
+@Config(modid = Gregification.MODID, name = Gregification.MODID + "/ex_nihilo", category = "Ex Nihilo")
 public class ExNihiloConfig {
 
-    @Config.Comment({
+    @Comment({
             "Override all Sifting Tables to drop excess outputs once GT drops have been added.",
             "Default: true"
     })
-    @Config.RequiresMcRestart
-    public boolean overrideAllSiftDrops = true;
+    @RequiresMcRestart
+    public static boolean overrideAllSiftDrops = true;
 
-    @Config.Comment({
+    @Comment({
             "Replace Ex Nihilo Mesh recipes with GT-style recipes",
             "Default: true"
     })
-    @Config.RequiresMcRestart
-    public boolean harderMeshes = true;
+    @RequiresMcRestart
+    public static boolean harderMeshes = true;
 
-    @Config.Comment({
+    @Comment({
             "Enable High-Tier Sieves (UHV-UXV)",
             "Requires Gregicality to be installed.",
             "Default: true"
     })
-    @Config.RequiresMcRestart
-    public boolean highTierSieve = true;
+    @RequiresMcRestart
+    public static boolean highTierSieve = true;
 
-    @Config.Comment({"Config category for sieve drops"})
-    @Config.RequiresMcRestart
-    public SieveCategory drops = new SieveCategory();
+    @Comment({"Config category for sieve drops"})
+    @RequiresMcRestart
+    public static SieveCategory drops = new SieveCategory();
 
     public static class SieveCategory {
 
-        @Config.Comment("Sand Sieve drop list. Format is: { Material(string), Chance(double), Mesh Level(int) }. If empty, none will be generated")
+        @Comment("Sand Sieve drop list. Format is: { Material(string), Chance(double), Mesh Level(int) }. If empty, none will be generated")
         public String[] sandSieveDrops = new String[]{
                 "copper", "0.0612", "2",
                 "redstone", "0.1938", "2",
@@ -68,7 +72,7 @@ public class ExNihiloConfig {
                 "tantalite", "0.0169", "4"
         };
 
-        @Config.Comment("Gravel Sieve drop list. Format is: { Material(string), Chance(double), Mesh Level(int) }. If empty, none will be generated")
+        @Comment("Gravel Sieve drop list. Format is: { Material(string), Chance(double), Mesh Level(int) }. If empty, none will be generated")
         public String[] gravelSieveDrops = new String[]{
                 "coal", "0.192", "1",
                 "trona", "0.0507", "1",
@@ -100,7 +104,7 @@ public class ExNihiloConfig {
                 "palladium", "0.05915", "3",
         };
 
-        @Config.Comment("Granite Sieve drop list. Format is: { Material(string), Chance(double), Mesh Level(int) }. If empty, none will be generated")
+        @Comment("Granite Sieve drop list. Format is: { Material(string), Chance(double), Mesh Level(int) }. If empty, none will be generated")
         public String[] graniteSieveDrops = new String[]{
                 "apatite", "0.1014", "1",
                 "tricalcium_phosphate", "0.0676", "1",
@@ -168,7 +172,7 @@ public class ExNihiloConfig {
                 "lithium", "0.0338", "4"
         };
 
-        @Config.Comment("Diorite Sieve drop list. Format is: { Material(string), Chance(double), Mesh Level(int) }. If empty, none will be generated")
+        @Comment("Diorite Sieve drop list. Format is: { Material(string), Chance(double), Mesh Level(int) }. If empty, none will be generated")
         public String[] dioriteSieveDrops = new String[]{
                 "bauxite", "0.153", "1",
                 "aluminium", "0.0765", "1",
@@ -212,7 +216,7 @@ public class ExNihiloConfig {
                 "pentlandite", "0.056", "4"
         };
 
-        @Config.Comment("Andesite Sieve drop list. Format is: { Material(string), Chance(double), Mesh Level(int) }. If empty, none will be generated")
+        @Comment("Andesite Sieve drop list. Format is: { Material(string), Chance(double), Mesh Level(int) }. If empty, none will be generated")
         public String[] andesiteSieveDrops = new String[]{
                 "redstone", "0.1938", "2",
                 "ruby", "0.0646", "2",
@@ -260,7 +264,7 @@ public class ExNihiloConfig {
                 "lithium", "0.0338", "4"
         };
 
-        @Config.Comment("Netherrack Sieve drop list. Format is: { Material(string), Chance(double), Mesh Level(int) }. If empty, none will be generated")
+        @Comment("Netherrack Sieve drop list. Format is: { Material(string), Chance(double), Mesh Level(int) }. If empty, none will be generated")
         public String[] netherrackSieveDrops = new String[]{
                 "chalcopyrite", "0.0432", "2",
                 "iron", "0.0432", "2",
@@ -295,7 +299,7 @@ public class ExNihiloConfig {
                 "blue_topaz", "0.0196", "4"
         };
 
-        @Config.Comment("Endstone Sieve drop list. Format is: { Material(string), Chance(double), Mesh Level(int) }. If empty, none will be generated")
+        @Comment("Endstone Sieve drop list. Format is: { Material(string), Chance(double), Mesh Level(int) }. If empty, none will be generated")
         public String[] endstoneSieveDrops = new String[]{
                 "beryllium", "0.0405", "2",
                 "emerald", "0.0243", "2",

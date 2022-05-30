@@ -24,7 +24,7 @@ import exnihilocreatio.items.seeds.ItemSeedBase;
 import exnihilocreatio.registries.manager.ISieveDefaultRegistryProvider;
 import exnihilocreatio.registries.registries.SieveRegistry;
 import exnihilocreatio.util.ItemInfo;
-import gregification.base.BaseConfig;
+import gregification.exnihilo.ExNihiloConfig;
 import gregification.exnihilo.ExNihiloModule;
 import gregtech.api.GregTechAPI;
 import gregtech.api.unification.OreDictUnifier;
@@ -46,13 +46,13 @@ public class SieveDrops implements ISieveDefaultRegistryProvider {
     private static Map<SieveDropType, List<SieveDrop>> SIEVE_DROPS_MAP = new HashMap<>();
 
     public static void readSieveDropsFromConfig() {
-        readSieveDropsFromConfig(BaseConfig.exNihilo.drops.sandSieveDrops, SieveDropType.SAND);
-        readSieveDropsFromConfig(BaseConfig.exNihilo.drops.gravelSieveDrops, SieveDropType.GRAVEL);
-        readSieveDropsFromConfig(BaseConfig.exNihilo.drops.graniteSieveDrops, SieveDropType.GRANITE);
-        readSieveDropsFromConfig(BaseConfig.exNihilo.drops.dioriteSieveDrops, SieveDropType.DIORITE);
-        readSieveDropsFromConfig(BaseConfig.exNihilo.drops.andesiteSieveDrops, SieveDropType.ANDESITE);
-        readSieveDropsFromConfig(BaseConfig.exNihilo.drops.netherrackSieveDrops, SieveDropType.NETHERRACK);
-        readSieveDropsFromConfig(BaseConfig.exNihilo.drops.endstoneSieveDrops, SieveDropType.END);
+        readSieveDropsFromConfig(ExNihiloConfig.drops.sandSieveDrops, SieveDropType.SAND);
+        readSieveDropsFromConfig(ExNihiloConfig.drops.gravelSieveDrops, SieveDropType.GRAVEL);
+        readSieveDropsFromConfig(ExNihiloConfig.drops.graniteSieveDrops, SieveDropType.GRANITE);
+        readSieveDropsFromConfig(ExNihiloConfig.drops.dioriteSieveDrops, SieveDropType.DIORITE);
+        readSieveDropsFromConfig(ExNihiloConfig.drops.andesiteSieveDrops, SieveDropType.ANDESITE);
+        readSieveDropsFromConfig(ExNihiloConfig.drops.netherrackSieveDrops, SieveDropType.NETHERRACK);
+        readSieveDropsFromConfig(ExNihiloConfig.drops.endstoneSieveDrops, SieveDropType.END);
     }
 
     private static void readSieveDropsFromConfig(String[] recipes, SieveDropType type) {
@@ -116,7 +116,7 @@ public class SieveDrops implements ISieveDefaultRegistryProvider {
     // TODO Clean this up
     @Override
     public void registerRecipeDefaults(@Nonnull SieveRegistry registry) {
-        if (BaseConfig.exNihilo.overrideAllSiftDrops) {
+        if (ExNihiloConfig.overrideAllSiftDrops) {
             registry.clearRegistry();
 
             registry.register("dirt", new ItemInfo(ModItems.pebbles), 1f, BlockSieve.MeshType.STRING.getID());

@@ -23,9 +23,9 @@ import forestry.api.recipes.RecipeManagers;
 import forestry.core.ModuleCore;
 import forestry.factory.MachineUIDs;
 import forestry.factory.ModuleFactory;
-import gregification.base.BaseConfig;
 import gregification.base.BaseUtility;
 import gregification.base.ModIDs;
+import gregification.forestry.ForestryConfig;
 import gregification.forestry.ForestryModule;
 import gregification.forestry.ForestryUtils;
 import gregification.forestry.bees.GTCombType;
@@ -81,7 +81,7 @@ public class CombRecipes {
         addProcessGT(GTCombType.APATITE, new Material[]{Materials.Apatite, Materials.Phosphate}, Voltage.LV);
         addCentrifugeToMaterial(GTCombType.ASH, new Material[]{Materials.DarkAsh, Materials.Ash}, new int[]{50 * 100, 50 * 100}, new int[]{}, Voltage.ULV, ItemStack.EMPTY, 50 * 100);
         addCentrifugeToItemStack(GTCombType.BIOMASS, new ItemStack[]{ForestryUtils.getDropStack(GTDropType.BIOMASS), ForestryUtils.getDropStack(GTDropType.ETHANOL), ModuleCore.getItems().beeswax.getItemStack()}, new int[]{70 * 100, 30 * 100, 50 * 100}, Voltage.ULV);
-        if (BaseConfig.forestry.nerfGTCombs) {
+        if (ForestryConfig.nerfGTCombs) {
             addCentrifugeToItemStack(GTCombType.COAL, new ItemStack[]{OreDictUnifier.get(OrePrefix.gem, Materials.Coal), ModuleCore.getItems().beeswax.getItemStack()}, new int[]{5 * 100, 50 * 100}, Voltage.ULV);
             addCentrifugeToItemStack(GTCombType.COKE, new ItemStack[]{OreDictUnifier.get(OrePrefix.gem, Materials.Coke), ModuleCore.getItems().beeswax.getItemStack()}, new int[]{5 * 100, 50 * 100}, Voltage.ULV);
             // TODO the recipe below gave 1 oilberry instead of oilsands dust. change to that if oilberry balance stays the same in the new crop system
@@ -110,7 +110,7 @@ public class CombRecipes {
         addProcessGT(GTCombType.REDALLOY, new Material[]{Materials.RedAlloy, Materials.Redstone, Materials.Copper}, Voltage.LV);
         addProcessGT(GTCombType.STAINLESSSTEEL, new Material[]{Materials.StainlessSteel, Materials.Iron, Materials.Chrome, Materials.Manganese, Materials.Nickel}, Voltage.HV);
         // redstone alloy, conductive iron, vibrant alloy, energetic alloy, electrical steel, dark steel, pulsating iron, enderium
-        if (BaseConfig.forestry.nerfGTCombs) {
+        if (ForestryConfig.nerfGTCombs) {
             addCentrifugeToMaterial(GTCombType.REDALLOY, new Material[]{Materials.RedAlloy}, new int[]{100 * 100}, new int[]{}, Voltage.ULV, ModuleCore.getItems().refractoryWax.getItemStack(), 50 * 100);
             addCentrifugeToMaterial(GTCombType.STAINLESSSTEEL, new Material[]{Materials.StainlessSteel}, new int[]{50 * 100}, new int[]{}, Voltage.HV, ModuleCore.getItems().refractoryWax.getItemStack(), 50 * 100);
         } else {
@@ -140,7 +140,7 @@ public class CombRecipes {
         //addProcessGT(GTCombType.FIRESTONE, ...);
         addProcessGT(GTCombType.PYROPE, new Material[]{Materials.Pyrope, Materials.Aluminium, Materials.Magnesium, Materials.Silicon}, Voltage.LV);
         addProcessGT(GTCombType.GROSSULAR, new Material[]{Materials.Grossular, Materials.Aluminium, Materials.Silicon}, Voltage.LV);
-        if (BaseConfig.forestry.nerfGTCombs) {
+        if (ForestryConfig.nerfGTCombs) {
             addCentrifugeToMaterial(GTCombType.STONE, new Material[]{Materials.Stone, Materials.GraniteBlack, Materials.GraniteRed, Materials.Basalt, Materials.Marble, Materials.Redrock}, new int[]{70 * 100, 50 * 100, 50 * 100, 50 * 100, 50 * 100, 50 * 100}, new int[]{9, 9, 9, 9, 9, 9}, Voltage.ULV, ItemStack.EMPTY, 50 * 100);
             if (Loader.isModLoaded(ModIDs.MODID_AE)) {
                 addCentrifugeToItemStack(GTCombType.FLUIX, new ItemStack[]{OreDictUnifier.get("dustFluix"), ModuleCore.getItems().beeswax.getItemStack()}, new int[]{25 * 100, 30 * 100}, Voltage.ULV);
@@ -184,7 +184,7 @@ public class CombRecipes {
 
         addChemicalProcess(GTCombType.STEEL, Materials.BrownLimonite, Materials.YellowLimonite, Voltage.LV);
         addChemicalProcess(GTCombType.STEEL, Materials.YellowLimonite, Materials.BrownLimonite, Voltage.LV);
-        if (BaseConfig.forestry.nerfGTCombs) {
+        if (ForestryConfig.nerfGTCombs) {
             addCentrifugeToMaterial(GTCombType.SLAG, new Material[]{Materials.Stone, Materials.GraniteBlack, Materials.GraniteRed}, new int[]{50 * 100, 20 * 100, 20 * 100}, new int[]{9, 9, 9}, Voltage.ULV, ItemStack.EMPTY, 30 * 100);
             addCentrifugeToMaterial(GTCombType.COPPER, new Material[]{Materials.Copper}, new int[]{70 * 100}, new int[]{}, Voltage.ULV, ItemStack.EMPTY, 30 * 100);
             addCentrifugeToMaterial(GTCombType.TIN, new Material[]{Materials.Tin}, new int[]{60 * 100}, new int[]{}, Voltage.ULV, ItemStack.EMPTY, 30 * 100);
@@ -228,7 +228,7 @@ public class CombRecipes {
         addProcessGT(GTCombType.SALT, new Material[]{Materials.Salt, Materials.RockSalt, Materials.Saltpeter}, Voltage.MV);
         addProcessGT(GTCombType.ELECTROTINE, new Material[]{Materials.Electrotine, Materials.Electrum, Materials.Redstone}, Voltage.MV);
 
-        if (BaseConfig.forestry.nerfGTCombs) {
+        if (ForestryConfig.nerfGTCombs) {
             addCentrifugeToMaterial(GTCombType.SALT, new Material[]{Materials.Salt}, new int[]{100 * 100}, new int[]{9}, Voltage.MV, 160, ItemStack.EMPTY, 50 * 100);
         } else {
             addCentrifugeToMaterial(GTCombType.BAUXITE, new Material[]{Materials.Bauxite, Materials.Aluminium}, new int[]{75 * 100, 55 * 100}, new int[]{}, Voltage.ULV, ItemStack.EMPTY, 30 * 100);
@@ -258,7 +258,7 @@ public class CombRecipes {
         addProcessGT(GTCombType.LUTETIUM, new Material[]{Materials.Lutetium, Materials.Thorium}, Voltage.IV);
         addProcessGT(GTCombType.AMERICIUM, new Material[]{Materials.Americium, Materials.Lutetium}, Voltage.LUV);
         addProcessGT(GTCombType.NEUTRONIUM, new Material[]{Materials.Neutronium, Materials.Americium}, Voltage.UV);
-        if (!BaseConfig.forestry.nerfGTCombs) {
+        if (!ForestryConfig.nerfGTCombs) {
             addCentrifugeToMaterial(GTCombType.ALMANDINE, new Material[]{Materials.Almandine, Materials.Pyrope, Materials.Sapphire, Materials.GreenSapphire}, new int[]{90 * 100, 80 * 100, 75 * 100, 75 * 100}, new int[]{}, Voltage.ULV, ItemStack.EMPTY, 30 * 100);
             addCentrifugeToMaterial(GTCombType.URANIUM, new Material[]{Materials.Uranium238, Materials.Pitchblende, Materials.Uraninite, Materials.Uranium235}, new int[]{50 * 100, 65 * 100, 75 * 100, 50 * 100}, new int[]{}, Voltage.EV, ItemStack.EMPTY, 30 * 100);
             addCentrifugeToMaterial(GTCombType.PLUTONIUM, new Material[]{Materials.Plutonium239, Materials.Uranium235}, new int[]{10, 5}, new int[]{}, Voltage.EV, ItemStack.EMPTY, 30 * 100);
@@ -283,7 +283,7 @@ public class CombRecipes {
 
         if (Loader.isModLoaded(ModIDs.MODID_MB)) {
             addProcessGT(GTCombType.SPARKLING, new Material[]{Materials.NetherStar}, Voltage.EV);
-            addCentrifugeToItemStack(GTCombType.SPARKLING, new ItemStack[]{BaseUtility.getModItem(ModIDs.MODID_MB, "wax", 0), BaseUtility.getModItem(ModIDs.MODID_MB, "resource", 5), OreDictUnifier.get(OrePrefix.dustTiny, Materials.NetherStar)}, new int[]{50 * 100, 10 * 100, (BaseConfig.forestry.nerfGTCombs ? 10 : 50) * 100}, Voltage.EV);
+            addCentrifugeToItemStack(GTCombType.SPARKLING, new ItemStack[]{BaseUtility.getModItem(ModIDs.MODID_MB, "wax", 0), BaseUtility.getModItem(ModIDs.MODID_MB, "resource", 5), OreDictUnifier.get(OrePrefix.dustTiny, Materials.NetherStar)}, new int[]{50 * 100, 10 * 100, (ForestryConfig.nerfGTCombs ? 10 : 50) * 100}, Voltage.EV);
             if (Loader.isModLoaded(ModIDs.MODID_XU2)) {
                 addProcessGT(GTCombType.DIVIDED, new Material[]{Materials.Iron, Materials.Diamond}, Voltage.HV);
                 addCentrifugeToItemStack(GTCombType.DIVIDED, new ItemStack[]{BaseUtility.getModItem(ModIDs.MODID_MB, "wax", 0), BaseUtility.getModItem(ModIDs.MODID_XU2, "unstableingots", 1), OreDictUnifier.get(OrePrefix.dustTiny, Materials.Iron), OreDictUnifier.get(OrePrefix.dustTiny, Materials.Diamond)}, new int[]{50 * 100, 20 * 100, 50 * 100, 30 * 100}, Voltage.HV);
@@ -438,7 +438,7 @@ public class CombRecipes {
         }
 
         // Finalize Forestry Map
-        if (volt.compareTo(Voltage.MV) < 0 || !BaseConfig.forestry.nerfGTCombs) {
+        if (volt.compareTo(Voltage.MV) < 0 || !ForestryConfig.nerfGTCombs) {
             if (ModuleFactory.machineEnabled(MachineUIDs.CENTRIFUGE)) {
                 RecipeManagers.centrifugeManager.addRecipe(40, combStack, product.build());
             }
@@ -471,7 +471,7 @@ public class CombRecipes {
         }
 
         public int getCentrifugeTime() {
-            if (BaseConfig.forestry.nerfGTCombs) {
+            if (ForestryConfig.nerfGTCombs) {
                 return 128 * (Math.max(1, ordinal()));
             } else {
                 return 96 + ordinal() * 32;

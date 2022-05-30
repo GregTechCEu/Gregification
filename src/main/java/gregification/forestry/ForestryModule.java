@@ -43,8 +43,8 @@ public class ForestryModule implements Module {
 
     // Frequently used booleans for enabling some features
 
-    public static final boolean TWILIGHT_BEES = BaseConfig.forestry.twilightBees && Loader.isModLoaded(ModIDs.MODID_TF) && Loader.isModLoaded(ModIDs.MODID_MB);
-    public static final boolean THAUMIC_BEES = BaseConfig.forestry.thaumicBees && Loader.isModLoaded(ModIDs.MODID_THAUM) && Loader.isModLoaded(ModIDs.MODID_MB);
+    public static final boolean TWILIGHT_BEES = ForestryConfig.twilightBees && Loader.isModLoaded(ModIDs.MODID_TF) && Loader.isModLoaded(ModIDs.MODID_MB);
+    public static final boolean THAUMIC_BEES = ForestryConfig.thaumicBees && Loader.isModLoaded(ModIDs.MODID_THAUM) && Loader.isModLoaded(ModIDs.MODID_MB);
 
     // Items
 
@@ -77,7 +77,7 @@ public class ForestryModule implements Module {
     @Override
     public void preInit(FMLPreInitializationEvent event) {
         // Initialize GT Comb and Drop items
-        if (BaseConfig.forestry.gtBees) {
+        if (ForestryConfig.gtBees) {
             if (ForestryUtils.apicultureEnabled()) {
                 gtCombs = new GTItemComb();
                 gtDrops = new GTItemDrop();
@@ -87,7 +87,7 @@ public class ForestryModule implements Module {
         }
 
         // Initialize GT Frame item
-        if (BaseConfig.forestry.gtFrames) {
+        if (ForestryConfig.gtFrames) {
             if (ForestryUtils.apicultureEnabled()) {
                 for (GTFrameType type : GTFrameType.values()) {
                     gtFrames.put(type, new GTItemFrame(type));
@@ -101,7 +101,7 @@ public class ForestryModule implements Module {
     @Override
     public void init(FMLInitializationEvent event) {
         // Replace Forestry Electrode recipes
-        if (BaseConfig.forestry.gtElectrodes) {
+        if (ForestryConfig.gtElectrodes) {
             logger.info("Registering Forestry Electrode recipe overrides");
             ElectrodeRecipes.removeForestryRecipes();
             ElectrodeRecipes.addForestryMachineRecipes();
@@ -109,7 +109,7 @@ public class ForestryModule implements Module {
 
         // Register GT Bee species, alleles, mutations
         if (ForestryUtils.apicultureEnabled()) {
-            if (BaseConfig.forestry.gtBees) {
+            if (ForestryConfig.gtBees) {
                 logger.info("Registering GT Bee alleles, species and mutations");
                 GTAlleleBeeSpecies.setupGTAlleles();
                 GTBeeDefinition.initBees();
@@ -118,7 +118,7 @@ public class ForestryModule implements Module {
 
         if (FMLCommonHandler.instance().getSide() == Side.CLIENT) {
             if (ForestryUtils.apicultureEnabled()) {
-                if (BaseConfig.forestry.gtBees) {
+                if (ForestryConfig.gtBees) {
                     Minecraft.getMinecraft().getItemColors().registerItemColorHandler(CombItemColor.INSTANCE, ForestryModule.gtCombs, ForestryModule.gtDrops);
                 }
             }
@@ -138,19 +138,19 @@ public class ForestryModule implements Module {
     public void registerItems(RegistryEvent.Register<Item> event) {
         // Register GT Combs, Drops, and Frames
         if (ForestryUtils.apicultureEnabled()) {
-            if (BaseConfig.forestry.gtBees) {
+            if (ForestryConfig.gtBees) {
                 logger.info("Registering GT Comb and Drop items");
                 event.getRegistry().register(gtCombs);
                 event.getRegistry().register(gtDrops);
             }
-            if (BaseConfig.forestry.gtFrames) {
+            if (ForestryConfig.gtFrames) {
                 logger.info("Registering GT Frame items");
                 gtFrames.values().forEach(f -> event.getRegistry().register(f));
             }
         }
 
         // Register GT Electron Tubes
-        if (BaseConfig.forestry.gtElectrodes) {
+        if (ForestryConfig.gtElectrodes) {
             logger.info("Registering GT Electron Tubes");
             ELECTRODE_APATITE = BaseModule.baseMetaItem.addItem(1, "electrode.apatite");
             ELECTRODE_BLAZE = BaseModule.baseMetaItem.addItem(2, "electrode.blaze");
@@ -176,7 +176,7 @@ public class ForestryModule implements Module {
         }
 
         // Register GT Scoop
-        if (BaseConfig.forestry.gtScoop) {
+        if (ForestryConfig.gtScoop) {
             logger.info("Registering GT Scoop");
             SCOOP = (ToolMetaItem<?>.MetaToolValueItem) BaseModule.baseMetaTool.addItem(1, "tool.scoop")
                     .setToolStats(new ToolScoop())
@@ -191,7 +191,7 @@ public class ForestryModule implements Module {
         MiscRecipes.registerHandlers();
 
         // GT Electrode recipes
-        if (BaseConfig.forestry.gtElectrodes) {
+        if (ForestryConfig.gtElectrodes) {
             logger.info("Registering GT Electrode recipes");
             ElectrodeRecipes.initGTRecipes();
         }
@@ -199,7 +199,7 @@ public class ForestryModule implements Module {
         if (ForestryUtils.apicultureEnabled()) {
 
             // GT Comb, Drop, and Propolis recipes, and Comb OreDict
-            if (BaseConfig.forestry.gtBees) {
+            if (ForestryConfig.gtBees) {
                 logger.info("Registering GT Bee, Comb, Drop and Propolis recipes");
                 for (GTCombType type : GTCombType.VALUES) {
                     OreDictUnifier.registerOre(ForestryUtils.getCombStack(type), "beeComb");
@@ -209,7 +209,7 @@ public class ForestryModule implements Module {
             }
 
             // GT Frame recipes
-            if (BaseConfig.forestry.gtFrames) {
+            if (ForestryConfig.gtFrames) {
                 logger.info("Registering GT Frame recipes");
                 FrameRecipes.init();
             }
@@ -219,11 +219,11 @@ public class ForestryModule implements Module {
     @Override
     public void registerModels(ModelRegistryEvent event) {
         if (ForestryUtils.apicultureEnabled()) {
-            if (BaseConfig.forestry.gtBees) {
+            if (ForestryConfig.gtBees) {
                 ForestryModule.gtCombs.registerModel(ForestryModule.gtCombs, ForestryAPI.modelManager);
                 ForestryModule.gtDrops.registerModel(ForestryModule.gtDrops, ForestryAPI.modelManager);
             }
-            if (BaseConfig.forestry.gtFrames) {
+            if (ForestryConfig.gtFrames) {
                 ForestryModule.gtFrames.values().forEach(f -> f.registerModel(f, ForestryAPI.modelManager));
             }
         }

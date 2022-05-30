@@ -1,22 +1,26 @@
 package gregification.forestry;
 
+import gregification.Gregification;
 import net.minecraftforge.common.config.Config;
+import net.minecraftforge.common.config.Config.*;
 
+@LangKey("gregification.config.forestry")
+@Config(modid = Gregification.MODID, name = Gregification.MODID + "/forestry", category = "Forestry")
 public class ForestryConfig {
 
-    @Config.Comment({
+    @Comment({
             "Enable GT Electrodes. Also overrides Forestry recipes.",
             "Default: true"
     })
-    public boolean gtElectrodes = true;
+    public static boolean gtElectrodes = true;
 
-    @Config.Comment({
+    @Comment({
             "Enable the GT Scoop",
             "Default: true"
     })
-    public boolean gtScoop = true;
+    public static boolean gtScoop = true;
 
-    @Config.Comment({
+    @Comment({
             "Enable GT Bees",
             "Requirements: Forestry Apiculture module",
             "Additional mod compatibility:",
@@ -26,42 +30,42 @@ public class ForestryConfig {
             "Extra Utilities 2: Adds Divided Bee for making Stable/Unstable Nuggets (also requires ExtraBees)",
             "Default: true"
     })
-    public boolean gtBees = true;
+    public static boolean gtBees = true;
 
-    @Config.Comment({
+    @Comment({
             "Whether or not to nerf GT Comb processing recipes.",
             "Requirements: Forestry Apiculture modile, gtBees config enabled",
             "Primarily affects whether the Centrifuge (GT or Forestry) can process GT combs",
             "Default: false"
     })
-    public boolean nerfGTCombs = false;
+    public static boolean nerfGTCombs = false;
 
-    @Config.Comment({
+    @Comment({
             "Enable GT Apiary Frames",
             "Requirements: Forestry Apiculture module",
             "Default: true"
     })
-    public boolean gtFrames = true;
+    public static boolean gtFrames = true;
 
-    @Config.Comment({
+    @Comment({
             "Enable GT Twilight Forest Bees",
             "Requirements: Forestry Apiculture module, The Twilight Forest, MagicBees, gtBees config option",
             "Has additional compatibility with the thaumicBees config option, such as the Urghast and SnowQueen Bees",
             "Default: true"
     })
-    public boolean twilightBees = true;
+    public static boolean twilightBees = true;
 
-    @Config.Comment({
+    @Comment({
             "Enable GT Thaumcraft 6 Bees",
             "Requirements: Forestry Apiculture module, Thaumcraft 6, MagicBees, gtBees config option",
             "Default: true"
     })
-    public boolean thaumicBees = true;
+    public static boolean thaumicBees = true;
 
-    //@Config.Comment({
+    //@Comment({
     //        "Enable GT Advanced Rocketry/Galacticraft Bees",
     //        "Requirements: Forestry Apiculture module, Advanced Rocketry OR Galacticraft, gtBees config option",
     //        "Default: true"
     //})
-    //public boolean spaceBees = true;
+    //public static boolean spaceBees = true;
 }

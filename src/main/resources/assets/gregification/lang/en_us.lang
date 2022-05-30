@@ -1,3 +1,13 @@
+# Config lang keys
+gregification.config.base=Module Toggles
+gregification.config.base.tooltip=Enable or disable individual mod compatibility modules
+gregification.config.ex_nihilo=Module: Ex Nihilo
+gregification.config.ex_nihilo.tooltip=Config options for Ex Nihilo features
+gregification.config.forestry=Module: Forestry
+gregification.config.forestry.tooltip=Config options for Forestry features
+gregification.config.open_computers=Module: Open Computers
+gregification.config.open_computers.tooltip=Config options for Open Computers features
+
 # Ex Nihilo
 item.gtPebble.basalt.name=Basalt Pebble
 item.gtPebble.black_granite.name=Black Granite Pebble

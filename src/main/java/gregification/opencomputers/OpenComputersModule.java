@@ -41,7 +41,7 @@ public class OpenComputersModule implements Module {
         //Driver.add(new DriverBatteryTower());
 
         // TODO Waiting on Gregicality Science
-        if (BaseConfig.openComputers.enableGregicalityOC && Loader.isModLoaded(ModIDs.MODID_GCYS)) {
+        if (OpenComputersConfig.enableGregicalityOC && Loader.isModLoaded(ModIDs.MODID_GCYS)) {
             //Driver.add(new DriverNuclearReactor());
             //Driver.add(new DriverVoidMiner());
             //Driver.add(new DriverQubitMultiblockController());
