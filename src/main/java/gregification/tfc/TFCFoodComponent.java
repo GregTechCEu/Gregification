@@ -1,4 +1,4 @@
-package gregification.terrafirmacraft;
+package gregification.tfc;
 
 import gregification.common.GFValues;
 import gregtech.api.items.metaitem.FoodStats;

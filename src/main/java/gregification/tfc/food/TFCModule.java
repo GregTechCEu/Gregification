@@ -1,23 +1,33 @@
-package gregification.proxy;
+package gregification.tfc.food;
 
-import gregification.common.GFValues;
-import gregification.terrafirmacraft.TFCFoodComponent;
-import gregtech.api.items.metaitem.MetaItem;
-import gregtech.api.items.metaitem.stats.IFoodBehavior;
-import gregtech.api.items.metaitem.stats.IItemBehaviour;
-import gregtech.api.items.metaitem.stats.IItemComponent;
+import gregification.base.ModIDs;
+import gregification.base.Module;
+import gregification.tfc.TFCFoodComponent;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
-import net.minecraft.init.Items;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.Loader;
+import org.apache.logging.log4j.Logger;
 
-@Mod.EventBusSubscriber(modid = GFValues.MODID)
-public class TFCCommonProxy {
-    @SubscribeEvent
+import java.util.Collections;
+import java.util.List;
+
+@Module.Root(name = "Gregification: Ex TerraFirmaCraft")
+public class TFCModule implements Module {
+    @Module.Log
+    public static Logger logger;
+
+    @Override
+    public boolean isModuleActive() {
+        return Loader.isModLoaded(ModIDs.MODID_TFC);
+    }
+
+    @Override
+    public List<Class<?>> getEventBusListeners() {
+        return Collections.singletonList(this.getClass());
+    }
+
     public static void attachItemCapabilities(AttachCapabilitiesEvent<ItemStack> event) {
         if (event.getObject().getItem() instanceof MetaItem
                 && ((MetaItem<?>) event.getObject().getItem()).getItem(event.getObject()) != null) {
