@@ -1,6 +1,6 @@
-package gregification.tfc;
+package gregification.tfc.food;
 
-import gregification.common.GFValues;
+import gregification.base.ModIDs;
 import gregtech.api.items.metaitem.FoodStats;
 import gregtech.api.items.metaitem.stats.IFoodBehavior;
 import gregtech.api.util.RandomPotionEffect;
@@ -29,8 +29,8 @@ public class TFCFoodComponent extends FoodStats {
         super(foodLevel, saturation);
     }
 
-    public void setFoodData(FoodData data) {
-        this.foodData = data;
+    public void setFoodData(float water, float grain, float veg, float fruit, float meat, float dairy) {
+        this.foodData = new FoodData(this.foodLevel, water, this.saturation, grain, veg, fruit, meat, dairy, 1);
     }
 
     public void setHeatProperties(int heatCapacity, int meltTemp) {
@@ -41,7 +41,7 @@ public class TFCFoodComponent extends FoodStats {
 
     @Override
     public ItemStack onFoodEaten(ItemStack stack, EntityPlayer player) {
-        if (Loader.isModLoaded(GFValues.MODID_TFC)) {
+        if (Loader.isModLoaded(ModIDs.MODID_TFC)) {
             player.getFoodStats().addStats(null, stack);
         }
         return super.onFoodEaten(stack, player);

@@ -1,8 +1,10 @@
-package gregification.tfc.food;
+package gregification.tfc;
 
 import gregification.base.ModIDs;
 import gregification.base.Module;
-import gregification.tfc.TFCFoodComponent;
+import gregification.tfc.food.TFCFoodComponent;
+import gregtech.api.items.metaitem.MetaItem;
+import gregtech.api.items.metaitem.stats.IItemComponent;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;

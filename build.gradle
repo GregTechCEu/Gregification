@@ -54,7 +54,7 @@ dependencies {
     deobfCompile "CraftTweaker2:CraftTweaker2-MC1120-Main:1.12-4.1.20.554"
     deobfCompile "curse.maven:jei-238222:3040523"
     deobfCompile "curse.maven:jeid-296289:2919737"
-    runtime "curse.maven:the-one-probe-245211:2667280"
+    deobfCompile "curse.maven:the-one-probe-245211:2667280"
 
     // Direct compat mods
     // Must be present in-dev as their code is referenced in this mod
@@ -67,7 +67,7 @@ dependencies {
     deobfCompile "curse.maven:opencomputers-223008:2828357"
     deobfCompile "curse.maven:tfcraft-302973:3268988"
     deobfCompile "curse.maven:ae2-extended-life-570458:3632074"
-    deobfProvided "curse.maven:gregtech-food-option-477021:3787937"
+    deobfCompile "curse.maven:gregtech-food-option-477021:3787937"
 
     // May get some form of compatibility in the future
     //deobfCompile "curse.maven:mcjtylib-233105:2745846"
