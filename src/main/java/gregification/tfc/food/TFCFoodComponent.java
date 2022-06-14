@@ -29,8 +29,8 @@ public class TFCFoodComponent extends FoodStats {
         super(foodLevel, saturation);
     }
 
-    public TFCFoodComponent setFoodData(float water, float grain, float veg, float fruit, float meat, float dairy) {
-        this.foodData = new FoodData(this.foodLevel, water, this.saturation, grain, veg, fruit, meat, dairy, 1);
+    public TFCFoodComponent setFoodData(float water, float grain, float fruit, float veg, float meat, float dairy) {
+        this.foodData = new FoodData(this.foodLevel, water, this.saturation, grain, fruit, veg, meat, dairy, 1);
         return this;
     }
 
