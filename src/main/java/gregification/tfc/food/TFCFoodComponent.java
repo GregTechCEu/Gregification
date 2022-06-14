@@ -1,6 +1,7 @@
 package gregification.tfc.food;
 
 import gregification.base.ModIDs;
+import gregification.tfc.TFCConfig;
 import gregtech.api.items.metaitem.FoodStats;
 import gregtech.api.items.metaitem.stats.IFoodBehavior;
 import gregtech.api.util.RandomPotionEffect;
@@ -19,18 +20,24 @@ public class TFCFoodComponent extends FoodStats implements ITFCFoodComponent {
 
     public TFCFoodComponent(int foodLevel, float saturation, boolean isDrink, boolean alwaysEdible, ItemStack containerItem, RandomPotionEffect... potionEffects) {
         super(foodLevel, saturation, isDrink, alwaysEdible, containerItem, potionEffects);
+        if (TFCConfig.allowGregTechFoodToHaveStatsInTFC)
+            this.foodData = new FoodData(foodLevel, 0, saturation, 0, 0, 0, 0, 0, 1);
     }
 
     public TFCFoodComponent(int foodLevel, float saturation, boolean isDrink) {
-        super(foodLevel, saturation, isDrink);
+        this(foodLevel, saturation, isDrink, false, null);
     }
 
     public TFCFoodComponent(int foodLevel, float saturation) {
-        super(foodLevel, saturation);
+        this(foodLevel, saturation, false);
     }
 
     public TFCFoodComponent setFoodData(float water, float grain, float fruit, float veg, float meat, float dairy) {
-        this.foodData = new FoodData(this.foodLevel, water, this.saturation, grain, fruit, veg, meat, dairy, 1);
+        if (TFCConfig.allowGregTechFoodToHaveStatsInTFC) {
+            if (TFCConfig.allowGregTechFoodToHaveNutrientsInTFC)
+                this.foodData = new FoodData(this.foodLevel, water, this.saturation, grain, fruit, veg, meat, dairy, 1);
+            // Otherwise, it should be set from the constructor already.
+        }
         return this;
     }
 
