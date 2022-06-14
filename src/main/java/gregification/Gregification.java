@@ -79,9 +79,6 @@ public class Gregification {
         });
     }
 
-    @SidedProxy(modId = GFValues.MODID, serverSide = "gregification.proxy.TFCCommonProxy", clientSide = "gregification.proxy.TFCCommonProxy")
-    public static TFCCommonProxy TFCProxy;
-
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {
         MODULE_LIST.forEach(m -> m.preInit(event));

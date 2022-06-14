@@ -29,14 +29,16 @@ public class TFCFoodComponent extends FoodStats {
         super(foodLevel, saturation);
     }
 
-    public void setFoodData(float water, float grain, float veg, float fruit, float meat, float dairy) {
+    public TFCFoodComponent setFoodData(float water, float grain, float veg, float fruit, float meat, float dairy) {
         this.foodData = new FoodData(this.foodLevel, water, this.saturation, grain, veg, fruit, meat, dairy, 1);
+        return this;
     }
 
-    public void setHeatProperties(int heatCapacity, int meltTemp) {
+    public TFCFoodComponent setHeatProperties(int heatCapacity, int meltTemp) {
         this.isHeatable = true;
         this.heatCapacity = heatCapacity;
         this.meltTemp = meltTemp;
+        return this;
     }
 
     @Override
