@@ -10,7 +10,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.fml.common.Loader;
 
-public class TFCFoodComponent extends FoodStats {
+public class TFCFoodComponent extends FoodStats implements ITFCFoodComponent {
 
     protected FoodData foodData = new FoodData();
     protected boolean isHeatable = false;

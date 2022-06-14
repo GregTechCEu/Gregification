@@ -2,9 +2,12 @@ package gregification.tfc;
 
 import gregification.base.ModIDs;
 import gregification.base.Module;
+import gregification.tfc.food.ITFCFoodComponent;
 import gregification.tfc.food.TFCFoodComponent;
 import gregtech.api.items.metaitem.FoodStats;
+import gregtech.api.items.metaitem.FoodUseManager;
 import gregtech.api.items.metaitem.MetaItem;
+import gregtech.api.items.metaitem.stats.IFoodBehavior;
 import gregtech.api.items.metaitem.stats.IItemComponent;
 import gregtech.api.unification.OreDictUnifier;
 import gregtech.api.unification.material.Materials;
@@ -12,8 +15,11 @@ import gregtech.api.unification.ore.OrePrefix;
 import gregtech.api.util.RandomPotionEffect;
 import gregtech.common.items.MetaItems;
 import net.dries007.tfc.api.capability.food.CapabilityFood;
+import net.dries007.tfc.api.capability.food.FoodData;
+import net.dries007.tfc.api.capability.food.FoodHandler;
 import net.minecraft.init.Items;
 import net.minecraft.init.MobEffects;
+import net.minecraft.item.EnumAction;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
@@ -47,12 +53,14 @@ public class TFCModule implements Module {
     public static void attachItemCapabilities(AttachCapabilitiesEvent<ItemStack> event) {
         if (event.getObject().getItem() instanceof MetaItem
                 && ((MetaItem<?>) event.getObject().getItem()).getItem(event.getObject()) != null) {
-            for (IItemComponent component : ((MetaItem<?>) event.getObject().getItem()).getItem(event.getObject()).getAllStats()) {
-                if (component instanceof TFCFoodComponent) {
-                    ICapabilityProvider foodHandler = ((TFCFoodComponent) component).getTFCFoodHandler();
+            MetaItem.MetaValueItem valueItem = ((MetaItem<?>) event.getObject().getItem()).getItem(event.getObject());
+            if (valueItem.getUseManager() instanceof FoodUseManager && ((FoodUseManager) valueItem.getUseManager()).getFoodStats() != null) {
+                IFoodBehavior gtFoodStats = ((FoodUseManager) valueItem.getUseManager()).getFoodStats();
+                if (gtFoodStats instanceof ITFCFoodComponent) {
+                    ICapabilityProvider foodHandler = ((ITFCFoodComponent) gtFoodStats).getTFCFoodHandler();
                     if (foodHandler != null)
                         event.addCapability(CapabilityFood.KEY, foodHandler);
-                    break;
+                    // If the food behavior is not a TFCFoodComponent, one can't really
                 }
             }
         }
