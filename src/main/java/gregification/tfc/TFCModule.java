@@ -1,7 +1,9 @@
 package gregification.tfc;
 
+import gregification.base.BaseConfig;
 import gregification.base.ModIDs;
 import gregification.base.Module;
+import gregification.tfc.food.GTFOTFCCompatibilityAdder;
 import gregification.tfc.food.ITFCFoodComponent;
 import gregification.tfc.food.TFCFoodComponent;
 import gregtech.api.items.metaitem.FoodStats;
@@ -34,14 +36,14 @@ import org.apache.logging.log4j.Logger;
 import java.util.Collections;
 import java.util.List;
 
-@Module.Root(name = "Gregification: Ex TerraFirmaCraft")
+@Module.Root(name = "Gregification: TerraFirmaCraft")
 public class TFCModule implements Module {
     @Module.Log
     public static Logger logger;
 
     @Override
     public boolean isModuleActive() {
-        return Loader.isModLoaded(ModIDs.MODID_TFC);
+        return BaseConfig.enableTerraFirmaCraftModule && Loader.isModLoaded(ModIDs.MODID_TFC);
     }
 
     @Override
@@ -72,5 +74,7 @@ public class TFCModule implements Module {
                 .setFoodData(0, 0, 0, 0.2f, 0, 0).setHeatProperties(0, 0));
         MetaItems.BOTTLE_PURPLE_DRINK.addComponents(new TFCFoodComponent(8, 0.2F, true, true, new ItemStack(Items.GLASS_BOTTLE), new RandomPotionEffect(MobEffects.HASTE, 800, 1, 90))
                 .setFoodData(3, 0, 1, 0, 0, 0).setHeatProperties(10, 240));
+        if (Loader.isModLoaded(ModIDs.MODID_GTFO))
+            GTFOTFCCompatibilityAdder.init();
     }
 }

@@ -54,7 +54,7 @@ dependencies {
     deobfCompile "CraftTweaker2:CraftTweaker2-MC1120-Main:1.12-4.1.20.554"
     deobfCompile "curse.maven:jei-238222:3040523"
     deobfCompile "curse.maven:jeid-296289:2919737"
-    deobfCompile "curse.maven:the-one-probe-245211:2667280"
+    runtime "curse.maven:the-one-probe-245211:2667280"
 
     // Direct compat mods
     // Must be present in-dev as their code is referenced in this mod

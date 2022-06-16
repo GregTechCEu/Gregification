@@ -19,4 +19,8 @@ public class BaseConfig {
     @Comment({"Enable Open Computers integration.", "Default: true"})
     @RequiresMcRestart
     public static boolean enableOpenComputersModule = true;
+
+    @Comment({"Enable Open Computers integration.", "Default: true"})
+    @RequiresMcRestart
+    public static boolean enableTerraFirmaCraftModule = true;
 }
