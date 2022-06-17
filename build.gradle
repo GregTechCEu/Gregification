@@ -67,7 +67,7 @@ dependencies {
     deobfCompile "curse.maven:opencomputers-223008:2828357"
     deobfCompile "curse.maven:tfcraft-302973:3268988"
     deobfCompile "curse.maven:ae2-extended-life-570458:3632074"
-    deobfProvided "curse.maven:gregtech-food-option-477021:3787937"
+    deobfProvided "curse.maven:gregtech-food-option-477021:3835574"
 
     // May get some form of compatibility in the future
     //deobfCompile "curse.maven:mcjtylib-233105:2745846"
