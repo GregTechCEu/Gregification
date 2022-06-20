@@ -20,7 +20,7 @@ public class AnnotationProcessor {
             Class<?> clazz;
             try {
                 clazz = Class.forName(className);
-            } catch (ClassNotFoundException e) {
+            } catch (ClassNotFoundException | NoClassDefFoundError e) {
                 Gregification.logger.error("Failed to load {} module, malformed annotation data", className);
                 continue;
             }
