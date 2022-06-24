@@ -20,7 +20,7 @@ public class BaseConfig {
     @RequiresMcRestart
     public static boolean enableOpenComputersModule = true;
 
-    @Comment({"Enable Open Computers integration.", "Default: true"})
+    @Comment({"Enable TerraFirmaCraft integration.", "Default: true"})
     @RequiresMcRestart
     public static boolean enableTerraFirmaCraftModule = true;
 }
