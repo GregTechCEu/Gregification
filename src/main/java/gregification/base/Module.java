@@ -7,6 +7,7 @@ import net.minecraft.item.crafting.IRecipe;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLInterModComms;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
@@ -56,6 +57,9 @@ public interface Module {
     }
 
     default void registerMaterials(GregTechAPI.MaterialEvent event) {
+    }
+
+    default void respondIMC(FMLInterModComms.IMCEvent event){
     }
 
     /**
