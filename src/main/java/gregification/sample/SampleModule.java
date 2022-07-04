@@ -8,6 +8,7 @@ import net.minecraft.item.crafting.IRecipe;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLInterModComms;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import org.apache.logging.log4j.Logger;
@@ -100,5 +101,13 @@ public class SampleModule implements Module {
 
     @Override
     public void registerMaterials(GregTechAPI.MaterialEvent event) {
+    }
+
+
+    /**
+     * Simple pass-through for FML Inter-mod communications.
+     */
+    @Override
+    public void respondIMC(FMLInterModComms.IMCEvent event){
     }
 }
