@@ -1,0 +1,13 @@
+{
+  "package": "gregification.gtceu.mixins",
+  "refmap": "mixins.gregification.refmap.json",
+  "target": "@env(DEFAULT)",
+  "minVersion": "0.8",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [
+    "GTCEuArmorAutoEatMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

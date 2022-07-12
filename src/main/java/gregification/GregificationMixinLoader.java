@@ -9,5 +9,7 @@ public class GregificationMixinLoader {
     public GregificationMixinLoader() {
         // Insert Mixins.addConfiguration(...) here
         Mixins.addConfiguration("mixins.tfc.json");
+
+        Mixins.addConfiguration("mixins.gtceu.json");
     }
 }
