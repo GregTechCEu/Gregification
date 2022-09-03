@@ -1,6 +1,7 @@
 package gregification.modules.forestry;
 
 import forestry.api.core.ForestryAPI;
+import forestry.core.items.IColoredItem;
 import gregification.base.BaseConfig;
 import gregification.base.BaseModule;
 import gregification.base.ModIDs;
@@ -22,7 +23,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
@@ -116,10 +116,15 @@ public class ForestryModule implements Module {
             }
         }
 
-        if (FMLCommonHandler.instance().getSide() == Side.CLIENT) {
+        if (event.getSide() == Side.CLIENT) {
             if (ForestryUtils.apicultureEnabled()) {
                 if (ForestryConfig.gtBees) {
-                    Minecraft.getMinecraft().getItemColors().registerItemColorHandler(CombItemColor.INSTANCE, ForestryModule.gtCombs, ForestryModule.gtDrops);
+                    Minecraft.getMinecraft().getItemColors().registerItemColorHandler((stack, tintIndex) -> {
+                        if (stack.getItem() instanceof IColoredItem) {
+                            return ((IColoredItem) stack.getItem()).getColorFromItemstack(stack, tintIndex);
+                        }
+                        return 0xFFFFFF;
+                    }, ForestryModule.gtCombs, ForestryModule.gtDrops);
                 }
             }
         }
