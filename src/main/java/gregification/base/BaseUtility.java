@@ -8,6 +8,7 @@ import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.FMLLaunchHandler;
 import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nonnull;
 import java.util.ArrayList;
@@ -49,8 +50,15 @@ public class BaseUtility {
 
     /** Should only be called after {@link net.minecraftforge.fml.common.event.FMLPreInitializationEvent} */
     public static void throwIncompatibility(List<String> messages) {
-        throw FMLLaunchHandler.side() == Side.SERVER
-                ? new RuntimeException(String.join(",", messages))
-                : new ModIncompatibilityException(messages);
+        if (FMLLaunchHandler.side() == Side.SERVER) {
+            throw new RuntimeException(String.join(",", messages));
+        } else {
+            throwClientIncompatibility(messages);
+        }
+    }
+
+    @SideOnly(Side.CLIENT)
+    private static void throwClientIncompatibility(List<String> messages) {
+        throw new ModIncompatibilityException(messages);
     }
 }
