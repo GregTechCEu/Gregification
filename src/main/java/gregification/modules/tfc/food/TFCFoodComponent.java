@@ -1,8 +1,8 @@
-package gregification.tfc.food;
+package gregification.modules.tfc.food;
 
 import gregification.base.ModIDs;
-import gregification.tfc.TFCConfig;
-import gregification.tfc.TFCModule;
+import gregification.modules.tfc.TFCConfig;
+import gregification.modules.tfc.TFCModule;
 import gregtech.api.items.metaitem.FoodStats;
 import gregtech.api.items.metaitem.FoodUseManager;
 import gregtech.api.items.metaitem.MetaItem;

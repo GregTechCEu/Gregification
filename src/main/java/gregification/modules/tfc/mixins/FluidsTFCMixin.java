@@ -1,8 +1,8 @@
-package gregification.tfc.mixins;
+package gregification.modules.tfc.mixins;
 
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
-import gregification.tfc.ITFCFluidRegistrationStatus;
+import gregification.modules.tfc.ITFCFluidRegistrationStatus;
 import net.dries007.tfc.ConfigTFC;
 import net.dries007.tfc.Constants;
 import net.dries007.tfc.TerraFirmaCraft;

@@ -1,4 +1,4 @@
-package gregification.tfc;
+package gregification.modules.tfc;
 
 public interface ITFCFluidRegistrationStatus {
 

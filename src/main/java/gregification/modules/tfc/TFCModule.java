@@ -1,10 +1,10 @@
-package gregification.tfc;
+package gregification.modules.tfc;
 
 import gregification.base.BaseConfig;
 import gregification.base.ModIDs;
 import gregification.base.Module;
-import gregification.tfc.food.ITFCFoodComponent;
-import gregification.tfc.food.TFCFoodComponent;
+import gregification.modules.tfc.food.ITFCFoodComponent;
+import gregification.modules.tfc.food.TFCFoodComponent;
 import gregtech.api.items.metaitem.FoodUseManager;
 import gregtech.api.items.metaitem.MetaItem;
 import gregtech.api.items.metaitem.stats.IFoodBehavior;

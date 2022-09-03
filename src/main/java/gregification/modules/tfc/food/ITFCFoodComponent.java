@@ -1,4 +1,4 @@
-package gregification.tfc.food;
+package gregification.modules.tfc.food;
 
 import gregtech.api.items.metaitem.stats.IFoodBehavior;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;

@@ -1,4 +1,4 @@
-package gregification.tfc;
+package gregification.modules.tfc;
 
 import gregification.Gregification;
 import net.minecraftforge.common.config.Config;
