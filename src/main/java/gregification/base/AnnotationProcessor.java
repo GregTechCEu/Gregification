@@ -17,14 +17,17 @@ public class AnnotationProcessor {
         // Root annotations
         for (ASMData data : table.getAll(Module.Root.class.getName())) {
             String className = data.getClassName();
+            String moduleName = (String) data.getAnnotationInfo().get("name");
             Class<?> clazz;
             try {
                 clazz = Class.forName(className);
             } catch (ClassNotFoundException e) {
-                Gregification.logger.error("Failed to load {} module, malformed annotation data", className);
+                Gregification.logger.error("Failed to load {}, malformed annotation data", className);
+                continue;
+            } catch (NoClassDefFoundError e) {
+                Gregification.logger.info("Could not load {}, skipping...", moduleName);
                 continue;
             }
-            String moduleName = (String) data.getAnnotationInfo().get("name");
 
             Constructor<?> constructor = null;
 
