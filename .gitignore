@@ -23,3 +23,4 @@ classes
 logs/debug.log
 logs/latest.log
 *.gz
+/libs/GregTech Food Option-1.12.2-1.6.1.jar

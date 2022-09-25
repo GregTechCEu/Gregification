@@ -1,6 +1,6 @@
-package gregification.tfc.mixins;
+package gregification.modules.tfc.mixins;
 
-import gregification.tfc.ITFCFluidRegistrationStatus;
+import gregification.modules.tfc.ITFCFluidRegistrationStatus;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.objects.fluids.FluidsTFC;
 import net.minecraftforge.fml.common.Mod;

@@ -22,5 +22,6 @@ public class ModIDs {
             MODID_TF = "twilightforest",
             MODID_THAUM = "thaumcraft",
             GENDUSTRY = "gendustry",
-            MODID_GTFO = "gregtechfoodoption";
+            MODID_GTFO = "gregtechfoodoption",
+            MODID_TFC = "tfc";
 }

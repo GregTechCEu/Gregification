@@ -11,10 +11,7 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
-import net.minecraftforge.fml.common.event.FMLConstructionEvent;
-import net.minecraftforge.fml.common.event.FMLInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.event.*;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -119,4 +116,10 @@ public class Gregification {
     public void registerMaterials(GregTechAPI.MaterialEvent event) {
         MODULE_LIST.forEach(m -> m.registerMaterials(event));
     }
+
+    @EventHandler
+    public void respondIMC(FMLInterModComms.IMCEvent event) {
+        MODULE_LIST.forEach(m -> m.respondIMC(event));
+    }
+
 }
