@@ -1,5 +1,5 @@
 {
-  "package": "gregification.tfc.mixins",
+  "package": "gregification.modules.tfc.mixins",
   "refmap": "mixins.gregification.refmap.json",
   "target": "@env(DEFAULT)",
   "minVersion": "0.8",

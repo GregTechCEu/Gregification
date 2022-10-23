@@ -21,8 +21,8 @@ import gregtech.api.capability.GregtechTileCapabilities;
 import gregtech.api.capability.IWorkable;
 import gregtech.api.capability.impl.AbstractRecipeLogic;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
-import gregtech.api.recipes.CountableIngredient;
 import gregtech.api.recipes.Recipe;
+import gregtech.api.recipes.ingredients.GTRecipeInput;
 import li.cil.oc.api.machine.Arguments;
 import li.cil.oc.api.machine.Callback;
 import li.cil.oc.api.machine.Context;
@@ -83,11 +83,11 @@ public class DriverAbstractRecipeLogic extends DriverSidedTileEntity {
                 recipe.put("EUt", previousRecipe.getEUt());
 
                 List<Map<String, Object>> itemInput = new ArrayList<>();
-                List<CountableIngredient> inputs = previousRecipe.getInputs();
+                List<GTRecipeInput> inputs = previousRecipe.getInputs();
                 inputs.forEach(iR -> {
-                    for (ItemStack itemStack : iR.getIngredient().getMatchingStacks()) {
+                    for (ItemStack itemStack : iR.getInputStacks()) {
                         Map<String, Object> input = new HashMap<>();
-                        input.put("count", iR.getCount());
+                        input.put("count", iR.getAmount());
                         input.put("name", itemStack.getDisplayName());
                         itemInput.add(input);
                     }
@@ -97,11 +97,11 @@ public class DriverAbstractRecipeLogic extends DriverSidedTileEntity {
                 }
 
                 List<Map<String, Object>> fluidInput = new ArrayList<>();
-                List<FluidStack> fluidInputs = previousRecipe.getFluidInputs();
+                List<GTRecipeInput> fluidInputs = previousRecipe.getFluidInputs();
                 fluidInputs.forEach(iR -> {
                     Map<String, Object> input = new HashMap<>();
-                    input.put("amount", iR.amount);
-                    input.put("name", iR.getFluid().getName());
+                    input.put("amount", iR.getAmount());
+                    input.put("name", iR.getInputFluidStack().getFluid().getName());
                     fluidInput.add(input);
                 });
                 if (!fluidInput.isEmpty()) {
