@@ -1,6 +1,7 @@
-package gregification.base;
+package gregification.core;
 
 import gregification.Gregification;
+import gregification.base.Module;
 import net.minecraftforge.fml.common.discovery.ASMDataTable;
 import net.minecraftforge.fml.common.discovery.ASMDataTable.ASMData;
 import org.apache.logging.log4j.LogManager;

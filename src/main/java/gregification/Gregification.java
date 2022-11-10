@@ -1,7 +1,7 @@
 package gregification;
 
-import gregification.base.AnnotationProcessor;
 import gregification.base.Module;
+import gregification.core.AnnotationProcessor;
 import gregtech.api.GregTechAPI;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
