@@ -112,3 +112,11 @@ sourceSets {
         ext.refMap = "mixins.gregification.refmap.json"
     }
 }
+
+jar {
+    manifest {
+        attributes([
+                "FMLCorePlugin": "gregification.core.GregificationLoadingPlugin"
+        ])
+    }
+}
