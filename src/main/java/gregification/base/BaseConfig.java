@@ -23,4 +23,8 @@ public class BaseConfig {
     @Comment({"Enable TerraFirmaCraft integration.", "Default: true"})
     @RequiresMcRestart
     public static boolean enableTerraFirmaCraftModule = true;
+
+    @Comment({"Enable Tinkers' Construct integration.", "Default: true"})
+    @RequiresMcRestart
+    public static boolean enableTinkersConstructModule = true;
 }

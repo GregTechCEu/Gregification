@@ -9,6 +9,8 @@ gregification.config.open_computers=Module: Open Computers
 gregification.config.open_computers.tooltip=Config options for Open Computers features
 gregification.config.tfc=Module: TerraFirmaCraft
 gregification.config.tfc.tooltip=Config options for TerraFirmaCraft features
+gregification.config.tinkers=Module: Tinkers' Construct
+gregification.config.tinkers.tooltip=Config options for Tinkers' Construct features
 
 # Ex Nihilo
 item.gtPebble.basalt.name=Basalt Pebble
