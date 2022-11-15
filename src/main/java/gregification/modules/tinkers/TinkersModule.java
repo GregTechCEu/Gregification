@@ -6,6 +6,9 @@ import gregification.base.Module;
 import net.minecraftforge.fml.common.Loader;
 import org.apache.logging.log4j.Logger;
 
+import java.util.Collections;
+import java.util.List;
+
 @Module.Root(name = "Gregification: Tinkers' Construct")
 public class TinkersModule implements Module {
 
@@ -15,5 +18,10 @@ public class TinkersModule implements Module {
     @Override
     public boolean isModuleActive() {
         return BaseConfig.enableTinkersConstructModule && Loader.isModLoaded(ModIDs.MODID_TCON);
+    }
+
+    @Override
+    public List<Class<?>> getEventBusListeners() {
+        return Collections.singletonList(TinkersEvents.class);
     }
 }
