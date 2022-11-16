@@ -285,3 +285,7 @@ item.gt.honey_drop.ethanol.name=Ethanol Drop
 
 item.gt.tool.scoop.name=%s Scoop
 item.gt.tool.behavior.scoop=§dArborist: §fCatches Butterflies on Left-Click
+
+# Tinkers' Construct
+modifier.gt_radioactive.name=Radioactive
+modifier.gt_radioactive.desc=§oIntoxicating!§r\nCan afflict enemies with hunger and poison, but can also afflict the user. Also applies to mining blocks.
