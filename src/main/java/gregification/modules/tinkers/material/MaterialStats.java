@@ -1,13 +1,14 @@
 package gregification.modules.tinkers.material;
 
-import com.google.common.base.CaseFormat;
 import gregification.modules.tinkers.TinkersConfig;
+import gregification.modules.tinkers.TinkersUtil;
 import gregtech.api.unification.OreDictUnifier;
 import gregtech.api.unification.material.Material;
 import gregtech.api.unification.material.properties.PropertyKey;
 import gregtech.api.unification.material.properties.ToolProperty;
 import gregtech.api.unification.ore.OrePrefix;
 import gregtech.api.unification.stack.UnificationEntry;
+import gregtech.common.ConfigHolder;
 import slimeknights.tconstruct.library.TinkerRegistry;
 import slimeknights.tconstruct.library.materials.*;
 import slimeknights.tconstruct.library.traits.ITrait;
@@ -20,46 +21,69 @@ public class MaterialStats {
 
     private final Material gtMaterial;
 
-    private final List<IMaterialStats> allStats = new ArrayList<>();
-    private final Map<ITrait, List<String>> allTraits = new HashMap<>(); // todo add some cool traits
+    private final Map<String, IMaterialStats> allStats = new HashMap<>();
+    private final Map<ITrait, List<String>> allTraits = new HashMap<>();
+
+    private Boolean castOverride;
+    private Boolean craftOverride;
 
     private MaterialStats(Material gtMaterial) {
         this.gtMaterial = gtMaterial;
     }
 
-    private void addStat(IMaterialStats stat) {
-        allStats.add(stat);
+    private void setStat(String type, IMaterialStats stat) {
+        allStats.put(type, stat);
     }
 
     public void register() {
         TMaterial tconMaterial = new TMaterial(gtMaterial.toString(), gtMaterial.getMaterialRGB());
-        String formattedName = CaseFormat.LOWER_CAMEL.to(CaseFormat.UPPER_CAMEL, gtMaterial.toCamelCaseString());
+        String formattedName = TinkersUtil.getFormattedName(gtMaterial);
 
         if (gtMaterial.hasProperty(PropertyKey.FLUID)) {
             tconMaterial.setFluid(gtMaterial.getFluid());
+            TinkersUtil.registerMelting(tconMaterial, gtMaterial);
         }
 
         if (gtMaterial.hasProperty(PropertyKey.INGOT)) {
+            tconMaterial.setCastable(castOverride == null || castOverride); // default true, unless overridden
+            tconMaterial.setCraftable(craftOverride != null && craftOverride); // default false, unless overridden
             tconMaterial.addCommonItems(formattedName);
             tconMaterial.addItemIngot(new UnificationEntry(OrePrefix.ingot, gtMaterial).toString());
             tconMaterial.setRepresentativeItem(OreDictUnifier.get(OrePrefix.ingot, gtMaterial));
+        } else if (gtMaterial.hasProperty(PropertyKey.GEM)) {
+            tconMaterial.setCastable(false); // always false, since no fluid should exist
+            // todo is this how we want to make gem tool parts?
+            tconMaterial.setCraftable(craftOverride == null || craftOverride); // default true, unless overridden
+            tconMaterial.addItem(new UnificationEntry(OrePrefix.gem, gtMaterial).toString(), 1, 144);
+            tconMaterial.addItem(new UnificationEntry(OrePrefix.gemFlawless, gtMaterial).toString(), 1, 288);
+            tconMaterial.addItem(new UnificationEntry(OrePrefix.gemExquisite, gtMaterial).toString(), 1, 576);
+            if (ConfigHolder.recipes.generateLowQualityGems) {
+                tconMaterial.addItem(new UnificationEntry(OrePrefix.gemChipped, gtMaterial).toString(), 1, 36);
+                tconMaterial.addItem(new UnificationEntry(OrePrefix.gemFlawed, gtMaterial).toString(), 1, 72);
+            }
+            tconMaterial.setRepresentativeItem(OreDictUnifier.get(OrePrefix.gem, gtMaterial));
         }
 
-        // TODO Some way to modify materials that already exist in tinkers?
         if (TinkerRegistry.getMaterial(tconMaterial.identifier) == UNKNOWN) {
             TinkerRegistry.addMaterial(tconMaterial);
-            for (IMaterialStats stat : allStats) {
-                tconMaterial.addStats(stat);
-            }
-            for (Map.Entry<ITrait, List<String>> entry : allTraits.entrySet()) {
-                ITrait trait = entry.getKey();
-                if (entry.getValue() == null) {
-                    tconMaterial.addTrait(trait);
-                } else for (String part : entry.getValue()) {
-                    tconMaterial.addTrait(trait, part);
-                }
-            }
+            registerStatsTraits(tconMaterial);
             TinkerRegistry.integrate(tconMaterial, tconMaterial.getFluid(), formattedName);
+        } else { // try to add these stats to an existing material TODO might cause issues?
+            registerStatsTraits(TinkerRegistry.getMaterial(tconMaterial.identifier));
+        }
+    }
+
+    private void registerStatsTraits(slimeknights.tconstruct.library.materials.Material material) {
+        for (IMaterialStats stat : allStats.values()) {
+            material.addStats(stat);
+        }
+        for (Map.Entry<ITrait, List<String>> entry : allTraits.entrySet()) {
+            ITrait trait = entry.getKey();
+            if (entry.getValue() == null) {
+                material.addTrait(trait);
+            } else for (String part : entry.getValue()) {
+                material.addTrait(trait, part);
+            }
         }
     }
 
@@ -118,7 +142,7 @@ public class MaterialStats {
          * @param harvestLevel What range of blocks at tool with a tool head of this material can mine
          */
         public Builder setHead(int durability, float miningSpeed, float attackDamage, int harvestLevel) {
-            stats.addStat(new HeadMaterialStats(
+            stats.setStat(MaterialTypes.HEAD, new HeadMaterialStats(
                     (int) (durability * TinkersConfig.toolStats.durabilityModifier),
                     miningSpeed * (float) TinkersConfig.toolStats.miningSpeedModifier,
                     attackDamage * (float) TinkersConfig.toolStats.attackDamageModifier,
@@ -131,7 +155,7 @@ public class MaterialStats {
          * @param durability Tool durability will be changed by this amount
          */
         public Builder setHandle(float modifier, int durability) {
-            stats.addStat(new HandleMaterialStats(
+            stats.setStat(MaterialTypes.HANDLE, new HandleMaterialStats(
                     modifier * (float) TinkersConfig.toolStats.handleModifier,
                     durability));
             return this;
@@ -141,7 +165,7 @@ public class MaterialStats {
          * @param extraDurability How much durability this part contributes when used as an accessory
          */
         public Builder setExtra(int extraDurability) {
-            stats.addStat(new ExtraMaterialStats(extraDurability));
+            stats.setStat(MaterialTypes.EXTRA, new ExtraMaterialStats(extraDurability));
             return this;
         }
 
@@ -151,7 +175,7 @@ public class MaterialStats {
          * @param bonusDamage Bonus damage dealt on hit. The force of the arrow
          */
         public Builder setBow(float drawSpeed, float range, float bonusDamage) {
-            stats.addStat(new BowMaterialStats(
+            stats.setStat(MaterialTypes.BOW, new BowMaterialStats(
                     drawSpeed * (float) TinkersConfig.toolStats.bowDrawSpeedModifier,
                     range * (float) TinkersConfig.toolStats.bowFlightSpeedModifier,
                     bonusDamage * (float) TinkersConfig.toolStats.arrowMassModifier));
@@ -162,7 +186,7 @@ public class MaterialStats {
          * @param modifier The tool durability will be multiplied by this
          */
         public Builder setBowString(float modifier) {
-            stats.addStat(new BowStringMaterialStats(modifier));
+            stats.setStat(MaterialTypes.BOWSTRING, new BowStringMaterialStats(modifier));
             return this;
         }
 
@@ -171,13 +195,13 @@ public class MaterialStats {
          * @param modifier How many arrows you can craft with this. Projectile ammo will be multiplied by this
          */
         public Builder setFletching(float accuracy, float modifier) {
-            stats.addStat(new FletchingMaterialStats(accuracy, modifier));
+            stats.setStat(MaterialTypes.FLETCHING, new FletchingMaterialStats(accuracy, modifier));
             return this;
         }
 
         // TODO is this useful?
         public Builder setProjectile() {
-            stats.addStat(new ProjectileMaterialStats());
+            stats.setStat(MaterialTypes.FLETCHING, new ProjectileMaterialStats());
             return this;
         }
 
@@ -186,7 +210,7 @@ public class MaterialStats {
          * @param bonusAmmo This much flat ammo will be added
          */
         public Builder setArrowShaft(float modifier, int bonusAmmo) {
-            stats.addStat(new ArrowShaftMaterialStats(
+            stats.setStat(MaterialTypes.SHAFT, new ArrowShaftMaterialStats(
                     modifier * (float) TinkersConfig.toolStats.arrowAmmoModifier,
                     bonusAmmo));
             return this;
@@ -195,6 +219,16 @@ public class MaterialStats {
         public Builder addTrait(ITrait trait, String... parts) {
             List<String> traitParts = stats.allTraits.computeIfAbsent(trait, k -> new ArrayList<>());
             traitParts.addAll(Arrays.asList(parts));
+            return this;
+        }
+
+        public Builder setCastOverride(boolean canCast) {
+            stats.castOverride = canCast;
+            return this;
+        }
+
+        public Builder setCraftOverride(boolean canCraft) {
+            stats.craftOverride = canCraft;
             return this;
         }
 

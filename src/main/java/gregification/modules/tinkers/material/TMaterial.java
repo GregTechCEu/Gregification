@@ -1,5 +1,6 @@
 package gregification.modules.tinkers.material;
 
+import slimeknights.tconstruct.library.Util;
 import slimeknights.tconstruct.library.materials.Material;
 
 /**
@@ -25,5 +26,11 @@ public class TMaterial extends Material {
     @Override
     public TMaterial setCastable(boolean castable) {
         return (TMaterial) super.setCastable(castable);
+    }
+
+    // Lang override to automatically use the GT Material translations
+    @Override
+    public String getLocalizedName() {
+        return Util.translate("material.%s", this.getIdentifier());
     }
 }

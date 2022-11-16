@@ -3,7 +3,7 @@ package gregification.modules.tinkers;
 import gregification.base.BaseConfig;
 import gregification.base.ModIDs;
 import gregification.base.Module;
-import gregification.modules.tinkers.material.MaterialAdditions;
+import gregification.modules.tinkers.material.MaterialProcessing;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import org.apache.logging.log4j.Logger;
@@ -29,7 +29,6 @@ public class TinkersModule implements Module {
 
     @Override
     public void preInit(FMLPreInitializationEvent event) {
-        SmelteryProcessing.integrateMaterials();
-        MaterialAdditions.init();
+        MaterialProcessing.init();
     }
 }

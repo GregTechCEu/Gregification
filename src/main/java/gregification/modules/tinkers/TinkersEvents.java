@@ -26,7 +26,8 @@ public class TinkersEvents {
     public static void onMeltingRegisterEvent(MeltingRegisterEvent event) {
         MeltingRecipe recipe = event.getRecipe();
         Material m = getBlastMaterials().get(recipe.getResult().getFluid());
-        if (m != null && (matches(recipe.input, ore, m) || matches(recipe.input, dust, m))) {
+        if (m != null && (matches(recipe.input, ore, m) || matches(recipe.input, dust, m)
+                || matches(recipe.input, dustTiny, m) || matches(recipe.input, dustSmall, m))) {
             event.setCanceled(true);
         }
     }
