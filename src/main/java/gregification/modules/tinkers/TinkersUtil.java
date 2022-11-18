@@ -3,20 +3,29 @@ package gregification.modules.tinkers;
 import com.google.common.base.CaseFormat;
 import gregification.modules.tinkers.material.TMaterial;
 import gregtech.api.GTValues;
+import gregtech.api.GregTechAPI;
+import gregtech.api.unification.OreDictUnifier;
 import gregtech.api.unification.material.Material;
 import gregtech.api.unification.material.properties.OreProperty;
 import gregtech.api.unification.material.properties.PropertyKey;
 import gregtech.api.unification.ore.OrePrefix;
 import gregtech.api.unification.stack.UnificationEntry;
 import gregtech.common.ConfigHolder;
+import net.minecraft.util.NonNullList;
+import net.minecraftforge.fluids.Fluid;
+import slimeknights.mantle.util.RecipeMatch;
 import slimeknights.tconstruct.common.config.Config;
 import slimeknights.tconstruct.library.TinkerRegistry;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import static gregtech.api.unification.ore.OrePrefix.*;
 
 public class TinkersUtil {
 
     private static OrePrefix[] oreTypePrefixes;
+    private static Map<Fluid, Material> blastMaterials;
 
     // TODO CEu should have a way to get this
     public static OrePrefix[] getOreTypePrefixes() {
@@ -51,5 +60,23 @@ public class TinkersUtil {
         if (gtMaterial.hasProperty(PropertyKey.DUST)) {
             TinkerRegistry.registerMelting(getOreName(OrePrefix.dust, gtMaterial), gtMaterial.getFluid(), GTValues.L);
         }
+    }
+
+    public static Map<Fluid, Material> getBlastMaterials() {
+        Map<Fluid, Material> map = blastMaterials;
+        if (map == null) {
+            map = new HashMap<>();
+            for (Material m : GregTechAPI.MATERIAL_REGISTRY) {
+                if (m.hasProperty(PropertyKey.BLAST) && m.hasProperty(PropertyKey.FLUID)) {
+                    map.put(m.getFluid(), m);
+                }
+            }
+            blastMaterials = map;
+        }
+        return map;
+    }
+
+    public static boolean matches(RecipeMatch input, OrePrefix p, Material m) {
+        return input.matches(NonNullList.withSize(1, OreDictUnifier.get(p, m))).isPresent();
     }
 }
