@@ -9,6 +9,7 @@ import gregtech.api.unification.material.properties.ToolProperty;
 import gregtech.api.unification.ore.OrePrefix;
 import gregtech.api.unification.stack.UnificationEntry;
 import gregtech.common.ConfigHolder;
+import net.minecraft.item.ItemStack;
 import slimeknights.tconstruct.library.TinkerRegistry;
 import slimeknights.tconstruct.library.materials.*;
 import slimeknights.tconstruct.library.traits.ITrait;
@@ -24,8 +25,12 @@ public class MaterialStats {
     private final Map<String, IMaterialStats> allStats = new HashMap<>();
     private final Map<ITrait, List<String>> allTraits = new HashMap<>();
 
+    private final Map<UnificationEntry, Integer> additionalItems = new HashMap<>();
+
     private Boolean castOverride;
     private Boolean craftOverride;
+    private UnificationEntry representativeItemOverride;
+    private boolean ignoreFluid;
 
     private MaterialStats(Material gtMaterial) {
         this.gtMaterial = gtMaterial;
@@ -39,9 +44,15 @@ public class MaterialStats {
         TMaterial tconMaterial = new TMaterial(gtMaterial.toString(), gtMaterial.getMaterialRGB());
         String formattedName = TinkersUtil.getFormattedName(gtMaterial);
 
-        if (gtMaterial.hasProperty(PropertyKey.FLUID)) {
+        if (!ignoreFluid && gtMaterial.hasProperty(PropertyKey.FLUID)) {
             tconMaterial.setFluid(gtMaterial.getFluid());
             TinkersUtil.registerMelting(tconMaterial, gtMaterial);
+        }
+
+        for (Map.Entry<UnificationEntry, Integer> entry : additionalItems.entrySet()) {
+            if (entry.getValue() != 0) {
+                tconMaterial.addItem(entry.getKey().toString(), 1, entry.getValue());
+            } else tconMaterial.addItem(entry.getKey().toString());
         }
 
         if (gtMaterial.hasProperty(PropertyKey.INGOT)) {
@@ -49,7 +60,7 @@ public class MaterialStats {
             tconMaterial.setCraftable(craftOverride != null && craftOverride); // default false, unless overridden
             tconMaterial.addCommonItems(formattedName);
             tconMaterial.addItemIngot(new UnificationEntry(OrePrefix.ingot, gtMaterial).toString());
-            tconMaterial.setRepresentativeItem(OreDictUnifier.get(OrePrefix.ingot, gtMaterial));
+            tconMaterial.setRepresentativeItem(new UnificationEntry(OrePrefix.ingot, gtMaterial).toString());
         } else if (gtMaterial.hasProperty(PropertyKey.GEM)) {
             tconMaterial.setCastable(false); // always false, since no fluid should exist
             // todo is this how we want to make gem tool parts?
@@ -61,13 +72,19 @@ public class MaterialStats {
                 tconMaterial.addItem(new UnificationEntry(OrePrefix.gemChipped, gtMaterial).toString(), 1, 36);
                 tconMaterial.addItem(new UnificationEntry(OrePrefix.gemFlawed, gtMaterial).toString(), 1, 72);
             }
-            tconMaterial.setRepresentativeItem(OreDictUnifier.get(OrePrefix.gem, gtMaterial));
+            tconMaterial.setRepresentativeItem(new UnificationEntry(OrePrefix.gem, gtMaterial).toString());
+        }
+
+        if (representativeItemOverride != null) {
+            tconMaterial.setRepresentativeItem(representativeItemOverride.toString());
         }
 
         if (TinkerRegistry.getMaterial(tconMaterial.identifier) == UNKNOWN) {
             TinkerRegistry.addMaterial(tconMaterial);
             registerStatsTraits(tconMaterial);
-            TinkerRegistry.integrate(tconMaterial, tconMaterial.getFluid(), formattedName);
+            if (!ignoreFluid && gtMaterial.hasProperty(PropertyKey.FLUID)) {
+                TinkerRegistry.integrate(tconMaterial, tconMaterial.getFluid(), formattedName);
+            }
         } else { // try to add these stats to an existing material TODO might cause issues?
             registerStatsTraits(TinkerRegistry.getMaterial(tconMaterial.identifier));
         }
@@ -103,10 +120,14 @@ public class MaterialStats {
         float damage = prop.getToolAttackDamage();
         int harvestLevel = gtMaterial.getToolHarvestLevel();
 
+        // TODO bow, arrow shaft
         return builder(gtMaterial)
                 .setHead((int) (durability * 0.8), speed, damage, harvestLevel)
                 .setHandle((harvestLevel - 0.5f) / 2, durability / 3)
-                .setExtra(durability / 4);
+                .setExtra(durability / 4)
+                .setProjectile();
+                //.setBow()
+                //.setArrowShaft();
     }
 
     /** Requires the GT Material provided to have a Tool Property */
@@ -121,15 +142,25 @@ public class MaterialStats {
         float damage = prop.getToolAttackDamage();
         int harvestLevel = gtMaterial.getToolHarvestLevel();
 
+        // TODO bow, arrow shaft
         return builder(gtMaterial)
                 .setHead(durability, speed, damage, harvestLevel)
                 .setHandle(harvestLevel - 0.5f, durability / 4)
                 .setExtra(durability / 100);
     }
 
+    public static Builder createPolymerTemplate(Material gtMaterial) {
+        return builder(gtMaterial)
+                .setIgnoreFluid()
+                .addItems(new UnificationEntry(OrePrefix.plate, gtMaterial), 144)
+                .setRepresentativeItem(new UnificationEntry(OrePrefix.plate, gtMaterial))
+                .setCraftOverride(true);
+    }
+
     public static class Builder {
 
         private final MaterialStats stats;
+        private boolean setCancelled;
 
         private Builder (Material gtMaterial) {
             stats = new MaterialStats(gtMaterial);
@@ -232,8 +263,30 @@ public class MaterialStats {
             return this;
         }
 
+        public Builder addItems(UnificationEntry item, int amount) {
+            stats.additionalItems.put(item, amount);
+            return this;
+        }
+
+        public Builder setRepresentativeItem(UnificationEntry item) {
+            stats.representativeItemOverride = item;
+            return this;
+        }
+
+        public Builder setIgnoreFluid() {
+            stats.ignoreFluid = true;
+            return this;
+        }
+
+        public Builder cancel() {
+            setCancelled = true;
+            return this;
+        }
+
         public void build() {
-            stats.register();
+            if (!setCancelled) {
+                stats.register();
+            }
         }
     }
 }

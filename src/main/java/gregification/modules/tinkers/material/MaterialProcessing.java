@@ -1,5 +1,6 @@
 package gregification.modules.tinkers.material;
 
+import gregification.modules.tinkers.TinkersModule;
 import gregification.modules.tinkers.TinkersUtil;
 import gregtech.api.GTValues;
 import gregtech.api.GregTechAPI;
@@ -55,7 +56,13 @@ public class MaterialProcessing {
     }
 
     public static MaterialStats.Builder getBuilder(Material m) {
-        return materialStats.get(m);
+        MaterialStats.Builder b = materialStats.get(m);
+        if (b == null) {
+            // To not crash if a material we reference somewhere loses its tool property
+            TinkersModule.logger.error("Could not get Tinker tool builder from material {}, as it does not exist!", m);
+            return MaterialStats.builder(null).cancel();
+        }
+        return b;
     }
 
     private static void registerMelting(Material m) {
