@@ -116,6 +116,7 @@ sourceSets {
 jar {
     manifest {
         attributes([
+                "FMLCorePluginContainsFMLMod": true,
                 "FMLCorePlugin": "gregification.core.GregificationLoadingPlugin"
         ])
     }
