@@ -44,5 +44,4 @@ metaitem.electrode.orchid.name=兰花电子管元件
 metaitem.electrode.rubber.name=橡胶电子管元件
 metaitem.electrode.tin.name=锡电子管元件
 
-metaitem.tool.scoop.name=%s捕虫网
-behaviour.scoop=左键以捕捉蝴蝶
+item.gt.tool.scoop.name=%s捕虫网

@@ -10,14 +10,17 @@ import gregification.modules.forestry.bees.*;
 import gregification.modules.forestry.frames.GTFrameType;
 import gregification.modules.forestry.frames.GTItemFrame;
 import gregification.modules.forestry.recipes.*;
-import gregification.modules.forestry.tools.ToolScoop;
+import gregification.modules.forestry.tools.ScoopBehavior;
+import gregtech.api.GTValues;
 import gregtech.api.GregTechAPI;
 import gregtech.api.items.metaitem.MetaItem;
-import gregtech.api.items.toolitem.ToolMetaItem;
+import gregtech.api.items.toolitem.IGTTool;
+import gregtech.api.items.toolitem.ItemGTTool;
 import gregtech.api.unification.OreDictUnifier;
 import gregtech.api.unification.material.Materials;
 import gregtech.api.unification.material.properties.OreProperty;
 import gregtech.api.unification.material.properties.PropertyKey;
+import gregtech.common.items.ToolItems;
 import net.minecraft.client.Minecraft;
 import net.minecraft.item.Item;
 import net.minecraft.item.crafting.IRecipe;
@@ -67,7 +70,7 @@ public class ForestryModule implements Module {
     public static MetaItem<?>.MetaValueItem ELECTRODE_RUBBER;
     public static MetaItem<?>.MetaValueItem ELECTRODE_TIN;
 
-    public static ToolMetaItem<?>.MetaToolValueItem SCOOP;
+    public static IGTTool SCOOP;
 
     @Override
     public boolean isModuleActive() {
@@ -95,6 +98,17 @@ public class ForestryModule implements Module {
             } else {
                 logger.error("GT Frames is enabled, but Forestry Apiculture module is disabled. Skipping GT Frames...");
             }
+        }
+
+        // Initialize GT Scoop
+        if (ForestryConfig.gtScoop) {
+            logger.info("Registering GT Scoop");
+            SCOOP = ToolItems.register(ItemGTTool.Builder.of(GTValues.MODID, "scoop")
+                    .toolStats(b -> b
+                            .cannotAttack().attackSpeed(-2.4F)
+                            .behaviors(ScoopBehavior.INSTANCE))
+                    .toolClasses("scoop")
+                    .oreDict("toolScoop"));
         }
     }
 
@@ -178,15 +192,6 @@ public class ForestryModule implements Module {
             if (Loader.isModLoaded(ModIDs.MODID_IC2) || Loader.isModLoaded(ModIDs.MODID_TR) || Loader.isModLoaded(ModIDs.MODID_BINNIE)) {
                 ELECTRODE_RUBBER = BaseModule.baseMetaItem.addItem(14, "electrode.rubber");
             }
-        }
-
-        // Register GT Scoop
-        if (ForestryConfig.gtScoop) {
-            logger.info("Registering GT Scoop");
-            SCOOP = (ToolMetaItem<?>.MetaToolValueItem) BaseModule.baseMetaTool.addItem(1, "tool.scoop")
-                    .setToolStats(new ToolScoop())
-                    .setFullRepairCost(3)
-                    .addOreDict("craftingToolScoop");
         }
     }
 

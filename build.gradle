@@ -37,21 +37,18 @@ repositories {
         name "CurseForge"
         url "https://www.cursemaven.com"
     }
-    maven {
-        name "CraftTweaker"
-        url "https://maven.blamejared.com"
-    }
 }
 
 dependencies {
 
     // Hard-Deps
-    deobfCompile "curse.maven:gregtech-ce-unofficial-557242:3949406"
+    deobfCompile "curse.maven:gregtech-ce-unofficial-557242:4325257"
     deobfCompile "curse.maven:codechicken-lib-1-8-242818:2779848"
-    deobfCompile "curse.maven:mixin-booter-419286:3321174"
+    deobfCompile "curse.maven:mixin-booter-419286:4090558"
 
     // Useful stuff
-    deobfCompile "CraftTweaker2:CraftTweaker2-MC1120-Main:1.12-4.1.20.554"
+    compile "curse.maven:crafttweaker-239197:3935788"
+    deobfCompile "curse.maven:groovyscript-687577:4286298"
     deobfCompile "curse.maven:jei-238222:3040523"
     deobfCompile "curse.maven:jeid-296289:2919737"
     runtime "curse.maven:the-one-probe-245211:2667280"
@@ -66,8 +63,8 @@ dependencies {
     deobfCompile "curse.maven:ex-nihilo-creatio-274456:2817545"
     deobfCompile "curse.maven:opencomputers-223008:2828357"
     deobfCompile "curse.maven:tfcraft-302973:3268988"
-    deobfCompile "curse.maven:ae2-extended-life-570458:3632074"
-    deobfProvided "curse.maven:gregtech-food-option-477021:4023986"
+    deobfCompile "curse.maven:ae2-extended-life-570458:4323863"
+    deobfProvided "curse.maven:gregtech-food-option-477021:4325343"
 
     // May get some form of compatibility in the future
     //deobfCompile "curse.maven:mcjtylib-233105:2745846"

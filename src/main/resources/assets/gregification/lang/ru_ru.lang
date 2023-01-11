@@ -44,5 +44,4 @@ metaitem.electrode.orchid.name=Орхидейный электрод
 metaitem.electrode.rubber.name=Прорезиненный электрод
 metaitem.electrode.tin.name=Оловянный электрод
 
-metaitem.tool.scoop.name=%s совок
-behaviour.scoop=Ловит бабочек на левый клик
+item.gt.tool.scoop.name=%s совок

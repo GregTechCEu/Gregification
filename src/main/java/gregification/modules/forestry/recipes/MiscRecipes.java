@@ -13,7 +13,6 @@ import gregification.modules.forestry.ForestryModule;
 import gregification.modules.forestry.ForestryUtils;
 import gregification.modules.forestry.bees.GTDropType;
 import gregtech.api.GTValues;
-import gregtech.api.recipes.ModHandler;
 import gregtech.api.recipes.RecipeMaps;
 import gregtech.api.unification.material.Material;
 import gregtech.api.unification.material.Materials;
@@ -22,6 +21,7 @@ import gregtech.api.unification.material.properties.ToolProperty;
 import gregtech.api.unification.ore.OrePrefix;
 import gregtech.api.unification.stack.UnificationEntry;
 import gregtech.common.items.MetaItems;
+import gregtech.loaders.recipe.handlers.ToolRecipeHandler;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -212,7 +212,7 @@ public class MiscRecipes {
     }
 
     private static void processScoop(OrePrefix prefix, Material material, ToolProperty property) {
-        ModHandler.addShapedRecipe(String.format("scoop_%s", material), ForestryModule.SCOOP.getStackForm(material),
+        ToolRecipeHandler.addToolRecipe(material, ForestryModule.SCOOP, false,
                 "SWS", "SSS", "xSh",
                 'S', new UnificationEntry(OrePrefix.stick, material),
                 'W', new ItemStack(Blocks.WOOL, 1, GTValues.W));

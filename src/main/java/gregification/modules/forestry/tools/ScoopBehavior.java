@@ -4,50 +4,45 @@ import forestry.api.lepidopterology.EnumFlutterType;
 import forestry.api.lepidopterology.IAlleleButterflySpecies;
 import forestry.api.lepidopterology.IEntityButterfly;
 import gregification.base.ModIDs;
-import gregtech.api.items.metaitem.stats.IItemBehaviour;
-import gregtech.api.util.GTUtility;
+import gregtech.api.items.toolitem.behavior.IToolBehavior;
 import net.minecraft.client.resources.I18n;
-import net.minecraft.entity.Entity;
+import net.minecraft.client.util.ITooltipFlag;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.world.World;
 import net.minecraftforge.fml.common.Loader;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import java.util.List;
 
-public class ScoopBehavior implements IItemBehaviour {
+public class ScoopBehavior implements IToolBehavior {
 
-    private final int cost;
+    public static final ScoopBehavior INSTANCE = new ScoopBehavior();
 
-    public ScoopBehavior(int cost) {
-        this.cost = cost;
+    private ScoopBehavior() {/**/}
+
+    @Override
+    public void hitEntity(@Nonnull ItemStack stack, @Nonnull EntityLivingBase target, @Nonnull EntityLivingBase attacker) {
+        if (!Loader.isModLoaded(ModIDs.MODID_FR)) return;
+        if (!(target instanceof IEntityButterfly)) return;
+        if (!(attacker instanceof EntityPlayer)) return;
+        if (attacker.world == null || attacker.world.isRemote) return;
+
+        IEntityButterfly butterfly = (IEntityButterfly) target;
+        EntityPlayer player = (EntityPlayer) attacker;
+
+        IAlleleButterflySpecies species = butterfly.getButterfly().getGenome().getPrimary();
+        species.getRoot().getBreedingTracker(target.world, player.getGameProfile()).registerCatch(butterfly.getButterfly());
+        player.world.spawnEntity(new EntityItem(player.world, target.posX, target.posY, target.posZ,
+                species.getRoot().getMemberStack(butterfly.getButterfly().copy(), EnumFlutterType.BUTTERFLY)));
+        target.setDead();
     }
 
     @Override
-    public boolean onLeftClickEntity(ItemStack itemStack, EntityPlayer player, Entity entity) {
-        return Loader.isModLoaded(ModIDs.MODID_FR) && processButterflyCatch(itemStack, player, entity);
-    }
-
-    private boolean processButterflyCatch(ItemStack itemStack, EntityPlayer player, Entity entity) {
-        if (entity instanceof IEntityButterfly) {
-            if (player.world.isRemote) {
-                return true;
-            }
-            if (player.capabilities.isCreativeMode || GTUtility.doDamageItem(itemStack, this.cost, false)) {
-                IEntityButterfly butterfly = (IEntityButterfly) entity;
-                IAlleleButterflySpecies species = butterfly.getButterfly().getGenome().getPrimary();
-                species.getRoot().getBreedingTracker(entity.world, player.getGameProfile()).registerCatch(butterfly.getButterfly());
-                player.world.spawnEntity(new EntityItem(player.world, entity.posX, entity.posY, entity.posZ,
-                        species.getRoot().getMemberStack(butterfly.getButterfly().copy(), EnumFlutterType.BUTTERFLY)));
-                entity.setDead();
-            }
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public void addInformation(ItemStack itemStack, List<String> lines) {
-        lines.add(I18n.format("behaviour.scoop"));
+    public void addInformation(@Nonnull ItemStack stack, @Nullable World world, @Nonnull List<String> tooltip, @Nonnull ITooltipFlag flag) {
+        tooltip.add(I18n.format("item.gt.tool.behavior.scoop"));
     }
 }

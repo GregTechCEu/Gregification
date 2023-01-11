@@ -281,5 +281,5 @@ item.gt.honey_drop.lapis.name=Lapis Coolant Drop
 item.gt.honey_drop.biomass.name=Biomass Drop
 item.gt.honey_drop.ethanol.name=Ethanol Drop
 
-metaitem.tool.scoop.name=%s Scoop
-behaviour.scoop=Catches Butterflies on Left-Click
+item.gt.tool.scoop.name=%s Scoop
+item.gt.tool.behavior.scoop=§dArborist: §fCatches Butterflies on Left-Click
