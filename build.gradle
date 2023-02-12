@@ -42,7 +42,7 @@ repositories {
 dependencies {
 
     // Hard-Deps
-    deobfCompile "curse.maven:gregtech-ce-unofficial-557242:4325257"
+    deobfCompile "curse.maven:gregtech-ce-unofficial-557242:4390983"
     deobfCompile "curse.maven:codechicken-lib-1-8-242818:2779848"
     deobfCompile "curse.maven:mixin-booter-419286:4090558"
 
@@ -64,7 +64,6 @@ dependencies {
     deobfCompile "curse.maven:opencomputers-223008:2828357"
     deobfCompile "curse.maven:tfcraft-302973:3268988"
     deobfCompile "curse.maven:ae2-extended-life-570458:4323863"
-    deobfProvided "curse.maven:gregtech-food-option-477021:4325343"
 
     // May get some form of compatibility in the future
     //deobfCompile "curse.maven:mcjtylib-233105:2745846"
@@ -113,7 +112,9 @@ sourceSets {
 jar {
     manifest {
         attributes([
-                "FMLCorePlugin": "gregification.core.GregificationLoadingPlugin"
+                "FMLCorePlugin": "gregification.core.GregificationLoadingPlugin",
+                "FMLCorePluginContainsFMLMod": "true",
+                "ForceLoadAsMod": project.gradle.startParameter.taskNames[0] == "build"
         ])
     }
 }

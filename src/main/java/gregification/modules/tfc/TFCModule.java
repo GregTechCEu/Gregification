@@ -70,7 +70,7 @@ public class TFCModule implements Module {
     /**
      * For addons attempting to use this event, you must send an IMC message to Gregification labelled "setTfcFoodStats" with an NBT compound consisting of:
      *   an int "item" (identifies the metaitem, done with Item.getIdFromItem(Item)
-     *   a short "damage" (or metavalue, can be accessed with metaItem.getMetaValue()
+     *   an int "damage" (or metavalue, can be accessed with metaItem.getMetaValue()
      *   an NBT compound "tfcFoodStats" consisting of:
      *     a float "water"
      *     a float "grain"
@@ -90,7 +90,7 @@ public class TFCModule implements Module {
                     NBTTagCompound tag = imcMessage.getNBTValue();
                     if (tag.hasKey("item", 3) && Item.getItemById(tag.getInteger("item")) instanceof MetaItem) {
                         MetaItem metaItem = (MetaItem) Item.getItemById(tag.getInteger("item"));
-                        if (tag.hasKey("damage", 2)) {
+                        if (tag.hasKey("damage", 3)) {
                             MetaItem.MetaValueItem item = metaItem.getItem(tag.getShort("damage"));
                             if (item != null) {
                                 TFCFoodComponent comp = TFCFoodComponent.createFromFoodStats(item);

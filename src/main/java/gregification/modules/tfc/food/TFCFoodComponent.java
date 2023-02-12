@@ -8,7 +8,7 @@ import gregtech.api.items.metaitem.FoodUseManager;
 import gregtech.api.items.metaitem.MetaItem;
 import gregtech.api.items.metaitem.stats.IFoodBehavior;
 import gregtech.api.util.RandomPotionEffect;
-import gregtechfoodoption.item.GTFOFoodStats;
+import gregtechfoodoption.item.food.GTFOFoodStats;
 import net.dries007.tfc.api.capability.food.*;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumAction;
@@ -42,9 +42,9 @@ public class TFCFoodComponent extends FoodStats implements ITFCFoodComponent {
         this(oldBehavior.getFoodLevel(null, null), oldBehavior.getSaturation(null, null), oldBehavior.getFoodAction(null) == EnumAction.DRINK,
                 oldBehavior.alwaysEdible(null, null),
                 oldBehavior instanceof FoodStats ? ((FoodStats) oldBehavior).containerItem
-                        : Loader.isModLoaded(ModIDs.MODID_GTFO) && oldBehavior instanceof GTFOFoodStats ? ((GTFOFoodStats) oldBehavior).stackSupplier.get() : null,
+                        : Loader.isModLoaded(ModIDs.MODID_GTFO) && oldBehavior instanceof GTFOFoodStats ? ((GTFOFoodStats) oldBehavior).getStackSupplier().get() : null,
                 oldBehavior instanceof FoodStats ? ((FoodStats) oldBehavior).potionEffects
-                        : Loader.isModLoaded(ModIDs.MODID_GTFO) && oldBehavior instanceof GTFOFoodStats ? ((GTFOFoodStats) oldBehavior).potionEffects : null);
+                        : Loader.isModLoaded(ModIDs.MODID_GTFO) && oldBehavior instanceof GTFOFoodStats ? ((GTFOFoodStats) oldBehavior).getPotionEffects() : null);
         // Although technically the above weirdness should not be needed, it is nice for accessing these values without needing to jump through several hurdles.
         this.oldBehavior = oldBehavior;
     }
