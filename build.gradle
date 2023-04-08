@@ -146,6 +146,24 @@ dependencies {
     implementation fg.deobf("curse.maven:ae2-extended-life-570458:4323863")
     implementation fg.deobf("curse.maven:gregtech-food-option-477021:4423324")
 
+    // May get some form of compatibility in the future
+    //implementation fg.deobf("curse.maven:mcjtylib-233105:2745846")
+    //implementation fg.deobf("curse.maven:xnet-260912:2745852")
+
+    // Addons and other mods
+    // Enable for testing as needed
+    //implementation fg.deobf("curse.maven:binnies-mods-223525:2916129")
+    //implementation fg.deobf("curse.maven:magic-bees-65764:2566282")
+    //implementation fg.deobf("curse.maven:gendustry-70492:2516215")
+    //implementation fg.deobf("curse.maven:bdlib-70496:2518031")
+    //implementation fg.deobf("curse.maven:career-bees-281791:2534481")
+    //implementation fg.deobf("curse.maven:retrobees-300139:2934369")
+    //implementation fg.deobf("curse.maven:the-twilight-forest-227639:3051450")
+    //implementation fg.deobf("curse.maven:thaumcraft-223628:2629023")
+    //implementation fg.deobf("curse.maven:baubles-227083:2518667")
+    //implementation fg.deobf("curse.maven:biomes-o-plenty-220318:2715506")
+    //implementation fg.deobf("curse.maven:extra-utilities-225561:2678374")
+    
     if (project.use_mixins.toBoolean()) {
         compileOnly 'zone.rong:mixinbooter:7.0'
         runtimeOnly 'zone.rong:mixinbooter:7.0'
