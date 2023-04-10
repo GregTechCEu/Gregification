@@ -2,14 +2,12 @@ package gregification.modules.tinkers.material;
 
 import gregification.modules.tinkers.TinkersConfig;
 import gregification.modules.tinkers.TinkersUtil;
-import gregtech.api.unification.OreDictUnifier;
 import gregtech.api.unification.material.Material;
 import gregtech.api.unification.material.properties.PropertyKey;
 import gregtech.api.unification.material.properties.ToolProperty;
 import gregtech.api.unification.ore.OrePrefix;
 import gregtech.api.unification.stack.UnificationEntry;
 import gregtech.common.ConfigHolder;
-import net.minecraft.item.ItemStack;
 import slimeknights.tconstruct.library.TinkerRegistry;
 import slimeknights.tconstruct.library.materials.*;
 import slimeknights.tconstruct.library.traits.ITrait;
@@ -146,7 +144,10 @@ public class MaterialStats {
         return builder(gtMaterial)
                 .setHead(durability, speed, damage, harvestLevel)
                 .setHandle(harvestLevel - 0.5f, durability / 4)
-                .setExtra(durability / 100);
+                .setExtra(durability / 100)
+                .setProjectile();
+                //.setBow()
+                //.setArrowShaft();
     }
 
     public static Builder createPolymerTemplate(Material gtMaterial) {
@@ -232,7 +233,7 @@ public class MaterialStats {
 
         // TODO is this useful?
         public Builder setProjectile() {
-            stats.setStat(MaterialTypes.FLETCHING, new ProjectileMaterialStats());
+            stats.setStat(MaterialTypes.PROJECTILE, new ProjectileMaterialStats());
             return this;
         }
 
