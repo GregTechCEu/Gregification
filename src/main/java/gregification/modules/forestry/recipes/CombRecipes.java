@@ -33,7 +33,6 @@ import gregification.modules.forestry.bees.GTDropType;
 import gregtech.api.GTValues;
 import gregtech.api.recipes.RecipeBuilder;
 import gregtech.api.recipes.RecipeMaps;
-import gregtech.api.recipes.ingredients.IntCircuitIngredient;
 import gregtech.api.unification.OreDictUnifier;
 import gregtech.api.unification.material.Material;
 import gregtech.api.unification.material.Materials;
@@ -336,7 +335,7 @@ public class CombRecipes {
 
         RecipeBuilder<?> builder = RecipeMaps.AUTOCLAVE_RECIPES.recipeBuilder()
                 .inputs(GTUtility.copyAmount(9, ForestryUtils.getCombStack(comb)))
-                .notConsumable(new IntCircuitIngredient(circuitNumber))
+                .circuitMeta(circuitNumber)
                 .fluidInputs(Materials.UUMatter.getFluid((int) Math.max(1, ((material.getMass() + volt.getUUAmount()) / 10))))
                 .output(OrePrefix.crushedPurified, material, 4)
                 .duration((int) (material.getMass() * 128))
