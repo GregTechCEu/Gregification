@@ -82,7 +82,7 @@ public class ExNihiloRecipes {
         // Mirror Ex Nihilo Sifter recipes to Sifter RecipeMap
         for (SieveRecipe recipe : ExNihiloRegistryManager.SIEVE_REGISTRY.getRecipeList()) {
             for (ItemStack stack : recipe.getSievables()) {
-                if (SIEVE_RECIPES.findRecipe(4, Arrays.asList(stack, recipe.getMesh()), new ArrayList<>(), 0) != null)
+                if (SIEVE_RECIPES.findRecipe(4, Arrays.asList(stack, recipe.getMesh()), new ArrayList<>(), true) != null)
                     continue;
                 SimpleRecipeBuilder builder = SIEVE_RECIPES.recipeBuilder().notConsumable(recipe.getMesh()).inputs(stack);
 

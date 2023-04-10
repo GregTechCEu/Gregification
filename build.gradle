@@ -116,14 +116,14 @@ dependencies {
 
     // Hard-Deps
     implementation fg.deobf("curse.maven:gregtech-ce-unofficial-${project.gt_id}:${project.gt_version}")
-    implementation fg.deobf("curse.maven:codechicken-lib-1-8-${project.ccl_id}:${project.ccl_version}")
-    implementation fg.deobf("curse.maven:mixin-booter-${project.mixb_id}:${project.mixb_version}")
+    implementation fg.deobf("curse.maven:codechicken-lib-1-8-242818:2779848")
+    implementation fg.deobf("curse.maven:mixin-booter-419286:4090558")
 
     // Useful stuff
-    implementation "mezz.jei:jei_1.12.2:${project.jei_version}"
+    implementation "mezz.jei:jei_1.12.2:4.16.1.302"
     implementation "CraftTweaker2:CraftTweaker2-MC1120-Main:1.12-${project.ct_version}"
     implementation files("libs/groovyscript-0.4.0.jar")
-    implementation fg.deobf("curse.maven:the-one-probe-${project.top_id}:${project.top_version}")
+    implementation fg.deobf("curse.maven:the-one-probe-245211:2667280")
 
     // Direct compat mods
     // Must be present in-dev as their code is referenced in this mod
@@ -136,7 +136,7 @@ dependencies {
     implementation fg.deobf("curse.maven:opencomputers-223008:2828357")
     implementation fg.deobf("curse.maven:tfcraft-302973:3268988")
     implementation fg.deobf("curse.maven:ae2-extended-life-570458:4323863")
-    implementation fg.deobf("curse.maven:gregtech-food-option-477021:4423324")
+    implementation fg.deobf("curse.maven:gregtech-food-option-${project.gtfo_id}:${project.gtfo_version}")
 
     // May get some form of compatibility in the future
     //implementation fg.deobf("curse.maven:mcjtylib-233105:2745846")
