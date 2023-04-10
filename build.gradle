@@ -14,8 +14,6 @@ buildscript {
 plugins {
     id 'net.minecraftforge.gradle' version "${forge_gradle_version}"
     id 'wtf.gofancy.fancygradle' version "${fancy_gradle_version}"
-    id 'com.matthewprenger.cursegradle' version "${curse_gradle_version}" apply false
-    id 'com.modrinth.minotaur' version "${minotaur_version}" apply false
 }
 
 apply plugin: 'org.spongepowered.mixin'
@@ -57,17 +55,13 @@ if (project.use_eclipse.toBoolean()) {
 minecraft {
     mappings channel: "${mcp_mappings_channel}", version: "${mcp_mappings_version}"
 
-    if (project.has_access_transformer.toBoolean()) {
-        accessTransformer = file('src/main/resources/META-INF/gregification_at.cfg')
-    }
+    accessTransformer = file('src/main/resources/META-INF/gregification_at.cfg')
 
     runs {
         client {
             //noinspection GroovyAssignabilityCheck
             workingDirectory project.file('run')
-            if (project.use_coremod.toBoolean()) {
-                jvmArg '-Dfml.coreMods.load=' + coremod_plugin_class_name
-            }
+            jvmArg '-Dfml.coreMods.load=' + coremod_plugin_class_name
             jvmArg '-Dmixin.hotSwap=true'
             jvmArg '-Dmixin.checks.interfaces=true'
             jvmArg '-Dmixin.debug=true'
@@ -79,9 +73,7 @@ minecraft {
         server {
             //noinspection GroovyAssignabilityCheck
             workingDirectory project.file('run')
-            if (project.use_coremod.toBoolean()) {
-                jvmArg '-Dfml.coreMods.load=' + coremod_plugin_class_name
-            }
+            jvmArg '-Dfml.coreMods.load=' + coremod_plugin_class_name
             jvmArg '-Dmixin.hotSwap=true'
             jvmArg '-Dmixin.checks.interfaces=true'
             property 'forge.logging.markers', 'REGISTRIES'
@@ -123,15 +115,15 @@ dependencies {
     minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
 
     // Hard-Deps
-    implementation fg.deobf("curse.maven:gregtech-ce-unofficial-557242:4429261")
-    implementation fg.deobf("curse.maven:codechicken-lib-1-8-242818:2779848")
-    implementation fg.deobf("curse.maven:mixin-booter-419286:4090558")
+    implementation fg.deobf("curse.maven:gregtech-ce-unofficial-${project.gt_id}:${project.gt_version}")
+    implementation fg.deobf("curse.maven:codechicken-lib-1-8-${project.ccl_id}:${project.ccl_version}")
+    implementation fg.deobf("curse.maven:mixin-booter-${project.mixb_id}:${project.mixb_version}")
 
     // Useful stuff
-    implementation "mezz.jei:jei_1.12.2:4.16.1.302"
-    implementation "CraftTweaker2:CraftTweaker2-MC1120-Main:1.12-4.1.20.684"
+    implementation "mezz.jei:jei_1.12.2:${project.jei_version}"
+    implementation "CraftTweaker2:CraftTweaker2-MC1120-Main:1.12-${project.ct_version}"
     implementation files("libs/groovyscript-0.4.0.jar")
-    implementation fg.deobf("curse.maven:the-one-probe-245211:2667280")
+    implementation fg.deobf("curse.maven:the-one-probe-${project.top_id}:${project.top_version}")
 
     // Direct compat mods
     // Must be present in-dev as their code is referenced in this mod
@@ -163,13 +155,11 @@ dependencies {
     //implementation fg.deobf("curse.maven:baubles-227083:2518667")
     //implementation fg.deobf("curse.maven:biomes-o-plenty-220318:2715506")
     //implementation fg.deobf("curse.maven:extra-utilities-225561:2678374")
-    
-    if (project.use_mixins.toBoolean()) {
-        compileOnly 'zone.rong:mixinbooter:7.0'
-        runtimeOnly 'zone.rong:mixinbooter:7.0'
 
-        annotationProcessor "org.spongepowered:mixin:0.8.5:processor"
-    }
+    // Mixin related things
+    compileOnly "zone.rong:mixinbooter:${project.mixinbooter_version}"
+    runtimeOnly "zone.rong:mixinbooter:${project.mixinbooter_version}"
+    annotationProcessor "org.spongepowered:mixin:${project.mixin_annotations_version}:processor"
 }
 
 fancyGradle {
@@ -219,9 +209,7 @@ if (is_ci_env || project.build_sourceJar.toBoolean()) {
 // Loading resources, works even on IDE client runs
 sourceSets {
     main {
-        if (project.use_mixins.toBoolean()) {
-            ext.refMap = 'mixins.' + archives_base_name + '.refmap.json'
-        }
+        ext.refMap = 'mixins.' + archives_base_name + '.refmap.json'
 
         java {
             srcDirs = ['src/main/java', 'src/api/java']
@@ -296,70 +284,6 @@ test {
     useJUnitPlatform()
 }
 
-// Deployment
-
-def final deployment_debug = providers.environmentVariable('DEPLOYMENT_DEBUG').getOrElse('false').toBoolean()
-
-def final cf_api_key = providers.environmentVariable('CURSEFORGE_API_KEY')
-if (cf_api_key.isPresent()) {
-    apply plugin: 'com.matthewprenger.cursegradle'
-
-    curseforge {
-        apiKey = cf_api_key.get()
-        //noinspection GroovyAssignabilityCheck
-        project {
-            id = providers.environmentVariable('CURSEFORGE_PROJECT_ID').get()
-            changelogType = "markdown"
-            changelog = providers.environmentVariable('CHANGELOG_LOCATION').get()
-            releaseType = providers.environmentVariable('RELEASE_TYPE').get()
-
-            addGameVersion "${minecraft_version}"
-
-            def main_artifact = "${archivesBaseName}-${version}.jar"
-            mainArtifact file("build/libs/${main_artifact}")
-            file('build/libs/').eachFile { file ->
-                if (file.name.endsWith('.jar') && file.name != main_artifact) {
-                    addArtifact file
-                }
-            }
-        }
-        options {
-            debug = "${project.deployment_debug}".toBoolean() || deployment_debug
-            javaVersionAutoDetect = true
-            detectNewerJava = false
-            javaIntegration = false
-            forgeGradleIntegration = false
-        }
-    }
-    tasks.curseforge.dependsOn(build)
-}
-
-def final modrinth_api_key = providers.environmentVariable('MODRINTH_API_KEY')
-if (modrinth_api_key.isPresent()) {
-    apply plugin: 'com.modrinth.minotaur'
-
-    modrinth {
-        token = modrinth_api_key.get()
-        projectId = providers.environmentVariable("MODRINTH_PROJECT_ID").get()
-        changelog = providers.environmentVariable("CHANGELOG_LOCATION").get()
-        versionType = providers.environmentVariable("RELEASE_TYPE").get()
-
-        versionNumber = getVersionFromJava(false)
-        gameVersions = ["${minecraft_version}"]
-
-        def main_artifact = "${archivesBaseName}-${version}.jar"
-        uploadFile = file("build/libs/${main_artifact}")
-        file('build/libs/').eachFile { file ->
-            if (file.name.endsWith('.jar') && file.name != main_artifact) {
-                additionalFiles.add file
-            }
-        }
-
-        debugMode = "${project.deployment_debug}".toBoolean() || deployment_debug
-    }
-    tasks.modrinth.dependsOn(build)
-}
-
 /**
  * Applies required processing to jar tasks
  * @param task the task to process
@@ -369,19 +293,11 @@ private void processJarTask(task) {
         manifest {
             // noinspection GroovyAssignabilityCheck
             def attribute_map = [:]
-            if (project.use_coremod.toBoolean()) {
-                attribute_map['FMLCorePlugin'] = project.coremod_plugin_class_name
-                if (project.include_mod.toBoolean()) {
-                    attribute_map['FMLCorePluginContainsFMLMod'] = true
-                    attribute_map['ForceLoadAsMod'] = project.gradle.startParameter.taskNames[0] == 'build'
-                }
-            }
-            if (project.use_mixins.toBoolean()) {
-                attribute_map['TweakClass'] = 'org.spongepowered.asm.launch.MixinTweaker'
-            }
-            if (project.has_access_transformer.toBoolean()) {
-                attribute_map['FMLAT'] = 'gregification_at.cfg'
-            }
+            attribute_map['FMLCorePlugin'] = project.coremod_plugin_class_name
+            attribute_map['FMLCorePluginContainsFMLMod'] = true
+            attribute_map['ForceLoadAsMod'] = project.gradle.startParameter.taskNames[0] == 'build'
+            attribute_map['TweakClass'] = 'org.spongepowered.asm.launch.MixinTweaker'
+            attribute_map['FMLAT'] = 'gregification_at.cfg'
             attributes(attribute_map)
         }
 
