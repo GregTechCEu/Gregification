@@ -683,6 +683,23 @@ public enum GTBeeDefinition implements IBeeDefinition {
                 mutation.requireResource("blockIridium");
             }
     ),
+    NETHERSTAR(GTBranchDefinition.GT_RAREMETAL, "Infstella", false, 0x7A007A, 0xFFFFFF,
+            beeSpecies -> {
+                beeSpecies.addProduct(getGTComb(GTCombType.SLAG), 0.30f);
+                beeSpecies.addSpecialty(getGTComb(GTCombType.NETHERSTAR), 0.15f);
+                beeSpecies.addSpecialty(getGTComb(GTCombType.IRIDIUM), 0.05f);
+                beeSpecies.setHumidity(EnumHumidity.ARID);
+                beeSpecies.setTemperature(EnumTemperature.HELLISH);
+                beeSpecies.setHasEffect();
+            },
+            template -> AlleleHelper.getInstance().set(template, SPEED, Speed.SLOWER),
+            dis -> {
+                IBeeMutationBuilder mutation = dis.registerMutation(IRIDIUM, BeeDefinition.DEMONIC, 5);
+                mutation.requireResource("blockNetherStar");
+                mutation.restrictBiomeType(BiomeDictionary.Type.NETHER);
+            },
+            () -> !Loader.isModLoaded(ModIDs.MODID_MB)
+    ),
     OSMIUM(GTBranchDefinition.GT_RAREMETAL, "Osmia", false, 0x2B2BDA, 0x8B8B8B,
             beeSpecies -> {
                 beeSpecies.addProduct(getGTComb(GTCombType.SLAG), 0.30f);

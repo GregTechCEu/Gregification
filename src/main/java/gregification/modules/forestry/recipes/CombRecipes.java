@@ -222,6 +222,7 @@ public class CombRecipes {
         addChemicalProcess(GTCombType.MOLYBDENUM, Materials.Osmium, Materials.Osmium, Voltage.IV);
         addAutoclaveProcess(GTCombType.MOLYBDENUM, Materials.Osmium, Voltage.IV, 5);
         addProcessGT(GTCombType.IRIDIUM, new Material[]{Materials.Iridium, Materials.Osmium}, Voltage.IV);
+        addProcessGT(GTCombType.NETHERSTAR, new Material[]{Materials.NetherStar, Materials.Iridium}, Voltage.IV);
         addProcessGT(GTCombType.OSMIUM, new Material[]{Materials.Osmium, Materials.Iridium}, Voltage.IV);
         addProcessGT(GTCombType.LITHIUM, new Material[]{Materials.Lithium, Materials.Aluminium}, Voltage.MV);
         addProcessGT(GTCombType.SALT, new Material[]{Materials.Salt, Materials.RockSalt, Materials.Saltpeter}, Voltage.MV);
@@ -240,6 +241,7 @@ public class CombRecipes {
             addCentrifugeToMaterial(GTCombType.PLATINUM, new Material[]{Materials.Platinum, Materials.Cooperite, Materials.Palladium}, new int[]{40 * 100, 40 * 100, 40 * 100}, new int[]{}, Voltage.HV, ItemStack.EMPTY, 30 * 100);
             addCentrifugeToMaterial(GTCombType.MOLYBDENUM, new Material[]{Materials.Molybdenum, Materials.Molybdenite, Materials.Powellite, Materials.Wulfenite}, new int[]{100 * 100, 80 * 100, 75 * 100}, new int[]{}, Voltage.ULV, ItemStack.EMPTY, 30 * 100);
             addCentrifugeToMaterial(GTCombType.IRIDIUM, new Material[]{Materials.Iridium, Materials.Osmium}, new int[]{20 * 100, 15 * 100}, new int[]{}, Voltage.IV, ItemStack.EMPTY, 30 * 100);
+            addCentrifugeToMaterial(GTCombType.NETHERSTAR, new Material[]{Materials.NetherStar, Materials.Iridium}, new int[]{20 * 100, 15 * 100}, new int[]{}, Voltage.IV, ItemStack.EMPTY, 30 * 100);
             addCentrifugeToMaterial(GTCombType.OSMIUM, new Material[]{Materials.Osmium, Materials.Iridium}, new int[]{25 * 100, 15 * 100}, new int[]{}, Voltage.IV, ItemStack.EMPTY, 30 * 100);
             addCentrifugeToMaterial(GTCombType.LITHIUM, new Material[]{Materials.Lithium, Materials.Aluminium}, new int[]{85 * 100, 75 * 100}, new int[]{}, Voltage.MV, ItemStack.EMPTY, 30 * 100);
             addCentrifugeToMaterial(GTCombType.SALT, new Material[]{Materials.Salt, Materials.RockSalt, Materials.Saltpeter}, new int[]{100 * 100, 75 * 100, 65 * 100}, new int[]{9, 4, 4}, Voltage.MV, 160, ItemStack.EMPTY, 50 * 100);
