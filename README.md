@@ -1,5 +1,7 @@
 # Gregification
 
+### This mod has been discontinued in favor of its content being put directly into GTCEu.
+
 **Gregification** is a mod which aims to bridge the gap between [GregTech: CE Unofficial](https://github.com/Gregicality/GregTech) (and its addons) and other mods.
 
 Many features originally derive from:
