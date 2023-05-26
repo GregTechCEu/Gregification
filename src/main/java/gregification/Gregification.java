@@ -49,7 +49,7 @@ public class Gregification {
 
     public static final String MODID = "gregification";
     public static final String MOD_NAME = "Gregification";
-    public static final String VERSION = "@VERSION@";
+    public static final String VERSION = GFInternalTags.VERSION;
 
     // Root logger
     public static final Logger logger = LogManager.getLogger("Gregification");
