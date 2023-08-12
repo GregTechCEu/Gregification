@@ -28,4 +28,9 @@ public class BaseConfig {
     @Comment({"Enable Tinkers' Construct integration.", "Default: true"})
     @RequiresMcRestart
     public static boolean enableTinkersConstructModule = true;
+
+    @Comment({"Enable ComputerCraft integration.", "Default: true"})
+    @RequiresMcRestart
+    public static boolean enableComputerCraftModule = true;
+
 }

@@ -137,6 +137,7 @@ dependencies {
     implementation fg.deobf("curse.maven:tfcraft-302973:3268988")
     implementation fg.deobf("curse.maven:ae2-extended-life-570458:4323863")
     implementation fg.deobf("curse.maven:gregtech-food-option-${project.gtfo_id}:${project.gtfo_version}")
+    implementation fg.deobf("curse.maven:cc-tweaked-282001:2718128")
 
     // May get some form of compatibility in the future
     //implementation fg.deobf("curse.maven:mcjtylib-233105:2745846")
