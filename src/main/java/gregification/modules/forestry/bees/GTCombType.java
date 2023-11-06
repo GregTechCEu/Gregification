@@ -122,6 +122,9 @@ public enum GTCombType {
     // Nether Star
     SPARKLING("sparkling", Loader.isModLoaded(ModIDs.MODID_MB), 0x7A007A, 0xFFFFFF),
 
+    // Nether Star without magic bees
+    NETHERSTAR("netherstar", !Loader.isModLoaded(ModIDs.MODID_MB), 0x7A007A, 0xFFFFFF),
+
     //THAUMIUMSHARD("thaumiumshard", GTBees.THAUMIC_BEES, null, 85,0x9966FF, 0xAD85FF),
     //MITHRIL("mithril", GTBees.THAUMIC_BEES, null, 70,0xF0E68C, 0xFFFFD2),
     //ASTRALSILVER("astralsilver", GTBees.THAUMIC_BEES, null, 70,0xAFEEEE, 0xE6E6FF),
